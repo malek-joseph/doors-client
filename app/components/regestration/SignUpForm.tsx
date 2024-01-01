@@ -2,32 +2,31 @@
 "use client";
 
 import React, { useState } from "react";
-
+import Link from 'next/link'
 import Button from "../buttons/Button";
-import Link from "next/link";
-import googleImg from "../../../public/assets/images/google-logo.png"
 
-interface LoginFormProps {
-  onLogin: (username: string, password: string) => void;
+interface SignUpFormProps {
+  onSignUp: (username: string, password: string, confirmPassword: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const LoginForm: React.FC<SignUpFormProps> = ({ onSignUp }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleLogin = () => {
     // Basic validation, you might want to add more robust validation logic
     if (username && password) {
-      onLogin(username, password);
+      onSignUp(username, password, confirmPassword);
     } else {
       alert("Please enter both username and password.");
     }
   };
-  const handleGoogleLogin = () => {};
+  const handleGoogleSignUp = () => {};
 
   return (
     <div className="p-4 rounded-lg  ">
-      <h2 className="text-lg mb-2">Signin</h2>
+      <h2 className="text-lg mb-2">Signup</h2>
       <p className="text-xs mb-4 text-gray-400">
         Enter your account details to enter our platform.
       </p>
@@ -36,10 +35,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       <div className="flex items-center mb-4">
         <Button
           type="button"
-          title="Signin with Google"
+          title="Signup with Google"
           icon="/assets/images/google-logo.png"
           variant="btn_dark"
-          onClick={handleGoogleLogin}
+          onClick={handleGoogleSignUp}
         />
       </div>
 
@@ -76,28 +75,33 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* Forget password */}
-        <p className="text-xs mb-4 mt-2 text-right">
-          <a className="text-teal-500" href="#">
-            Forget password?
-          </a>
-        </p>
+        <label className="block text-xs mb-1" htmlFor="password">
+          Confirm Password
+        </label>
+        <input
+          className="border p-1 w-full rounded-md"
+          type="confirmPassword"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+  
       </div>
 
       {/* Login button */}
 
       <Button
         type="button"
-        title="Login"
+        title="Signup"
         variant="btn_teal"
         onClick={handleLogin}
       />
 
       {/* Create an account */}
       <p className="text-xs text-gray-400 mt-4 text-center">
-        Do not have an account?{" "}
+        Already have an account?{" "}
         <span className="text-teal-500">
-          <Link href="/signup">Create an account</Link>
+          <Link href="/login">Signin</Link>
         </span>
       </p>
     </div>

@@ -1,0 +1,22 @@
+/* carousel.css */
+
+.mySwiper {
+  width: 100%; /* Ensure the Swiper component takes up the full width of its container */
+}
+
+.swiper-slide {
+  height: 100%; /* Ensure each Swiper slide takes up the full height of the Swiper component */
+  width: 100%; /* Ensure each Swiper slide takes up the full width of the Swiper component */
+}
+
+.carousel-image-container {
+  height: 100%; /* Ensure the container takes up the full height of the Swiper slide */
+  width: 100%; /* Ensure the container takes up the full width of the Swiper slide */
+  position: relative; /* Ensure that child elements are positioned relative to this container */
+}
+
+.carousel-image-container img {
+  object-fit: cover; /* Ensure the image covers the entire container while maintaining its aspect ratio */
+  height: 100%; /* Ensure the image takes up the full height of the container */
+  width: 100%; /* Ensure the image takes up the full width of the container */
+}
