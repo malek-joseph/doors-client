@@ -1,8 +1,7 @@
 export const NAV_LINKS = [
-  { href: '/', key: 'home', label: 'Home' },
-  { href: '/', key: 'rent', label: 'Rent'},
-  { href: '/', key: 'rentOut', label: 'Rent Out'},
-  { href: '/', key: 'myProperties', label: 'My Properties'},
+  { href: '/', key: 'shortlist', label: 'Shortlist' },
+  { href: '/', key: 'messages', label: 'Messages'},
+  { href: '/', key: 'guides', label: 'Guides'},
 ]
 export const FOOTER_LINKS = [
   { href: '/', key: 'about', label: 'About Us' },

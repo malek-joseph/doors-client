@@ -19,7 +19,7 @@ const ButtonSm = ({ type, title, icon, variant, onClick }: ButtonProps) => {
   return (
     <button
       type={type}
-      className={`flexCenter gap-3 rounded border  ${variant}`}
+      className={`flexCenter gap-3 rounded   ${variant}`}
       onClick={handleClick} // Call handleClick on button click
     >
       {icon && (
