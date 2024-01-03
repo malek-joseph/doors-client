@@ -31,19 +31,19 @@ const LoginPage: React.FC = () => {
 
       {/* Right Section: Photo (Hidden on Mobile and Tablet) */}
       <div className="lg:w-1/2 rounded lg:order-1 hidden lg:block">
-        <Image
+        {/* <Image
           className="bg-cover bg-center h-full w-full "
           src={backgroundImage}
           alt="Background"
           width={100}
-        />
-   {/* <Carousel
+        /> */}
+   <Carousel
           images={[
             "/assets/images/home2.jpeg",
             "/assets/images/home3.jpeg",
             "/assets/images/home1.jpeg",
           ]}
-        /> */}
+        />
      </div> 
     </div>
   );

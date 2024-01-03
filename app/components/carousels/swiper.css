@@ -1,0 +1,23 @@
+.swiper-button-next { color: teal!important;
+opacity:0 !important;
+}
+.swiper-button-prev  { color: teal!important;
+opacity:0 !important;
+}
+
+.listing-carousel:hover .swiper-button-prev {
+  opacity: 1 !important;
+
+}
+.listing-carousel:hover .swiper-button-next {
+  opacity: 1 !important;
+}
+
+.swiper-pagination {
+  color: teal !important;
+}
+
+.swiper-bullet-active {
+    color: teal !important;
+
+}

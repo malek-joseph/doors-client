@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import Link from 'next/link'
-import Button from "../buttons/Button";
+import Button from "../shared/buttons/Button";
 
 interface SignUpFormProps {
   onSignUp: (username: string, password: string, confirmPassword: string) => void;
