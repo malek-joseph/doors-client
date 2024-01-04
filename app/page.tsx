@@ -1,8 +1,11 @@
-import Image from 'next/image'
+"use client";
+
+
 import ListSection from "./components/sections/ListSection";
 import ListingsSection from "./components/sections/ListingsSection";
 
 export default function Home() {
+ 
   return (
     <main className="flex flex-col items-center justify-center">
       <div className="w-5/6 ">

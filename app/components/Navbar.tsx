@@ -7,11 +7,13 @@ import SearchBar from "./navbar/SearchBar";
 
 const Navbar = () => {
   return (
-    <nav className=" flex flex-col lg:flex-row justify-between items-center max-container padding-container relative z-30 py-5  border-b border-gray-300">
-      <Logo />
-      <SearchBar />
-      <NavLinks />
-      <LoginButton />
+    <nav className="fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-300 py-5">
+      <div className="max-container padding-container flex justify-between items-center">
+        <Logo />
+        <SearchBar />
+        <NavLinks />
+        <LoginButton />
+      </div>
     </nav>
   );
 };

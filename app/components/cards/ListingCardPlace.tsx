@@ -12,26 +12,27 @@ interface ListingCardProps {
   gender?: string;
   description: string;
   availability: string;
+  billsIncluded?: boolean;
   governance: string;
   city: string;
- 
+  list?: string;
 }
 
 
 const MAX_DESCRIPTION_LENGTH = 45; // Adjust the desired maximum length
 
 
-const ListingCard: React.FC<ListingCardProps> = ({
+const ListingCardPlace: React.FC<ListingCardProps> = ({
   images,
   name,
   freeMessage,
   rent,
-  age,
-  gender,
   description,
   availability,
+  billsIncluded,
   governance,
-  city
+  city,
+  list
 }) => {
   // Truncate description if it exceeds the maximum length
   const truncatedDescription =
@@ -41,35 +42,37 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
   
   return (
-    <div className="flex flex-col items-center transition-all cursor-pointer bg-white rounded-lg overflow-hidden my-3">
+    
+    <div className="flex flex-col items-center  transition-all cursor-pointer bg-white rounded-lg overflow-hidden my-3">
       <ListingImages images={images} name={name} />
 
       <div className="">
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
-          <h2 className="text-xl font-semibold text-gray-600">{name}</h2>
+          <h2 className="text-xl font-semibold text-gray-600">
+            {rent}{" "}
+            <span className="font-thin text-sm ">
+              {" "}
+              {billsIncluded && "bills inc."}
+            </span>
+          </h2>
           <p className="text-gray-500 text-xs border border-gray-500 rounded p-1">
             {freeMessage}
           </p>
         </div>
 
         {/* Rent and Age Row */}
-        <div className="flex justify-between  items-center mb-2">
+        <div className="flex  justify-between items-center mb-2">
           <div className="flex flex-col">
-    <p className="text-gray-600 text-sm">
-            {age} year old {gender}
-          </p>
+   <p className="text-gray-600 text-sm">{list}</p>
+
           <p className="text-teal-500">
             {" "}
-            <span className="text-sm text-gray-500">Looking in:</span>{" "}
+            <span className="text-sm text-gray-500">for Rent in:</span>{" "}
             {governance}, {city}
           </p>
           </div>
-      
-          <div className="flex flex-col">
-            <span className="text-sm text-gray-500">Budget:</span> {rent}
-            <p className="text-teal-500"> </p>
-          </div>
+       
         </div>
         <p className="text-gray-600 text-sm mb-2">{truncatedDescription}</p>
 
@@ -89,4 +92,4 @@ const ListingCard: React.FC<ListingCardProps> = ({
   );
 };
 
-export default ListingCard;
+export default ListingCardPlace;

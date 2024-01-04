@@ -30,36 +30,47 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
+  const swiperStyles = {
+    "--swiper-pagination-color": "teal",
+    "--swiper-pagination-bullet-inactive-color": "#999999",
+    "--swiper-pagination-bullet-inactive-opacity": "1",
+    "--swiper-pagination-bullet-size": "5px",
+    "--swiper-pagination-bullet-horizontal-gap": "6px",
+  } as React.CSSProperties; // Define as CSSProperties
+
   return (
-    <div
-      className="relative h-60 w-80 mb-4 listing-carousel"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
-       navigation={true} // Enable navigation
-        pagination={{ clickable: true }}
-        className="w-full h-full" // Adjust width and height to fit the container
-      >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <div className="w-full h-full">
-              <Image
-                src={image}
-                alt={`Image ${index + 1}`}
-                layout="fill"
-                objectFit="cover" // Adjust objectFit if needed
-                className="rounded-md"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="object-cover rounded-md w-full">
+      <div
+        className="relative h-60  sm:w-80 mb-4 listing-carousel"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
+        <Swiper
+          style={swiperStyles}
+          spaceBetween={30}
+          centeredSlides={true}
+          // autoplay={{
+          //   delay: 5000,
+          //   disableOnInteraction: false,
+          // }}
+          navigation={true} // Enable navigation
+          pagination={{ clickable: true }}
+          className="w-full h-full" // Adjust width and height to fit the container
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full h-full">
+                <Image
+                  src={image}
+                  alt={`Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover" // Adjust objectFit if needed
+                  className="rounded-md"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };

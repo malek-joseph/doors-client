@@ -1,8 +1,12 @@
 .swiper-button-next { color: teal!important;
 opacity:0 !important;
+  transition: all .3s ease;
+
 }
 .swiper-button-prev  { color: teal!important;
 opacity:0 !important;
+  transition: all .3s ease;
+
 }
 
 .listing-carousel:hover .swiper-button-prev {
@@ -13,11 +17,3 @@ opacity:0 !important;
   opacity: 1 !important;
 }
 
-.swiper-pagination {
-  color: teal !important;
-}
-
-.swiper-bullet-active {
-    color: teal !important;
-
-}

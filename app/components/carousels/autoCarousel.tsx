@@ -33,11 +33,11 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        pagination={
-          {
-            // clickable: true,
-          }
-        }
+        // pagination={
+        //   {
+        //     clickable: true,
+        //   }
+        // }
         // navigation={true}
         className="w-full h-full">
         {images.map((image, index) => (

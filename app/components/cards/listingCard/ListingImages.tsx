@@ -18,7 +18,7 @@ const ListingImages: React.FC<ListingImagesProps> = ({ images, name }) => {
         className="object-cover rounded-md" 
         layout="fill"
       /> */}
-      <ListingCarousel images={images}/>
+      <ListingCarousel   images={images}/>
     </div>
   );
 };
