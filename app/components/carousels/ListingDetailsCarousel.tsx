@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +9,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import React, { useState } from "react";
 import "./swiper.css"
+
+
 // Import Swiper styles
 import "swiper/swiper-bundle.css";
 import Image from "next/image";
@@ -23,7 +27,7 @@ interface CarouselProps {
   images: string[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
 
   const swiperStyles = {
     "--swiper-pagination-color": "teal",
@@ -34,13 +38,16 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   } as React.CSSProperties; // Define as CSSProperties
 
   return (
+        <div className="relative w-full h-80 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
+
     <Swiper
       style={swiperStyles}
-      spaceBetween={30}
+      slidesPerView={3}
+      spaceBetween={10}
       centeredSlides={true}
       navigation={true} // Enable navigation
       pagination={{ clickable: false }}
-      className="w-full h-full listing-carousel" // Adjust width and height to fit the container
+      className="w-full h-full listing-carousel rounded-lg" // Adjust width and height to fit the container
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
@@ -49,12 +56,13 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             alt={`Image ${index + 1}`}
             layout="fill"
             objectFit="cover" // Adjust objectFit if needed
-            className="rounded-md"
+            className=""
           />
         </SwiperSlide>
       ))}
     </Swiper>
+    </div>
   );
 };
 
-export default Carousel;
+export default ListingDetailsCarousel;

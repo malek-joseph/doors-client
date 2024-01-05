@@ -6,9 +6,10 @@ import ListingCardPlace from "../cards/ListingCardPlace";
 
 const ListSection = () => {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 ">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 ">
       {LISTINGS.map((listing, i) =>
         listing.type === "person" ? (
+          
           <ListingCard
             images={listing.images}
             name={listing.name}
@@ -21,6 +22,7 @@ const ListSection = () => {
             key={i}
             governance={listing.governance}
             city={listing.city}
+            id={listing.id}
           />
         ) : (
           <ListingCardPlace
@@ -36,6 +38,7 @@ const ListSection = () => {
               governance={listing.governance}
               city={listing.city}
               list={listing.list}
+              id={listing.id}
           />
         )
       )}

@@ -1,10 +1,13 @@
 import ButtonSm from "../shared/buttons/ButtonSm";
 import Link from "next/link";
+import Image from "next/image";
+
 
 
 const LoginButton = () => {
   return (
        <div className="lg:flexCenter hidden transition-all hover:font-bold">
+     
         <Link href="/login">
           <ButtonSm
             type="button"

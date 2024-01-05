@@ -10,13 +10,8 @@ const Logo = () => {
       <Link href="/" className="">
         <Image src="/logo.svg" alt="logo" width={30} height={29} />
       </Link>
-      <Image
-        src="/assets/images/menu.svg"
-        alt="menu"
-        width={25}
-        height={25}
-        className="inline-block cursor-pointer lg:hidden"
-      />
+      
+    
     </div>
   );
 };

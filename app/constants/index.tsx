@@ -11,6 +11,7 @@ export const FOOTER_LINKS = [
 
 
 type Listing = {
+  id: number;
   type: "place" | "person";
   images: string[];
   name: string;
@@ -24,12 +25,14 @@ type Listing = {
   list?: string;
   governance: string;
   city: string;
+  
 };
 
 
 
 export const LISTINGS: Listing[] = [
   {
+    id: 1,
     type: "place",
     images: [
       "/assets/images/home1.jpeg",
@@ -49,6 +52,8 @@ export const LISTINGS: Listing[] = [
     list: "1 Bed in single room",
   },
   {
+    id: 2,
+
     type: "person",
     images: ["/assets/images/man.jpeg", "/assets/images/woman.jpeg"],
     name: "John Doe",
@@ -63,6 +68,8 @@ export const LISTINGS: Listing[] = [
     city: "Zayed",
   },
   {
+    id: 3,
+
     type: "place",
     images: [
       "/assets/images/home1.jpeg",
@@ -83,6 +90,8 @@ export const LISTINGS: Listing[] = [
     list: "1 Bed in double room",
   },
   {
+    id: 4,
+
     type: "person",
     images: ["/assets/images/man.jpeg", "/assets/images/woman.jpeg"],
     name: "John Doe",

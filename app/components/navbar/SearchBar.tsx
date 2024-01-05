@@ -13,6 +13,7 @@ const SearchBar = () => {
       <div className=" ">
         <p className="text-sm text-gray-500 ml-2">Quick Search</p>
       </div>
+      
     </div>
   );
 };

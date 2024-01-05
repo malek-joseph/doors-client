@@ -11,12 +11,13 @@ interface ListingImagesProps {
 
 const ListingImages: React.FC<ListingImagesProps> = ({ images, name }) => {
   return (
-    <div className="relative h-60 w-full mb-4">
+    <div className="relative w-full h-80 mb-4 overflow-hidden ">
       {/* <Image
-        src={images[1]}
+        src={images[0]}
         alt={name}
-        className="object-cover rounded-md" 
-        layout="fill"
+        className=" rounded-md w-full h-full object-cover"
+        width={500} 
+        height={700}
       /> */}
       <ListingCarousel   images={images}/>
     </div>

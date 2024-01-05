@@ -1,6 +1,7 @@
 /** @format */
 
 import ListingImages from "./listingCard/ListingImages";
+import Link from "next/link";
 
 
 interface ListingCardProps {
@@ -16,6 +17,7 @@ interface ListingCardProps {
   governance: string;
   city: string;
   list?: string;
+  id: number;
 }
 
 
@@ -32,7 +34,8 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
   billsIncluded,
   governance,
   city,
-  list
+  list,
+  id
 }) => {
   // Truncate description if it exceeds the maximum length
   const truncatedDescription =
@@ -42,11 +45,12 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
 
   
   return (
-    
-    <div className="flex flex-col items-center  transition-all cursor-pointer bg-white rounded-lg overflow-hidden my-3">
+
+    <div className="flex flex-col items-center transition-all cursor-pointer  ">
       <ListingImages images={images} name={name} />
 
-      <div className="">
+      <Link className="w-full" href={`/details/person/${encodeURIComponent(id)}`}>
+      
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
           <h2 className="text-xl font-semibold text-gray-600">
@@ -70,8 +74,11 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
             {" "}
             <span className="text-sm text-gray-500">for Rent in:</span>{" "}
             {governance}, {city}
-          </p>
+            </p>
+            
+
           </div>
+          
        
         </div>
         <p className="text-gray-600 text-sm mb-2">{truncatedDescription}</p>
@@ -87,8 +94,10 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
             Add to shortlist
           </button>
         </div>
-      </div>
+      </Link>
+
     </div>
+    
   );
 };
 
