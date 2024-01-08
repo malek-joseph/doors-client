@@ -1,7 +1,7 @@
 "use client";
 
 
-import ListSection from "./components/sections/ListSection";
+import ListSection from "./components/sections/ListNowSection";
 import ListingsSection from "./components/sections/ListingsSection";
 
 export default function Home() {

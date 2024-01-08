@@ -37,16 +37,30 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
     "--swiper-pagination-bullet-horizontal-gap": "6px",
   } as React.CSSProperties; // Define as CSSProperties
 
+   const swiperParams = {
+    slidesPerView: 1, // Default: Display 1 slide
+    spaceBetween: 10,
+    centeredSlides: true,
+    navigation: true,
+    pagination: { clickable: false },
+    breakpoints: {
+      // Display 1 slide on smaller screens
+      640: {
+        slidesPerView: 1,
+      },
+      // Display 3 slides on larger screens
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  };
+
   return (
         <div className="relative w-full h-80 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
 
     <Swiper
       style={swiperStyles}
-      slidesPerView={3}
-      spaceBetween={10}
-      centeredSlides={true}
-      navigation={true} // Enable navigation
-      pagination={{ clickable: false }}
+        {...swiperParams}
       className="w-full h-full listing-carousel rounded-lg" // Adjust width and height to fit the container
     >
       {images.map((image, index) => (

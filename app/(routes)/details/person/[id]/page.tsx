@@ -3,6 +3,9 @@
 
 import { LISTINGS } from "@/app/constants";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
+import PersonDetailsSection from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
+import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
+import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
 
 
 const PersonDetails = ({ params }: { params: { id: number } })  => {
@@ -19,13 +22,37 @@ const PersonDetails = ({ params }: { params: { id: number } })  => {
     
   // Extract the images of the specific person
   const personImages = person ? person.images : [];
+    if (!person) {
+      return <div>Loading...</div>; // Return a loading state or handle the case where person is undefined
+    }
 
   return (
-    <main className="flex flex-col items-center justify-center">
-         <div className="w-5/6 ">
-        {/* Pass the person's images to the ListingDetailsCarousel component */}
+    <main className="flex flex-col items-center justify-center ">
+      <div className="w-5/6 ">
+        <div className="my-8">
           <ListingDetailsCarousel images={personImages} />
         </div>
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
+          <div className="w-full lg:w-8/12">
+            <PersonDetailsSection
+              name={person.name}
+              freeMessage={person.freeMessage}
+              age={person.age}
+              gender={person.gender}
+              city={person.city}
+              governance={person.governance}
+            />
+            <hr className="my-3" />
+            
+              <BudgetAndStay
+            budget={person.budget}
+            />
+          </div>
+          <div className="w-full lg:w-4/12 ">
+            <SendMessageCard />
+          </div>
+        </div>
+      </div>
     </main>
   );
 };

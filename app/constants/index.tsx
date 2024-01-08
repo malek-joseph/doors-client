@@ -25,6 +25,7 @@ type Listing = {
   list?: string;
   governance: string;
   city: string;
+  budget?: number;
   
 };
 
@@ -50,6 +51,8 @@ export const LISTINGS: Listing[] = [
     governance: "Giza",
     city: "Zayed",
     list: "1 Bed in single room",
+    budget: 800,
+
   },
   {
     id: 2,
@@ -66,6 +69,8 @@ export const LISTINGS: Listing[] = [
     availability: "Now",
     governance: "Giza",
     city: "Zayed",
+    budget: 800,
+
   },
   {
     id: 3,
@@ -88,6 +93,8 @@ export const LISTINGS: Listing[] = [
     governance: "Cairo",
     city: "Maadi",
     list: "1 Bed in double room",
+    budget: 800,
+
   },
   {
     id: 4,
@@ -104,6 +111,8 @@ export const LISTINGS: Listing[] = [
     availability: "Now",
     governance: "Giza",
     city: "Zayed",
+    budget: 800,
+
   },
 ];
 

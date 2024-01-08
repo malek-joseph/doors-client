@@ -1,8 +1,8 @@
 /** @format */
 
 import { LISTINGS } from "@/app/constants";
-import ListingCard from "../cards/ListingCard";
-import ListingCardPlace from "../cards/ListingCardPlace";
+import ListingCard from "../cards/listingCard/ListingCardPerson";
+import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
 
 const ListSection = () => {
   return (

@@ -1,4 +1,4 @@
-import CardOne from "../cards/CardOne"
+import CardOne from "../cards/listingCard/ListNowCard"
 
 
 const ListSection = () => {

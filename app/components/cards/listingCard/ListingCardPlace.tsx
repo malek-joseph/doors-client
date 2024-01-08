@@ -1,8 +1,7 @@
 /** @format */
 
-import ListingImages from "./listingCard/ListingImages";
+import ListingImages from "./ListingImages";
 import Link from "next/link";
-
 
 interface ListingCardProps {
   images: string[];
@@ -20,9 +19,7 @@ interface ListingCardProps {
   id: number;
 }
 
-
 const MAX_DESCRIPTION_LENGTH = 45; // Adjust the desired maximum length
-
 
 const ListingCardPlace: React.FC<ListingCardProps> = ({
   images,
@@ -35,7 +32,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
   governance,
   city,
   list,
-  id
+  id,
 }) => {
   // Truncate description if it exceeds the maximum length
   const truncatedDescription =
@@ -43,14 +40,13 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
       ? `${description.slice(0, MAX_DESCRIPTION_LENGTH)}...`
       : description;
 
-  
   return (
-
     <div className="flex flex-col items-center transition-all cursor-pointer  ">
       <ListingImages images={images} name={name} />
 
-      <Link className="w-full" href={`/details/person/${encodeURIComponent(id)}`}>
-      
+      <Link
+        className="w-full"
+        href={`/details/person/${encodeURIComponent(id)}`}>
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
           <h2 className="text-xl font-semibold text-gray-600">
@@ -68,18 +64,14 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
         {/* Rent and Age Row */}
         <div className="flex  justify-between items-center mb-2">
           <div className="flex flex-col">
-   <p className="text-gray-600 text-sm">{list}</p>
+            <p className="text-gray-600 text-sm">{list}</p>
 
-          <p className="text-teal-500">
-            {" "}
-            <span className="text-sm text-gray-500">for Rent in:</span>{" "}
-            {governance}, {city}
+            <p className="text-teal-500">
+              {" "}
+              <span className="text-sm text-gray-500">for Rent in:</span>{" "}
+              {governance}, {city}
             </p>
-            
-
           </div>
-          
-       
         </div>
         <p className="text-gray-600 text-sm mb-2">{truncatedDescription}</p>
 
@@ -95,9 +87,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
           </button>
         </div>
       </Link>
-
     </div>
-    
   );
 };
 
