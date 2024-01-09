@@ -12,8 +12,6 @@ interface AboutMeProps {
   job: string;
   smoker: boolean;
   pets: boolean;
-  description: string;
-  type: string;
 
 
 }
@@ -23,18 +21,13 @@ const AboutMe: React.FC<AboutMeProps> = ({
   job,
   smoker,
   pets,
-  type,
-  description
 
 }) => {
   return (
     <div className="flex flex-col mb-8 ">
       <div className="mb-5">
         <h3 className="text-gray-500 mb-3 text-lg font-semibold">About</h3>
-        <p className="text-gray-400 text-sm">
-          {type === "person" && about}
-          {type === "place" && description}
-          </p>
+        <p className="text-gray-400 text-sm">{about}</p>
       </div>
       <div className="flex flex-col justify-between lg:flex-row md:flex-row mx-4 gap-4 ">
         <div className="w-full flex flex-col items-center lg:w-1/3 md:w-full">

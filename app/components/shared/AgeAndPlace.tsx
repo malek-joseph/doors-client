@@ -8,20 +8,29 @@ interface AgeAndPlaceProps {
   gender?: string;
   governance: string;
   city: string;
+  type: string;
+  list?: string;
+  name: string;
 
 }
 
-const AgeAndPlace: React.FC<AgeAndPlaceProps> = ({ age, gender, city,governance  }) => {
+const AgeAndPlace: React.FC<AgeAndPlaceProps> = ({ age, gender, city,governance, type, list, name  }) => {
   return (
           <div className="flex flex-col">
-              <p className="text-gray-600 text-sm">
-                {age} year old {gender}
-              </p>
-              <p className="text-teal-500">
+              <div className="text-gray-600 text-sm">
+                {type === "person" && <div>{age} year old {gender}</div>}
+                {type === "place" && <div>{list}</div>}
+              </div>
+            {type === "person" &&   <div className="text-teal-500">
                 {" "}
                 <span className="text-sm text-gray-500">Looking in:</span>{" "}
                 {governance}, {city}
-              </p>
+              </div>}
+              {type === "place" && <p className="text-teal-500">
+               
+                <span className="text-sm text-gray-500">Listed by: {" "}</span>
+                {name}
+              </p>}
             </div>
   
   );

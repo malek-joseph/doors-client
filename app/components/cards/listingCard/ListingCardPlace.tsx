@@ -46,7 +46,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
 
       <Link
         className="w-full"
-        href={`/details/person/${encodeURIComponent(id)}`}>
+        href={`/details/place/${encodeURIComponent(id)}`}>
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
           <h2 className="text-xl font-semibold text-gray-600">

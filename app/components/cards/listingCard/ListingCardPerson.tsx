@@ -17,6 +17,8 @@ interface ListingCardProps {
   governance: string;
   city: string;
   id: number;
+  type: string;
+  
 }
 
 const MAX_DESCRIPTION_LENGTH = 45; // Adjust the desired maximum length
@@ -33,6 +35,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   governance,
   city,
   id,
+  type,
+
 }) => {
   // Truncate description if it exceeds the maximum length
   const truncatedDescription =
@@ -49,11 +53,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
         href={`/details/person/${encodeURIComponent(id)}`}>
         <div className="">
           {/* Name and Free Message Row */}
-          <FreeToMessage name={name} freeMessage={freeMessage}/>
+          <FreeToMessage name={name} freeMessage={freeMessage} type={type } city={city} governance={governance} />
 
           {/* Rent and Age Row */}
           <div className="flex justify-between  items-center mb-2">
-            <AgeAndPlace age={age} gender={gender} city={ city} governance={governance} />
+            <AgeAndPlace age={age} gender={gender} city={ city} governance={governance} type={type} name={name} />
 
             <div className="flex flex-col">
               <span className="text-sm text-gray-500">Budget:</span> {rent}

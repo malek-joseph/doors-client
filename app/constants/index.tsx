@@ -60,7 +60,7 @@ export const LISTINGS: Listing[] = [
     budget: 800,
     availableDuration: 6,
     about:" " ,
-    job: "",
+    job: "Engineer",
     pets: true,
     smoker: true,
     

@@ -23,6 +23,7 @@ const ListSection = () => {
             governance={listing.governance}
             city={listing.city}
             id={listing.id}
+            type={listing.type}
           />
         ) : (
           <ListingCardPlace

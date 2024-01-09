@@ -7,7 +7,13 @@ import TextArea from "../../shared/TextArea";
 import Button from "../../shared/buttons/Button";
 import personImage from "../../../../public/assets/images/man.jpeg"
 
-const SendMessageCard: React.FC = () => {
+interface SendMessageCardProps {
+  name: string;
+}
+
+
+
+const SendMessageCard: React.FC<SendMessageCardProps> = ({name}) => {
    const [message, setMessage] = useState('');
 
   const handleMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,7 +30,7 @@ const SendMessageCard: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         {/* Pass the imageUrl prop to the CircleImage component */}
         <CircleImage imageUrl={imageUrl} />
-        <p>Message Nicole</p>
+        <p>Message { name}</p>
       </div>
       <div className="my-4">
       <TextArea value={message} onChange={handleMessageChange} />

@@ -10,14 +10,12 @@ interface BudgetAndStayProps {
   budget?: number;
   availability?: string;
   availableDuration?: number;
-  type: string;
 }
 
 const BudgetAndStay: React.FC<BudgetAndStayProps> = ({
   budget,
   availability,
   availableDuration,
-  type
 }) => {
   return (
     <div className="flex flex-col justify-between lg:flex-row md:flex-row mx-4 gap-4 ">
@@ -35,10 +33,7 @@ const BudgetAndStay: React.FC<BudgetAndStayProps> = ({
             <span className="text-sm text-gray-300">/Month</span>{" "}
           </div>
         </div>
-        <div className="text-gray-500 text-sm">
-         { type === "person" && "Budget"}
-         { type === "place" && "Rent"}
-        </div>
+        <div className="text-gray-500 text-sm">Budget</div>
       </div>
       <div className="w-full flex flex-col items-center lg:w-1/3 md:w-full">
         <div className="flex justify-start items-end w-8/12  mb-3">
@@ -54,12 +49,7 @@ const BudgetAndStay: React.FC<BudgetAndStayProps> = ({
             <span className="text-sm text-gray-300 "> &nbsp;Months</span>
           </div>
         </div>
-        <div className="text-gray-500 text-sm">
-         { type === "place" && "Available for"}
-         { type === "person" && "Stay Duration"}
-
-          
-            </div>
+        <div className="text-gray-500 text-sm">Stay Duration</div>
       </div>
       <div className="w-full flex flex-col items-center lg:w-1/3 md:w-full">
         <div className="flex justify-start items-end w-8/12  mb-3">
@@ -72,11 +62,7 @@ const BudgetAndStay: React.FC<BudgetAndStayProps> = ({
           />
           <div className="text-teal-500">{availability}</div>
         </div>
-        <div className="text-gray-500 text-sm">
-           { type === "place" && "Available starting"}
-         { type === "person" && "Move Date"}
-          
-        </div>
+        <div className="text-gray-500 text-sm">Move Date</div>
       </div>
     </div>
   );
