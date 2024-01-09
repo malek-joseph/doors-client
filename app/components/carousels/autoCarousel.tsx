@@ -47,9 +47,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                 src={image}
                 alt={`Image ${index + 1}`}
                
-                layout="fill"
-                objectFit="cover"
-                className="w-full h-full object-cover rounded"
+              fill
+ style={{objectFit:"cover"}}                className="w-full h-full object-cover rounded"
               />
             </div>
           </SwiperSlide>

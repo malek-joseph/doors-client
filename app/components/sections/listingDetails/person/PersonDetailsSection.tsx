@@ -14,7 +14,7 @@ interface PersonDetails {
 
 const PersonDetailsSection: React.FC<PersonDetails> = ({name, freeMessage, age, gender, city, governance}) => {
   return (
-    <div className='bg-gray-100'>
+    <div className=''>
       <FreeToMessage name={name} freeMessage={freeMessage} />
       <AgeAndPlace age={age} gender={gender} city={ city} governance={governance} />
     </div>

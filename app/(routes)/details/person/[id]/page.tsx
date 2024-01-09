@@ -6,6 +6,7 @@ import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCar
 import PersonDetailsSection from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
 import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
+import AboutMe from "@/app/components/sections/listingDetails/person/AboutMe";
 
 
 const PersonDetails = ({ params }: { params: { id: number } })  => {
@@ -43,10 +44,20 @@ const PersonDetails = ({ params }: { params: { id: number } })  => {
               governance={person.governance}
             />
             <hr className="my-3" />
-            
-              <BudgetAndStay
-            budget={person.budget}
+
+            <BudgetAndStay
+              budget={person.budget}
+              availability={person.availability}
+              availableDuration={person.availableDuration}
             />
+            <hr className="my-3" />
+            <AboutMe
+              about={person.about}
+              job={person.job}
+              smoker={person.smoker}
+              pets={person.pets}
+            />
+            
           </div>
           <div className="w-full lg:w-4/12 ">
             <SendMessageCard />

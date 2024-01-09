@@ -68,9 +68,8 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
           <Image
             src={image}
             alt={`Image ${index + 1}`}
-            layout="fill"
-            objectFit="cover" // Adjust objectFit if needed
-            className=""
+           fill
+ style={{objectFit:"cover"}}            className=""
           />
         </SwiperSlide>
       ))}

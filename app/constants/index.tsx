@@ -26,6 +26,12 @@ type Listing = {
   governance: string;
   city: string;
   budget?: number;
+  availableDuration?: number;
+  about: string;
+  job: string;
+  smoker: boolean;
+  pets: boolean;
+
   
 };
 
@@ -52,6 +58,13 @@ export const LISTINGS: Listing[] = [
     city: "Zayed",
     list: "1 Bed in single room",
     budget: 800,
+    availableDuration: 6,
+    about:" " ,
+    job: "",
+    pets: true,
+    smoker: true,
+    
+
 
   },
   {
@@ -65,11 +78,17 @@ export const LISTINGS: Listing[] = [
     age: "25",
     gender: "male",
     description:
-      "Spacious room available in a quiet neighborhood. Spacious room available in a quiet neighborhood. Spacious room available in a quiet neighborhood.",
+      "Spacious room available in a quiet neighborhood. Spacious room available in a quiet neighborhood. Spacious room available in a quiet neighborhood. lorem",
     availability: "Now",
     governance: "Giza",
     city: "Zayed",
     budget: 800,
+    availableDuration: 6,
+     about:"Hello I'm happy to meet you guys, I'm calm and work quietly. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi similique cupiditate fugit consequatur, animi harum expedita, ipsa hic laudantium maxime suscipit soluta repellat aut ad dolores itaque nostrum facere? A." ,
+    job: "Engineer",
+    pets: true,
+    smoker: true,
+
 
   },
   {
@@ -94,6 +113,12 @@ export const LISTINGS: Listing[] = [
     city: "Maadi",
     list: "1 Bed in double room",
     budget: 800,
+    availableDuration: 6,
+         about:"Hello I'm happy to meet you guys, I'm calm and work quietly. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatem dolor repudiandae minima quaerat repellat. Quis vel distinctio voluptatum voluptatem, modi consequuntur iste id, doloribus laboriosam perferendis deleniti commodi neque." ,
+    job: "Engineer",
+    pets: true,
+    smoker: true,
+
 
   },
   {
@@ -112,6 +137,12 @@ export const LISTINGS: Listing[] = [
     governance: "Giza",
     city: "Zayed",
     budget: 800,
+    availableDuration: 6,
+         about:"Hello I'm happy to meet you guys, I'm calm and work quietly. " ,
+    job: "Engineer",
+    pets: true,
+    smoker: true,
+
 
   },
 ];
