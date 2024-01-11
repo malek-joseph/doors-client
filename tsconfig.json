@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(routes)/details/place",
-    "app/(routes)/details/person/page.tsx"
+    "app/(routes)/details/person/page.tsx",
+    "src"
   ],
   "exclude": ["node_modules"]
 }
