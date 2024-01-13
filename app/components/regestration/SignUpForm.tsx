@@ -2,24 +2,38 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from 'next/link'
+import Link from "next/link";
 import Button from "../shared/buttons/Button";
+import Input from "../inputs/Input"; // Import the Input component
+import { useRouter } from "next/navigation";
+import { signup } from "../../services/authService"; // Import the signup function
+import { ToastContainer, toast } from "react-toastify";
 
-interface SignUpFormProps {
-  onSignUp: (username: string, password: string, confirmPassword: string) => void;
-}
-
-const LoginForm: React.FC<SignUpFormProps> = ({ onSignUp }) => {
-  const [username, setUsername] = useState("");
+const SignupForm: React.FC = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [signingUp, setSigningUp] = useState(false);
+  const router = useRouter();
 
-  const handleLogin = () => {
-    // Basic validation, you might want to add more robust validation logic
-    if (username && password) {
-      onSignUp(username, password, confirmPassword);
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password === confirmPassword) {
+      if (password.length < 8) {
+        toast.error("Password must be at least 8 characters long");
+      } else {
+        setSigningUp(true);
+        const user = { email, password };
+        const success = await signup(user);
+        setSigningUp(false);
+
+        if (success) {
+          router.push("/");
+        }
+      }
     } else {
-      alert("Please enter both username and password.");
+      toast.error("Password mismatch");
     }
   };
   const handleGoogleSignUp = () => {};
@@ -38,7 +52,7 @@ const LoginForm: React.FC<SignUpFormProps> = ({ onSignUp }) => {
           title="Signup with Google"
           icon="/assets/images/google-logo.png"
           variant="btn_dark"
-          onClick={handleGoogleSignUp}
+          disabled={false}
         />
       </div>
 
@@ -48,54 +62,45 @@ const LoginForm: React.FC<SignUpFormProps> = ({ onSignUp }) => {
         <span className="mx-2 text-sm text-gray-400">or</span>
         <hr className="flex-grow border-t border-gray-200" />
       </div>
-
-      {/* Email input */}
-      <div className="mb-4">
-        <label className="block text-xs mb-1" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="border p-1 w-full rounded-md"
+      <form onSubmit={handleSignup}>
+        {/* Email input */}
+        <Input
+          label="Email"
           type="text"
           id="email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required={true}
         />
-      </div>
 
-      {/* Password input */}
-      <div className="mb-4 relative">
-        <label className="block text-xs mb-1" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="border p-1 w-full rounded-md"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+        {/* Password input */}
+        <div className="mb-4 relative">
+          <Input
+            label="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required={true}
+          />
+          <Input
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required={true}
+          />
+        </div>
+
+        {/* Submit button */}
+        <Button
+          type="submit"
+          title="Signup"
+          variant="btn_teal"
+          disabled={signingUp}
         />
-        <label className="block text-xs mb-1" htmlFor="password">
-          Confirm Password
-        </label>
-        <input
-          className="border p-1 w-full rounded-md"
-          type="confirmPassword"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-  
-      </div>
-
-      {/* Login button */}
-
-      <Button
-        type="button"
-        title="Signup"
-        variant="btn_teal"
-        onClick={handleLogin}
-      />
+      </form>
 
       {/* Create an account */}
       <p className="text-xs text-gray-400 mt-4 text-center">
@@ -108,4 +113,4 @@ const LoginForm: React.FC<SignUpFormProps> = ({ onSignUp }) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

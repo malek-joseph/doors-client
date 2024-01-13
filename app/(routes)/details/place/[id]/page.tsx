@@ -1,6 +1,5 @@
 /** @format */
 
-
 import { LISTINGS } from "@/app/constants";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
 import PlaceDetailsSection from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
@@ -8,24 +7,22 @@ import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
 import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
 import AboutMe from "@/app/components/sections/listingDetails/person/AboutMe";
 
-
-const PlaceDetails = ({ params }: { params: { id: number } })  => {
+const PlaceDetails = ({ params }: { params: { id: number } }) => {
   const { id } = params;
 
   // Convert nid to number if it's a string
   const personId: number | undefined =
     typeof id === "string" ? parseInt(id, 10) : undefined;
 
-  
   const place = LISTINGS.find(
     (listing) => listing.type === "place" && listing.id === personId
   );
-    
+
   // Extract the images of the specific person
   const placeImages = place ? place.images : [];
-    if (!place) {
-      return <div>Loading...</div>; // Return a loading state or handle the case where person is undefined
-    }
+  if (!place) {
+    return <div>Loading...</div>; // Return a loading state or handle the case where person is undefined
+  }
 
   return (
     <main className="flex flex-col items-center justify-center ">

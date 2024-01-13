@@ -1,7 +1,8 @@
-import AgeAndPlace from '@/app/components/shared/AgeAndPlace';
-import FreeToMessage from '@/app/components/shared/FreeToMessage'
-import React from 'react'
+/** @format */
 
+import AgeAndPlace from "@/app/components/shared/AgeAndPlace";
+import FreeToMessage from "@/app/components/shared/FreeToMessage";
+import React from "react";
 
 interface PlaceDetails {
   name: string;
@@ -14,7 +15,16 @@ interface PlaceDetails {
   list?: string;
 }
 
-const PlaceDetailsSection: React.FC<PlaceDetails> = ({name, type, freeMessage, age, gender, city, governance, list}) => {
+const PlaceDetailsSection: React.FC<PlaceDetails> = ({
+  name,
+  type,
+  freeMessage,
+  age,
+  gender,
+  city,
+  governance,
+  list,
+}) => {
   return (
     <div className="">
       <FreeToMessage
@@ -34,6 +44,6 @@ const PlaceDetailsSection: React.FC<PlaceDetails> = ({name, type, freeMessage, a
       />
     </div>
   );
-}
+};
 
-export default PlaceDetailsSection
+export default PlaceDetailsSection;

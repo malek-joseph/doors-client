@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "app/(routes)/details/place",
     "app/(routes)/details/person/page.tsx",
-    "src"
+    "src",
+    "app/providers/reduxProvider.ts"
   ],
   "exclude": ["node_modules"]
 }

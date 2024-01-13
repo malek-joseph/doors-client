@@ -9,7 +9,6 @@ const ListSection = () => {
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 ">
       {LISTINGS.map((listing, i) =>
         listing.type === "person" ? (
-          
           <ListingCard
             images={listing.images}
             name={listing.name}
@@ -35,11 +34,11 @@ const ListSection = () => {
             description={listing.description}
             availability={listing.availability}
             key={i}
-              billsIncluded={listing.billsIncluded}
-              governance={listing.governance}
-              city={listing.city}
-              list={listing.list}
-              id={listing.id}
+            billsIncluded={listing.billsIncluded}
+            governance={listing.governance}
+            city={listing.city}
+            list={listing.list}
+            id={listing.id}
           />
         )
       )}

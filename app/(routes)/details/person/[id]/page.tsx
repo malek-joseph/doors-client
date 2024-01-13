@@ -1,6 +1,5 @@
 /** @format */
 
-
 import { LISTINGS } from "@/app/constants";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
 import PersonDetailsSection from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
@@ -8,24 +7,22 @@ import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
 import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
 import AboutMe from "@/app/components/sections/listingDetails/person/AboutMe";
 
-
-const PersonDetails = ({ params }: { params: { id: number } })  => {
+const PersonDetails = ({ params }: { params: { id: number } }) => {
   const { id } = params;
 
   // Convert nid to number if it's a string
   const personId: number | undefined =
     typeof id === "string" ? parseInt(id, 10) : undefined;
 
-  
   const person = LISTINGS.find(
     (listing) => listing.type === "person" && listing.id === personId
   );
-    
+
   // Extract the images of the specific person
   const personImages = person ? person.images : [];
-    if (!person) {
-      return <div>Loading...</div>; // Return a loading state or handle the case where person is undefined
-    }
+  if (!person) {
+    return <div>Loading...</div>; // Return a loading state or handle the case where person is undefined
+  }
 
   return (
     <main className="flex flex-col items-center justify-center ">
@@ -61,7 +58,6 @@ const PersonDetails = ({ params }: { params: { id: number } })  => {
               type={person.type}
               description={person.description}
             />
-            
           </div>
           <div className="w-full lg:w-4/12 ">
             <SendMessageCard name={person.name} />

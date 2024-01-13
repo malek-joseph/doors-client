@@ -5,22 +5,38 @@ import React, { useState } from "react";
 
 import Button from "../shared/buttons/Button";
 import Link from "next/link";
-import googleImg from "../../../public/assets/images/google-logo.png"
+import googleImg from "../../../public/assets/images/google-logo.png";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import { signin } from "../../services/authService"; // Import the signup function
+import Input from "../inputs/Input"; // Import the Input component
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/auth/authSlice";
 
-interface LoginFormProps {
-  onLogin: (username: string, password: string) => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
+const LoginForm: React.FC = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signingIn, setSigningIn] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const handleLogin = () => {
-    // Basic validation, you might want to add more robust validation logic
-    if (username && password) {
-      onLogin(username, password);
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
     } else {
-      alert("Please enter both username and password.");
+      setSigningIn(true);
+      const user = { email, password };
+      const success = await signin(user);
+      console.log(user)
+      dispatch(setUser(user)); // Dispatch the user data to Redux
+
+      setSigningIn(false);
+
+      if (success) {
+        router.push("/");
+      }
     }
   };
   const handleGoogleLogin = () => {};
@@ -39,7 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           title="Signin with Google"
           icon="/assets/images/google-logo.png"
           variant="btn_dark"
-          onClick={handleGoogleLogin}
+          disabled={false}
         />
       </div>
 
@@ -50,48 +66,43 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         <hr className="flex-grow border-t border-gray-200" />
       </div>
 
-      {/* Email input */}
-      <div className="mb-4">
-        <label className="block text-xs mb-1" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="border p-1 w-full rounded-md"
+      <form onSubmit={handleLogin}>
+        <Input
+          label="Email"
           type="text"
           id="email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required={true}
         />
-      </div>
 
-      {/* Password input */}
-      <div className="mb-4 relative">
-        <label className="block text-xs mb-1" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="border p-1 w-full rounded-md"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+        {/* Password input */}
+        <div className="mb-4 relative">
+          <Input
+            label="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required={true}
+          />
+          {/* Forget password */}
+          <p className="text-xs mb-4 mt-2 text-right">
+            <a className="text-teal-500" href="#">
+              Forget password?
+            </a>
+          </p>
+        </div>
+
+        {/* Login button */}
+
+        <Button
+          type="submit"
+          title="Login"
+          variant="btn_teal"
+          disabled={signingIn}
         />
-        {/* Forget password */}
-        <p className="text-xs mb-4 mt-2 text-right">
-          <a className="text-teal-500" href="#">
-            Forget password?
-          </a>
-        </p>
-      </div>
-
-      {/* Login button */}
-
-      <Button
-        type="button"
-        title="Login"
-        variant="btn_teal"
-        onClick={handleLogin}
-      />
+      </form>
 
       {/* Create an account */}
       <p className="text-xs text-gray-400 mt-4 text-center">
