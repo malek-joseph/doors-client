@@ -8,7 +8,7 @@ const Logo = () => {
   return (
     <div className="flex items-center  justify-between lg:inline-block  lg:mb-0 lg:w-auto padding-container  ">
       <Link href="/" className="">
-        <Image src="/logo.svg" alt="logo" width={50} height={29}  className=""/>
+        <Image src="/logo.svg" alt="logo" width={50} height={29} className="w-8 h-auto"  />
       </Link>
       
     

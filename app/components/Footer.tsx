@@ -11,11 +11,18 @@ import googleApp from "../../public/assets/images/googleApp.png"
 import appleApp from "../../public/assets/images/appleApp.png"
 
 const Footer = () => {
-  const Login = () => {};
+
+  
   return (
     <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 bg-gray-10">
       <Link href="/" className="">
-        <Image src="/logo.svg" alt="logo" width={40} height={29} />
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width={40}
+          height={40}
+         className="w-8 h-auto"
+        />
       </Link>
       <ul className=" h-full gap-2 lg:gap-5 flex flex-col lg:flex-row items-center justify-center ">
         {FOOTER_LINKS.map((link) => (
@@ -28,8 +35,20 @@ const Footer = () => {
         ))}
       </ul>
       <div className="flex">
-        <Image src={appleApp} alt="apple app" width={100}/>
-        <Image src={googleApp} alt="google app"  width={100}/>
+        <Image
+          src={appleApp}
+          alt="apple app"
+          width={100}
+          height={40}
+          className="w-full h-auto"
+        />
+        <Image
+          src={googleApp}
+          alt="google app"
+          width={100}
+          height={40}
+          className="w-full h-auto"
+        />
       </div>
     </footer>
   );

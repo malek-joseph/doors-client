@@ -74,6 +74,7 @@ const LoginForm: React.FC = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required={true}
+          autocomplete="email"
         />
 
         {/* Password input */}
@@ -85,6 +86,8 @@ const LoginForm: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required={true}
+              autocomplete="current-password"
+
           />
           {/* Forget password */}
           <p className="text-xs mb-4 mt-2 text-right">

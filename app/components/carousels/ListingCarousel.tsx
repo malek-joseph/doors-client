@@ -38,17 +38,19 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       style={swiperStyles}
       spaceBetween={30}
       centeredSlides={true}
-      navigation={true} 
+      navigation={true}
       pagination={{ clickable: false }}
-      className="w-full h-full listing-carousel" 
-    >
+      className="w-full h-full listing-carousel">
       {images.map((image, index) => (
         <SwiperSlide key={index}>
           <Image
+            priority={true}
             src={image}
             alt={`Image ${index + 1}`}
-          fill
- style={{objectFit:"cover"}}            className="rounded-md"
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-md"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </SwiperSlide>
       ))}

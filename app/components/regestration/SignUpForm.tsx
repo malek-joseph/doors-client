@@ -71,6 +71,7 @@ const SignupForm: React.FC = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required={true}
+          autocomplete="email"
         />
 
         {/* Password input */}
@@ -82,6 +83,7 @@ const SignupForm: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required={true}
+            autocomplete="new-password"
           />
           <Input
             label="Confirm Password"
@@ -90,6 +92,7 @@ const SignupForm: React.FC = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required={true}
+            autocomplete="new-password"
           />
         </div>
 

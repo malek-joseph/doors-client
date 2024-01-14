@@ -44,11 +44,13 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           <SwiperSlide key={index} className="swiper-slide w-full h-full">
             <div className=" relative w-full h-screen xl:flex items-center">
               <Image
+                priority={true}
                 src={image}
                 alt={`Image ${index + 1}`}
-               
-              fill
- style={{objectFit:"cover"}}                className="w-full h-full object-cover rounded"
+                fill
+                style={{ objectFit: "cover" }}
+                className="w-full h-full object-cover rounded"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </SwiperSlide>

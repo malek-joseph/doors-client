@@ -8,6 +8,7 @@ interface InputProps {
   value: string;
   required: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autocomplete?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   required,
+    autocomplete,
 }) => (
   <div className="mb-4">
     <label className="block text-xs mb-1" htmlFor={id}>
@@ -29,6 +31,7 @@ const Input: React.FC<InputProps> = ({
       value={value}
       onChange={onChange}
       required
+      autoComplete={autocomplete}
     />
   </div>
 );

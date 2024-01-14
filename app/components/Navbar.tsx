@@ -11,9 +11,7 @@ import { selectUser } from '../redux/features/auth/authSlice'; // Adjust the imp
 
 
 const Navbar = () => {
-    const user = useSelector(selectUser);
-
-    console.log(user)
+   
 
 
 

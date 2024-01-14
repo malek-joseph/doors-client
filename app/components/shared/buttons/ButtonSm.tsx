@@ -6,10 +6,11 @@ type ButtonProps = {
   title: string;
   icon?: string;
   variant: string;
-  onClick? : () => void
+  onClick?: () => void;
+  size?: number; // New property for image size
 };
 
-const ButtonSm = ({ type, title, icon, variant, onClick }: ButtonProps) => {
+const ButtonSm = ({ type, title, icon, variant, onClick, size = 18 }: ButtonProps) => {
   const handleClick = () => {
     if (onClick) {
       onClick();
@@ -24,7 +25,7 @@ const ButtonSm = ({ type, title, icon, variant, onClick }: ButtonProps) => {
     >
       {icon && (
        
-          <Image src={icon} alt="title" width={18} height={18} />
+        <Image src={icon} alt={title} width={size} height={size} />
     
       )}
       <label className="hover:cursor-pointer text-sm ">{title}</label>
