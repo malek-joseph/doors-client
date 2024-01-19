@@ -7,10 +7,20 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/features/auth/authSlice";
 import SwiperMenu from "../shared/menu/SwiperMenu";
 
-const LoginButton = () => {
+
+interface UserOverlayProps {
+  onClick: () => void;
+  isOverlayVisible: boolean;
+}
+
+
+const LoginButton: React.FC<UserOverlayProps> = ({
+  onClick,
+  isOverlayVisible,
+}) => {
   const user = useSelector(selectUser);
 
-  console.log(user)
+  // console.log(user)
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
       {!user ? (
@@ -23,15 +33,17 @@ const LoginButton = () => {
           />
         </Link>
       ) : (
-        <>
+        <Link href="/profile">
           <ButtonSm
             type="button"
             title=""
             icon="/assets/images/profile.png"
             variant="white"
-            size={26}
+              size={30}
+              onClick={onClick}
+              
           />
-        </>
+        </Link>
       )}
     </div>
   );

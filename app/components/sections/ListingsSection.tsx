@@ -3,7 +3,6 @@
 import { LISTINGS } from "@/app/constants";
 import ListingCard from "../cards/listingCard/ListingCardPerson";
 import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
-import SwiperMenu from "../shared/menu/SwiperMenu";
 
 const ListSection = () => {
   return (
@@ -43,7 +42,6 @@ const ListSection = () => {
           />
         )
       )}
-      {/* <SwiperMenu /> */}
     </section>
   );
 };

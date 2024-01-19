@@ -1,0 +1,56 @@
+/* styles.css */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 40; /* Ensure it's on top of other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; /* Full viewport width */
+  overflow: hidden; /* Prevent scrolling */
+  margin: 0; /* Remove any default margins */
+}
+
+
+.overlay-content {
+  background: rgb(26, 71, 71);
+  padding: 20px;
+  width: 100vw; /* Full viewport width */
+  overflow: auto; /* Enable scroll if content is too long */
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top */
+  right: 0; /* Align to the left */
+  left:0;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Center content vertically */
+  align-items: flex-end; /* Center content horizontally */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  border-radius: 0; /* Full screen typically doesn't have rounded corners */
+  z-index: 40; /* Ensure it's on top of other content */
+
+}
+
+.close-button {
+  background-color: #f4433689; /* Red color for the close button */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+   top: 20px;
+  z-index: 2000;
+  right: 20px; /* Position it at the top-right corner of the overlay content */
+}
+
+
+/* Styling for the navigation links */
+.overlay-content .nav-links {
+  margin: 20px 0; /* Add some spacing around the navigation links */
+  /* Add additional styles for navigation links if needed */
+}
