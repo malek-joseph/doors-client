@@ -20,6 +20,11 @@ const LoginButton: React.FC<UserOverlayProps> = ({
 }) => {
   const user = useSelector(selectUser);
 
+    const handleClick = () => {
+      if (user) {
+        onClick(); // Toggle the overlay for logged in users
+      }
+    };
   // console.log(user)
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
@@ -33,17 +38,15 @@ const LoginButton: React.FC<UserOverlayProps> = ({
           />
         </Link>
       ) : (
-        <Link href="/profile">
+       <div onClick={handleClick}>
           <ButtonSm
             type="button"
             title=""
             icon="/assets/images/profile.png"
             variant="white"
-              size={30}
-              onClick={onClick}
-              
+            size={30}
           />
-        </Link>
+        </div>
       )}
     </div>
   );
