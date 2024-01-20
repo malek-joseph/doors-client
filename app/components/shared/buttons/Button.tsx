@@ -8,8 +8,9 @@ type ButtonProps = {
   icon?: string;
   variant: string;
   disabled: boolean;
+  onClick?: () => void;
 };
-
+ 
 const Button = ({ type, title, icon, variant, disabled }: ButtonProps) => {
 
 

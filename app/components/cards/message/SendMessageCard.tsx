@@ -41,6 +41,7 @@ const SendMessageCard: React.FC<SendMessageCardProps> = ({name}) => {
         title="Send Message"
         variant="btn_teal"
         onClick={handleButtonClick}
+        disabled={false}
       />
     </aside>
   );
