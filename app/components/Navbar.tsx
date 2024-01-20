@@ -9,10 +9,22 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
 import SwiperMenu from "./shared/menu/SwiperMenu";
 import HamburgerMenuOverlay from "./overlays/hamburger/HamburgerMenuOverlay";
+import UserAccountOverlay from "./overlays/user/UserAccountOverlay";
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/features/auth/authSlice'; // Adjust the import path as needed
+import { useRouter } from "next/navigation";
+
+
+
 
 
 
 const Navbar = () => {
+  const dispatch = useDispatch(); // Use useDispatch hook to dispatch actions
+    const router = useRouter(); // Create the router instance
+
+  const user = useSelector(selectUser);
+
      const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
      const [isUserOverlayVisible, setIsUserOverlayVisible] = useState(false);
 
@@ -23,7 +35,13 @@ const Navbar = () => {
        setIsUserOverlayVisible(!isUserOverlayVisible);
      };
 
+  const handleLogout = () => {
+    dispatch(logout());
 
+
+    setIsUserOverlayVisible(false);
+    router.push('/'); 
+  };
   return (
     <nav className="fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-300 py-5">
       <div className=" flex justify-between items-center w-full ">
@@ -35,11 +53,18 @@ const Navbar = () => {
         <div className="lg:ml-20">
           <NavLinks />
         </div>
-        <div className="lg:ml-20 ">
+        <div className="relative lg:flexCenter lg:ml-20 hidden">
+         
           <LoginButton
             onClick={toggleUserOverlay}
             isOverlayVisible={isUserOverlayVisible}
           />
+            {isUserOverlayVisible && user && (
+        <UserAccountOverlay
+          onClose={toggleUserOverlay}
+          onLogout={handleLogout}
+        />
+      )}
         </div>
 
         <HamburgerMenu
@@ -48,9 +73,7 @@ const Navbar = () => {
         />
       </div>
       {isMenuOverlayVisible && <HamburgerMenuOverlay />}
-      {/* {isUserOverlayVisible && (
-          <UserAccountOverlay onClose={toggleUserOverlay} />
-      )} */}
+    
     </nav>
   );
 };

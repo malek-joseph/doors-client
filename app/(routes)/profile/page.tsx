@@ -11,7 +11,7 @@ const profile = () => {
       <div className="w-5/6 ">
         <UserProfile />
         <UserListings />
-        <UserAccount/>
+        {/* <UserAccount/>  */}
 
    </div>
     </main>

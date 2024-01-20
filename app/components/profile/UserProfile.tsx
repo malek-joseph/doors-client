@@ -1,56 +1,52 @@
 /** @format */
 "use client"
 
-import Image from "next/image";
 import React, { useState } from "react";
+import Image from "next/image";
+import defaultProfilePic from "../../../public/assets/images/profile.png"; // Path to your default profile image
 
 const UserProfile = () => {
-  const [image, setImage] = useState<string | null>(null);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setImage(reader.result as string);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImageSrc(event.target?.result as string);
+      };
+      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
+  // Adjusted style for the label
+  const labelStyle =
+    "text-center bg-black bg-opacity-50 text-white text-xs p-1 rounded cursor-pointer";
+
   return (
-    <section className="bg-blue-500 text-white  w-full h-full ">
-      <div className="">
-        <label htmlFor="imageUpload" className="cursor-pointer">
-          <div className="w-20 h-20 bg-white rounded-full">
-            {image ? (
-              <Image
-                src={image}
-                alt="User's Profile"
-                className="w-full h-full rounded-full"
-                fill
-              />
-            ) : (
-              <div className="w-full h-full flex justify-center items-center">
-                <span>Upload Image</span>
-              </div>
-            )}
-          </div>
-          <input
-            type="file"
-            id="imageUpload"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleImageUpload}
-          />
-        </label>
+    <div className="w-full h-full flex flex-col items-center justify-center  rounded-lg my-2 text-gray-600 p-4 mt-5">
+      <div className="w-32 h-32 relative mb-2">
+        {" "}
+        {/* Adjust margin as needed */}
+        <Image
+          src={imageSrc || defaultProfilePic}
+          alt="User's Profile"
+          layout="fill"
+          className="rounded-full object-cover"
+        />
       </div>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center p-4">
-        <h2>User Name</h2>
-      </div>
-    </section>
+      <input
+        id="imageUpload"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleImageUpload}
+      />
+      <label htmlFor="imageUpload" className={labelStyle}>
+        {imageSrc ? "Change Image" : "Upload Image"}
+      </label>
+      <h2 className="text-lg mt-4">User Name</h2>{" "}
+      {/* Adjust margin as needed */}
+    </div>
   );
 };
 
