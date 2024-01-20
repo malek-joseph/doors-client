@@ -8,9 +8,9 @@ interface AgeAndPlaceProps {
   gender?: string;
   governance: string;
   city: string;
-  type: string;
+  type?: string;
   list?: string;
-  name: string;
+  name?: string;
 
 }
 

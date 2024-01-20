@@ -6,9 +6,9 @@ import React from "react";
 interface FreeToMessageProps {
   freeMessage: string;
   name: string;
-  type: string;
-  city: string;
-  governance: string;
+  type?: string;
+  city?: string;
+  governance?: string;
 }
 
 const FreeToMessage: React.FC<FreeToMessageProps> = ({ freeMessage, name, type, city, governance }) => {
