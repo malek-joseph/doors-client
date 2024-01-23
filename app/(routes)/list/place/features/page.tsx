@@ -49,7 +49,7 @@ const handleSelectFeature = (featureName: string) => {
       router.push("/list/place/rent");
   };
 
-  const isNextButtonDisabled = !propertyDetails.totalRoommates;
+  const isNextButtonDisabled = !propertyDetails.selectedFeatures;
 
 type FurnishingFeature = {
   name: string;

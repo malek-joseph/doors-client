@@ -1,6 +1,8 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+
+
 interface PropertyDetails {
   governance: string;
   city: string;

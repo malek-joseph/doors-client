@@ -45,7 +45,9 @@ const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       router.push("/list/place/photos");
   };
 
-  const isNextButtonDisabled = !propertyDetails.furnishing || !propertyDetails.roomType || !propertyDetails.roomBathroom;
+  const isNextButtonDisabled =
+    !propertyDetails.deposit ||
+    !propertyDetails.monthlyRent  
 
   return (
     <div className="flex flex-col items-center justify-center ">

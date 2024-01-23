@@ -24,7 +24,7 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
-
+  console.log(images);
   const swiperStyles = {
     "--swiper-pagination-color": "teal",
     "--swiper-pagination-bullet-inactive-color": "#999999",
@@ -43,6 +43,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       className="w-full h-full listing-carousel">
       {images.map((image, index) => (
         <SwiperSlide key={index}>
+       
           <Image
             priority={true}
             src={image}
@@ -52,6 +53,12 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             className="rounded-md"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
+           {/* <img
+      src={image}
+      alt={`Image ${index + 1}`}
+      style={{ objectFit: "cover" }}
+      className="rounded-md"
+    /> */}
         </SwiperSlide>
       ))}
     </Swiper>

@@ -1,11 +1,21 @@
 // components/PhotoUpload.tsx
-import React from 'react';
+import React, { ChangeEvent } from 'react'; // Corrected import
 
 interface PhotoUploadProps {
   onPhotoSelect: (files: FileList | null) => void;
 }
 
-const PhotoUpload: React.FC<PhotoUploadProps> = ({ onPhotoSelect }) => (
+const PhotoUpload: React.FC<PhotoUploadProps> = ({ onPhotoSelect }) => {
+
+const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  // Call the onPhotoSelect prop with the files from the event target
+  if (onPhotoSelect) {
+    onPhotoSelect(event.target.files);
+  }
+};
+  
+  
+return (
   <div className="border-dashed border-2 border-gray-300 p-6 rounded-md text-center">
     <div className="mb-3">
       <p className="font-semibold text-gray-900 mb-1">
@@ -24,7 +34,7 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({ onPhotoSelect }) => (
       id="photo-upload"
       type="file"
       multiple
-      onChange={(e) => onPhotoSelect(e.target.files)}
+  onChange={handleFileInputChange}
       className="hidden"
     />
     <p className="text-gray-500 text-xs mt-3">
@@ -33,5 +43,6 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({ onPhotoSelect }) => (
     </p>
   </div>
 );
+}
 
 export default PhotoUpload;
