@@ -20,12 +20,12 @@ const Input: React.FC<InputProps> = ({
   required,
     autocomplete,
 }) => (
-  <div className="mb-4">
+  <div className="mb-4 w-full">
     <label className="block text-xs mb-1" htmlFor={id}>
       {label}
     </label>
     <input
-      className="border p-1 w-full rounded-md text-xs p-2"
+      className="border  w-full rounded-md text-xs p-2 "
       type={type}
       id={id}
       value={value}

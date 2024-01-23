@@ -1,5 +1,4 @@
 /** @format */
-
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import "./globals.css";
@@ -8,6 +7,10 @@ import { Inter } from "next/font/google";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Providers } from "./redux/provider";
+import FooterVisibility from "./helpers/FooterVisibility";
+
+
+
 
 
 
@@ -22,15 +25,16 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+  }) {
+
   return (
     <html lang="en" className="">
-      <body className={inter.className}>
+      <body className={`${inter.className} `}>
         <Providers >
 
         <Navbar />
         {children}
-        <Footer />
+          <FooterVisibility /> 
         </Providers>
 
         <ToastContainer position="bottom-left" autoClose={2000} />

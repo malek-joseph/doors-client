@@ -1,4 +1,3 @@
-/** @format */
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
@@ -7,17 +6,22 @@ import { persistStore, persistReducer } from "redux-persist";
 // import storage from "redux-persist/lib/storage"; // defaults to using localStorage
 import storage from "../storage"
 import authReducer from "./features/auth/authSlice";
+import listingFormReducer from "./features/listing/listingFormSlice";
 
 // Configuration for Redux Persist
 const persistConfig = {
   key: "root", // Key to use in local storage
+  version: 1, // Current version
+
   storage, // Storage method (local storage)
-  whitelist: ["auth"], // Reducers you want to persist (by key)
+  whitelist: ["auth", "listingForm"], // Reducers you want to persist (by key)
 };
 
 // Combine reducers (if you have more than one)
 const rootReducer = combineReducers({
   auth: authReducer,
+  listingForm: listingFormReducer,
+
   // Add other reducers here
 });
 
@@ -27,13 +31,14 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Create the store with the persisted reducer
 export const store = configureStore({
   reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     }),
+  devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools in non-production environments
 });
 
 // Create a persistor

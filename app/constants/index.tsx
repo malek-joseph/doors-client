@@ -150,6 +150,21 @@ export const LISTINGS: Listing[] = [
 
 
 
+export const accommodationTypes = [
+  {
+    name: "Room(s) in an existing sharehouse",
+    iconSrc: "/assets/images/room.png",
+  },
+  { name: "Whole property for rent", iconSrc: "/assets/images/whole.png" },
+  {
+    name: "Student accommodation",
+    iconSrc: "/assets/images/students.png",
+  },
+  { name: "Homestay", iconSrc: "/assets/images/homestay.png" },
+];
+
+
+
 
 
 

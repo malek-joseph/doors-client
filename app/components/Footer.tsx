@@ -14,7 +14,7 @@ const Footer = () => {
 
   
   return (
-    <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 bg-gray-10">
+    <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 bg-gray-10 w-full">
       <Link href="/" className="">
         <Image
           src="/logo.svg"
