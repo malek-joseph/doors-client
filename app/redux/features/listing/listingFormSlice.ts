@@ -11,11 +11,12 @@ interface PropertyDetails {
   roomType: string;
   furnishing: string;
   roomBathroom: string;
-  selectedFeatures: string[]; 
-monthlyRent: number; 
-  deposit: number; 
-    billsIncluded: boolean;
-
+  selectedFeatures: string[];
+  monthlyRent: number;
+  deposit: number;
+  billsIncluded: boolean;
+  monthlyBills: number;
+  photos: File[];
 }
 
 interface ListingFormState {
@@ -36,12 +37,11 @@ const initialState: ListingFormState = {
     furnishing: "",
     roomBathroom: "",
     selectedFeatures: [],
-     monthlyRent: 0,
+    monthlyRent: 0,
     deposit: 0,
-    billsIncluded: true, 
-
-
-
+    billsIncluded: true,
+    monthlyBills: 0,
+    photos: [],
   },
 };
 
@@ -59,11 +59,18 @@ const listingFormSlice = createSlice({
       state.propertyDetails = { ...state.propertyDetails, ...action.payload };
     },
     resetForm: () => initialState,
+     updatePhotos: (state, action: PayloadAction<File[]>) => {
+      state.propertyDetails.photos = action.payload;
+    },
   },
 });
 
-export const { updateAccommodationType, updatePropertyDetails, resetForm } =
-  listingFormSlice.actions;
+export const {
+  updateAccommodationType,
+  updatePropertyDetails,
+  resetForm,
+  updatePhotos,
+} = listingFormSlice.actions;
 
 // Selectors
 export const selectAccommodationType = (state: {

@@ -7,10 +7,10 @@ import { useDispatch } from "react-redux";
 import { updatePropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
-import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
 import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
 import NumberInput from "@/app/components/inputs/NumberInput"; // Import the Input component
+import CheckboxWithLabel from "@/app/components/inputs/CheckboxWithLabel";
 
 
 const Page = () => {
@@ -28,14 +28,21 @@ const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 };
    const handleBillsIncludedChange = (checked: boolean) => {
     dispatch(updatePropertyDetails({ billsIncluded: checked }));
-  };
+   };
+  
+   const handleMonthlyBillsChange = (e: ChangeEvent<HTMLInputElement>) => {
+     // Convert the input value to a number and update the state
+     dispatch(
+       updatePropertyDetails({ monthlyBills: parseFloat(e.target.value) || 0 })
+     );
+   };
 
   const handleBackClick = () => {
     router.push("/list/place/features");
   };
 
   const handleNextClick = () => {
-      router.push("/list/place/features");
+      router.push("/list/place/photos");
   };
 
   const isNextButtonDisabled = !propertyDetails.furnishing || !propertyDetails.roomType || !propertyDetails.roomBathroom;
@@ -52,21 +59,33 @@ const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
               label="Monthly Rent"
               type="number"
               id="monthlyRent"
-              value={String(propertyDetails.monthlyRent)} 
+              value={String(propertyDetails.monthlyRent)}
               onChange={handleInputChange}
               required
               autocomplete="off"
             />
-             <CheckboxWithLabel
-          label="Bills included in rent"
-          checked={propertyDetails.billsIncluded}
-          onChange={handleBillsIncludedChange}
-        />
+            <CheckboxWithLabel
+              label="Bills included in rent"
+              checked={propertyDetails.billsIncluded}
+              onChange={handleBillsIncludedChange}
+            />
+            {!propertyDetails.billsIncluded && (
+              <NumberInput
+                label="Monthly Bills"
+                type="number"
+                id="monthlyBills"
+                value={String(propertyDetails.monthlyBills || "")} // Ensure you have 'monthlyBills' in your state
+                onChange={handleMonthlyBillsChange}
+                required
+                autocomplete="off"
+              />
+            )}
+
             <NumberInput
               label="Security Deposit"
               type="number"
               id="deposit"
-              value={String(propertyDetails.deposit)} 
+              value={String(propertyDetails.deposit)}
               onChange={handleInputChange}
               required
               autocomplete="off"

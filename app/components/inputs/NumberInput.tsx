@@ -26,7 +26,7 @@ const NumberInput: React.FC<InputProps> = ({
     </label>
     <div className="flex items-center">
       <input
-        className="border w-full rounded-l-md text-xs p-2 focus:outline-none focus:ring focus:ring-teal-400"
+  className="border border-gray-300 w-full rounded-l-md text-xs p-2 focus:border focus:border-teal-400 focus:outline-none"
         type={type}
         id={id}
         name={id}

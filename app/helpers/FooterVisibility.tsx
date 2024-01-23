@@ -19,6 +19,8 @@ function FooterVisibility() {
     path !== "/list/place/features"
        && 
     path !== "/list/place/rent"
+       && 
+    path !== "/list/place/photos"
 
   return <>{showFooter && <Footer /> }</>;
 }

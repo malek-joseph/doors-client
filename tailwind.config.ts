@@ -6,10 +6,16 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  variants: {
+    extend: {
+      backgroundColor: ["checked"],
+      borderColor: ["checked"],
+    },
+  },
   theme: {
     extend: {
-           boxShadow: {
-        'lg': '3px 3px 20px 1px rgba(0, 0, 0, 0.1)',
+      boxShadow: {
+        lg: "3px 3px 20px 1px rgba(0, 0, 0, 0.1)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

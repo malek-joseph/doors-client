@@ -25,6 +25,7 @@ input[type='number'] {
 
 
 
+
 @layer utilities {
     .btn_dark {
     @apply  bg-white transition-all hover:bg-teal-50
