@@ -1,5 +1,7 @@
 // components/CheckboxWithLabel.tsx
 import React from 'react';
+import { Checkbox } from "@nextui-org/react";
+
 
 interface CheckboxWithLabelProps {
   label: string;
@@ -21,6 +23,7 @@ const CheckboxWithLabel: React.FC<CheckboxWithLabelProps> = ({
     />
     <span className="text-gray-600 text-sm">{label}</span>
   </label>
+
 );
 
 export default CheckboxWithLabel;

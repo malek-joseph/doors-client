@@ -53,12 +53,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             className="rounded-md"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-           {/* <img
-      src={image}
-      alt={`Image ${index + 1}`}
-      style={{ objectFit: "cover" }}
-      className="rounded-md"
-    /> */}
+ 
+         
         </SwiperSlide>
       ))}
     </Swiper>

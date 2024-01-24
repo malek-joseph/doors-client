@@ -27,7 +27,7 @@ interface CarouselProps {
   images: string[];
 }
 
-const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
+const ListingUploadCarousel: React.FC<CarouselProps> = ({ images }) => {
 
   const swiperStyles = {
     "--swiper-pagination-color": "teal",
@@ -38,9 +38,9 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
   } as React.CSSProperties; // Define as CSSProperties
 
    const swiperParams = {
-    slidesPerView: 1, // Default: Display 1 slide
+    slidesPerView: 2, // Default: Display 1 slide
     spaceBetween: 10,
-    centeredSlides: true,
+    // centeredSlides: false,
     navigation: true,
     pagination: { clickable: false },
     breakpoints: {
@@ -56,28 +56,28 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-        <div className="relative w-full h-80 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
-
-    <Swiper
-      style={swiperStyles}
+    <div className="relative w-full h-40 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
+      <Swiper
+        style={swiperStyles}
         {...swiperParams}
-      className="w-full h-full listing-carousel rounded-lg" // Adjust width and height to fit the container
-    >
-      {images.map((image, index) => (
-        <SwiperSlide key={index}>
-          <Image
-            src={image}
-            alt={`Image ${index + 1}`}
-           fill
-            style={{ objectFit: "cover" }}
-            className="rounded-md"
-          />
-         
-        </SwiperSlide>
-      ))}
-    </Swiper>
+        className="w-full h-full listing-carousel rounded-lg " // Adjust width and height to fit the container
+      >
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative w-full h-full">
+              <Image
+                src={image}
+                alt={`Image ${index + 1}`}
+                fill
+                style={{ objectFit: "contain" }}
+                className="rounded-md"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
 
-export default ListingDetailsCarousel;
+export default ListingUploadCarousel;

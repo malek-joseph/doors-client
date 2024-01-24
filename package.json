@@ -14,6 +14,7 @@
     "@splidejs/splide-extension-auto-scroll": "github:splidejs/splide-extension-auto-scroll",
     "@types/react-redux": "^7.1.33",
     "@types/redux-thunk": "^2.1.0",
+    "aws-sdk": "^2.1542.0",
     "axios": "^1.6.5",
     "lodash": "^4.17.21",
     "next": "^14.0.4",

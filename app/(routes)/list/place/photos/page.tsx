@@ -1,23 +1,19 @@
-/** @format */
-
 "use client";
 
-import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePhotos } from "@/app/redux/features/listing/listingFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
 import PhotoUpload from "./PhotoUpload";
-import Carousel from "@/app/components/carousels/ListingCarousel";
   import { useEffect, useState } from 'react';
+import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
   const dispatch = useDispatch();
 const [objectURLs, setObjectURLs] = useState<string[]>([]);
-
 
 const handlePhotoSelect = (files: FileList | null) => {
   if (files) {
@@ -44,13 +40,12 @@ useEffect(() => {
 }, [propertyDetails.photos]);
 
 
-
   const handleBackClick = () => {
     router.push("/list/place/rent");
   };
 
   const handleNextClick = () => {
-      router.push("/list/place/features");
+      router.push("/list/place/preference");
   };
 
   const isNextButtonDisabled = !propertyDetails.furnishing || !propertyDetails.roomType || !propertyDetails.roomBathroom;
@@ -62,9 +57,12 @@ useEffect(() => {
           Property and Room photos
         </h2>
         <div className="flex justify-center  ">
-          <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
+          <div className="w-11/12 md:w-10/12 lg:w-8/12 flex items-center flex-col">
             <PhotoUpload onPhotoSelect={handlePhotoSelect} />
-            <Carousel images={objectURLs} />
+
+            {objectURLs.length > 0 && (
+              <ListingUploadCarousel images={objectURLs} />
+            )}
           </div>
         </div>
 
