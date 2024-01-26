@@ -8,17 +8,18 @@ import { createSlice } from "@reduxjs/toolkit";
 interface User {
   id: string;
   username: string;
-  // Other user properties...
+  name: string; 
+  age: number; 
+  image?: string;
 }
 
 interface AuthState {
-  user: User | null; // Define your user type
-  // Add other auth-related state variables here
+  user: User | null; 
 }
 
 const initialState: AuthState = {
   user: null,
-  // Initialize other state variables
+  
 };
 
 const authSlice = createSlice({

@@ -8,21 +8,20 @@ interface User {
   password: string;
 }
 
-const signup = async (user: User) => {
+const signup = async (formData: FormData) => {
   try {
     const response = await axios.post(
       "http://localhost:8000/api/users/signup",
-      user
+      formData,
+     
     );
 
     if (response.status === 201) {
-      // Signup successful (status code 201: Created)
-      toast.success("registered successfully")
+      toast.success("Registered successfully");
       return true;
-    } 
-    return false
+    }
+    return false;
   } catch (error: any) {
-   
     if (error.response) {
       const { status, data } = error.response;
 
@@ -40,7 +39,6 @@ const signup = async (user: User) => {
       // Network error or other unexpected error: Display a generic error message
       toast.error("An unexpected error occurred.");
     }
-
   }
 };
 
