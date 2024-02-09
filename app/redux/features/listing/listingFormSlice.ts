@@ -41,7 +41,7 @@ const initialState: ListingFormState = {
     roomType: "",
     furnishing: "",
     roomBathroom: "",
-    selectedFeatures: [],
+    selectedFeatures: [], 
     monthlyRent: 0,
     deposit: 0,
     billsIncluded: true,
