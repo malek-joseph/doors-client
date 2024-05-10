@@ -8,6 +8,8 @@ import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormS
 import PhotoUpload from "./PhotoUpload";
   import { useEffect, useState } from 'react';
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
+import { uploadFileToServer } from "@/app/services/photoUpload";
+
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
@@ -15,30 +17,37 @@ const Page = () => {
   const dispatch = useDispatch();
 const [objectURLs, setObjectURLs] = useState<string[]>([]);
 
-const handlePhotoSelect = (files: FileList | null) => {
-  if (files) {
-    // Create a new array that includes the existing photos plus the new ones
-    const updatedPhotosArray = [
-      ...propertyDetails.photos,
-      ...Array.from(files),
-    ];
-    // Dispatch the updatePhotos action with the updated array
-    dispatch(updatePhotos(updatedPhotosArray));
-    console.log(propertyDetails.photos); // After dispatching updatePhotos
+const handlePhotoUpload = async (selectedFiles: FileList | null) => {
+  if (selectedFiles) {
+    const filesArray = Array.from(selectedFiles);
+    try {
+      const uploadedUrls = await Promise.all(
+        filesArray.map((file) => uploadFileToServer(file)) // This function needs to be adjusted to your backend API
+      );
+      // Assuming the backend returns URLs as strings
+      dispatch(updatePhotos([...propertyDetails.photos, ...uploadedUrls]));
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   }
 };
 
-useEffect(() => {
-  if (propertyDetails.photos.length > 0) {
-    const newObjectURLs = propertyDetails.photos
-      .filter((file) => file instanceof File)
-      .map((file) => URL.createObjectURL(file));
-    setObjectURLs(newObjectURLs);
+ 
 
-    return () => newObjectURLs.forEach(URL.revokeObjectURL);
-  }
+useEffect(() => {
+  // Create object URLs only for File items in the photos array
+  const newObjectURLs = propertyDetails.photos
+    .filter((item): item is File => item instanceof File) // This line is adjusted
+    .map((file) => URL.createObjectURL(file));
+
+  setObjectURLs((prevURLs) => [...prevURLs, ...newObjectURLs]);
+
+  // Cleanup: Revoke URLs when the component unmounts or photos array changes
+  return () => newObjectURLs.forEach(URL.revokeObjectURL);
 }, [propertyDetails.photos]);
 
+  
+console.log(objectURLs); 
 
   const handleBackClick = () => {
     router.push("/list/place/rent");
@@ -58,8 +67,7 @@ useEffect(() => {
         </h2>
         <div className="flex justify-center  ">
           <div className="w-11/12 md:w-10/12 lg:w-8/12 flex items-center flex-col">
-            <PhotoUpload onPhotoSelect={handlePhotoSelect} />
-
+            <PhotoUpload onPhotoSelect={handlePhotoUpload} />
             {objectURLs.length > 0 && (
               <ListingUploadCarousel images={objectURLs} />
             )}

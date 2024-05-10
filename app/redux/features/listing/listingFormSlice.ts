@@ -18,7 +18,7 @@ interface PropertyDetails {
   deposit: number;
   billsIncluded: boolean;
   monthlyBills: number;
-  photos: File[];
+  photos: string[];
   roommatePreferences: string[];
     description: string;
     propertyDescription: string;
@@ -28,7 +28,7 @@ interface ListingFormState {
   accommodationType: string | null;
   propertyDetails: PropertyDetails;
 }
-
+ 
 const initialState: ListingFormState = {
   accommodationType: null,
   propertyDetails: {
@@ -68,7 +68,7 @@ const listingFormSlice = createSlice({
       state.propertyDetails = { ...state.propertyDetails, ...action.payload };
     },
     resetForm: () => initialState,
-    updatePhotos: (state, action: PayloadAction<File[]>) => {
+    updatePhotos: (state, action: PayloadAction<string[]>) => {
       state.propertyDetails.photos = action.payload;
     },
    
