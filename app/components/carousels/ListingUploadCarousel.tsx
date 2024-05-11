@@ -38,19 +38,23 @@ const ListingUploadCarousel: React.FC<CarouselProps> = ({ images }) => {
   } as React.CSSProperties; // Define as CSSProperties
 
    const swiperParams = {
-    slidesPerView: 2, // Default: Display 1 slide
+    slidesPerView: 1, // Default: Display 1 slide
     spaceBetween: 10,
     // centeredSlides: false,
     navigation: true,
     pagination: { clickable: false },
     breakpoints: {
       // Display 1 slide on smaller screens
-      640: {
-        slidesPerView: 1,
+      350: {
+        slidesPerView: 2,
+      },
+      // Display 1 slide on smaller screens
+      550: {
+        slidesPerView: 3,
       },
       // Display 3 slides on larger screens
       1024: {
-        slidesPerView: 3,
+        slidesPerView: 4,
       },
     },
   };

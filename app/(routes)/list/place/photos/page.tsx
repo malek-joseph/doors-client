@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -6,58 +8,58 @@ import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
 import PhotoUpload from "./PhotoUpload";
-  import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
-import { uploadFileToServer } from "@/app/services/photoUpload";
-
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
   const dispatch = useDispatch();
-const [objectURLs, setObjectURLs] = useState<string[]>([]);
+  const [objectURLs, setObjectURLs] = useState<string[]>([]);
 
-const handlePhotoUpload = async (selectedFiles: FileList | null) => {
-  if (selectedFiles) {
-    const filesArray = Array.from(selectedFiles);
-    try {
-      const uploadedUrls = await Promise.all(
-        filesArray.map((file) => uploadFileToServer(file)) // This function needs to be adjusted to your backend API
+
+    useEffect(() => {
+      // Retrieve stored images from local storage
+      const storedImages = localStorage.getItem("uploadedImages");
+      if (storedImages) {
+        setObjectURLs(JSON.parse(storedImages));
+      }
+    }, []);
+
+const handlePhotoUpload = (selectedFiles: FileList | null) => {
+    if (selectedFiles) {
+      const filesArray = Array.from(selectedFiles);
+
+      // Update object URLs state with new URLs
+      const newObjectURLs = filesArray.map((file) =>
+        URL.createObjectURL(file)
       );
-      // Assuming the backend returns URLs as strings
-      dispatch(updatePhotos([...propertyDetails.photos, ...uploadedUrls]));
-    } catch (error) {
-      console.error("Error uploading files:", error);
+      setObjectURLs((prevURLs) => [...prevURLs, ...newObjectURLs]);
+
+      // Update local storage with new photos (object URLs)
+      localStorage.setItem(
+        "uploadedImages",
+        JSON.stringify([...objectURLs, ...newObjectURLs])
+      );
+
+      // Dispatch action to update Redux store with new photos (object URLs)
+      dispatch(updatePhotos([...objectURLs, ...newObjectURLs]));
     }
-  }
-};
+  };
 
- 
-
-useEffect(() => {
-  // Create object URLs only for File items in the photos array
-  const newObjectURLs = propertyDetails.photos
-    .filter((item): item is File => item instanceof File) // This line is adjusted
-    .map((file) => URL.createObjectURL(file));
-
-  setObjectURLs((prevURLs) => [...prevURLs, ...newObjectURLs]);
-
-  // Cleanup: Revoke URLs when the component unmounts or photos array changes
-  return () => newObjectURLs.forEach(URL.revokeObjectURL);
-}, [propertyDetails.photos]);
-
-  
-console.log(objectURLs); 
 
   const handleBackClick = () => {
     router.push("/list/place/rent");
   };
 
   const handleNextClick = () => {
-      router.push("/list/place/preference");
+    router.push("/list/place/preference");
   };
 
-  const isNextButtonDisabled = !propertyDetails.furnishing || !propertyDetails.roomType || !propertyDetails.roomBathroom;
+  const isNextButtonDisabled =
+    !propertyDetails.furnishing ||
+    !propertyDetails.roomType ||
+    !propertyDetails.roomBathroom;
 
   return (
     <div className="flex flex-col items-center justify-center ">

@@ -24,7 +24,7 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
-  console.log(images);
+  // console.log(images);
   const swiperStyles = {
     "--swiper-pagination-color": "teal",
     "--swiper-pagination-bullet-inactive-color": "#999999",

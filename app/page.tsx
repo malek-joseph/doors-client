@@ -13,7 +13,7 @@ export default function Home() {
 
     const selectedType = useSelector(selectAccommodationType);
 
-  console.log(selectedType); // Console log the selected type
+  // console.log(selectedType); // Console log the selected type
 
 
   return (

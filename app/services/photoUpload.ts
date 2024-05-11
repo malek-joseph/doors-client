@@ -5,7 +5,7 @@ export async function uploadFileToServer(file: File): Promise<string> {
   formData.append("file", file);
 
   // Replace URL with your actual upload endpoint
-  const response = await fetch("https://your-upload-endpoint.com/upload", {
+  const response = await fetch("http://localhost:8000/api/places", {
     method: "POST",
     body: formData,
   });
