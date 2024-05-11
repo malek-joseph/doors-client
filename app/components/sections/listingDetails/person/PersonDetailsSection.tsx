@@ -6,7 +6,6 @@ import React from "react";
 
 interface PlaceDetails {
   name: string;
-  freeMessage: string;
   age?: string;
   gender?: string;
   city: string;
@@ -15,10 +14,9 @@ interface PlaceDetails {
   list?: string;
 }
 
-const PlaceDetailsSection: React.FC<PlaceDetails> = ({
+const PersonDetailsSection: React.FC<PlaceDetails> = ({
   name,
   type,
-  freeMessage,
   age,
   gender,
   city,
@@ -29,7 +27,6 @@ const PlaceDetailsSection: React.FC<PlaceDetails> = ({
     <div className="">
       <FreeToMessage
         name={name}
-        freeMessage={freeMessage}
         type={type}
         city={city}
         governance={governance}
@@ -46,4 +43,4 @@ const PlaceDetailsSection: React.FC<PlaceDetails> = ({
   );
 };
 
-export default PlaceDetailsSection;
+export default PersonDetailsSection;

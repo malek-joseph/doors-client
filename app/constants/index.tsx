@@ -40,7 +40,7 @@ type Listing = {
 export const LISTINGS: Listing[] = [
   {
     id: 1,
-    type: "place",
+    type: "place", 
     images: [
       "/assets/images/home1.jpeg",
       "/assets/images/home2.jpeg",

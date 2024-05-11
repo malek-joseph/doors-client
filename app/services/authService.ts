@@ -9,8 +9,10 @@ interface User {
 }
 
 const signup = async (formData: FormData) => {
+    console.log(formData);
+
   try {
-    const response = await axios.post(
+    const response = await axios.post( 
       "http://localhost:8000/api/users/signup",
       formData,
      
@@ -44,6 +46,7 @@ const signup = async (formData: FormData) => {
 
 const signin = async (user: User) => {
   try {
+    
     const response = await axios.post(
       "http://localhost:8000/api/users/signin",
       user

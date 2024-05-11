@@ -9,7 +9,7 @@ interface PropertyDetails {
   totalBedrooms: number | string;
   totalBathrooms: number | string;
   internet: string;
-  totalRoommates: number | string;
+  totalRoommates: number | string; 
   roomType: string;
   furnishing: string;
   roomBathroom: string;
@@ -20,8 +20,8 @@ interface PropertyDetails {
   monthlyBills: number;
   photos: string[];
   roommatePreferences: string[];
-    description: string;
-    propertyDescription: string;
+  description: string;
+  propertyDescription: string;
 }
 
 interface ListingFormState {

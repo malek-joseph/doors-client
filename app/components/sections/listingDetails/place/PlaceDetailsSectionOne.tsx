@@ -6,32 +6,32 @@ import React from "react";
 
 interface PersonDetails {
   name: string;
-  freeMessage: string;
-  age?: string;
+  age?: number;
   gender?: string;
   city: string;
   governance: string;
+  placeOrPerson: string;
 }
 
-const PersonDetailsSection: React.FC<PersonDetails> = ({
+const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
   name,
-  freeMessage,
   age,
+  placeOrPerson,
   gender,
   city,
   governance,
 }) => {
   return (
     <div className="">
-      <FreeToMessage name={name} freeMessage={freeMessage} />
-      <AgeAndPlace
+      <FreeToMessage name={name} placeOrPerson={placeOrPerson} city={city} governance={governance}  />
+      {/* <AgeAndPlace
         age={age}
         gender={gender}
         city={city}
         governance={governance}
-      />
+      /> */}
     </div>
   );
 };
 
-export default PersonDetailsSection;
+export default PlaceDetailsSectionOne;

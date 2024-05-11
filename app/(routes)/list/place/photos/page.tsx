@@ -18,13 +18,7 @@ const Page = () => {
   const [objectURLs, setObjectURLs] = useState<string[]>([]);
 
 
-    useEffect(() => {
-      // Retrieve stored images from local storage
-      const storedImages = localStorage.getItem("uploadedImages");
-      if (storedImages) {
-        setObjectURLs(JSON.parse(storedImages));
-      }
-    }, []);
+
 
 const handlePhotoUpload = (selectedFiles: FileList | null) => {
     if (selectedFiles) {
@@ -35,12 +29,6 @@ const handlePhotoUpload = (selectedFiles: FileList | null) => {
         URL.createObjectURL(file)
       );
       setObjectURLs((prevURLs) => [...prevURLs, ...newObjectURLs]);
-
-      // Update local storage with new photos (object URLs)
-      localStorage.setItem(
-        "uploadedImages",
-        JSON.stringify([...objectURLs, ...newObjectURLs])
-      );
 
       // Dispatch action to update Redux store with new photos (object URLs)
       dispatch(updatePhotos([...objectURLs, ...newObjectURLs]));

@@ -42,12 +42,7 @@ const LoginForm: React.FC = () => {
   const handleGoogleLogin = () => {};
 
   return (
-    <div className="p-4 rounded-lg  ">
-      <h2 className="text-lg mb-2">Signin</h2>
-      <p className="text-xs mb-4 text-gray-400">
-        Enter your account details to enter our platform.
-      </p>
-
+    <div className="p-4 rounded-lg lg:w-1/2 ">
       {/* Signin with Google option */}
       <div className="flex items-center mb-4">
         <Button
@@ -66,7 +61,7 @@ const LoginForm: React.FC = () => {
         <hr className="flex-grow border-t border-gray-200" />
       </div>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className="lg:w-full">
         <Input
           label="Email"
           type="text"
@@ -104,6 +99,7 @@ const LoginForm: React.FC = () => {
           title="Login"
           variant="btn_teal"
           disabled={signingIn}
+          
         />
       </form>
 

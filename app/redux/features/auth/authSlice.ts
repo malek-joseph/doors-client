@@ -10,7 +10,10 @@ interface User {
   username: string;
   name: string; 
   age: number; 
-  image?: string;
+  number: number; 
+  gender: string; 
+  job: string; 
+  photo?: string;
 }
 
 interface AuthState {
@@ -36,6 +39,7 @@ const authSlice = createSlice({
 });
 
 export const { setUser, logout } = authSlice.actions;
-export const selectUser = (state: { auth: AuthState }) => state.auth.user;
+export const selectUserDetails = (state: { auth: AuthState }) => state.auth.user;
+
 
 export default authSlice.reducer;

@@ -2,7 +2,7 @@
 
 import { LISTINGS } from "@/app/constants";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
-import PlaceDetailsSection from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
+import PlaceDetailsSectionOne from "@/app/components/sections/listingDetails/person/PersonDetailsSection";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
 import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
 import AboutMe from "@/app/components/sections/listingDetails/person/AboutMe";
@@ -32,9 +32,8 @@ const PlaceDetails = ({ params }: { params: { id: number } }) => {
         </div>
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
           <div className="w-full lg:w-8/12">
-            <PlaceDetailsSection
+            <PlaceDetailsSectionOne
               name={place.name}
-              freeMessage={place.freeMessage}
               age={place.age}
               gender={place.gender}
               city={place.city}

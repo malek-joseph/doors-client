@@ -31,6 +31,10 @@ function FooterVisibility() {
     path !== "/list/place/property"
        && 
     path !== "/list/place/submit"
+       && 
+    path !== "/signup"
+       && 
+    path !== "/login"
 
   return <>{showFooter && <Footer /> }</>;
 }

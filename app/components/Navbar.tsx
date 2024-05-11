@@ -6,7 +6,7 @@ import Logo from "./navbar/Logo";
 import NavLinks from "./navbar/NavLinks";
 import SearchBar from "./navbar/SearchBar";
 import { useSelector } from "react-redux";
-import { selectUser } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
+import { selectUserDetails } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
 import SwiperMenu from "./shared/menu/SwiperMenu";
 import HamburgerMenuOverlay from "./overlays/hamburger/HamburgerMenuOverlay";
 import UserAccountOverlay from "./overlays/user/UserAccountOverlay";
@@ -23,7 +23,7 @@ const Navbar = () => {
   const dispatch = useDispatch(); // Use useDispatch hook to dispatch actions
     const router = useRouter(); // Create the router instance
 
-  const user = useSelector(selectUser);
+  const user = useSelector(selectUserDetails);
 
      const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
      const [isUserOverlayVisible, setIsUserOverlayVisible] = useState(false);

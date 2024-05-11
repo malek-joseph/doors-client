@@ -4,7 +4,7 @@ import ButtonSm from "../shared/buttons/ButtonSm";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/features/auth/authSlice";
+import { selectUserDetails } from "../../redux/features/auth/authSlice";
 import SwiperMenu from "../shared/menu/SwiperMenu";
 
 
@@ -18,7 +18,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
   onClick,
   isOverlayVisible,
 }) => {
-  const user = useSelector(selectUser);
+  const user = useSelector(selectUserDetails);
 
     const handleClick = () => {
       if (user) {

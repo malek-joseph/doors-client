@@ -4,7 +4,7 @@
 import React from "react";
 
 interface AgeAndPlaceProps {
-  age?: string;
+  age?: number;
   gender?: string;
   governance: string;
   city: string;
