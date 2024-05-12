@@ -17,7 +17,7 @@ const Button = ({ type, title, icon, variant, disabled }: ButtonProps) => {
   return (
     <button
       type={type}
-      className={`text-sm p-1 border rounded-md w-full flex items-center justify-center mt-3  ${variant}`}
+      className={`text-sm p-1 border rounded-md w-full flex items-center justify-center mt-4  ${variant}`}
       disabled={disabled}
     >
       {icon && (

@@ -1,20 +1,69 @@
 /** @format */
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import defaultProfilePic from "../../../public/assets/images/profile.png"; // Path to your default profile image
+import { useSelector } from "react-redux";
+import { selectUserDetails, setUser } from "@/app/redux/features/auth/authSlice";
+import axios from "axios"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from 'react-redux';
+
 
 const UserProfile = () => {
+  const userDetails = useSelector(selectUserDetails);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Load the user's photo when userDetails changes
+useEffect(() => {
+  if (userDetails && userDetails.photo) {
+    // Remove the "uploads" word from userDetails.photo
+    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
+    // Set the image source with the modified path
+    setImageSrc(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    );
+  }
+}, [userDetails]);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setImageSrc(event.target?.result as string);
-      };
-      reader.readAsDataURL(e.target.files[0]);
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("photo", file);
+
+      // Check if userDetails is defined before accessing its id property
+      if (userDetails) {
+        const userId = userDetails.id;
+        formData.append("userId", userId);
+
+        try {
+          // Send a POST request to your backend API endpoint
+          const response = await axios.post(
+            "http://localhost:8000/api/users/update-profile-picture",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+
+// Update the user object in Redux with the new photo
+        const updatedUser = { ...userDetails, photo: response.data.photo };
+        dispatch(setUser(updatedUser));
+
+        // Show success toast
+        toast.success("Profile picture updated successfully");
+        } catch (error) {
+          // Handle error
+        toast.error("Error updating profile picture");
+        console.error("Error updating profile picture", error);
+        }
+      }
     }
   };
 
@@ -44,7 +93,7 @@ const UserProfile = () => {
       <label htmlFor="imageUpload" className={labelStyle}>
         {imageSrc ? "Change Image" : "Upload Image"}
       </label>
-      <h2 className="text-lg mt-4">User Name</h2>{" "}
+      <h2 className="text-lg mt-4">Hello {userDetails?.name}. You can view your listings here, best of luck!</h2>{" "}
       {/* Adjust margin as needed */}
     </div>
   );

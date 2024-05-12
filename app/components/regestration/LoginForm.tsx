@@ -28,9 +28,7 @@ const LoginForm: React.FC = () => {
     } else {
       setSigningIn(true);
       const user = { email, password };
-      const success = await signin(user);
-      console.log(user)
-      dispatch(setUser(user)); // Dispatch the user data to Redux
+      const success = await signin(user, dispatch);
 
       setSigningIn(false);
 
@@ -104,7 +102,7 @@ const LoginForm: React.FC = () => {
       </form>
 
       {/* Create an account */}
-      <p className="text-xs text-gray-400 mt-4 text-center">
+      <p className="text-xs text-gray-400 mt-2 text-center">
         Do not have an account?{" "}
         <span className="text-teal-500">
           <Link href="/signup">Create an account</Link>

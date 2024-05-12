@@ -20,19 +20,41 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const router = useRouter();
   const propertyDetails = useSelector(selectPropertyDetails);
   const userDetails = useSelector(selectUserDetails);
+  const [imageURLs, setImageURLs] = useState<string[]>([]);
 
-  console.log(userDetails);
+  // Load photos from local storage on component mount
+  useEffect(() => {
+    const storedImages = localStorage.getItem("propertyImages");
+    if (storedImages) {
+      setImageURLs(JSON.parse(storedImages));
+    }
 
-  const personId: number | undefined =
-    typeof id === "string" ? parseInt(id, 10) : undefined;
+  }, []);
 
-  const place = LISTINGS.find(
-    (listing) => listing.type === "place" && listing.id === personId
-  );
 
-  if (!propertyDetails || !userDetails) {
-    return <Spinner />; // Return a loading state or handle the case where person is undefined
+
+     // Convert Base64 strings to Blob URLs
+ const base64ToBlobURL = (base64String: string): string => {
+   try {
+     const byteCharacters = atob(base64String.split(",")[1]);
+     const byteNumbers = new Array(byteCharacters.length);
+     for (let i = 0; i < byteCharacters.length; i++) {
+       byteNumbers[i] = byteCharacters.charCodeAt(i);
+     }
+     const byteArray = new Uint8Array(byteNumbers);
+     const blob = new Blob([byteArray], { type: "image/jpeg" });
+     return URL.createObjectURL(blob);
+   } catch (error) {
+     console.error("Error decoding Base64 string:", error);
+     return ""; // Return empty string or handle the error accordingly
+   }
+ };
+
+  if ( !propertyDetails || !userDetails) {
+    return <Spinner />;
   }
+
+
   // console.log(propertyDetails.photos);
 
   const handleBackClick = () => {
@@ -43,12 +65,19 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
     router.push("/list/place/submit");
   };
 
+  console.log(imageURLs);
+  
   return (
     <main className="flex flex-col items-center justify-center ">
       <div className="w-5/6 ">
         <div className="my-8">
-          <ListingDetailsCarousel images={propertyDetails.photos} />
+            {imageURLs?.length > 0 && (
+          <ListingDetailsCarousel
+            images={imageURLs.map((url) => base64ToBlobURL(url))}
+          />
+           )}
         </div>
+          
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
           <div className="w-full lg:w-8/12">
             <PlaceDetailsSectionOne
@@ -78,7 +107,10 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
             /> */}
           </div>
           <div className="w-full lg:w-4/12 ">
-            <SendMessageCard name={userDetails.name} photo={userDetails.photo} />
+            <SendMessageCard
+              name={userDetails.name}
+              photo={userDetails.photo}
+            />
           </div>
         </div>
       </div>

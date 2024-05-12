@@ -29,7 +29,7 @@ interface CarouselProps {
 
 const ListingUploadCarousel: React.FC<CarouselProps> = ({ images }) => {
 
-  const swiperStyles = {
+  const swiperStyles = { 
     "--swiper-pagination-color": "teal",
     "--swiper-pagination-bullet-inactive-color": "#999999",
     "--swiper-pagination-bullet-inactive-opacity": "1",

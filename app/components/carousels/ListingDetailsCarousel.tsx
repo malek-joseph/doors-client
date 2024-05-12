@@ -65,7 +65,7 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
-          <Image
+          <Image  
             src={image}
             alt={`Image ${index + 1}`}
            fill

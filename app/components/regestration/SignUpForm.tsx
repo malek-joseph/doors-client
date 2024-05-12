@@ -42,9 +42,9 @@ const SignupForm: React.FC = () => {
      toast.error("Password mismatch or too short");
      return;
    }
-    if (!photo || !age) {
+    if (!photo) {
     // Handle missing photo or age
-    toast.error("Photo and age are required");
+    toast.error("Profile photo is required");
     return;
   }
 
@@ -56,12 +56,15 @@ const SignupForm: React.FC = () => {
    formDataToSend.append("gender", gender);
    formDataToSend.append("job", job);
    formDataToSend.append("age", age);
+
   if (photo) {
     formDataToSend.append("photo", photo);
   }
 
+
+
    setSigningUp(true);
-   const success = await signup(formDataToSend);
+   const success = await signup(formDataToSend, dispatch);
    setSigningUp(false);
 
    if (success) {
@@ -213,7 +216,7 @@ const SignupForm: React.FC = () => {
       </form>
 
       {/* Create an account */}
-      <p className="text-xs text-gray-400 mt-4 text-center">
+      <p className="text-xs text-gray-400 mt-2 text-center">
         Already have an account?{" "}
         <span className="text-teal-500">
           <Link href="/login">Signin</Link>

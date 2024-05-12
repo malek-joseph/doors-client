@@ -10,31 +10,74 @@ import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormS
 import PhotoUpload from "./PhotoUpload";
 import { useEffect, useState } from "react";
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
+import Spinner from "@/app/components/shared/spinner/Spinner";
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
   const dispatch = useDispatch();
-  const [objectURLs, setObjectURLs] = useState<string[]>([]);
+ const [imageFiles, setImageFiles] = useState<File[]>([]);
+ const [imageURLs, setImageURLs] = useState<string[]>([]);
+
+  // Load photos from local storage on component mount
+  useEffect(() => {
+    const storedImages = localStorage.getItem("propertyImages");
+    if (storedImages) {
+      setImageURLs(JSON.parse(storedImages));
+    }
+
+  }, []);
 
 
 
 
-const handlePhotoUpload = (selectedFiles: FileList | null) => {
+    // Convert Blob URLs to Base64 strings
+    const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+   // Convert Base64 strings to Blob URLs
+ const base64ToBlobURL = (base64String: string): string => {
+   try {
+     const byteCharacters = atob(base64String.split(",")[1]);
+     const byteNumbers = new Array(byteCharacters.length);
+     for (let i = 0; i < byteCharacters.length; i++) {
+       byteNumbers[i] = byteCharacters.charCodeAt(i);
+     }
+     const byteArray = new Uint8Array(byteNumbers);
+     const blob = new Blob([byteArray], { type: "image/jpeg" });
+     return URL.createObjectURL(blob);
+   } catch (error) {
+     console.error("Error decoding Base64 string:", error);
+     return ""; // Return empty string or handle the error accordingly
+   }
+ };
+
+ const handlePhotoUpload = async (selectedFiles: FileList | null) => {
     if (selectedFiles) {
       const filesArray = Array.from(selectedFiles);
 
-      // Update object URLs state with new URLs
-      const newObjectURLs = filesArray.map((file) =>
-        URL.createObjectURL(file)
-      );
-      setObjectURLs((prevURLs) => [...prevURLs, ...newObjectURLs]);
+      // Update image files state with new files
+      setImageFiles((prevFiles) => [...prevFiles, ...filesArray]);
 
-      // Dispatch action to update Redux store with new photos (object URLs)
-      dispatch(updatePhotos([...objectURLs, ...newObjectURLs]));
+      // Convert each file to Base64 string and store in local storage
+      const newImageURLs = await Promise.all(
+        filesArray.map(async (file) => {
+          const base64String = await blobToBase64(file);
+          return base64String;
+        })
+      );
+
+      const updatedImageURLs = [...imageURLs, ...newImageURLs];
+      setImageURLs(updatedImageURLs);
+      localStorage.setItem("propertyImages", JSON.stringify(updatedImageURLs));
     }
   };
-
 
   const handleBackClick = () => {
     router.push("/list/place/rent");
@@ -44,10 +87,8 @@ const handlePhotoUpload = (selectedFiles: FileList | null) => {
     router.push("/list/place/preference");
   };
 
-  const isNextButtonDisabled =
-    !propertyDetails.furnishing ||
-    !propertyDetails.roomType ||
-    !propertyDetails.roomBathroom;
+  const isNextButtonDisabled = !imageURLs?.length;
+console.log(imageURLs)
 
   return (
     <div className="flex flex-col items-center justify-center ">
@@ -58,8 +99,10 @@ const handlePhotoUpload = (selectedFiles: FileList | null) => {
         <div className="flex justify-center  ">
           <div className="w-11/12 md:w-10/12 lg:w-8/12 flex items-center flex-col">
             <PhotoUpload onPhotoSelect={handlePhotoUpload} />
-            {objectURLs.length > 0 && (
-              <ListingUploadCarousel images={objectURLs} />
+             {imageURLs.length > 0 && (
+              <ListingUploadCarousel
+                images={imageURLs.map((url) => base64ToBlobURL(url))}
+              />
             )}
           </div>
         </div>
