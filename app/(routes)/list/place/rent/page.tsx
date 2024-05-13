@@ -12,7 +12,7 @@ import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormS
 import NumberInput from "@/app/components/inputs/NumberInput"; // Import the Input component
 import CheckboxWithLabel from "@/app/components/inputs/CheckboxWithLabel";
 
-
+ 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
@@ -46,7 +46,6 @@ const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
   };
 
   const isNextButtonDisabled =
-    !propertyDetails.deposit ||
     !propertyDetails.monthlyRent  
 
   return (

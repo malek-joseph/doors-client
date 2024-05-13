@@ -1,35 +1,60 @@
 /** @format */
 "use client"
 
-import { LISTINGS } from "@/app/constants";
 import {useState, useEffect} from 'react'
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
 import PlaceDetailsSectionOne from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionOne";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
-import BudgetAndStay from "@/app/components/sections/listingDetails/person/BudgetAndStay";
-import AboutMe from "@/app/components/sections/listingDetails/person/AboutMe";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import PlaceDetailsSectionTwo from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionTwo";
+import PlaceDetailsSectionThree from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionThree";
+import PlaceDetailsSectionFour from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFour";
+import PlaceDetailsSectionFive from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFive";
+import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
 import Spinner from "@/app/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
-import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import {
+  selectPropertyDetails,
+  selectAccommodationType,
+  clearListingForm,
+} from "@/app/redux/features/listing/listingFormSlice";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
+import publishProperty from './publishProperty'
+import { useDispatch } from "react-redux";
+
+
 
 const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
   const router = useRouter();
   const propertyDetails = useSelector(selectPropertyDetails);
+  const accommodationType = useSelector(selectAccommodationType);
   const userDetails = useSelector(selectUserDetails);
   const [imageURLs, setImageURLs] = useState<string[]>([]);
-
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+const dispatch = useDispatch()
   // Load photos from local storage on component mount
-  useEffect(() => {
-    const storedImages = localStorage.getItem("propertyImages");
-    if (storedImages) {
-      setImageURLs(JSON.parse(storedImages));
-    }
-
-  }, []);
+useEffect(() => {
+  const storedImages = localStorage.getItem("propertyImages");
+  console.log("Stored images:", storedImages);
+  if (storedImages) {
+    setImageURLs(JSON.parse(storedImages));
+  } else {
+    setImageURLs([]); // Set a default empty array if no data is found
+  }
+}, []);
+  // Load the user's photo when userDetails changes
+useEffect(() => {
+  if (userDetails && userDetails.photo) {
+    // Remove the "uploads" word from userDetails.photo
+    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
+    // Set the image source with the modified path
+    setImageSrc(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    );
+  }
+}, [userDetails]);
+  // console.log(imageURLs)
 
 
 
@@ -54,64 +79,79 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
     return <Spinner />;
   }
 
-
-  // console.log(propertyDetails.photos);
-
-  const handleBackClick = () => {
+  const onEditClick = () => {
     router.push("/list/place/property");
   };
 
-  const handleNextClick = () => {
-    router.push("/list/place/submit");
-  };
+  const onPublishClick = async () => {
+    const updatedPropertyDetails = { ...propertyDetails, type: "place" };
+    
+   publishProperty(imageURLs.map((url) => base64ToBlobURL(url)), userDetails, updatedPropertyDetails, accommodationType);
+   localStorage.removeItem("propertyImages")
+      dispatch(clearListingForm());
+    router.push("/");
 
-  console.log(imageURLs);
+};
+
   
   return (
-    <main className="flex flex-col items-center justify-center ">
+    <main className="flex flex-col items-center justify-center mb-32">
       <div className="w-5/6 ">
         <div className="my-8">
-            {imageURLs?.length > 0 && (
-          <ListingDetailsCarousel
-            images={imageURLs.map((url) => base64ToBlobURL(url))}
-          />
-           )}
+          {imageURLs?.length > 0 && (
+            <ListingDetailsCarousel
+              images={imageURLs.map((url) => base64ToBlobURL(url))}
+            />
+          )}
         </div>
-          
+
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
           <div className="w-full lg:w-8/12">
             <PlaceDetailsSectionOne
-              name={userDetails.name}
-              age={userDetails.age}
               gender={userDetails.gender}
               city={propertyDetails.city}
               governance={propertyDetails.governance}
-              placeOrPerson={"place"}
+              roomType={propertyDetails.roomType}
+              roommatePreference={propertyDetails.roommatePreference}
+              furnishing={propertyDetails.furnishing}
+              bathroomType={propertyDetails.roomBathroom}
+              accommodationType={accommodationType}
             />
             <hr className="my-3" />
 
-            {/* <BudgetAndStay
-              budget={propertyDetails.monthlyRent}
-              availability={propertyDetails.availability}
-              availableDuration={propertyDetails.availableDuration}
-              type={propertyDetails.type}
+            <PlaceDetailsSectionTwo
+              monthlyRent={propertyDetails.monthlyRent}
+              deposit={propertyDetails.deposit}
+              billsIncluded={propertyDetails.billsIncluded}
+              monthlyBills={propertyDetails.monthlyBills}
+              internet={propertyDetails.internet}
+              totalRoommates={propertyDetails.totalRoommates}
             />
             <hr className="my-3" />
-            <AboutMe
-              about={propertyDetails.about}
-              job={propertyDetails.job}
-              smoker={propertyDetails.smoker}
-              pets={propertyDetails.pets}
+            <PlaceDetailsSectionThree
+              roommatePreferences={propertyDetails.roommatePreferences}
+            />
+            <hr className="my-3" />
+            <PlaceDetailsSectionFour
+              placeFeatures={propertyDetails.selectedFeatures}
+            />
+            <hr className="my-3" />
+            <PlaceDetailsSectionFive
               description={propertyDetails.description}
-              type={propertyDetails.type}
-            /> */}
-          </div>
-          <div className="w-full lg:w-4/12 ">
-            <SendMessageCard
-              name={userDetails.name}
-              photo={userDetails.photo}
+              propertyDescription={propertyDetails.propertyDescription}
             />
           </div>
+          <div className="w-full lg:w-4/12 ">
+            {imageSrc && (
+              <SendMessageCard name={userDetails.name} photo={imageSrc} />
+            )}
+          </div>
+            <PublishEditBtns
+          onEditClick={onEditClick}
+          onPublishClick={onPublishClick}
+        />
+
+        
         </div>
       </div>
     </main>

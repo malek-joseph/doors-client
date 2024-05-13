@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface CircleImageProps {
   imageUrl: string;
-  alt: string;
+  alt: string
 }
 
 const CircleImage: React.FC<CircleImageProps> = ({ imageUrl, alt }) => {

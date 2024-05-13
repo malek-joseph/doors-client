@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import ListingImages from "./ListingImages";
-import FreeToMessage from "../../shared/FreeToMessage";
 import AgeAndPlace from "../../shared/AgeAndPlace";
 
 interface ListingCardProps {
@@ -53,7 +52,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
         href={`/details/person/${encodeURIComponent(id)}`}>
         <div className="">
           {/* Name and Free Message Row */}
-          <FreeToMessage name={name} freeMessage={freeMessage} type={type } city={city} governance={governance} />
 
           {/* Rent and Age Row */}
           <div className="flex justify-between  items-center mb-2">

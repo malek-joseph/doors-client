@@ -1,35 +1,47 @@
 /** @format */
 
 import AgeAndPlace from "@/app/components/shared/AgeAndPlace";
-import FreeToMessage from "@/app/components/shared/FreeToMessage";
 import React from "react";
 
 interface PersonDetails {
-  name: string;
-  age?: number;
   gender?: string;
   city: string;
   governance: string;
-  placeOrPerson: string;
+  roomType: string;
+  roommatePreference: string;
+  furnishing: string;
+  bathroomType: string;
+  accommodationType: string | null;
 }
 
 const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
-  name,
-  age,
-  placeOrPerson,
   gender,
   city,
   governance,
+  roommatePreference,
+  furnishing,
+  bathroomType,
+  roomType,
+  accommodationType
 }) => {
+
+console.log(bathroomType)
   return (
     <div className="">
-      <FreeToMessage name={name} placeOrPerson={placeOrPerson} city={city} governance={governance}  />
-      {/* <AgeAndPlace
-        age={age}
-        gender={gender}
-        city={city}
-        governance={governance}
-      /> */}
+      <div className=" mb-2">
+        <h2 className="text-xl font-semibold text-gray-600">
+          {`Avilable for rent in ${city}, ${governance}.`}
+        </h2>
+        <h3 className="text-gray-500 flex flex-col">
+          {`${furnishing} ${roomType} room in a ${accommodationType}.`}
+          {bathroomType === "Private" && (
+            <span className="text-xs text-teal-300">With private bathroom.</span>
+          )}
+        </h3>
+        <p className="text-sm text-gray-700">
+          {`Genders to apply: ${roommatePreference}`}
+        </p>
+      </div>
     </div>
   );
 };

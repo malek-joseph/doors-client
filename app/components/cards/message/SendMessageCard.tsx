@@ -26,7 +26,7 @@ const SendMessageCard: React.FC<SendMessageCardProps> = ({ name, photo }) => {
   return (
     <aside className="p-4 rounded-lg bg-gray-100 mb-8 border border-gray-300">
       <div className="flex  items-center mb-4">
-        {/* Pass the imageUrl prop to the CircleImage component */}
+          {/* Pass the imageUrl prop to the CircleImage component */}
         {photo && (
           <div>
             <CircleImage imageUrl={photo} alt="profile Img" />

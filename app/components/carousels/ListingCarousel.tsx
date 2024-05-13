@@ -20,10 +20,10 @@ SwiperCore.use([
 ]);
 
 interface CarouselProps {
-  images: string[];
+  photos: string[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel: React.FC<CarouselProps> = ({ photos }) => {
   // console.log(images);
   const swiperStyles = {
     "--swiper-pagination-color": "teal",
@@ -41,20 +41,17 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       navigation={true}
       pagination={{ clickable: false }}
       className="w-full h-full listing-carousel">
-      {images.map((image, index) => (
+      {photos.map((photo, index) => (
         <SwiperSlide key={index}>
-       
           <Image
             priority={true}
-            src={image}
+            src={photo}
             alt={`Image ${index + 1}`}
             fill
             style={{ objectFit: "cover" }}
             className="rounded-md"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
- 
-         
         </SwiperSlide>
       ))}
     </Swiper>

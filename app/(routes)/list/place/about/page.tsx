@@ -53,7 +53,8 @@ const Page = () => {
     !propertyDetails.governance ||
     !propertyDetails.city ||
     !propertyDetails.totalBedrooms ||
-    !propertyDetails.totalBathrooms;
+    !propertyDetails.totalBathrooms ||
+    !propertyDetails.internet;
 
   return (
     <div className="flex flex-col items-center justify-center ">

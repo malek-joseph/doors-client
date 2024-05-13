@@ -88,7 +88,7 @@ const Page = () => {
   };
 
   const isNextButtonDisabled = !imageURLs?.length;
-console.log(imageURLs)
+// console.log(imageURLs)
 
   return (
     <div className="flex flex-col items-center justify-center ">

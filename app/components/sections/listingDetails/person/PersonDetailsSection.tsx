@@ -1,7 +1,6 @@
 /** @format */
 
 import AgeAndPlace from "@/app/components/shared/AgeAndPlace";
-import FreeToMessage from "@/app/components/shared/FreeToMessage";
 import React from "react";
 
 interface PlaceDetails {
@@ -25,12 +24,7 @@ const PersonDetailsSection: React.FC<PlaceDetails> = ({
 }) => {
   return (
     <div className="">
-      <FreeToMessage
-        name={name}
-        type={type}
-        city={city}
-        governance={governance}
-      />
+     
       <AgeAndPlace
         list={list}
         gender={gender}

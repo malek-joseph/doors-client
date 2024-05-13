@@ -25,7 +25,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
         onClick(); // Toggle the overlay for logged in users
       }
     };
-  console.log(user)
+  // console.log(user)
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
       {!user ? (

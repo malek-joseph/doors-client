@@ -52,10 +52,9 @@ useEffect(() => {
             }
           );
 
-// Update the user object in Redux with the new photo
         const updatedUser = { ...userDetails, photo: response.data.photo };
-        dispatch(setUser(updatedUser));
 
+        dispatch(setUser(updatedUser));
         // Show success toast
         toast.success("Profile picture updated successfully");
         } catch (error) {

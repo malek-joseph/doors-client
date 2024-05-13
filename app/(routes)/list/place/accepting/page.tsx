@@ -11,6 +11,7 @@ import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
 import cigarette from "@/public/assets/images/cigarette.png"
 import pet from "@/public/assets/images/pet.png"
 import student from "@/public/assets/images/student.png"
+import visitors from "@/public/assets/images/visitors.png"
 import type { StaticImageData } from "next/image";
 
 const Page = () => {
@@ -53,6 +54,7 @@ const handleSelectFeature = (featureName: string) => {
      { name: "smokers", src: cigarette },
      { name: "pets", src: pet },
      { name: "students", src: student },
+     { name: "visitors", src: visitors },
     
    ];
 
@@ -60,7 +62,7 @@ const handleSelectFeature = (featureName: string) => {
     <div className="flex flex-col items-center justify-center ">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
-          Roommate preference
+          Roommate preferences
         </h2>
         <div className="flex justify-center  ">
           <div className="flex items-center flex-col">

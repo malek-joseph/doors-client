@@ -28,7 +28,7 @@ const Page = () => {
       router.push("/list/place/accepting");
   };
 
-  const isNextButtonDisabled = !propertyDetails.furnishing || !propertyDetails.roomType || !propertyDetails.roomBathroom;
+  const isNextButtonDisabled = !propertyDetails.roommatePreference;
 
    const options = [
     "Women only",

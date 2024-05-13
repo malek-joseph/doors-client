@@ -5,11 +5,10 @@ import Image from "next/image";
 import ListingCarousel from "../../carousels/ListingCarousel";
 
 interface ListingImagesProps {
-  images: string[];
-  name: string;
+  photos: string[];
 }
 
-const ListingImages: React.FC<ListingImagesProps> = ({ images, name }) => {
+const ListingImages: React.FC<ListingImagesProps> = ({ photos }) => {
   return (
     <div className="relative w-full h-80 mb-4 overflow-hidden ">
       {/* <Image
@@ -19,7 +18,7 @@ const ListingImages: React.FC<ListingImagesProps> = ({ images, name }) => {
         width={500} 
         height={700}
       /> */}
-      <ListingCarousel   images={images}/>
+      <ListingCarousel photos={photos} />
     </div>
   );
 };
