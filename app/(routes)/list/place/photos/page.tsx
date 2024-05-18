@@ -32,29 +32,24 @@ const Page = () => {
   const accommodationType = useSelector(selectAccommodationType);
 
  useEffect(() => {
-   const fetchData = async () => {
-     try {
-       const storedImages = await localforage.getItem<File[]>("propertyImages");
-       if (storedImages && Array.isArray(storedImages)) {
-         const urls = storedImages.map((file) => URL.createObjectURL(file));
-         setImageFiles(storedImages);
-         setImageURLs(urls);
-       } else {
-         setImageFiles([]);
-         setImageURLs([]);
-       }
-     } catch (error) {
-       console.error("Error getting item:", error);
-     }
-   };
+    localforage
+      .getItem<File[]>("propertyImages")
+      .then((storedImages) => {
+        if (storedImages) {
+          setImageFiles(storedImages);
+          const updatedImageURLs = storedImages.map((file) =>
+            URL.createObjectURL(file)
+          );
 
-   fetchData();
+          setImageURLs(updatedImageURLs);
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting item:", error);
+      });
 
-   return () => {
-     // Clean up blob URLs when component unmounts
-     imageURLs.forEach(URL.revokeObjectURL);
-   };
- }, []);
+   
+  }, []);
 
   // Convert File array to FileList
 const arrayToFileList = (files: (File | Blob)[]): FileList => {
@@ -74,6 +69,15 @@ const arrayToFileList = (files: (File | Blob)[]): FileList => {
   return dataTransfer.files;
 };
 
+const fileListToArray = (fileList: FileList | null): File[] => {
+  if (!fileList) return [];
+
+  const array: File[] = [];
+  for (let i = 0; i < fileList.length; i++) {
+    array.push(fileList[i]);
+  }
+  return array;
+};
 
 
   // Updated handlePhotoUpload function
@@ -85,32 +89,23 @@ const arrayToFileList = (files: (File | Blob)[]): FileList => {
         toast.error("Please upload valid image files (JPEG, PNG, GIF, or BMP)");
         return;
       }
-    console.log(validFiles);
 
       const validFilesFilelist = arrayToFileList(validFiles)
-    console.log(selectedFiles)
-
-    console.log(validFilesFilelist)
-
       const compressedFiles = await compressImages(validFilesFilelist);
-    console.log(compressedFiles)
-
-
       // Update image files state with new files
       const updatedFiles = [...imageFiles, ...compressedFiles];
     setImageFiles(updatedFiles);
     
   const updatedImages = arrayToFileList(updatedFiles);
 
-          const updatedPropertyDetails = { ...propertyDetails, type: "place" };
-    // console.log(updatedFiles);
+      //     const updatedPropertyDetails = { ...propertyDetails, type: "place" };
     
-      publishProperty(
-        updatedImages,
-        userDetails,
-      updatedPropertyDetails,
-      accommodationType
-      );
+      // publishProperty(
+      //   updatedImages,
+      //   userDetails,
+      // updatedPropertyDetails,
+      // accommodationType
+      // );
       // Generate object URLs for new files
      const updatedImageURLs = updatedFiles.map((file) =>
       URL.createObjectURL(file)
@@ -120,7 +115,7 @@ const arrayToFileList = (files: (File | Blob)[]): FileList => {
 
       // Update local storage with new files
         localforage
-          .setItem("propertyImages", updatedImages)
+          .setItem("propertyImages", fileListToArray(updatedImages))
           .then(() => {
             // Item stored successfully
           })
@@ -129,15 +124,7 @@ const arrayToFileList = (files: (File | Blob)[]): FileList => {
             console.error("Error storing item:", error);
           });
 
-        localforage
-          .setItem("propertyImagesURLs", updatedImageURLs)
-          .then(() => {
-            // Item stored successfully
-          })
-          .catch((error) => {
-            // Handle error
-            console.error("Error storing item:", error);
-          });
+   
 
   };
 

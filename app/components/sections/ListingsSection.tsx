@@ -35,17 +35,33 @@ const ListSection = () => {
 const [listings, setListings] = useState<ListingType[]>([]);
 
 useEffect(() => {
-  // Fetch property details from backend API
-  axios
-    .get("http://localhost:8000/api/properties/allProperties")
-    .then((response) => {
+  const fetchListings = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/properties/allProperties"
+      );
       const properties: ListingType[] = response.data;
-      setListings(properties); // Replace with setting the new properties directly
-    })
-    .catch((error) => {
+
+      const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
+      const updatedListings = properties.map((listing) => ({
+        ...listing,
+        photos: listing.photos.map((photo) => {
+          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+          return `${baseURL}/${photoPathWithoutUploads}`;
+        }),
+      }));
+
+      setListings(updatedListings);
+
+    } catch (error) {
       console.error("Error fetching property details:", error);
-    });
+    }
+  };
+
+  fetchListings();
 }, []);
+
+console.log(listings)
 
 
 

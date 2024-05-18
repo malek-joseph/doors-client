@@ -38,26 +38,37 @@ useEffect(() => {
   }
 }, [userDetails]);
 
-   useEffect(() => {
-    const fetchPropertyDetails = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await axios.get(
-          `http://localhost:8000/api/properties/propertyDetails/${id}`
-        );
-        setPropertyDetails(response.data); // Assuming the response contains property details
-        setLoading(false);
-      } catch (error) {
-        setError("Error fetching property details");
-        setLoading(false);
-      }
-    };
+useEffect(() => {
+  const fetchPropertyDetails = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get(
+        `http://localhost:8000/api/properties/propertyDetails/${id}`
+      );
 
-    if (id) {
-      fetchPropertyDetails();
+      const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
+
+      const updatedPropertyDetails = {
+        ...response.data,
+        photos: response.data.photos.map((photo: string) => {
+          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+          return `${baseURL}/${photoPathWithoutUploads}`;
+        }),
+      };
+
+      setPropertyDetails(updatedPropertyDetails);
+      setLoading(false);
+    } catch (error) {
+      setError("Error fetching property details");
+      setLoading(false);
     }
-  }, [id]);
+  };
+
+  if (id) {
+    fetchPropertyDetails();
+  }
+}, [id]);
 
   if (error) {
     return <div>Error: {error}</div>;

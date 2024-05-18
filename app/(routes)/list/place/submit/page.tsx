@@ -40,7 +40,8 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const dispatch = useDispatch();
   // Load photos from local storage on component mount
-  useEffect(() => {
+
+ useEffect(() => {
     localforage
       .getItem<File[]>("propertyImages")
       .then((storedImages) => {
@@ -57,10 +58,7 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
         console.error("Error getting item:", error);
       });
 
-    return () => {
-      // Clean up blob URLs when component unmounts
-      imageURLs.forEach(URL.revokeObjectURL);
-    };
+   
   }, []);
 
   // Load the user's photo when userDetails changes
@@ -111,16 +109,16 @@ const onPublishClick = async () => {
     updatedPropertyDetails,
     accommodationType
   );
-  // localforage.removeItem('propertyImages')
-  // .then(() => {
-  //   // Item removed successfully
-  // })
-  // .catch((error) => {
-  //   // Handle error
-  //   console.error('Error removing item:', error);
-  // });
-  //   dispatch(clearListingForm());
-  // router.push("/");
+  localforage.removeItem('propertyImages')
+  .then(() => {
+    // Item removed successfully
+  })
+  .catch((error) => {
+    // Handle error
+    console.error('Error removing item:', error);
+  });
+    dispatch(clearListingForm());
+  router.push("/");
 };
   
   console.log(imageURLs);
