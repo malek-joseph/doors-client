@@ -34,7 +34,6 @@ useEffect(() => {
       const file = e.target.files[0];
       const formData = new FormData();
       formData.append("photo", file);
-
       // Check if userDetails is defined before accessing its id property
       if (userDetails) {
         const userId = userDetails.id;

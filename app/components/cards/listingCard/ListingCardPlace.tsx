@@ -30,13 +30,14 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
       ? `${propertyDescription.slice(0, MAX_DESCRIPTION_LENGTH)}...`
       : propertyDescription;
 
+
   return (
     <div className="flex flex-col items-center transition-all cursor-pointer  ">
       <ListingImages photos={photos} />
 
       <Link
         className="w-full"
-        href={`/details/place/${encodeURIComponent(id)}`}>
+        href={`/details/property/${id}`}>
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
           <h2 className="text-xl font-semibold text-gray-600">

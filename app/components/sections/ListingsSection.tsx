@@ -28,24 +28,24 @@ type ListingType = {
   propertyDescription: string;
   type: string;
   accommodationType: string;
-  id: string;
+  _id: string;
 };
 
 const ListSection = () => {
 const [listings, setListings] = useState<ListingType[]>([]);
 
- useEffect(() => {
-    // Fetch property details from backend API
-    axios.get('http://localhost:8000/api/properties/allProperties')
-      .then(response => {
-        const properties: ListingType[]  = response.data;
-        setListings(prevListings => [...prevListings, ...properties]);
-      })
-      .catch(error => {
-        console.error('Error fetching property details:', error);
-      });
- }, []);
-  console.log(listings)
+useEffect(() => {
+  // Fetch property details from backend API
+  axios
+    .get("http://localhost:8000/api/properties/allProperties")
+    .then((response) => {
+      const properties: ListingType[] = response.data;
+      setListings(properties); // Replace with setting the new properties directly
+    })
+    .catch((error) => {
+      console.error("Error fetching property details:", error);
+    });
+}, []);
 
 
 
@@ -93,7 +93,7 @@ const [listings, setListings] = useState<ListingType[]>([]);
             billsIncluded={listing.billsIncluded}
             governance={listing.governance}
             city={listing.city}
-            id={listing.id}
+            id={listing._id}
           />
         )
       )}

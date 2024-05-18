@@ -16,6 +16,8 @@
     "@types/redux-thunk": "^2.1.0",
     "aws-sdk": "^2.1542.0",
     "axios": "^1.6.5",
+    "browser-image-compression": "^2.0.2",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",

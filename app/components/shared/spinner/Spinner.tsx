@@ -13,7 +13,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 20 }) => {
   };
 
   return (
-    <div className="spinner" style={style}>
+    <div className="spinner h-screen w-screen" style={style}>
       <div className="spinner-circle" />
     </div>
   );

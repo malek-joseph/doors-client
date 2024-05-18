@@ -9,61 +9,24 @@ import PlaceDetailsSectionTwo from "@/app/components/sections/listingDetails/pla
 import PlaceDetailsSectionThree from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionThree";
 import PlaceDetailsSectionFour from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFour";
 import PlaceDetailsSectionFive from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFive";
-import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
 import Spinner from "@/app/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
-import {
-  selectPropertyDetails,
-  selectAccommodationType,
-  clearListingForm,
-} from "@/app/redux/features/listing/listingFormSlice";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import publishProperty from './publishProperty'
 import { useDispatch } from "react-redux";
-import localforage from "localforage";
-
-const persistConfig = {
-  key: "root",
-  storage: localforage,
-};
-
+import axios from 'axios';
 
 const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
+  console.log(id)
   const router = useRouter();
-  const propertyDetails = useSelector(selectPropertyDetails);
-  const accommodationType = useSelector(selectAccommodationType);
+  const [propertyDetails, setPropertyDetails] = useState<any>(null);
   const userDetails = useSelector(selectUserDetails);
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const dispatch = useDispatch();
-  // Load photos from local storage on component mount
-  useEffect(() => {
-    localforage
-      .getItem<File[]>("propertyImages")
-      .then((storedImages) => {
-        if (storedImages) {
-          setImageFiles(storedImages);
-          const updatedImageURLs = storedImages.map((file) =>
-            URL.createObjectURL(file)
-          );
+   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+const dispatch = useDispatch()
 
-          setImageURLs(updatedImageURLs);
-        }
-      })
-      .catch((error) => {
-        console.error("Error getting item:", error);
-      });
-
-    return () => {
-      // Clean up blob URLs when component unmounts
-      imageURLs.forEach(URL.revokeObjectURL);
-    };
-  }, []);
-
-  // Load the user's photo when userDetails changes
 useEffect(() => {
   if (userDetails && userDetails.photo) {
     // Remove the "uploads" word from userDetails.photo
@@ -75,65 +38,47 @@ useEffect(() => {
   }
 }, [userDetails]);
 
-if (!propertyDetails || !userDetails) {
-  return <Spinner />;
-}
+   useEffect(() => {
+    const fetchPropertyDetails = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await axios.get(
+          `http://localhost:8000/api/properties/propertyDetails/${id}`
+        );
+        setPropertyDetails(response.data); // Assuming the response contains property details
+        setLoading(false);
+      } catch (error) {
+        setError("Error fetching property details");
+        setLoading(false);
+      }
+    };
 
-const onEditClick = () => {
-  router.push("/list/place/property");
-};
-
-const arrayToFileList = (files: (File | Blob)[]): FileList => {
-  const dataTransfer = new DataTransfer();
-  files.forEach((file) => {
-    // If file is a Blob, convert it to a File
-    if ((file as Blob) instanceof Blob) {
-      const blob = file as Blob;
-      const convertedFile = new File([blob], "compressed-image.jpg", {
-        type: blob.type,
-      });
-      dataTransfer.items.add(convertedFile);
-    } else if (file instanceof File) {
-      dataTransfer.items.add(file);
+    if (id) {
+      fetchPropertyDetails();
     }
-  });
-  return dataTransfer.files;
-};
+  }, [id]);
 
-const onPublishClick = async () => {
-  const updatedPropertyDetails = { ...propertyDetails, type: "place" };
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-  const updatedImages = arrayToFileList(imageFiles);
+  if ( !propertyDetails || !userDetails) {
+    return <Spinner />;
+  }
 
-  publishProperty(
-    updatedImages,
-    userDetails,
-    updatedPropertyDetails,
-    accommodationType
-  );
-  // localforage.removeItem('propertyImages')
-  // .then(() => {
-  //   // Item removed successfully
-  // })
-  // .catch((error) => {
-  //   // Handle error
-  //   console.error('Error removing item:', error);
-  // });
-  //   dispatch(clearListingForm());
-  // router.push("/");
-};
-  
-  console.log(imageURLs);
   return (
     <main className="flex flex-col items-center justify-center mb-32">
       <div className="w-5/6 ">
         <div className="my-8">
-          {imageURLs?.length > 0 && (
-            <ListingDetailsCarousel images={imageURLs} />
+          {propertyDetails?.photos?.length > 0 && (
+            <ListingDetailsCarousel
+              images={propertyDetails.photos}
+            />
           )}
         </div>
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
-          <div className="w-full lg:w-8/12">
+            <div className="w-full lg:w-8/12">
             <PlaceDetailsSectionOne
               gender={userDetails.gender}
               city={propertyDetails.city}
@@ -142,9 +87,10 @@ const onPublishClick = async () => {
               roommatePreference={propertyDetails.roommatePreference}
               furnishing={propertyDetails.furnishing}
               bathroomType={propertyDetails.roomBathroom}
-              accommodationType={accommodationType}
+              accommodationType={propertyDetails.accommodationType}
             />
             <hr className="my-3" />
+
             <PlaceDetailsSectionTwo
               monthlyRent={propertyDetails.monthlyRent}
               deposit={propertyDetails.deposit}
@@ -172,10 +118,6 @@ const onPublishClick = async () => {
               <SendMessageCard name={userDetails.name} photo={imageSrc} />
             )}
           </div>
-          <PublishEditBtns
-            onEditClick={onEditClick}
-            onPublishClick={onPublishClick}
-          />
         </div>
       </div>
     </main>
