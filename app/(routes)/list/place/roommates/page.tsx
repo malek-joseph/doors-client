@@ -3,12 +3,12 @@
 // Page.tsx
 import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { updatePropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
-import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);

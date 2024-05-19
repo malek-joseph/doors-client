@@ -6,7 +6,7 @@ import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import {
   selectPropertyDetails,
   updatePropertyDetails,
-} from "@/app/redux/features/listing/listingFormSlice";
+} from "@/app/redux/features/listing/placeFormSlice";
 import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
 import cigarette from "@/public/assets/images/cigarette.png"
 import pet from "@/public/assets/images/pet.png"

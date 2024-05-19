@@ -16,18 +16,12 @@ import { useSelector } from "react-redux";
 import {
   selectPropertyDetails,
   selectAccommodationType,
-  clearListingForm,
-} from "@/app/redux/features/listing/listingFormSlice";
+  clearPlaceForm,
+} from "@/app/redux/features/listing/placeFormSlice";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import publishProperty from './publishProperty'
+import publishProperty from "./publishProperty";
 import { useDispatch } from "react-redux";
 import localforage from "localforage";
-
-const persistConfig = {
-  key: "root",
-  storage: localforage,
-};
-
 
 const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
@@ -39,9 +33,8 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const dispatch = useDispatch();
-  // Load photos from local storage on component mount
 
- useEffect(() => {
+  useEffect(() => {
     localforage
       .getItem<File[]>("propertyImages")
       .then((storedImages) => {
@@ -50,78 +43,76 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
           const updatedImageURLs = storedImages.map((file) =>
             URL.createObjectURL(file)
           );
-
           setImageURLs(updatedImageURLs);
         }
       })
       .catch((error) => {
         console.error("Error getting item:", error);
       });
-
-   
   }, []);
 
-  // Load the user's photo when userDetails changes
-useEffect(() => {
-  if (userDetails && userDetails.photo) {
-    // Remove the "uploads" word from userDetails.photo
-    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
-    // Set the image source with the modified path
-    setImageSrc(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    );
-  }
-}, [userDetails]);
-
-if (!propertyDetails || !userDetails) {
-  return <Spinner />;
-}
-
-const onEditClick = () => {
-  router.push("/list/place/property");
-};
-
-const arrayToFileList = (files: (File | Blob)[]): FileList => {
-  const dataTransfer = new DataTransfer();
-  files.forEach((file) => {
-    // If file is a Blob, convert it to a File
-    if ((file as Blob) instanceof Blob) {
-      const blob = file as Blob;
-      const convertedFile = new File([blob], "compressed-image.jpg", {
-        type: blob.type,
-      });
-      dataTransfer.items.add(convertedFile);
-    } else if (file instanceof File) {
-      dataTransfer.items.add(file);
+  useEffect(() => {
+    if (userDetails && userDetails.photo) {
+      const photoPathWithoutUploads = userDetails.photo.replace(
+        /^uploads\//,
+        ""
+      );
+      setImageSrc(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+      );
     }
-  });
-  return dataTransfer.files;
-};
+  }, [userDetails]);
 
-const onPublishClick = async () => {
-  const updatedPropertyDetails = { ...propertyDetails, type: "place" };
+  if (!propertyDetails || !userDetails) {
+    return <Spinner />;
+  }
 
-  const updatedImages = arrayToFileList(imageFiles);
+  const onEditClick = () => {
+    router.push("/list/place/property");
+  };
 
-  publishProperty(
-    updatedImages,
-    userDetails,
-    updatedPropertyDetails,
-    accommodationType
-  );
-  localforage.removeItem('propertyImages')
-  .then(() => {
-    // Item removed successfully
-  })
-  .catch((error) => {
-    // Handle error
-    console.error('Error removing item:', error);
-  });
-    dispatch(clearListingForm());
-  router.push("/");
-};
-  
-  console.log(imageURLs);
+  const arrayToFileList = (files: (File | Blob)[]): FileList => {
+    const dataTransfer = new DataTransfer();
+    files.forEach((file) => {
+      // If file is a Blob, convert it to a File
+      if ((file as Blob) instanceof Blob) {
+        const blob = file as Blob;
+        const convertedFile = new File([blob], "compressed-image.jpg", {
+          type: blob.type,
+        });
+        dataTransfer.items.add(convertedFile);
+      } else if (file instanceof File) {
+        dataTransfer.items.add(file);
+      }
+    });
+    return dataTransfer.files;
+  };
+
+  const onPublishClick = async () => {
+    const updatedPropertyDetails = { ...propertyDetails, type: "place" };
+
+    const updatedImages = arrayToFileList(imageFiles);
+
+    publishProperty(
+      updatedImages,
+      userDetails,
+      updatedPropertyDetails,
+      accommodationType
+    );
+    localforage
+      .removeItem("propertyImages")
+      .then(() => {
+        // Item removed successfully
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error removing item:", error);
+      });
+    dispatch(clearPlaceForm());
+    router.push("/");
+  };
+
+  // console.log(imageURLs);
   return (
     <main className="flex flex-col items-center justify-center mb-32">
       <div className="w-5/6 ">

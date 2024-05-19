@@ -35,24 +35,31 @@ const PlaceDetailsSectionTwo: React.FC<PlaceDetailsSectionTwoProps> = ({
           alt="coin"
         />
         <div className="flex flex-col">
-       <div className="text-teal-500 flex items-center justify-center md:justify-start lg:justify-start ">
+       <div className="text-teal-500 flex items-center justify-start ">
           <span className="text-sm text-gray-500">Rent:&nbsp;</span>
           {monthlyRent}
           <span className="text-sm text-gray-300"> &nbsp;EGP/Month</span>
         </div>
-        <div className="text-teal-500 flex items-center justify-center md:justify-start lg:justify-start ">
+        <div className="text-teal-500 flex items-center justify-start ">
           <span className="text-sm text-gray-500">Deposit:&nbsp; </span>
           {deposit}
           <span className="text-sm text-gray-300"> &nbsp;EGP</span>
         </div>
-        <div className="text-teal-500 flex items-center justify-center md:justify-start lg:justify-start">
+        <div className="text-teal-500 flex items-center justify-start">
           <span className="text-sm text-gray-500">Bills Included:&nbsp; </span>
           {billsIncluded ? (
             <span className="text-sm text-gray-300"> &nbsp;Yes</span>
           ) : (
             <span className="text-sm text-gray-300"> &nbsp;No</span>
           )}
+          </div>
+          {monthlyBills ? (
+             <div className="text-teal-500 flex items-center justify-center md:justify-start lg:justify-start ">
+          <span className="text-sm text-gray-500">Monthly Bills:&nbsp; </span>
+          {monthlyBills}
+          <span className="text-sm text-gray-300"> &nbsp;EGP</span>
         </div>
+          ): null}
         </div>
  
       </div>

@@ -79,7 +79,7 @@ useEffect(() => {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center mb-32">
+    <main className="flex flex-col items-center justify-center mb-10">
       <div className="w-5/6 ">
         <div className="my-8">
           {propertyDetails?.photos?.length > 0 && (

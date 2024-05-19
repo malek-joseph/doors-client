@@ -6,7 +6,8 @@ import { persistStore, persistReducer } from "redux-persist";
 // import storage from "redux-persist/lib/storage"; // defaults to using localStorage
 import storage from "../storage"
 import authReducer from "./features/auth/authSlice";
-import listingFormReducer from "./features/listing/listingFormSlice";
+import placeFormReducer from "./features/listing/placeFormSlice";
+import personFormReducer from "./features/listing/personFormSlice";
 
 // Configuration for Redux Persist
 const persistConfig = {
@@ -14,13 +15,14 @@ const persistConfig = {
   version: 1, // Current version
 
   storage, // Storage method (local storage)
-  whitelist: ["auth", "listingForm"], // Reducers you want to persist (by key)
+  whitelist: ["auth", "placeForm", "personForm"], // Reducers you want to persist (by key)
 };
 
 // Combine reducers (if you have more than one)
 const rootReducer = combineReducers({
   auth: authReducer,
-  listingForm: listingFormReducer,
+  placeForm: placeFormReducer,
+  personForm: personFormReducer,
 
   // Add other reducers here
 });

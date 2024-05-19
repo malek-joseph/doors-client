@@ -4,7 +4,9 @@ import { LISTINGS } from "@/app/constants";
 import { useState, useEffect } from 'react';
 import ListingCard from "../cards/listingCard/ListingCardPerson";
 import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
+import ListingCardPerson from "../cards/listingCard/ListingCardPerson";
 import axios from "axios";
+
 
 type ListingType = {
   governance: string;
@@ -14,6 +16,7 @@ type ListingType = {
   internet: string;
   totalRoommates: number | string;
   roomType: string;
+  moveInDate: string;
   furnishing: string;
   roomBathroom: string;
   selectedFeatures: string[];
@@ -26,6 +29,7 @@ type ListingType = {
   roommatePreferences: string[];
   description: string;
   propertyDescription: string;
+  personDescription: string;
   type: string;
   accommodationType: string;
   _id: string;
@@ -33,17 +37,26 @@ type ListingType = {
 
 const ListSection = () => {
 const [listings, setListings] = useState<ListingType[]>([]);
+const [loading, setLoading] = useState<boolean>(false);
 
 useEffect(() => {
   const fetchListings = async () => {
+    setLoading(true);
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/properties/allProperties"
-      );
-      const properties: ListingType[] = response.data;
+      const [propertiesResponse, personsResponse] = await Promise.all([
+        axios.get("http://localhost:8000/api/properties/allProperties"),
+        axios.get("http://localhost:8000/api/persons/allPersons"),
+      ]);
+
+      console.log("Properties Response:", propertiesResponse.data);
+      console.log("Persons Response:", personsResponse.data);
+
+      const properties: ListingType[] = propertiesResponse.data;
+      const persons: ListingType[] = personsResponse.data;
 
       const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
-      const updatedListings = properties.map((listing) => ({
+
+      const updatedProperties = properties.map((listing) => ({
         ...listing,
         photos: listing.photos.map((photo) => {
           const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
@@ -51,65 +64,67 @@ useEffect(() => {
         }),
       }));
 
-      setListings(updatedListings);
+      const updatedPersons = persons.map((listing) => ({
+        ...listing,
+        photos: listing.photos.map((photo) => {
+          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+          return `${baseURL}/${photoPathWithoutUploads}`;
+        }),
+      }));
 
+      // Combine properties and persons into one array
+      const combinedListings = [...updatedProperties, ...updatedPersons];
+
+      console.log("Combined Listings:", combinedListings);
+
+      setListings(combinedListings);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching property details:", error);
+      setLoading(false);
     }
   };
 
   fetchListings();
 }, []);
 
+
+
 console.log(listings)
 
 
 
-//     useEffect(() => {
-//     // Fetch people details from backend API
-//     axios.get('API_ENDPOINT_FOR_PEOPLE_DATA')
-//       .then(response => {
-//         const people = response.data;
-//         setListings(prevListings => [...prevListings, ...people]);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching people details:', error);
-//       });
-//   }, []);
 
 
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 ">
-      {listings.map((listing, i) =>
-        // listing.type === "person" && (
-        //   <ListingCard
-        //     photos={listing.photos}
-        //     name={listing.name}
-        //     freeMessage={listing.freeMessage}
-        //     rent={listing.rent}
-        //     age={listing.age}
-        //     gender={listing.gender}
-        //     description={listing.description}
-        //     availability={listing.availability}
-        //     key={i}
-        //     governance={listing.governance}
-        //     city={listing.city}
-        //     id={listing.id}
-        //     type={listing.type}
-        //   />
-        // ) 
-        listing.type === "place" && 
-        (
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 min-h-screen">
+       {listings.map((listing, i) =>
+        listing.type === "place" ? (
           <ListingCardPlace
+            key={i}
             photos={listing.photos}
             monthlyRent={listing.monthlyRent}
             propertyDescription={listing.propertyDescription}
-            key={i}
             billsIncluded={listing.billsIncluded}
             governance={listing.governance}
             city={listing.city}
             id={listing._id}
+            loading={loading}
+            accommodationType={listing.accommodationType}
+          />
+        ) : (
+        <ListingCardPerson
+            key={i}
+            photos={listing.photos}
+            monthlyRent={listing.monthlyRent}
+            personDescription={listing.personDescription}
+            billsIncluded={listing.billsIncluded}
+            governance={listing.governance}
+            city={listing.city}
+            id={listing._id}
+               loading={loading}
+               accommodationType={listing.accommodationType}
           />
         )
       )}

@@ -2,6 +2,8 @@
 
 import ListingImages from "./ListingImages";
 import Link from "next/link";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface ListingCardProps {
   photos: string[];
@@ -11,6 +13,8 @@ interface ListingCardProps {
   governance: string;
   city: string;
   id: string;
+  accommodationType: string;
+  loading: boolean;
 }
 
 const MAX_DESCRIPTION_LENGTH = 45; // Adjust the desired maximum length
@@ -22,7 +26,9 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
   billsIncluded,
   governance,
   city,
-  id
+  id,
+  loading,
+  accommodationType,
 }) => {
   // Truncate description if it exceeds the maximum length
   const truncatedDescription =
@@ -30,14 +36,11 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
       ? `${propertyDescription.slice(0, MAX_DESCRIPTION_LENGTH)}...`
       : propertyDescription;
 
-
   return (
-    <div className="flex flex-col items-center transition-all cursor-pointer  ">
+    <div className="flex flex-col items-center transition-all cursor-pointer m-2 ">
       <ListingImages photos={photos} />
 
-      <Link
-        className="w-full"
-        href={`/details/property/${id}`}>
+      <Link className="w-full" href={`/details/property/${id}`}>
         {/* Name and Free Message Row */}
         <div className="flex justify-between mb-2 items-center">
           <h2 className="text-xl font-semibold text-gray-600">
@@ -47,7 +50,6 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
               {billsIncluded && "bills inc."}
             </span>
           </h2>
-         
         </div>
 
         {/* Rent and Age Row */}
@@ -57,7 +59,9 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
 
             <p className="text-teal-500">
               {" "}
-              <span className="text-sm text-gray-500">for Rent in:</span>{" "}
+              <span className="text-sm text-gray-500">
+                 A {accommodationType} is for rent in:
+              </span>{" "}
               {governance}, {city}
             </p>
           </div>

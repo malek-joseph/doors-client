@@ -6,7 +6,7 @@ import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import {
   selectPropertyDetails,
   updatePropertyDetails,
-} from "@/app/redux/features/listing/listingFormSlice";
+} from "@/app/redux/features/listing/placeFormSlice";
 import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
 import TextArea from "./TextArea";
 

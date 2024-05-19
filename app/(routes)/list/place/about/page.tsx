@@ -3,13 +3,13 @@
 // Page.tsx
 import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { updatePropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import WarningMessage from "@/app/components/cards/message/WarningMessage";
 import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
-import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import SelectInput from "@/app/components/inputs/SelectInput"; // Import the shared SelectInput component
 
 const Page = () => {
@@ -64,7 +64,7 @@ const Page = () => {
         </h2>
         <div className="flex justify-center ">
           <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
-            <WarningMessage />
+            {/* <WarningMessage /> */}
             <SelectInput
               label="Governance"
               name="governance"

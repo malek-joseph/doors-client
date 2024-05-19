@@ -61,6 +61,7 @@ const ListingUploadCarousel: React.FC<CarouselProps> = ({ images }) => {
 
   return (
     <div className="relative w-full h-40 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
+      
       <Swiper
         style={swiperStyles}
         {...swiperParams}

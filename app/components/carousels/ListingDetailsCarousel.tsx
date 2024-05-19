@@ -46,7 +46,7 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
     breakpoints: {
       // Display 1 slide on smaller screens
       640: {
-        slidesPerView: 1,
+        slidesPerView: 2,
       },
       // Display 3 slides on larger screens
       1024: {
@@ -69,7 +69,7 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
             src={image}
             alt={`Image ${index + 1}`}
            fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
             className="rounded-md"
           />
          

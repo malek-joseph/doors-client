@@ -26,12 +26,12 @@ interface PropertyDetails {
   type: string;
 }
 
-interface ListingFormState {
+interface PlaceFormState {
   accommodationType: string | null;
   propertyDetails: PropertyDetails;
 }
  
-const initialState: ListingFormState = {
+const initialState: PlaceFormState = {
   accommodationType: "",
   propertyDetails: {
     governance: "",
@@ -58,8 +58,8 @@ const initialState: ListingFormState = {
   },  
 };
 
-const listingFormSlice = createSlice({
-  name: "listingForm",
+const placeFormSlice = createSlice({
+  name: "placeForm",
   initialState,
   reducers: {
     updateAccommodationType: (state, action: PayloadAction<string | null>) => {
@@ -75,7 +75,7 @@ const listingFormSlice = createSlice({
     updatePhotos: (state, action: PayloadAction<string[]>) => {
       state.propertyDetails.photos = action.payload;
     },
-    clearListingForm: (state) => {
+    clearPlaceForm: (state) => {
       state.accommodationType = null;
       state.propertyDetails = initialState.propertyDetails;
     },
@@ -87,15 +87,15 @@ export const {
   updatePropertyDetails,
   resetForm,
   updatePhotos,
-  clearListingForm,
-} = listingFormSlice.actions;
+  clearPlaceForm,
+} = placeFormSlice.actions;
 
 // Selectors
 export const selectAccommodationType = (state: {
-  listingForm: ListingFormState;
-}) => state.listingForm.accommodationType;
+  placeForm: PlaceFormState;
+}) => state.placeForm.accommodationType;
 export const selectPropertyDetails = (state: {
-  listingForm: ListingFormState;
-}) => state.listingForm.propertyDetails;
+  placeForm: PlaceFormState;
+}) => state.placeForm.propertyDetails;
 
-export default listingFormSlice.reducer;
+export default placeFormSlice.reducer;

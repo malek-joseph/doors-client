@@ -40,17 +40,16 @@ const Carousel: React.FC<CarouselProps> = ({ photos }) => {
       centeredSlides={true}
       navigation={true}
       pagination={{ clickable: false }}
-      className="w-full h-full listing-carousel">
+      className="w-full h-full listing-carousel ">
       {photos.map((photo, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={index} className="overflow-hidden">
           <Image
             priority={true}
             src={photo}
             alt={`Image ${index + 1}`}
-            fill
-            style={{ objectFit: "cover" }}
-            className="rounded-md"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            layout="fill"
+            className="w-auto h-auto"
+            style={{ objectFit: "contain"}}
           />
         </SwiperSlide>
       ))}

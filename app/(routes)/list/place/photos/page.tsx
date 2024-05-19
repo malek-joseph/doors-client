@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
-import { selectPropertyDetails } from "@/app/redux/features/listing/listingFormSlice";
+import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import PhotoUpload from "./PhotoUpload";
 import { useEffect, useState } from "react";
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
@@ -13,14 +13,10 @@ import imageCompression from "browser-image-compression";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import { selectAccommodationType } from "@/app/redux/features/listing/listingFormSlice";
+import { selectAccommodationType } from "@/app/redux/features/listing/placeFormSlice";
 import publishProperty from '../submit/publishProperty'
 
 
-const persistConfig = {
-  key: "root",
-  storage: localforage,
-};
 
 const Page = () => {
   const router = useRouter();
@@ -30,6 +26,7 @@ const Page = () => {
   const userDetails = useSelector(selectUserDetails);
   const propertyDetails = useSelector(selectPropertyDetails);
   const accommodationType = useSelector(selectAccommodationType);
+  const [loading, setLoading] = useState<boolean>(false)
 
  useEffect(() => {
     localforage
@@ -82,6 +79,7 @@ const fileListToArray = (fileList: FileList | null): File[] => {
 
   // Updated handlePhotoUpload function
   const handlePhotoUpload = async (selectedFiles: FileList | null) => {
+    setLoading(true)
     if (!selectedFiles) return;
 
       const validFiles = validateImageFiles(selectedFiles);
@@ -112,7 +110,7 @@ const fileListToArray = (fileList: FileList | null): File[] => {
     );
 
     setImageURLs(updatedImageURLs);
-
+setLoading(false    )
       // Update local storage with new files
         localforage
           .setItem("propertyImages", fileListToArray(updatedImages))
@@ -127,6 +125,7 @@ const fileListToArray = (fileList: FileList | null): File[] => {
    
 
   };
+ 
 
   // Updated validateImageFiles function
   const validateImageFiles = (files: FileList): File[] => {
@@ -154,22 +153,63 @@ const compressImages = async (files: FileList): Promise<File[]> => {
     useWebWorker: true,
   };
 
-  // Iterate over each file in the FileList
   for (let i = 0; i < files.length; i++) {
     try {
       // Compress each file
       const compressedFile = await imageCompression(files[i], options);
-      // Preserve the original file name
+
+      // Use a canvas to resize and crop the image
       const originalFile = files[i];
-      const compressedBlob = compressedFile as Blob;
-      const compressedFileWithOriginalName = new File(
-        [compressedBlob],
-        originalFile.name,
-        {
-          type: compressedBlob.type,
-        }
-      );
-      compressedFiles.push(compressedFileWithOriginalName);
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(compressedFile);
+
+      await new Promise<void>((resolve) => {
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          // Set canvas dimensions to the desired square size
+          const size = 900;
+          canvas.width = size;
+          canvas.height = size;
+
+          // Calculate the dimensions and position for cropping
+          const aspectRatio = img.width / img.height;
+          let sx, sy, sWidth, sHeight;
+
+          if (aspectRatio > 1) {
+            // Landscape orientation
+            sWidth = img.height;
+            sHeight = img.height;
+            sx = (img.width - sWidth) / 2;
+            sy = 0;
+          } else {
+            // Portrait or square orientation
+            sWidth = img.width;
+            sHeight = img.width;
+            sx = 0;
+            sy = (img.height - sHeight) / 2;
+          }
+
+          // Draw the cropped image on the canvas
+          ctx?.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, size, size);
+
+          // Convert canvas to Blob and then to File
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const compressedFileWithOriginalName = new File(
+                [blob],
+                originalFile.name,
+                {
+                  type: blob.type,
+                }
+              );
+              compressedFiles.push(compressedFileWithOriginalName);
+              resolve();
+            }
+          }, originalFile.type);
+        };
+      });
     } catch (error) {
       console.error("Error compressing image:", error);
     }
@@ -177,6 +217,7 @@ const compressImages = async (files: FileList): Promise<File[]> => {
 
   return compressedFiles;
 };
+
 
   const handleClearPhotosClick = () => {
     //  localStorage.removeItem("propertyImages");
@@ -221,6 +262,12 @@ const compressImages = async (files: FileList): Promise<File[]> => {
             />
             {imageURLs.length > 0 && (
               <ListingUploadCarousel images={imageURLs} />
+            )}
+            {loading && (
+              <div className="mt-10">
+              <Spinner size={30} />
+
+              </div>
             )}
           </div>
         </div>

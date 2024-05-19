@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { selectAccommodationType } from "./redux/features/listing/listingFormSlice";
+import { selectAccommodationType } from "./redux/features/listing/placeFormSlice";
 
 
 
@@ -17,8 +17,8 @@ export default function Home() {
 
 
   return (
-    <main className="flex flex-col items-center justify-center">
-      <div className="w-5/6 ">
+    <main className="flex flex-col items-center justify-center ">
+      <div className="w-5/6 mb-24">
         <ListSection />
         <ListingsSection />
       </div>

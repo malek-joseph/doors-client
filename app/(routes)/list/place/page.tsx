@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import {
   updateAccommodationType,
   resetForm,
-} from "@/app/redux/features/listing/listingFormSlice";
+} from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { selectAccommodationType } from "@/app/redux/features/listing/listingFormSlice"; 
+import { selectAccommodationType } from "@/app/redux/features/listing/placeFormSlice"; 
 import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import AccommodationTypeButton from "./components/AccommodationTypeButton";
 
