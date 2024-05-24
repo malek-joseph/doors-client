@@ -66,9 +66,9 @@ const SignupForm: React.FC = () => {
    setSigningUp(true);
    const success = await signup(formDataToSend, dispatch);
    setSigningUp(false);
+  //  console.log(photo)
 
    if (success) {
-     dispatch(setUser({ email, name,age, photo, gender, number, job }));
      router.push("/"); 
    }
  };

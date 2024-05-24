@@ -18,16 +18,26 @@ const ButtonSm = ({ type, title, icon, variant, onClick, size = 18 }: ButtonProp
   };
 
   return (
-    <button
-      type={type}
-      className={`flexCenter gap-3 rounded  w-10 ${variant}`}
-      onClick={handleClick} // Call handleClick on button click
-    >
-      {icon && (
-          <Image src={icon} alt={title} width={size} height={size} />
-      )}
-      <label className="hover:cursor-pointer text-sm ">{title}</label>
-    </button>
+    <div className="rounded-full overflow-hidden">
+      <button
+        type={type}
+        className={`flexCenter gap-3 rounded w-10 ${variant}`}
+        onClick={handleClick} // Call handleClick on button click
+      >
+        {icon && (
+          <div className="rounded-full overflow-hidden">
+            <Image
+              src={icon}
+              alt={title}
+              width={size}
+              height={size}
+              className="rounded-full"
+            />
+          </div>
+        )}
+        <label className="hover:cursor-pointer text-sm">{title}</label>
+      </button>
+    </div>
   );
 };
 

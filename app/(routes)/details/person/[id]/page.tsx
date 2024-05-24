@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
-  console.log(id)
+  // console.log(id)
   const router = useRouter();
   const [personDetails, setPersonDetails] = useState<any>(null);
   const userDetails = useSelector(selectUserDetails);
@@ -28,15 +28,16 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
 const dispatch = useDispatch()
 
 useEffect(() => {
-  if (userDetails && userDetails.photo) {
-    // Remove the "uploads" word from userDetails.photo
-    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
-    // Set the image source with the modified path
+  if (personDetails && personDetails.userPhoto) {
+    const photoPathWithoutUploads = personDetails.userPhoto.replace(
+      /^uploads\//,
+      ""
+    );
     setImageSrc(
       `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
     );
   }
-}, [userDetails]);
+}, [personDetails]);
 
 useEffect(() => {
   const fetchPersonDetails = async () => {
@@ -45,13 +46,13 @@ useEffect(() => {
       setError(null);
       const response = await axios.get(
         `http://localhost:8000/api/persons/personDetails/${id}`
-      );
-
-      const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Reperson with your actual base URL
-
-      const updatedPersonDetails = {
-        ...response.data,
-        photos: response.data.photos.map((photo: string) => {
+        );
+  
+        const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Reperson with your actual base URL
+  
+        const updatedPersonDetails = {
+          ...response.data,
+          photos: response.data.photos.map((photo: string) => {
           const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
           return `${baseURL}/${photoPathWithoutUploads}`;
         }),
@@ -74,19 +75,18 @@ useEffect(() => {
     return <div>Error: {error}</div>;
   }
 
-  if ( !personDetails || !userDetails) {
-    return <Spinner />;
-  }
+
+
 
   return (
-    <main className="flex flex-col items-center justify-center mb-10">
+    <main className="flex flex-col items-center justify-center mb-10 min-h-screen">
       <div className="w-5/6 ">
-        <div className="my-8">
-          {personDetails?.photos?.length > 0 && (
+          {personDetails && userDetails  && (
+            <>
+                   <div className="my-8">
             <ListingDetailsCarousel
               images={personDetails.photos}
             />
-          )}
         </div>
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
             <div className="w-full lg:w-8/12">
@@ -126,10 +126,22 @@ useEffect(() => {
           </div>
           <div className="w-full lg:w-4/12 ">
             {imageSrc && (
-              <SendMessageCard name={userDetails.name} photo={imageSrc} />
+              <SendMessageCard 
+                    name={personDetails.userName}
+                    photo={imageSrc}
+                    listingId={personDetails._id}
+                    listingType={personDetails.type}
+                  />
+                
             )}
           </div>
+
         </div>
+            </> 
+ 
+          
+          )}
+          
       </div>
     </main>
   );

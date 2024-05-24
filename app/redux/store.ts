@@ -37,7 +37,12 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "auth/setUser",
+        ],
+        ignoredPaths: ["auth.user.photo"],
       },
     }),
   devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools in non-production environments

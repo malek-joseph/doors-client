@@ -48,8 +48,8 @@ useEffect(() => {
         axios.get("http://localhost:8000/api/persons/allPersons"),
       ]);
 
-      console.log("Properties Response:", propertiesResponse.data);
-      console.log("Persons Response:", personsResponse.data);
+      // console.log("Properties Response:", propertiesResponse.data);
+      // console.log("Persons Response:", personsResponse.data);
 
       const properties: ListingType[] = propertiesResponse.data;
       const persons: ListingType[] = personsResponse.data;
@@ -75,7 +75,7 @@ useEffect(() => {
       // Combine properties and persons into one array
       const combinedListings = [...updatedProperties, ...updatedPersons];
 
-      console.log("Combined Listings:", combinedListings);
+      // console.log("Combined Listings:", combinedListings);
 
       setListings(combinedListings);
       setLoading(false);

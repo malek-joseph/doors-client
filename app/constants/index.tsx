@@ -1,6 +1,6 @@
 export const NAV_LINKS = [
   { href: '/', key: 'shortlist', label: 'Shortlist' },
-  { href: '/', key: 'messages', label: 'Messages'},
+  { href: '/messages', key: 'messages', label: 'Messages'},
   { href: '/', key: 'guides', label: 'Guides'},
 ]
 export const FOOTER_LINKS = [

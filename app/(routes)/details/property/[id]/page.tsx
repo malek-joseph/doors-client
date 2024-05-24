@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
-  console.log(id)
+  // console.log(id)
   const router = useRouter();
   const [propertyDetails, setPropertyDetails] = useState<any>(null);
   const userDetails = useSelector(selectUserDetails);
@@ -28,15 +28,17 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
 const dispatch = useDispatch()
 
 useEffect(() => {
-  if (userDetails && userDetails.photo) {
-    // Remove the "uploads" word from userDetails.photo
-    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
-    // Set the image source with the modified path
+  if (propertyDetails && propertyDetails.userPhoto) {
+    const photoPathWithoutUploads = propertyDetails.userPhoto.replace(
+      /^uploads\//,
+      ""
+    );
     setImageSrc(
       `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
     );
   }
-}, [userDetails]);
+}, [propertyDetails]);
+
 
 useEffect(() => {
   const fetchPropertyDetails = async () => {
@@ -74,62 +76,66 @@ useEffect(() => {
     return <div>Error: {error}</div>;
   }
 
-  if ( !propertyDetails || !userDetails) {
-    return <Spinner />;
-  }
+ 
 
+  // console.log(propertyDetails)
   return (
-    <main className="flex flex-col items-center justify-center mb-10">
+    <main className="flex flex-col items-center justify-center mb-10 min-h-screen">
       <div className="w-5/6 ">
-        <div className="my-8">
-          {propertyDetails?.photos?.length > 0 && (
-            <ListingDetailsCarousel
-              images={propertyDetails.photos}
-            />
-          )}
-        </div>
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
-            <div className="w-full lg:w-8/12">
-            <PlaceDetailsSectionOne
-              gender={userDetails.gender}
-              city={propertyDetails.city}
-              governance={propertyDetails.governance}
-              roomType={propertyDetails.roomType}
-              roommatePreference={propertyDetails.roommatePreference}
-              furnishing={propertyDetails.furnishing}
-              bathroomType={propertyDetails.roomBathroom}
-              accommodationType={propertyDetails.accommodationType}
-            />
-            <hr className="my-3" />
+        {propertyDetails && userDetails && (
+          <>
+            <div className="my-8">
+              <ListingDetailsCarousel images={propertyDetails.photos} />
+            </div>
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
+              <div className="w-full lg:w-8/12">
+                <PlaceDetailsSectionOne
+                  gender={userDetails.gender}
+                  city={propertyDetails.city}
+                  governance={propertyDetails.governance}
+                  roomType={propertyDetails.roomType}
+                  roommatePreference={propertyDetails.roommatePreference}
+                  furnishing={propertyDetails.furnishing}
+                  bathroomType={propertyDetails.roomBathroom}
+                  accommodationType={propertyDetails.accommodationType}
+                />
+                <hr className="my-3" />
 
-            <PlaceDetailsSectionTwo
-              monthlyRent={propertyDetails.monthlyRent}
-              deposit={propertyDetails.deposit}
-              billsIncluded={propertyDetails.billsIncluded}
-              monthlyBills={propertyDetails.monthlyBills}
-              internet={propertyDetails.internet}
-              totalRoommates={propertyDetails.totalRoommates}
-            />
-            <hr className="my-3" />
-            <PlaceDetailsSectionThree
-              roommatePreferences={propertyDetails.roommatePreferences}
-            />
-            <hr className="my-3" />
-            <PlaceDetailsSectionFour
-              placeFeatures={propertyDetails.selectedFeatures}
-            />
-            <hr className="my-3" />
-            <PlaceDetailsSectionFive
-              description={propertyDetails.description}
-              propertyDescription={propertyDetails.propertyDescription}
-            />
-          </div>
-          <div className="w-full lg:w-4/12 ">
-            {imageSrc && (
-              <SendMessageCard name={userDetails.name} photo={imageSrc} />
-            )}
-          </div>
-        </div>
+                <PlaceDetailsSectionTwo
+                  monthlyRent={propertyDetails.monthlyRent}
+                  deposit={propertyDetails.deposit}
+                  billsIncluded={propertyDetails.billsIncluded}
+                  monthlyBills={propertyDetails.monthlyBills}
+                  internet={propertyDetails.internet}
+                  totalRoommates={propertyDetails.totalRoommates}
+                />
+                <hr className="my-3" />
+                <PlaceDetailsSectionThree
+                  roommatePreferences={propertyDetails.roommatePreferences}
+                />
+                <hr className="my-3" />
+                <PlaceDetailsSectionFour
+                  placeFeatures={propertyDetails.selectedFeatures}
+                />
+                <hr className="my-3" />
+                <PlaceDetailsSectionFive
+                  description={propertyDetails.description}
+                  propertyDescription={propertyDetails.propertyDescription}
+                />
+              </div>
+              <div className="w-full lg:w-4/12 ">
+                {imageSrc && (
+                  <SendMessageCard
+                    name={propertyDetails.userName}
+                    photo={imageSrc}
+                    listingId={propertyDetails._id}
+                    listingType={propertyDetails.type}
+                  />
+                )}
+              </div> 
+            </div>
+          </>
+        )}
       </div>
     </main>
   );

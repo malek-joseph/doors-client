@@ -53,6 +53,7 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     if (userDetails && userDetails.photo) {
+      // console.log(userDetails)
       const photoPathWithoutUploads = userDetails.photo.replace(
         /^uploads\//,
         ""

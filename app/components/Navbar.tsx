@@ -67,7 +67,7 @@ const Navbar = () => {
       )}
         </div>
 
-        <HamburgerMenu
+      <HamburgerMenu
           onClick={toggleMenuOverlay}
           isOverlayVisible={isMenuOverlayVisible}
         />

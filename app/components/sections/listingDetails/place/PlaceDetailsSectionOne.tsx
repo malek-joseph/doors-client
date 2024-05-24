@@ -25,7 +25,7 @@ const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
   accommodationType
 }) => {
 
-console.log(bathroomType)
+// console.log(bathroomType)
   return (
     <div className="">
       <div className=" mb-2">
