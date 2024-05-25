@@ -28,31 +28,30 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
   const [creatingNewConversation, setCreatingNewConversation] = useState(false);
   const initialized = useRef(false);
 
-  useEffect(() => {
-    const fetchAndSetConversations = async () => {
-      try {
-        const response = await fetchConversations(currentUserId);
-        const updatedConversations = response.data.map((conv: any) => {
-          if (conv.receiverPhoto) {
-            const photoPathWithoutUploads = conv.receiverPhoto.replace(
-              /^uploads\//,
-              ""
-            );
-            conv.receiverPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-          }
-          return conv;
-        });
-        setConversations(updatedConversations);
-        initialized.current = true;
-      } catch (error) {
-        console.error("Error fetching conversations:", error);
-      }
-    };
+ useEffect(() => {
+   const fetchAndSetConversations = async () => {
+     try {
+       const response = await fetchConversations(currentUserId);
+       const updatedConversations = response.data.map((conv: any) => {
+         if (conv.currentUserPhoto) {
+           conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
+         }
+         if (conv.listingOwnerPhoto) {
+           conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
+         }
+         return conv;
+       });
+       setConversations(updatedConversations);
+       initialized.current = true;
+     } catch (error) {
+       console.error("Error fetching conversations:", error);
+     }
+   };
 
-    if (!initialized.current) {
-      fetchAndSetConversations();
-    }
-  }, [currentUserId]);
+   if (!initialized.current) {
+     fetchAndSetConversations();
+   }
+ }, [currentUserId]);
 
   useEffect(() => {
     if (initialized.current && !creatingNewConversation) {
@@ -83,12 +82,8 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
      
       );
 
-      if (newConversation.receiverPhoto) {
-        const photoPathWithoutUploads = newConversation.receiverPhoto.replace(
-          /^uploads\//,
-          ""
-        );
-        newConversation.receiverPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+      if (newConversation.listingOwnerPhoto) {
+        newConversation.listingOwnerPhoto = formatPhotoURL(newConversation.listingOwnerPhoto);
       }
 
       setConversations((prevConversations) => [
@@ -102,6 +97,11 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
       setCreatingNewConversation(false);
     }
   };
+
+   const formatPhotoURL = (photoPath: string) => {
+     const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
+     return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+   };
 
   console.log("Conversations:", conversations);
 
@@ -120,32 +120,57 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
             }`}
             onClick={() =>
               router.push(
-                `/messages/${conversation.listingOwner._id}/${conversation.listingId}/${conversation.listingType}`
+                `/messages/${conversation.listingId}/${conversation.listingType}`
               )
             }>
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
-                {conversation.receiverPhoto ? (
+                {conversation.listingOwnerId == userDetails.id ? (
                   <img
-                    src={conversation.receiverPhoto}
-                    alt={conversation.receiverName}
+                    src={conversation.currentUserPhoto}
+                    alt={conversation.currentUserName}
                     className="w-full h-full rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full rounded-full bg-gray-300"></div>
+                  <img
+                    src={conversation.listingOwnerPhoto}
+                    alt={conversation.listingOwnerName}
+                    className="w-full h-full rounded-full object-cover"
+                  />
                 )}
               </div>
               <div>
-                <div>{conversation.receiverName}</div>
-                {conversation.listingType === "place" ? (
-                  <div className="text-xs text-gray-500">
-                    Offering a place in a {conversation.accommodationType}
-                  </div>
+                {conversation.listingOwnerId == userDetails.id ? (
+                  <div>{conversation.currentUserName}</div>
                 ) : (
-                  <div className="text-xs text-gray-500">
-                    Looking for a place in a {conversation.accommodationType}
-                  </div>
+                  <div>{conversation.listingOwnerName}</div>
                 )}
+                {conversation.listingOwnerId !== userDetails.id &&
+                  conversation.listingType === "place" && (
+                    <div className="text-xs text-gray-500">
+                      Offering a place in a {conversation.accommodationType}
+                    </div>
+                  )}
+                {conversation.listingOwnerId == userDetails.id &&
+                  conversation.listingType === "place" && (
+                    <div className="text-xs text-gray-500">
+                      Interested in your listing{" "}
+                      {conversation.accommodationType}
+                    </div>
+                  )}
+                {conversation.listingOwnerId !== userDetails.id &&
+                  conversation.listingType === "person" && (
+                    <div className="text-xs text-gray-500">
+                      Looking for a place in a {conversation.accommodationType}
+                    </div>
+                  )}
+                {conversation.listingOwnerId !== userDetails.id &&
+                  conversation.listingType === "person" && (
+                    <div className="text-xs text-gray-500">
+                      Interested in your listing{" "}
+                      {conversation.accommodationType}
+                    </div>
+                  )}
               </div>
             </div>
           </div>
@@ -156,7 +181,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
           <div className="w-full h-full max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-md">
             <Chat
               currentUserId={currentUserId}
-              listingOwnerId={selectedConversation.listingOwner._id}
+              listingOwnerId={selectedConversation.listingOwnerId}
               listingId={selectedConversation.listingId}
               listingType={selectedConversation.listingType}
             />

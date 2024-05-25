@@ -9,7 +9,11 @@ interface Message {
     name: string;
     photo: string;
   };
-  receiver: string;
+  receiver: {
+    _id: string;
+    name: string;
+    photo: string;
+  };
   content: string;
   timestamp: string;
 }

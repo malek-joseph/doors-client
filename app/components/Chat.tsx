@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { fetchMessages } from "../services/messageApi";
 import MessageList from "./MessageList";
+import Button from "@/app/components/shared/buttons/Button";
 
 interface ChatProps {
   currentUserId: string;
@@ -18,7 +19,11 @@ interface Message {
     name: string;
     photo: string;
   };
-  receiver: string;
+  receiver: {
+    _id: string;
+    name: string;
+    photo: string;
+  };
   content: string;
   timestamp: string;
 }
@@ -35,6 +40,7 @@ const Chat: React.FC<ChatProps> = ({
 }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
+  
 console.log(listingOwnerId)
   const conversationId = listingId
     ? `${listingId}-${listingOwnerId}-${listingType}`
@@ -62,8 +68,8 @@ console.log(listingOwnerId)
   const sendMessage = (msg: string) => {
     if (msg.trim()) {
       const newMessage = {
-        sender: currentUserId,
-        receiver: listingOwnerId,
+        currentUserId: currentUserId,
+        listingOwnerId: listingOwnerId,
         content: msg,
         listingId: listingId,
         listingType: listingType,
@@ -105,12 +111,12 @@ console.log(listingOwnerId)
           />
         </div>
         <div className="w-1/3 mx-5">
-          <button
+          <Button
             type="button"
-            className="bg-teal-500 text-white px-4 py-2 rounded"
-            onClick={handleSend}>
-            Send
-          </button>
+            title="Send"
+            variant="bg-teal-500 text-white"
+            onClick={handleSend}
+          />
         </div>
       </div>
     </div>
