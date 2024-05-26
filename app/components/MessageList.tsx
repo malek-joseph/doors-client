@@ -68,12 +68,11 @@ useEffect(() => {
     }
   };
 
-  console.log(messages)
 
   const renderMessageHeader = (message: Message) => {
     const sender = message.sender;
     const imageSrc = imageSrcMap[sender._id] || null;
-    console.log(imageSrc)
+    // console.log(imageSrc)
 
     return (
       <div className="flex items-center mb-1">

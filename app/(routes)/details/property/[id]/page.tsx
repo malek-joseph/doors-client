@@ -130,9 +130,10 @@ useEffect(() => {
                     photo={imageSrc}
                     listingId={propertyDetails._id}
                     listingType={propertyDetails.type}
+                    ownerId={propertyDetails.userId}
                   />
                 )}
-              </div> 
+              </div>
             </div>
           </>
         )}

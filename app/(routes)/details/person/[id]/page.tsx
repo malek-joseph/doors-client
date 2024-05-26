@@ -76,7 +76,7 @@ useEffect(() => {
   }
 
 
-
+// console.log(personDetails)
 
   return (
     <main className="flex flex-col items-center justify-center mb-10 min-h-screen">
@@ -131,6 +131,7 @@ useEffect(() => {
                     photo={imageSrc}
                     listingId={personDetails._id}
                     listingType={personDetails.type}
+                    ownerId={personDetails.userId}
                   />
                 
             )}

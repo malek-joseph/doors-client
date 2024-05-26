@@ -47,9 +47,12 @@ const Carousel: React.FC<CarouselProps> = ({ photos }) => {
             priority={true}
             src={photo}
             alt={`Image ${index + 1}`}
-            layout="fill"
+            fill
+            sizes="(max-width: 768pwx) 100vw, 
+                   (max-width: 1200px) 50vw, 
+                   33vw"
             className="w-auto h-auto"
-            style={{ objectFit: "contain"}}
+            style={{ objectFit: "contain" }}
           />
         </SwiperSlide>
       ))}

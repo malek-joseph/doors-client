@@ -16,7 +16,7 @@ const signup = async (formDataToSend: FormData, dispatch: AppDispatch) => {
       "http://localhost:8000/api/users/signup",
       formDataToSend
     );
-    console.log(response.data);
+    // console.log(response.data);
 
     if (response.status === 201) {
       toast.success("Registered successfully");
@@ -48,7 +48,7 @@ const signup = async (formDataToSend: FormData, dispatch: AppDispatch) => {
 const signin = async (user: User, dispatch: AppDispatch) => {
   try {
     // Log the user payload
-    console.log("Signing in with:", user);
+    // console.log("Signing in with:", user);
 
     const response = await axios.post(
       "http://localhost:8000/api/users/signin",

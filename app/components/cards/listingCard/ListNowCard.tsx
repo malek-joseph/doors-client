@@ -38,6 +38,7 @@ const CardOne: React.FC<CardProps> = ({
         className=" h-32 object-cover rounded-md"
         width={200}
         height={300}
+        priority
       />
     </div>
   );

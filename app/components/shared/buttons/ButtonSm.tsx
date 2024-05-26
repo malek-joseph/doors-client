@@ -32,6 +32,7 @@ const ButtonSm = ({ type, title, icon, variant, onClick, size = 18 }: ButtonProp
               width={size}
               height={size}
               className="rounded-full"
+              style={{ objectFit: "contain", width: "auto", height: "auto" }}
             />
           </div>
         )}

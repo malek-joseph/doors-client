@@ -21,7 +21,8 @@ const Footer = () => {
           alt="logo"
           width={40}
           height={40}
-         className="w-8 h-auto"
+          className="w-8 h-auto"
+          priority
         />
       </Link>
       <ul className=" h-full gap-2 lg:gap-5 flex flex-col lg:flex-row items-center justify-center ">

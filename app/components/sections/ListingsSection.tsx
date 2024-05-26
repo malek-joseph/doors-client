@@ -90,7 +90,7 @@ useEffect(() => {
 
 
 
-console.log(listings)
+// console.log(listings)
 
 
 

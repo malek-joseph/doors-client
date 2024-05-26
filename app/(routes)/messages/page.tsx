@@ -111,9 +111,9 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
     }
   };
 
-  console.log("Conversations:", conversations);
+  // console.log("Conversations:", conversations);
 
-  console.log("Selected Conversation:", selectedConversation);
+  // console.log("Selected Conversation:", selectedConversation);
 
   return (
     <div className="w-screen net_height flex p-4">

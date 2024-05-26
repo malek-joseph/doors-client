@@ -56,26 +56,28 @@ const ListingDetailsCarousel: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-        <div className="relative w-full h-80 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
-
-    <Swiper
-      style={swiperStyles}
+    <div className="relative w-full h-80 mb-4 overflow-hidden my-4 shadow-lg rounded-lg ">
+      <Swiper
+        style={swiperStyles}
         {...swiperParams}
-      className="w-full h-full listing-carousel rounded-lg" // Adjust width and height to fit the container
-    >
-      {images.map((image, index) => (
-        <SwiperSlide key={index}>
-          <Image  
-            src={image}
-            alt={`Image ${index + 1}`}
-           fill
-            style={{ objectFit: "contain" }}
-            className="rounded-md"
-          />
-         
-        </SwiperSlide>
-      ))}
-    </Swiper>
+        className="w-full h-full listing-carousel rounded-lg" // Adjust width and height to fit the container
+      >
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <Image
+              src={image}
+              alt={`Image ${index + 1}`}
+              fill
+              sizes="(max-width: 768pwx) 100vw, 
+                   (max-width: 1200px) 50vw, 
+                   33vw"
+              priority
+              style={{ objectFit: "contain" }}
+              className="rounded-md"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

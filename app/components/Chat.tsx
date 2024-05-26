@@ -1,10 +1,10 @@
-/** @format */
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import io from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchMessages } from "../services/messageApi";
 import MessageList from "./MessageList";
 import Button from "@/app/components/shared/buttons/Button";
+import { selectInitialMessage, clearInitialMessage } from "@/app/redux/features/listing/initialMessageSlice";
 
 interface ChatProps {
   currentUserId: string;
@@ -40,8 +40,11 @@ const Chat: React.FC<ChatProps> = ({
 }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
+  const initialMessage = useSelector(selectInitialMessage);
+  const dispatch = useDispatch();
+    const initialMessageSent = useRef(false);
+
   
-console.log(listingOwnerId)
   const conversationId = listingId
     ? `${listingId}-${listingOwnerId}-${listingType}`
     : `${currentUserId}-${listingOwnerId}`;
@@ -55,8 +58,12 @@ console.log(listingOwnerId)
 
     socket.emit("joinRoom", { conversationId });
 
-    socket.on("receiveMessage", (newMessage: Message) => {
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    socket.on("receiveMessage", () => {
+        fetchMessages(currentUserId, listingOwnerId, listingId)
+          .then((response) => {
+            setMessages(response.data);
+          })
+          .catch((error) => console.error(error));
     });
 
     return () => {
@@ -64,6 +71,14 @@ console.log(listingOwnerId)
       socket.emit("leaveRoom", { conversationId });
     };
   }, [currentUserId, listingOwnerId, listingId, conversationId]);
+
+  useEffect(() => {
+    if (initialMessage && !initialMessageSent.current) {
+      sendMessage(initialMessage);
+      dispatch(clearInitialMessage());
+      initialMessageSent.current = true;
+    }
+  }, [initialMessage, dispatch]);
 
   const sendMessage = (msg: string) => {
     if (msg.trim()) {
@@ -96,6 +111,8 @@ console.log(listingOwnerId)
       handleSend();
     }
   };
+
+  // console.log(messages)
 
   return (
     <div className="h-full flex flex-col justify-between p-3">

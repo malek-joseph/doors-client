@@ -112,7 +112,9 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
     router.push("/");
   };
 
-  // console.log(imageURLs);
+  if(!imageSrc) return null
+
+  // console.log(imageSrc);
   return (
     <main className="flex flex-col items-center justify-center mb-32">
       <div className="w-5/6 ">
@@ -158,7 +160,8 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
           </div>
           <div className="w-full lg:w-4/12 ">
             {imageSrc && (
-              <SendMessageCard name={userDetails.name} photo={imageSrc} />
+              <SendMessageCard name={userDetails.name} photo={imageSrc}  listingType ={personDetails.type}
+                ownerId={userDetails.id}/>
             )}
           </div>
           <PublishEditBtns

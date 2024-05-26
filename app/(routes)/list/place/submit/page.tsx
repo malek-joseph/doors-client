@@ -159,7 +159,12 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
           </div>
           <div className="w-full lg:w-4/12 ">
             {imageSrc && (
-              <SendMessageCard name={userDetails.name} photo={imageSrc} />
+              <SendMessageCard
+                name={userDetails.name}
+                photo={imageSrc}
+                listingType ={propertyDetails.type}
+                ownerId={userDetails.id}
+              />
             )}
           </div>
           <PublishEditBtns

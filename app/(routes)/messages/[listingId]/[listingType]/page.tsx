@@ -103,13 +103,13 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
      return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
    };
 
-  console.log("Conversations:", conversations);
+  // console.log("Conversations:", conversations);
 
-  console.log("Selected Conversation:", selectedConversation);
+  // console.log("Selected Conversation:", selectedConversation);
 
   return (
-    <div className="w-screen net_height flex p-4">
-      <div className="w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3">
+    <div className="flex flex-col md:flex-row p-4 net_height">
+      <div className="w-full md:w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3 md:my-0">
         {conversations.map((conversation) => (
           <div
             key={conversation._id}
@@ -125,7 +125,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
             }>
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
-                {conversation.listingOwnerId == userDetails.id ? (
+                {conversation.listingOwnerId === userDetails.id ? (
                   <img
                     src={conversation.currentUserPhoto}
                     alt={conversation.currentUserName}
@@ -140,7 +140,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
                 )}
               </div>
               <div>
-                {conversation.listingOwnerId == userDetails.id ? (
+                {conversation.listingOwnerId === userDetails.id ? (
                   <div>{conversation.currentUserName}</div>
                 ) : (
                   <div>{conversation.listingOwnerName}</div>
@@ -151,7 +151,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
                       Offering a place in a {conversation.accommodationType}
                     </div>
                   )}
-                {conversation.listingOwnerId == userDetails.id &&
+                {conversation.listingOwnerId === userDetails.id &&
                   conversation.listingType === "place" && (
                     <div className="text-xs text-gray-500">
                       Interested in your listing{" "}
@@ -164,7 +164,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
                       Looking for a place in a {conversation.accommodationType}
                     </div>
                   )}
-                {conversation.listingOwnerId !== userDetails.id &&
+                {conversation.listingOwnerId === userDetails.id &&
                   conversation.listingType === "person" && (
                     <div className="text-xs text-gray-500">
                       Interested in your listing{" "}
@@ -176,7 +176,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
           </div>
         ))}
       </div>
-      <div className="w-2/3 h-full flex items-center justify-center p-4">
+      <div className="w-full md:w-2/3 h-full flex items-center justify-center p-4">
         {selectedConversation && (
           <div className="w-full h-full max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-md">
             <Chat
