@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="lg:ml-10">
           <Logo />
         </div>
-        <SearchBar />
+        {/* <SearchBar /> */}
 
         <div className="lg:ml-20">
           <NavLinks />

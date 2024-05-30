@@ -1,12 +1,13 @@
 /** @format */
 
-import { LISTINGS } from "@/app/constants";
-import { useState, useEffect } from 'react';
-import ListingCard from "../cards/listingCard/ListingCardPerson";
+// ListSection.tsx
+
+import { useState, useEffect } from "react";
+import axios from "axios";
 import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
 import ListingCardPerson from "../cards/listingCard/ListingCardPerson";
-import axios from "axios";
-
+import SearchAndFiltersBar from "./SearchAndFiltersBar";
+import Loading from "@/app/(routes)/shortlists/loading";
 
 type ListingType = {
   governance: string;
@@ -36,10 +37,23 @@ type ListingType = {
 };
 
 const ListSection = () => {
-const [listings, setListings] = useState<ListingType[]>([]);
-const [loading, setLoading] = useState<boolean>(false);
+  const [listings, setListings] = useState<ListingType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [filteredListings, setFilteredListings] = useState<ListingType[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filters, setFilters] = useState<any>({
+    listingType: null,
+    roommatePreference: null,
+    rentRange: [500, 10000], // Min and Max rent range
+    internet: null,
+    city: null,
+    governance: null,
+  });
 
-useEffect(() => {
+  useEffect(() => {
+    fetchListings();
+  }, []);
+
   const fetchListings = async () => {
     setLoading(true);
     try {
@@ -47,9 +61,6 @@ useEffect(() => {
         axios.get("http://localhost:8000/api/properties/allProperties"),
         axios.get("http://localhost:8000/api/persons/allPersons"),
       ]);
-
-      // console.log("Properties Response:", propertiesResponse.data);
-      // console.log("Persons Response:", personsResponse.data);
 
       const properties: ListingType[] = propertiesResponse.data;
       const persons: ListingType[] = personsResponse.data;
@@ -72,12 +83,10 @@ useEffect(() => {
         }),
       }));
 
-      // Combine properties and persons into one array
       const combinedListings = [...updatedProperties, ...updatedPersons];
 
-      // console.log("Combined Listings:", combinedListings);
-
       setListings(combinedListings);
+      setFilteredListings(combinedListings); // Initialize filtered listings with all listings
       setLoading(false);
     } catch (error) {
       console.error("Error fetching property details:", error);
@@ -85,50 +94,115 @@ useEffect(() => {
     }
   };
 
-  fetchListings();
-}, []);
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    applyFilters(searchTerm, filters);
+  };
 
+  const handleFilters = (newFilters: any) => {
+    setFilters(newFilters);
+    applyFilters(searchTerm, newFilters);
+  };
 
+  const applyFilters = (searchTerm: string, filters: any) => {
+    let filteredList = [...listings];
 
-// console.log(listings)
+    // Apply search term filter
+    filteredList = filteredList.filter(
+      (listing) =>
+        listing.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        listing.governance.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        listing.accommodationType
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        listing.roommatePreference
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+    );
 
+    // Apply additional filters
+    if (filters.listingType) {
+      filteredList = filteredList.filter(
+        (listing) => listing.type === filters.listingType
+      );
+    }
+    if (filters.roommatePreference) {
+      filteredList = filteredList.filter(
+        (listing) => listing.roommatePreference == filters.roommatePreference
+      );
+    }
+    if (filters.rentRange) {
+      console.log(filters.rentRange)
+      filteredList = filteredList.filter(
+        (listing) =>
+          listing.monthlyRent >= filters.rentRange[0] &&
+          listing.monthlyRent <= filters.rentRange[1]
+      );
+    }
+    if (filters.internet !== null) {
+      filteredList = filteredList.filter(
+        (listing) =>
+          listing.internet === (filters.internet === true ? "yes" : "no")
+      );
+    }
+    if (filters.city) {
+      filteredList = filteredList.filter((listing) =>
+        listing.city.toLowerCase().includes(filters.city.toLowerCase())
+      );
+    }
+    if (filters.governance) {
+      filteredList = filteredList.filter((listing) =>
+        listing.governance
+          .toLowerCase()
+          .includes(filters.governance.toLowerCase())
+      );
+    }
 
+    setFilteredListings(filteredList);
+  };
 
-
-
+  console.log(filteredListings);
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 min-h-screen">
-       {listings.map((listing, i) =>
-        listing.type === "place" ? (
-          <ListingCardPlace
-            key={i}
-            photos={listing.photos}
-            monthlyRent={listing.monthlyRent}
-            propertyDescription={listing.propertyDescription}
-            billsIncluded={listing.billsIncluded}
-            governance={listing.governance}
-            city={listing.city}
-            id={listing._id}
-            loading={loading}
-            accommodationType={listing.accommodationType}
-          />
-        ) : (
-        <ListingCardPerson
-            key={i}
-            photos={listing.photos}
-            monthlyRent={listing.monthlyRent}
-            personDescription={listing.personDescription}
-            billsIncluded={listing.billsIncluded}
-            governance={listing.governance}
-            city={listing.city}
-            id={listing._id}
-               loading={loading}
-               accommodationType={listing.accommodationType}
-          />
-        )
+    <div className="container mx-auto mt-8">
+      <SearchAndFiltersBar onSearch={handleSearch} onFilter={handleFilters} />
+
+      {loading ? (
+        <Loading/>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 mt-12 min-h-screen">
+          {filteredListings.map((listing, i) =>
+            listing.type === "place" ? (
+              <ListingCardPlace
+                key={i}
+                photos={listing.photos}
+                monthlyRent={listing.monthlyRent}
+                propertyDescription={listing.propertyDescription}
+                billsIncluded={listing.billsIncluded}
+                governance={listing.governance}
+                city={listing.city}
+                id={listing._id}
+                loading={loading}
+                accommodationType={listing.accommodationType}
+              />
+            ) : (
+              <ListingCardPerson
+                key={i}
+                photos={listing.photos}
+                monthlyRent={listing.monthlyRent}
+                personDescription={listing.personDescription}
+                billsIncluded={listing.billsIncluded}
+                governance={listing.governance}
+                city={listing.city}
+                id={listing._id}
+                loading={loading}
+                accommodationType={listing.accommodationType}
+              />
+            )
+          )}
+        </section>
       )}
-    </section>
+    </div>
   );
 };
 
