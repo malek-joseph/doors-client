@@ -1,0 +1,12 @@
+import Spinner from '@/app/components/shared/spinner/Spinner'
+import React from 'react'
+
+const Loading = (): JSX.Element => {
+  return (
+    <div className="flex justify-center items-center net_height w-full">
+      <Spinner size={40} />
+    </div>
+  );
+};
+
+export default Loading

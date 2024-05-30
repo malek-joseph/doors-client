@@ -63,10 +63,11 @@ const ListingCardPerson: React.FC<ListingCardProps> = ({
       toast.error("Failed to add to shortlist. Please try again later.");
     }
   }
-};
+  };
+  
 
   return (
-    <div className="flex flex-col items-center transition-all m-2 ">
+    <div className="transition-all ">
       <ListingImages photos={photos} />
 
       <Link className="w-full cursor-pointer " href={`/details/person/${id}`}>

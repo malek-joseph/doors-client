@@ -10,7 +10,7 @@ interface ListingImagesProps {
 
 const ListingImages: React.FC<ListingImagesProps> = ({ photos }) => {
   return (
-    <div className="relative w-full h-80 mb-4  ">
+    <div className="relative mb-4  ">
       <ListingCarousel photos={photos} />
     </div>
   );

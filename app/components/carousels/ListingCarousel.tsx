@@ -25,21 +25,21 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ photos }) => {
   // console.log(images);
-  const swiperStyles = {
-    "--swiper-pagination-color": "teal",
-    "--swiper-pagination-bullet-inactive-color": "#999999",
-    "--swiper-pagination-bullet-inactive-opacity": "1",
-    "--swiper-pagination-bullet-size": "5px",
-    "--swiper-pagination-bullet-horizontal-gap": "6px",
-  } as React.CSSProperties; // Define as CSSProperties
+  // const swiperStyles = {
+  //   "--swiper-pagination-color": "teal",
+  //   "--swiper-pagination-bullet-inactive-color": "#999999",
+  //   "--swiper-pagination-bullet-inactive-opacity": "1",
+  //   "--swiper-pagination-bullet-size": "5px",
+  //   "--swiper-pagination-bullet-horizontal-gap": "6px",
+  // } as React.CSSProperties; // Define as CSSProperties
 
   return (
     <Swiper
-      style={swiperStyles}
+      // style={swiperStyles}
       spaceBetween={30}
       centeredSlides={true}
       navigation={true}
-      pagination={{ clickable: false }}
+      // pagination={{ clickable: false }}
       className="w-full h-full listing-carousel ">
       {photos.map((photo, index) => (
         <SwiperSlide key={index} className="overflow-hidden">
@@ -47,12 +47,9 @@ const Carousel: React.FC<CarouselProps> = ({ photos }) => {
             priority={true}
             src={photo}
             alt={`Image ${index + 1}`}
-            fill
-            sizes="(max-width: 768pwx) 100vw, 
-                   (max-width: 1200px) 50vw, 
-                   33vw"
-            className="w-auto h-auto"
-            style={{ objectFit: "contain" }}
+            width={400}
+            height={250}
+            className="object-cover rounded-lg"
           />
         </SwiperSlide>
       ))}

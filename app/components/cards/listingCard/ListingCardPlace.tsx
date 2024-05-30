@@ -69,7 +69,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center transition-all  m-2 ">
+    <div className=" transition-all  ">
       <ListingImages photos={photos} />
 
       <Link className="w-full cursor-pointer" href={`/details/property/${id}`}>
