@@ -1,12 +1,16 @@
 /** @format */
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Chat from "@/app/components/Chat";
-import { fetchConversations, startConversation } from "@/app/services/messageApi";
+import {
+  fetchConversations,
+  startConversation,
+} from "@/app/services/messageApi";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
+import Image from "next/image";
 
 interface MessagesProps {
   params: {
@@ -16,48 +20,79 @@ interface MessagesProps {
 }
 
 const Messages: React.FC<MessagesProps> = ({ params }) => {
-  const {  listingId, listingType } = params;
+  const { listingId, listingType } = params;
   const userDetails = useSelector(selectUserDetails);
   const router = useRouter();
 
-  if (!userDetails) return null;
-
-  const currentUserId = userDetails.id;
   const [conversations, setConversations] = useState<any[]>([]);
-  const [selectedConversation, setSelectedConversation] = useState<any | null>(null);
+  const [selectedConversation, setSelectedConversation] = useState<any | null>(
+    null
+  );
   const [creatingNewConversation, setCreatingNewConversation] = useState(false);
   const initialized = useRef(false);
 
- useEffect(() => {
-   const fetchAndSetConversations = async () => {
-     try {
-       const response = await fetchConversations(currentUserId);
-       const updatedConversations = response.data.map((conv: any) => {
-         if (conv.currentUserPhoto) {
-           conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
-         }
-         if (conv.listingOwnerPhoto) {
-           conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
-         }
-         return conv;
-       });
-       setConversations(updatedConversations);
-       initialized.current = true;
-     } catch (error) {
-       console.error("Error fetching conversations:", error);
-     }
-   };
+  const currentUserId = userDetails?.id;
 
-   if (!initialized.current) {
-     fetchAndSetConversations();
-   }
- }, [currentUserId]);
+const startNewConversation = useCallback(async () => {
+  if (creatingNewConversation) return; // Prevent multiple requests
+  if (!currentUserId) return;
+
+  setCreatingNewConversation(true);
+  try {
+    const newConversation = await startConversation(
+      currentUserId,
+      listingId,
+      listingType
+    );
+
+    if (newConversation.listingOwnerPhoto) {
+      newConversation.listingOwnerPhoto = formatPhotoURL(
+        newConversation.listingOwnerPhoto
+      );
+    }
+
+    setConversations((prevConversations) => [
+      ...prevConversations,
+      newConversation,
+    ]);
+    setSelectedConversation(newConversation);
+  } catch (error) {
+    console.error("Error starting conversation:", error);
+  } finally {
+    setCreatingNewConversation(false);
+  }
+}, [currentUserId, listingId, listingType, creatingNewConversation]);
+
+  useEffect(() => {
+    if (!currentUserId) return;
+    const fetchAndSetConversations = async () => {
+      try {
+        const response = await fetchConversations(currentUserId);
+        const updatedConversations = response.data.map((conv: any) => {
+          if (conv.currentUserPhoto) {
+            conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
+          }
+          if (conv.listingOwnerPhoto) {
+            conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
+          }
+          return conv;
+        });
+        setConversations(updatedConversations);
+        initialized.current = true;
+      } catch (error) {
+        console.error("Error fetching conversations:", error);
+      }
+    };
+
+    if (!initialized.current) {
+      fetchAndSetConversations();
+    }
+  }, [currentUserId]);
 
   useEffect(() => {
     if (initialized.current && !creatingNewConversation) {
       const selectedConv = conversations.find(
-        (conv) =>
-          conv.listingId === listingId 
+        (conv) => conv.listingId === listingId
       );
 
       if (selectedConv) {
@@ -68,40 +103,21 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
         setSelectedConversation(conversations[0] || null);
       }
     }
-  }, [conversations, listingId, listingType, creatingNewConversation]);
+  }, [
+    conversations,
+    listingId,
+    listingType,
+    creatingNewConversation,
+    startNewConversation,
+  ]);
 
-  const startNewConversation = async () => {
-    if (creatingNewConversation) return; // Prevent multiple requests
-
-    setCreatingNewConversation(true);
-    try {
-      const newConversation = await startConversation(
-        currentUserId,
-        listingId,
-        listingType,
-     
-      );
-
-      if (newConversation.listingOwnerPhoto) {
-        newConversation.listingOwnerPhoto = formatPhotoURL(newConversation.listingOwnerPhoto);
-      }
-
-      setConversations((prevConversations) => [
-        ...prevConversations,
-        newConversation,
-      ]);
-      setSelectedConversation(newConversation);
-    } catch (error) {
-      console.error("Error starting conversation:", error);
-    } finally {
-      setCreatingNewConversation(false);
-    }
+  const formatPhotoURL = (photoPath: string) => {
+    const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
   };
 
-   const formatPhotoURL = (photoPath: string) => {
-     const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
-     return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-   };
+  if (!userDetails) return;
+  if (!currentUserId) return;
 
   // console.log("Conversations:", conversations);
 
@@ -126,16 +142,20 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
                 {conversation.listingOwnerId === userDetails.id ? (
-                  <img
+                  <Image
                     src={conversation.currentUserPhoto}
                     alt={conversation.currentUserName}
                     className="w-full h-full rounded-full object-cover"
+                  width={40}
+                  height={40}
                   />
                 ) : (
-                  <img
+                  <Image
                     src={conversation.listingOwnerPhoto}
                     alt={conversation.listingOwnerName}
                     className="w-full h-full rounded-full object-cover"
+                     width={40}
+                     height={40}
                   />
                 )}
               </div>

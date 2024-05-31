@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
+import Image from 'next/image'
 
 interface Message {
   sender: {
@@ -78,10 +79,12 @@ useEffect(() => {
       <div className="flex items-center mb-1">
         <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
           { imageSrc ? (
-            <img
+            <Image
               src={`${imageSrc}`}
               alt={sender.name}
               className="w-full h-full rounded-full object-cover"
+              width={40}
+              height={40}
             />
           ) : (
             <div className="w-full h-full bg-gray-300"></div>

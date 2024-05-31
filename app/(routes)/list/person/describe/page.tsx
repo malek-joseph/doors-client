@@ -40,7 +40,7 @@ const Page = () => {
     <div className="flex flex-col items-center justify-center ">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
-          What's your story
+          What&apos;s your story
         </h2>
         <div className="flex justify-center  ">
           <div className="w-11/12 md:w-10/12 lg:w-8/12 flex items-center flex-col">

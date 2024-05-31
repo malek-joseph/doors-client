@@ -61,7 +61,7 @@ if(ownerId !== userDetails.id) {
           </div>
         )}
         <p className="text-sm ml-3">
-          Hi! I'm {name} you can send me a message here.
+          Hi! I&apos;m {name} you can send me a message here.
         </p>
       </div>
       <div className="my-4 w-full">

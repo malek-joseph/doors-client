@@ -44,9 +44,10 @@ const ListingCardPerson: React.FC<ListingCardProps> = ({
   const userDetails = useSelector(selectUserDetails);
   // console.log(userDetails)
 
-  if (!userDetails) return null;
 
   const handleAddToShortlist = async () => {
+  if (!userDetails) return null;
+
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/shortlists`, {
         userId: userDetails.id, // Replace with actual user ID
@@ -64,7 +65,7 @@ const ListingCardPerson: React.FC<ListingCardProps> = ({
     }
   }
   };
-  
+
 
   return (
     <div className="transition-all ">

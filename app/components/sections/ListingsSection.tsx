@@ -132,7 +132,6 @@ const ListSection = () => {
       );
     }
     if (filters.rentRange) {
-      console.log(filters.rentRange)
       filteredList = filteredList.filter(
         (listing) =>
           listing.monthlyRent >= filters.rentRange[0] &&

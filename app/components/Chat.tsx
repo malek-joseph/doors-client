@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect,useRef, useCallback } from "react";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMessages } from "../services/messageApi";
@@ -49,6 +49,22 @@ const Chat: React.FC<ChatProps> = ({
     ? `${listingId}-${listingOwnerId}-${listingType}`
     : `${currentUserId}-${listingOwnerId}`;
 
+  
+    const sendMessage = useCallback((msg: string) => {
+      if (msg.trim()) {
+        const newMessage = {
+          currentUserId: currentUserId,
+          listingOwnerId: listingOwnerId,
+          content: msg,
+          listingId: listingId,
+          listingType: listingType,
+          conversationId: conversationId,
+        };
+
+        socket.emit("sendMessage", newMessage);
+      }
+    }, [currentUserId, listingOwnerId, listingId, listingType, conversationId]);
+
   useEffect(() => {
     fetchMessages(currentUserId, listingOwnerId, listingId)
       .then((response) => {
@@ -78,22 +94,9 @@ const Chat: React.FC<ChatProps> = ({
       dispatch(clearInitialMessage());
       initialMessageSent.current = true;
     }
-  }, [initialMessage, dispatch]);
+  }, [initialMessage, dispatch, sendMessage]);
 
-  const sendMessage = (msg: string) => {
-    if (msg.trim()) {
-      const newMessage = {
-        currentUserId: currentUserId,
-        listingOwnerId: listingOwnerId,
-        content: msg,
-        listingId: listingId,
-        listingType: listingType,
-        conversationId: conversationId,
-      };
 
-      socket.emit("sendMessage", newMessage);
-    }
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
