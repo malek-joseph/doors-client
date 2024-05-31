@@ -16,6 +16,7 @@ export async function uploadFileToServer(file: File): Promise<string> {
   if (!response.ok) {
     throw new Error("Upload failed");
   }
+  
 
   const data = await response.json();
   return data.url; // Assuming the server responds with the URL of the uploaded file

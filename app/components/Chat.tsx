@@ -28,6 +28,7 @@ interface Message {
   timestamp: string;
 }
 
+
 const socket = io(
   process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:8000"
 );
