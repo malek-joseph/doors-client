@@ -24,7 +24,7 @@ const publishPerson = async (
 
   try {
     const createPersonResponse = await axios.post(
-      "http://localhost:8000/api/persons/createPerson",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/createPerson`,
       formData,
       {
         headers: {

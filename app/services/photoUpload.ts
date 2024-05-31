@@ -5,10 +5,13 @@ export async function uploadFileToServer(file: File): Promise<string> {
   formData.append("file", file);
 
   // Replace URL with your actual upload endpoint
-  const response = await fetch("http://localhost:8000/api/places", {
-    method: "POST",
-    body: formData,
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/places`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Upload failed");

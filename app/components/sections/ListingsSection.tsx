@@ -58,8 +58,10 @@ const ListSection = () => {
     setLoading(true);
     try {
       const [propertiesResponse, personsResponse] = await Promise.all([
-        axios.get("http://localhost:8000/api/properties/allProperties"),
-        axios.get("http://localhost:8000/api/persons/allPersons"),
+        axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/allProperties`
+        ),
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/allPersons`),
       ]);
 
       const properties: ListingType[] = propertiesResponse.data;

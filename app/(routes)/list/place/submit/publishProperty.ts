@@ -24,7 +24,7 @@ const publishProperty = async (
 
   try {
     const createPropertyResponse = await axios.post(
-      "http://localhost:8000/api/properties/createProperty",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/createProperty`,
       formData,
       {
         headers: {

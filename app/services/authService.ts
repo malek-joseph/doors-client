@@ -13,7 +13,7 @@ interface User {
 const signup = async (formDataToSend: FormData, dispatch: AppDispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/users/signup",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/signup`,
       formDataToSend
     );
     // console.log(response.data);
@@ -51,7 +51,7 @@ const signin = async (user: User, dispatch: AppDispatch) => {
     // console.log("Signing in with:", user);
 
     const response = await axios.post(
-      "http://localhost:8000/api/users/signin",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/signin`,
       user
     );
 
@@ -85,7 +85,7 @@ const signin = async (user: User, dispatch: AppDispatch) => {
 const googleSignup = async (tokenResponse: any, dispatch: AppDispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/users/google-signup",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/google-signup`,
       { token: tokenResponse.credential }
     );
 

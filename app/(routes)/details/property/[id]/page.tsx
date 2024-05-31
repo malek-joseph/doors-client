@@ -46,7 +46,7 @@ useEffect(() => {
       setLoading(true);
       setError(null);
       const response = await axios.get(
-        `http://localhost:8000/api/properties/propertyDetails/${id}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/propertyDetails/${id}`
       );
 
       const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL

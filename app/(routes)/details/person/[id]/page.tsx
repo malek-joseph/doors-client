@@ -45,8 +45,8 @@ useEffect(() => {
       setLoading(true);
       setError(null);
       const response = await axios.get(
-        `http://localhost:8000/api/persons/personDetails/${id}`
-        );
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/personDetails/${id}`
+      );
   
         const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Reperson with your actual base URL
   

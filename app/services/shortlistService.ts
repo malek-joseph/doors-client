@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api'; // Replace with your backend API URL
+const API_URL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your backend API URL
 
 interface ShortlistItem {
   id: string;

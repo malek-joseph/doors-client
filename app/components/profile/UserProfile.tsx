@@ -43,7 +43,7 @@ useEffect(() => {
         try {
           // Send a POST request to your backend API endpoint
           const response = await axios.post(
-            "http://localhost:8000/api/users/update-profile-picture",
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/update-profile-picture`,
             formData,
             {
               headers: {
