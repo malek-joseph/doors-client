@@ -23,9 +23,10 @@ useEffect(() => {
     // Remove the "uploads" word from userDetails.photo
     const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
     // Set the image source with the modified path
-    setImageSrc(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    );
+    // setImageSrc(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    // );
+    setImageSrc(userDetails.photo)
   }
 }, [userDetails]);
 // console.log(imageSrc)
@@ -76,7 +77,7 @@ useEffect(() => {
         {" "}
         {/* Adjust margin as needed */}
         <Image
-          src={imageSrc || defaultProfilePic}
+          src={ imageSrc || defaultProfilePic}
           alt="User's Profile"
           layout="fill"
           className="rounded-full object-cover"

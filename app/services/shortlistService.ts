@@ -19,24 +19,25 @@ interface ShortlistItem {
 export const getShortlists = async (userId: string) => {
   try {
     const response = await axios.get(`${API_URL}/shortlists/${userId}`);
-    const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "";
+    // const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "";
 
-    // Process each item in the shortlist to update photo URLs
-    const updatedShortlist = response.data.map((item: any) => {
-      // Assuming `listingDetails` has a `photos` array
-      const updatedPhotos = item.listingDetails.photos.map(
-        (photo: string) => `${baseURL}/${photo.replace(/^uploads\//, "")}`
-      );
-      return {
-        ...item,
-        listingDetails: {
-          ...item.listingDetails,
-          photos: updatedPhotos,
-        },
-      };
-    });
+    // // Process each item in the shortlist to update photo URLs
+    // const updatedShortlist = response.data.map((item: any) => {
+    //   // Assuming `listingDetails` has a `photos` array
+    //   const updatedPhotos = item.listingDetails.photos.map(
+    //     (photo: string) => `${baseURL}/${photo.replace(/^uploads\//, "")}`
+    //   );
+    //   return {
+    //     ...item,
+    //     listingDetails: {
+    //       ...item.listingDetails,
+    //       photos: updatedPhotos,
+    //     },
+    //   };
+    // });
 
-    return updatedShortlist;
+    // return updatedShortlist;
+    return response.data
   } catch (error) {
     throw new Error("Failed to fetch shortlists");
   }

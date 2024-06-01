@@ -25,7 +25,8 @@ const ButtonSm = ({
     }
   };
 
-  // console.log(icon);
+
+  console.log(icon);
 
   return (
     <div className="rounded-full overflow-hidden">

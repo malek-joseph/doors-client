@@ -69,23 +69,24 @@ const ListSection = () => {
 
       const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
 
-      const updatedProperties = properties.map((listing) => ({
-        ...listing,
-        photos: listing.photos.map((photo) => {
-          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-          return `${baseURL}/${photoPathWithoutUploads}`;
-        }),
-      }));
+      // const updatedProperties = properties.map((listing) => ({
+      //   ...listing,
+      //   photos: listing.photos.map((photo) => {
+      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+      //     return `${baseURL}/${photoPathWithoutUploads}`;
+      //   }),
+      // }));
 
-      const updatedPersons = persons.map((listing) => ({
-        ...listing,
-        photos: listing.photos.map((photo) => {
-          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-          return `${baseURL}/${photoPathWithoutUploads}`;
-        }),
-      }));
+      // const updatedPersons = persons.map((listing) => ({
+      //   ...listing,
+      //   photos: listing.photos.map((photo) => {
+      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+      //     return `${baseURL}/${photoPathWithoutUploads}`;
+      //   }),
+      // }));
 
-      const combinedListings = [...updatedProperties, ...updatedPersons];
+      // const combinedListings = [...updatedProperties, ...updatedPersons];
+      const combinedListings = [...properties, ...persons];
 
       setListings(combinedListings);
       setFilteredListings(combinedListings); // Initialize filtered listings with all listings

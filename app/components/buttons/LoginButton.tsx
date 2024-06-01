@@ -21,10 +21,11 @@ const LoginButton: React.FC<UserOverlayProps> = ({
 
   let imageSrc = "";
   if (user && user.photo) {
-    const photoPathWithoutUploads =
-      user.photo && user.photo.replace(/^uploads\//, "");
+    // const photoPathWithoutUploads =
+    //   user.photo && user.photo.replace(/^uploads\//, "");
 
-    imageSrc = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+    // imageSrc = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+    imageSrc = user.photo;
   }
 
   const handleClick = () => {
@@ -32,7 +33,9 @@ const LoginButton: React.FC<UserOverlayProps> = ({
       onClick(); // Toggle the overlay for logged in users
     }
   };
-  // console.log(user)
+
+  console.log(user);
+
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
       {!user ? (
@@ -42,7 +45,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
             title="Login"
             icon="/assets/images/profile.png"
             variant="white"
-            size={30}
+            size={40}
           />
         </Link>
       ) : (
@@ -50,7 +53,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
           <ButtonSm
             type="button"
             title=""
-            icon={imageSrc}
+            icon={user.photo}
             variant="white"
             size={40}
           />

@@ -29,13 +29,15 @@ const dispatch = useDispatch()
 
 useEffect(() => {
   if (propertyDetails && propertyDetails.userPhoto) {
-    const photoPathWithoutUploads = propertyDetails.userPhoto.replace(
-      /^uploads\//,
-      ""
-    );
-    setImageSrc(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    );
+    // const photoPathWithoutUploads = propertyDetails.userPhoto.replace(
+    //   /^uploads\//,
+    //   ""
+    // );
+    // setImageSrc(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    // );
+      const photo = propertyDetails.userPhoto
+    setImageSrc(photo)
   }
 }, [propertyDetails]);
 
@@ -49,17 +51,18 @@ useEffect(() => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/propertyDetails/${id}`
       );
 
-      const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
+      // const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
 
-      const updatedPropertyDetails = {
-        ...response.data,
-        photos: response.data.photos.map((photo: string) => {
-          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-          return `${baseURL}/${photoPathWithoutUploads}`;
-        }),
-      };
+      // const updatedPropertyDetails = {
+      //   ...response.data,
+      //   photos: response.data.photos.map((photo: string) => {
+      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+      //     return `${baseURL}/${photoPathWithoutUploads}`;
+      //   }),
+      // };
 
-      setPropertyDetails(updatedPropertyDetails);
+      // setPropertyDetails(updatedPropertyDetails);
+      setPropertyDetails(response.data);
       setLoading(false);
     } catch (error) {
       setError("Error fetching property details");

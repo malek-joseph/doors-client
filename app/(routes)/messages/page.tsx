@@ -48,13 +48,13 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
         listingType
       );
 
-      if (newConversation.receiverPhoto) {
-        const photoPathWithoutUploads = newConversation.receiverPhoto.replace(
-          /^uploads\//,
-          ""
-        );
-        newConversation.receiverPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-      }
+      // if (newConversation.receiverPhoto) {
+      //   const photoPathWithoutUploads = newConversation.receiverPhoto.replace(
+      //     /^uploads\//,
+      //     ""
+      //   );
+      //   newConversation.receiverPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+      // }
 
       setConversations((prevConversations) => [
         ...prevConversations,
@@ -74,22 +74,23 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
     const fetchAndSetConversations = async () => {
       try {
         const response = await fetchConversations(currentUserId);
-         const updatedConversations = response.data.map((conv: any) => {
-           if (conv.currentUserPhoto && conv.listingOwnerPhoto) {
-             const currentUserPhoto = conv.currentUserPhoto.replace(
-               /^uploads\//,
-               ""
-             );
-             const listingOwnerPhoto = conv.listingOwnerPhoto.replace(
-               /^uploads\//,
-               ""
-             );
-             conv.currentUserPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${currentUserPhoto}`;
-             conv.listingOwnerPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${listingOwnerPhoto}`;
-           }
-           return conv;
-         });
-        setConversations(updatedConversations);
+        //  const updatedConversations = response.data.map((conv: any) => {
+        //    if (conv.currentUserPhoto && conv.listingOwnerPhoto) {
+        //      const currentUserPhoto = conv.currentUserPhoto.replace(
+        //        /^uploads\//,
+        //        ""
+        //      );
+        //      const listingOwnerPhoto = conv.listingOwnerPhoto.replace(
+        //        /^uploads\//,
+        //        ""
+        //      );
+        //      conv.currentUserPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${currentUserPhoto}`;
+        //      conv.listingOwnerPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${listingOwnerPhoto}`;
+        //    }
+        //    return conv;
+        //  });
+        // setConversations(updatedConversations);
+        setConversations(response.data);
         initialized.current = true;
       } catch (error) {
         console.error("Error fetching conversations:", error);

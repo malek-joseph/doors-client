@@ -53,13 +53,15 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     if (userDetails && userDetails.photo) {
-      const photoPathWithoutUploads = userDetails.photo.replace(
-        /^uploads\//,
-        ""
-      );
-      setImageSrc(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-      );
+      // const photoPathWithoutUploads = userDetails.photo.replace(
+      //   /^uploads\//,
+      //   ""
+      // );
+      // setImageSrc(
+      //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+      // );
+        const photo =  userDetails.photo
+    setImageSrc(photo)
     }
   }, [userDetails]);
 
