@@ -61,7 +61,6 @@ useEffect(() => {
       // };
 
       // setPersonDetails(updatedPersonDetails);
-      
       setPersonDetails(response.data);
       setLoading(false);
     } catch (error) {

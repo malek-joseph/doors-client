@@ -67,7 +67,7 @@ const ListSection = () => {
       const properties: ListingType[] = propertiesResponse.data;
       const persons: ListingType[] = personsResponse.data;
 
-      const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
+      // const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
 
       // const updatedProperties = properties.map((listing) => ({
       //   ...listing,
