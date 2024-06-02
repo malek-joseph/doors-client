@@ -42,17 +42,11 @@ useEffect(() => {
   const imageSrcMapCopy: Record<string, string> = {};
   messages.forEach((message) => {
     if (message.sender && message.sender.photo) {
-      // Extract the filename from the photo path
-      const photoPathWithoutUploads = message.sender.photo.replace(
-        /^uploads\//,
-        ""
-      );
-      // Construct the full URL
-      const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-      // Store the full URL in the map
-      imageSrcMapCopy[message.sender._id] = fullUrl;
+      // Store the photo URL directly without manipulation
+      imageSrcMapCopy[message.sender._id] = message.sender.photo;
     }
   });
+  
   setImageSrcMap(imageSrcMapCopy);
 }, [messages]);
 

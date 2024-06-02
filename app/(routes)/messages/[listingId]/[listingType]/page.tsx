@@ -45,11 +45,11 @@ const startNewConversation = useCallback(async () => {
       listingType
     );
 
-    if (newConversation.listingOwnerPhoto) {
-      newConversation.listingOwnerPhoto = formatPhotoURL(
-        newConversation.listingOwnerPhoto
-      );
-    }
+    // if (newConversation.listingOwnerPhoto) {
+    //   newConversation.listingOwnerPhoto = formatPhotoURL(
+    //     newConversation.listingOwnerPhoto
+    //   );
+    // }
 
     setConversations((prevConversations) => [
       ...prevConversations,
@@ -68,16 +68,17 @@ const startNewConversation = useCallback(async () => {
     const fetchAndSetConversations = async () => {
       try {
         const response = await fetchConversations(currentUserId);
-        const updatedConversations = response.data.map((conv: any) => {
-          if (conv.currentUserPhoto) {
-            conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
-          }
-          if (conv.listingOwnerPhoto) {
-            conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
-          }
-          return conv;
-        });
-        setConversations(updatedConversations);
+        // const updatedConversations = response.data.map((conv: any) => {
+        //   if (conv.currentUserPhoto) {
+        //     conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
+        //   }
+        //   if (conv.listingOwnerPhoto) {
+        //     conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
+        //   }
+        //   return conv;
+        // });
+        // setConversations(updatedConversations);
+        setConversations(response.data);
         initialized.current = true;
       } catch (error) {
         console.error("Error fetching conversations:", error);
@@ -111,10 +112,10 @@ const startNewConversation = useCallback(async () => {
     startNewConversation,
   ]);
 
-  const formatPhotoURL = (photoPath: string) => {
-    const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
-    return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-  };
+  // const formatPhotoURL = (photoPath: string) => {
+  //   const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
+  //   return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
+  // };
 
   if (!userDetails) return;
   if (!currentUserId) return;

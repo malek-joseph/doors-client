@@ -21,11 +21,13 @@ const UserProfile = () => {
 useEffect(() => {
   if (userDetails && userDetails.photo) {
     // Remove the "uploads" word from userDetails.photo
-    const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
-    // Set the image source with the modified path
-    setImageSrc(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    );
+    // const photoPathWithoutUploads = userDetails.photo.replace(/^uploads\//, "");
+    // // Set the image source with the modified path
+    // setImageSrc(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    // );
+      const photo = userDetails.photo;
+          setImageSrc(photo);
   }
 }, [userDetails]);
 // console.log(imageSrc)

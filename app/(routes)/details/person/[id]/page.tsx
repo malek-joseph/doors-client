@@ -29,13 +29,15 @@ const dispatch = useDispatch()
 
 useEffect(() => {
   if (personDetails && personDetails.userPhoto) {
-    const photoPathWithoutUploads = personDetails.userPhoto.replace(
-      /^uploads\//,
-      ""
-    );
-    setImageSrc(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    );
+    // const photoPathWithoutUploads = personDetails.userPhoto.replace(
+    //   /^uploads\//,
+    //   ""
+    // );
+    // setImageSrc(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
+    // );
+    const photo = personDetails.userPhoto
+    setImageSrc(photo)
   }
 }, [personDetails]);
 
@@ -48,17 +50,18 @@ useEffect(() => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/personDetails/${id}`
       );
   
-        const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Reperson with your actual base URL
+      //   const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Reperson with your actual base URL
   
-        const updatedPersonDetails = {
-          ...response.data,
-          photos: response.data.photos.map((photo: string) => {
-          const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-          return `${baseURL}/${photoPathWithoutUploads}`;
-        }),
-      };
+      //   const updatedPersonDetails = {
+      //     ...response.data,
+      //     photos: response.data.photos.map((photo: string) => {
+      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
+      //     return `${baseURL}/${photoPathWithoutUploads}`;
+      //   }),
+      // };
 
-      setPersonDetails(updatedPersonDetails);
+      // setPersonDetails(updatedPersonDetails);
+      setPersonDetails(response.data);
       setLoading(false);
     } catch (error) {
       setError("Error fetching person details");
