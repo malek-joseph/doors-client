@@ -19,11 +19,7 @@
     "aws-sdk": "^2.1542.0",
     "axios": "^1.7.2",
     "browser-image-compression": "^2.0.2",
-<<<<<<< HEAD
     "isomorphic-fetch": "^3.0.0",
-=======
-    "git-filter-repo": "^0.0.30",
->>>>>>> origin/main
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "next": "^14.1.1",
