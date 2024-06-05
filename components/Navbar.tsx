@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useState } from "react";
 import LoginButton from "./buttons/LoginButton";
@@ -6,41 +8,44 @@ import Logo from "./navbar/Logo";
 import NavLinks from "./navbar/NavLinks";
 import SearchBar from "./navbar/SearchBar";
 import { useSelector } from "react-redux";
-import { selectUserDetails } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
+import { selectUserDetails } from "../app/redux/features/auth/authSlice"; // Adjust the import path as needed
 import SwiperMenu from "./shared/menu/SwiperMenu";
 import HamburgerMenuOverlay from "./overlays/hamburger/HamburgerMenuOverlay";
 import UserAccountOverlay from "./overlays/user/UserAccountOverlay";
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/features/auth/authSlice'; // Adjust the import path as needed
+import { useDispatch } from "react-redux";
+import { logout } from "../app/redux/features/auth/authSlice"; // Adjust the import path as needed
 import { useRouter } from "next/navigation";
-
-
-
-
-
+import { useSession } from 'next-auth/react';
+import {signOut} from 'next-auth/react'
 
 const Navbar = () => {
   const dispatch = useDispatch(); // Use useDispatch hook to dispatch actions
-    const router = useRouter(); // Create the router instance
-
+  const router = useRouter(); // Create the router instance
+  const { data, status } = useSession()
   const user = useSelector(selectUserDetails);
 
-     const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
-     const [isUserOverlayVisible, setIsUserOverlayVisible] = useState(false);
+  const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
+  const [isUserOverlayVisible, setIsUserOverlayVisible] = useState(false);
 
-     const toggleMenuOverlay = () => {
-       setIsMenuOverlayVisible(!isMenuOverlayVisible);
-     };
-     const toggleUserOverlay = () => {
-       setIsUserOverlayVisible(!isUserOverlayVisible);
-     };
+  const toggleMenuOverlay = () => {
+    setIsMenuOverlayVisible(!isMenuOverlayVisible);
+  };
+  const toggleUserOverlay = () => {
+    setIsUserOverlayVisible(!isUserOverlayVisible);
+  };
 
   const handleLogout = () => {
+    if (user) {
     dispatch(logout());
 
+    }
+    if (data) {
+      signOut()
+    }
+      
 
     setIsUserOverlayVisible(false);
-    router.push('/'); 
+    router.push("/");
   };
   return (
     <nav className="fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-300 py-5">
@@ -54,28 +59,26 @@ const Navbar = () => {
           <NavLinks />
         </div>
         <div className="relative lg:flexCenter lg:ml-20 hidden">
-         
           <LoginButton
             onClick={toggleUserOverlay}
             isOverlayVisible={isUserOverlayVisible}
           />
-            {isUserOverlayVisible && user && (
-        <UserAccountOverlay
-          onClose={toggleUserOverlay}
-          onLogout={handleLogout}
-        />
-      )}
+          {isUserOverlayVisible && (user || data) && (
+            <UserAccountOverlay
+              onClose={toggleUserOverlay}
+              onLogout={handleLogout}
+            />
+          )}
         </div>
 
-      <HamburgerMenu
+        <HamburgerMenu
           onClick={toggleMenuOverlay}
           isOverlayVisible={isMenuOverlayVisible}
         />
       </div>
       {isMenuOverlayVisible && <HamburgerMenuOverlay />}
-    
     </nav>
   );
 };
 
-export default Navbar
+export default Navbar;

@@ -1,5 +1,5 @@
 /** @format */
-
+"use client"
 // ListSection.tsx
 
 import { useState, useEffect } from "react";
@@ -163,7 +163,7 @@ const ListSection = () => {
     setFilteredListings(filteredList);
   };
 
-  console.log(filteredListings);
+  // console.log(filteredListings);
 
   return (
     <div className="container mx-auto mt-8">

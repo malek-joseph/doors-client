@@ -3,13 +3,12 @@
 // HamburgerMenuOverlay.tsx
 import React from "react";
 import styles from "./HamburgerMenuOverlay.module.css";
-import { NAV_LINKS } from "../../../constants"; // Adjust the import path as needed
+import { NAV_LINKS } from "../../../app/constants"; // Adjust the import path as needed
 import Link from "next/link";
 
-const HamburgerMenuOverlay: React.FC = ({ }) => {
+const HamburgerMenuOverlay: React.FC = ({}) => {
   return (
-    <div className={`${styles.overlay} net_height`
-}>
+    <div className={`${styles.overlay} net_height`}>
       <div className={`${styles.overlayContent} net_height`}>
         {NAV_LINKS.map((link) => (
           <Link

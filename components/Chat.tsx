@@ -1,10 +1,15 @@
-import React, { useState, useEffect,useRef, useCallback } from "react";
+/** @format */
+
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMessages } from "../services/messageApi";
+import { fetchMessages } from "../app/services/messageApi";
 import MessageList from "./MessageList";
-import Button from "@/app/components/shared/buttons/Button";
-import { selectInitialMessage, clearInitialMessage } from "@/app/redux/features/listing/initialMessageSlice";
+import Button from "@/components/shared/buttons/Button";
+import {
+  selectInitialMessage,
+  clearInitialMessage,
+} from "@/app/redux/features/listing/initialMessageSlice";
 
 interface ChatProps {
   currentUserId: string;
@@ -28,7 +33,6 @@ interface Message {
   timestamp: string;
 }
 
-
 const socket = io(
   process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:8000"
 );
@@ -43,15 +47,14 @@ const Chat: React.FC<ChatProps> = ({
   const [message, setMessage] = useState<string>("");
   const initialMessage = useSelector(selectInitialMessage);
   const dispatch = useDispatch();
-    const initialMessageSent = useRef(false);
+  const initialMessageSent = useRef(false);
 
-  
   const conversationId = listingId
     ? `${listingId}-${listingOwnerId}-${listingType}`
     : `${currentUserId}-${listingOwnerId}`;
 
-  
-    const sendMessage = useCallback((msg: string) => {
+  const sendMessage = useCallback(
+    (msg: string) => {
       if (msg.trim()) {
         const newMessage = {
           currentUserId: currentUserId,
@@ -64,7 +67,9 @@ const Chat: React.FC<ChatProps> = ({
 
         socket.emit("sendMessage", newMessage);
       }
-    }, [currentUserId, listingOwnerId, listingId, listingType, conversationId]);
+    },
+    [currentUserId, listingOwnerId, listingId, listingType, conversationId]
+  );
 
   useEffect(() => {
     fetchMessages(currentUserId, listingOwnerId, listingId)
@@ -76,11 +81,11 @@ const Chat: React.FC<ChatProps> = ({
     socket.emit("joinRoom", { conversationId });
 
     socket.on("receiveMessage", () => {
-        fetchMessages(currentUserId, listingOwnerId, listingId)
-          .then((response) => {
-            setMessages(response.data);
-          })
-          .catch((error) => console.error(error));
+      fetchMessages(currentUserId, listingOwnerId, listingId)
+        .then((response) => {
+          setMessages(response.data);
+        })
+        .catch((error) => console.error(error));
     });
 
     return () => {
@@ -96,8 +101,6 @@ const Chat: React.FC<ChatProps> = ({
       initialMessageSent.current = true;
     }
   }, [initialMessage, dispatch, sendMessage]);
-
-
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);

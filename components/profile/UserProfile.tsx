@@ -3,19 +3,23 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import defaultProfilePic from "../../../public/assets/images/profile.png"; // Path to your default profile image
+import defaultProfilePic from "../../public/assets/images/profile.png"; // Path to your default profile image
 import { useSelector } from "react-redux";
 import { selectUserDetails, setUser } from "@/app/redux/features/auth/authSlice";
 import axios from "axios"; 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from 'react-redux';
+import { useSession } from 'next-auth/react';
 
 
 const UserProfile = () => {
   const userDetails = useSelector(selectUserDetails);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const dispatch = useDispatch();
+  const {data, status} = useSession()
+
+
 
   // Load the user's photo when userDetails changes
 useEffect(() => {
@@ -27,8 +31,10 @@ useEffect(() => {
     //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
     // );
     setImageSrc(userDetails.photo)
+  } else if (data && data.user) {
+    setImageSrc(data.user.image as string)
   }
-}, [userDetails]);
+}, [userDetails, data]);
 // console.log(imageSrc)
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,8 +1,8 @@
 /** @format */
 
-import UserAccount from "@/app/components/profile/UserAccount";
-import UserListings from "@/app/components/profile/UserListings";
-import UserProfile from "@/app/components/profile/UserProfile";
+import UserAccount from "@/components/profile/UserAccount";
+import UserListings from "@/components/profile/UserListings";
+import UserProfile from "@/components/profile/UserProfile";
 import React from "react";
 
 const profile = () => {

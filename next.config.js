@@ -1,4 +1,6 @@
-// next.config.js
+
+
+
 const nextConfig = {
   webpack: (config) => {
     const rules = config.module.rules
@@ -24,7 +26,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['localhost', 'doors-286ff.appspot.com', 'doors-server.vercel.app', 'firebasestorage.googleapis.com'],
+    domains: ['localhost', 'doors-286ff.appspot.com', 'doors-server.vercel.app', 'firebasestorage.googleapis.com', 'lh3.googleusercontent.com'],
     remotePatterns: [
       { protocol: 'https', hostname: 'storage.googleapis.com', pathname: '/doors-286ff.appspot.com/*' }
     ],

@@ -1,5 +1,7 @@
-import Spinner from '@/app/components/shared/spinner/Spinner'
-import React from 'react'
+/** @format */
+
+import Spinner from "@/components/shared/spinner/Spinner";
+import React from "react";
 
 const loading = () => {
   return (
@@ -7,6 +9,6 @@ const loading = () => {
       <Spinner size={40} />
     </div>
   );
-}
+};
 
-export default loading
+export default loading;

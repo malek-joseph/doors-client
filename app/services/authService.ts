@@ -82,38 +82,6 @@ const signin = async (user: User, dispatch: AppDispatch) => {
   }
 };
 
-const googleSignup = async (tokenResponse: any, dispatch: AppDispatch) => {
-  try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/google-signup`,
-      { token: tokenResponse.credential }
-    );
 
-    if (response.status === 201) {
-      toast.success("Registered successfully with Google");
-      const { email, name, age, photo, gender, number, job, _id } =
-        response.data;
-      dispatch(
-        setUser({ email, name, age, photo, gender, number, job, id: _id })
-      );
-      return true;
-    }
-    return false;
-  } catch (error: any) {
-    if (error.response) {
-      const { status, data } = error.response;
 
-      if (status === 400) {
-        toast.error(data.error);
-      } else if (status === 401) {
-        toast.error("Authentication failed. Check your credentials.");
-      } else {
-        toast.error("An error occurred while signing up.");
-      }
-    } else {
-      toast.error("An unexpected error occurred.");
-    }
-  }
-};
-
-export { signup, signin, googleSignup };
+export { signup, signin };

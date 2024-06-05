@@ -6,11 +6,11 @@ import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { updatePersonDetails } from "@/app/redux/features/listing/personFormSlice";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
 import { useSelector } from "react-redux";
 import { selectPersonDetails } from "@/app/redux/features/listing/personFormSlice";
-import NumberInput from "@/app/components/inputs/NumberInput"; // Import the Input component
-import CheckboxWithLabel from "@/app/components/inputs/CheckboxWithLabel";
+import NumberInput from "@/components/inputs/NumberInput"; // Import the Input component
+import CheckboxWithLabel from "@/components/inputs/CheckboxWithLabel";
 
 const Page = () => {
   const personDetails = useSelector(selectPersonDetails);

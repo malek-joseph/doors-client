@@ -2,16 +2,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
-import PersonDetailsSectionOne from "@/app/components/sections/listingDetails/person/PersonDetailsSectionOne";
-import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
-import PersonDetailsSectionTwo from "@/app/components/sections/listingDetails/person/PersonDetailsSectionTwo";
-import PersonDetailsSectionThree from "@/app/components/sections/listingDetails/person/PersonDetailsSectionThree";
-import PersonDetailsSectionFour from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFour";
-import PersonDetailsSectionFive from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFive";
-import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
+import ListingDetailsCarousel from "@/components/carousels/ListingDetailsCarousel";
+import PersonDetailsSectionOne from "@/components/sections/listingDetails/person/PersonDetailsSectionOne";
+import SendMessageCard from "@/components/cards/message/SendMessageCard";
+import PersonDetailsSectionTwo from "@/components/sections/listingDetails/person/PersonDetailsSectionTwo";
+import PersonDetailsSectionThree from "@/components/sections/listingDetails/person/PersonDetailsSectionThree";
+import PersonDetailsSectionFour from "@/components/sections/listingDetails/person/PersonDetailsSectionFour";
+import PersonDetailsSectionFive from "@/components/sections/listingDetails/person/PersonDetailsSectionFive";
+import PublishEditBtns from "@/components/shared/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
-import Spinner from "@/app/components/shared/spinner/Spinner";
+import Spinner from "@/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
 import {
   selectPersonDetails,

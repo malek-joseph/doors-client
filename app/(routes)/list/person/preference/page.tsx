@@ -4,13 +4,13 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
 import {
   selectPersonDetails,
   updatePersonDetails,
 } from "@/app/redux/features/listing/personFormSlice";
 import { useEffect, useState } from "react";
-import PreferenceOptions from "@/app/components/shared/PreferenceOptions";
+import PreferenceOptions from "@/components/shared/PreferenceOptions";
 
 const Page = () => {
   const personDetails = useSelector(selectPersonDetails);

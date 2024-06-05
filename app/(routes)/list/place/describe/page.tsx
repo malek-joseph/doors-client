@@ -2,12 +2,12 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
 import {
   selectPropertyDetails,
   updatePropertyDetails,
 } from "@/app/redux/features/listing/placeFormSlice";
-import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
+import FeaturesSelector from "@/components/inputs/FeaturesSelector";
 import TextArea from "./TextArea";
 
 

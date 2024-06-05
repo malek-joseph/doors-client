@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import Chat from "@/app/components/Chat";
+import Chat from "@/components/Chat";
 import {
   fetchConversations,
   startConversation,

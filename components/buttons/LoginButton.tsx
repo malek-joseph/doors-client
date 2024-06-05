@@ -1,12 +1,13 @@
 /** @format */
+"use client"
 
 import ButtonSm from "../shared/buttons/ButtonSm";
 import Link from "next/link";
-import Image from "next/image";
 import { useSelector } from "react-redux";
-import { selectUserDetails } from "../../redux/features/auth/authSlice";
-import SwiperMenu from "../shared/menu/SwiperMenu";
-import { useState } from "react";
+import { selectUserDetails } from "../../app/redux/features/auth/authSlice";
+import { useSession } from 'next-auth/react';
+import Spinner from "../shared/spinner/Spinner";
+
 
 interface UserOverlayProps {
   onClick: () => void;
@@ -18,9 +19,10 @@ const LoginButton: React.FC<UserOverlayProps> = ({
   isOverlayVisible,
 }) => {
   const user = useSelector(selectUserDetails);
-
+  const { data, status } = useSession()
+  
   let imageSrc = "";
-  if (user && user.photo) {
+  if (status === 'unauthenticated' && user && user.photo) {
     // const photoPathWithoutUploads =
     //   user.photo && user.photo.replace(/^uploads\//, "");
 
@@ -28,24 +30,31 @@ const LoginButton: React.FC<UserOverlayProps> = ({
     imageSrc = user.photo;
   }
 
+  if(status === 'authenticated' && data && data.user) {
+    imageSrc = data.user.image as string
+  }
+
+ 
+
   const handleClick = () => {
-    if (user) {
+    if (user || data) {
       onClick(); // Toggle the overlay for logged in users
     }
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
-      {!user ? (
+      { status === 'loading' &&  <Spinner/>}
+      {!imageSrc && status !== 'loading' ? (
         <Link href="/login">
           <ButtonSm
             type="button"
-            title="Login"
+            title=""
             icon="/assets/images/profile.png"
             variant="white"
-            size={40}
+            size={30}
           />
         </Link>
       ) : (
@@ -53,7 +62,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
           <ButtonSm
             type="button"
             title=""
-            icon={user.photo}
+            icon={imageSrc}
             variant="white"
             size={40}
           />

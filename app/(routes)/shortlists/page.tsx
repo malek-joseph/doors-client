@@ -14,7 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import Loading from "./loading";
-import ListingImages from "@/app/components/cards/listingCard/ListingImages";
+import ListingImages from "@/components/cards/listingCard/ListingImages";
 
 const ShortlistPage: React.FC = () => {
   const userDetails = useSelector(selectUserDetails);
@@ -72,7 +72,7 @@ const ShortlistPage: React.FC = () => {
   );
   const hasPersons = shortlist.some((item) => item.listingType === "person");
 
-  console.log(shortlist);
+  // console.log(shortlist);
 
   return (
     <div className="container mx-auto p-4 min-h-screen">

@@ -5,14 +5,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FOOTER_LINKS } from "../constants";
+import { FOOTER_LINKS } from "../app/constants";
 import ButtonSm from "./shared/buttons/ButtonSm";
-import googleApp from "../../public/assets/images/googleApp.png"
-import appleApp from "../../public/assets/images/appleApp.png"
+import googleApp from "../public/assets/images/googleApp.png";
+import appleApp from "../public/assets/images/appleApp.png";
 
 const Footer = () => {
-
-  
   return (
     <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 bg-gray-10 w-full">
       <Link href="/" className="">

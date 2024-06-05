@@ -1,6 +1,6 @@
 /** @format */
 
-import AgeAndPlace from "@/app/components/shared/AgeAndPlace";
+import AgeAndPlace from "@/components/shared/AgeAndPlace";
 import React from "react";
 
 interface PersonDetails {
@@ -22,10 +22,9 @@ const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
   furnishing,
   bathroomType,
   roomType,
-  accommodationType
+  accommodationType,
 }) => {
-
-// console.log(bathroomType)
+  // console.log(bathroomType)
   return (
     <div className="">
       <div className=" mb-2">
@@ -35,7 +34,9 @@ const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
         <h3 className="text-gray-500 flex flex-col">
           {`${furnishing} ${roomType} room in a ${accommodationType}.`}
           {bathroomType === "Private" && (
-            <span className="text-xs text-teal-300">With private bathroom.</span>
+            <span className="text-xs text-teal-300">
+              With private bathroom.
+            </span>
           )}
         </h3>
         <p className="text-sm text-gray-700">

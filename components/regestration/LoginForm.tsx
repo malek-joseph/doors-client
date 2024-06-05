@@ -8,10 +8,11 @@ import Link from "next/link";
 import googleImg from "../../../public/assets/images/google-logo.png";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import { signin } from "../../services/authService"; // Import the signup function
+import { signin } from "../../app/services/authService"; // Import the signup function
 import Input from "../inputs/Input"; // Import the Input component
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/features/auth/authSlice";
+import { setUser } from "../../app/redux/features/auth/authSlice";
+import { signIn } from "next-auth/react";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ const LoginForm: React.FC = () => {
       }
     }
   };
-  const handleGoogleLogin = () => {};
+    const handleGoogleLogin = async () => {signIn('google', {redirect: true, callbackUrl: '/'})};
 
   return (
     <div className="p-4 rounded-lg lg:w-1/2 ">
@@ -49,6 +50,7 @@ const LoginForm: React.FC = () => {
           icon="/assets/images/google-logo.png"
           variant="btn_dark"
           disabled={false}
+          onClick={handleGoogleLogin}
         />
       </div>
 
@@ -79,8 +81,7 @@ const LoginForm: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required={true}
-              autocomplete="current-password"
-
+            autocomplete="current-password"
           />
           {/* Forget password */}
           <p className="text-xs mb-4 mt-2 text-right">
@@ -97,7 +98,6 @@ const LoginForm: React.FC = () => {
           title="Login"
           variant="btn_teal"
           disabled={signingIn}
-          
         />
       </form>
 
