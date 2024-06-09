@@ -30,8 +30,8 @@ const LoginButton: React.FC<UserOverlayProps> = ({
     imageSrc = user.photo;
   }
 
-  if(status === 'authenticated' && data && data.user) {
-    imageSrc = data.user.image as string
+  if(status === 'authenticated' && user && user.photo) {
+    imageSrc = user.photo as string
   }
 
  
@@ -48,7 +48,7 @@ const LoginButton: React.FC<UserOverlayProps> = ({
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
       { status === 'loading' &&  <Spinner/>}
       {!imageSrc && status !== 'loading' ? (
-        <Link href="/login">
+        <Link href="/auth/signin">
           <ButtonSm
             type="button"
             title=""

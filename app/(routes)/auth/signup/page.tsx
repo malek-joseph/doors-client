@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import SignUpForm from "../../../components/regestration/SignUpForm";
+import SignUpForm from "../../../../components/regestration/SignUpForm";
 import backgroundImage from "../../../public/assets/images/medical.jpeg"; // Replace with the path to your photo
 import logoImage from "../../../public/assets/images/logo.png"; // Replace with the path to your logo
 import Image from "next/image";

@@ -19,7 +19,7 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const {data, status} = useSession()
 
-
+console.log(userDetails)
 
   // Load the user's photo when userDetails changes
 useEffect(() => {
@@ -31,9 +31,7 @@ useEffect(() => {
     //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
     // );
     setImageSrc(userDetails.photo)
-  } else if (data && data.user) {
-    setImageSrc(data.user.image as string)
-  }
+  } 
 }, [userDetails, data]);
 // console.log(imageSrc)
 
@@ -72,6 +70,8 @@ useEffect(() => {
       }
     }
   };
+
+
 
   // Adjusted style for the label
   const labelStyle =

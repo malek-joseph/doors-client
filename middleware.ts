@@ -10,12 +10,12 @@ export default withAuth(
     const { pathname } = request.nextUrl;
     const isAuth = await getToken({ req: request });
     const protectedRoutes = ["/profile"];
-    const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/signup");
+    const isAuthRoute = pathname.startsWith("/auth/signin") || pathname.startsWith("/auth//signup");
     const isProtectedRoute = protectedRoutes.some((route) =>
       pathname.startsWith(route)
     );
     if (!isAuth && isProtectedRoute) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/auth//signin", request.url));
     }
     if (isAuth && isAuthRoute) {
             return NextResponse.redirect(new URL("/profile", request.url));
@@ -27,7 +27,7 @@ export default withAuth(
     //   !request.cookies.get("next-auth.session-token")
     // ) {
     //   const url = request.nextUrl.clone();
-    //   url.pathname = "/login";
+    //   url.pathname = "/auth/signin";
     //   return NextResponse.redirect(url);
     // }
     // return NextResponse.next();
@@ -42,5 +42,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/profile/:path*", "/login/:path*"],
+  matcher: ["/profile/:path*", "/auth//signin/:path*"],
 };

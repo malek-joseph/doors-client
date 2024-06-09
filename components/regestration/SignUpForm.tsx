@@ -34,7 +34,8 @@ const SignupForm: React.FC = () => {
   };
 
 
-  const handleGoogleSignUp = async () => {signIn('google', {redirect: true, callbackUrl: '/'})};
+  const handleGoogleSignUp = async () => {
+    signIn('google', {redirect: true, callbackUrl: '/'})};
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -218,7 +219,7 @@ const SignupForm: React.FC = () => {
         <p className="text-xs text-gray-400 mt-2 text-center">
           Already have an account?{" "}
           <span className="text-teal-500">
-            <Link href="/login">Signin</Link>
+            <Link href="/auth/signin">Signin</Link>
           </span>
         </p>
       </div>

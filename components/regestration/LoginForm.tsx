@@ -105,7 +105,7 @@ const LoginForm: React.FC = () => {
       <p className="text-xs text-gray-400 mt-2 text-center">
         Do not have an account?{" "}
         <span className="text-teal-500">
-          <Link href="/signup">Create an account</Link>
+          <Link href="/auth/signup">Create an account</Link>
         </span>
       </p>
     </div>

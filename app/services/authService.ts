@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { setUser } from "../redux/features/auth/authSlice";
 import { AppDispatch } from "../redux/store";
 
+
 interface User {
   email: string;
   password: string;
@@ -82,6 +83,26 @@ const signin = async (user: User, dispatch: AppDispatch) => {
   }
 };
 
+const googleSignUp = async (user: { email: string; name: string; image: string }, dispatch: AppDispatch) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/google-signin`,
+      user
+    );
+
+    if (response.status === 200) {
+      const { email, name, age, photo, gender, number, job, _id } = response.data;
+      dispatch(setUser({ email, name, age, photo, gender, number, job, id: _id }));
+      return true;
+    }
+    return false;
+  } catch (error: any) {
+    console.error("Error during Google sign-in:", error);
+    return false;
+  }
+};
 
 
-export { signup, signin };
+
+
+export { signup, signin, googleSignUp };
