@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectAccommodationType } from "@/app/redux/features/listing/personFormSlice";
-import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import AccommodationTypeButton from "./components/AccommodationTypeButton";
 
 const Page = () => {

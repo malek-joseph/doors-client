@@ -3,9 +3,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMessages } from "../app/services/messageApi";
+import { fetchMessages } from "../services/messageApi";
 import MessageList from "./MessageList";
-import Button from "@/components/shared/buttons/Button";
+import Button from "@/app/components/shared/buttons/Button";
 import {
   selectInitialMessage,
   clearInitialMessage,

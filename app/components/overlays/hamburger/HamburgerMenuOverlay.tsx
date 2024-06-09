@@ -3,7 +3,7 @@
 // HamburgerMenuOverlay.tsx
 import React from "react";
 import styles from "./HamburgerMenuOverlay.module.css";
-import { NAV_LINKS } from "../../../app/constants"; // Adjust the import path as needed
+import { NAV_LINKS } from "../../../constants"; // Adjust the import path as needed
 import Link from "next/link";
 
 const HamburgerMenuOverlay: React.FC = ({}) => {

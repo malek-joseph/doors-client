@@ -5,12 +5,12 @@ import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
-import WarningMessage from "@/components/cards/message/WarningMessage";
-import NumericSelector from "@/components/inputs/NumericSelector";
+import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import WarningMessage from "@/app/components/cards/message/WarningMessage";
+import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
-import SelectInput from "@/components/inputs/SelectInput"; // Import the shared SelectInput component
+import SelectInput from "@/app/components/inputs/SelectInput"; // Import the shared SelectInput component
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);

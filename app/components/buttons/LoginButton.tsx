@@ -1,13 +1,12 @@
 /** @format */
-"use client"
+"use client";
 
 import ButtonSm from "../shared/buttons/ButtonSm";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { selectUserDetails } from "../../app/redux/features/auth/authSlice";
-import { useSession } from 'next-auth/react';
+import { selectUserDetails } from "../../redux/features/auth/authSlice";
+import { useSession } from "next-auth/react";
 import Spinner from "../shared/spinner/Spinner";
-
 
 interface UserOverlayProps {
   onClick: () => void;
@@ -19,10 +18,10 @@ const LoginButton: React.FC<UserOverlayProps> = ({
   isOverlayVisible,
 }) => {
   const user = useSelector(selectUserDetails);
-  const { data, status } = useSession()
-  
+  const { data, status } = useSession();
+
   let imageSrc = "";
-  if (status === 'unauthenticated' && user && user.photo) {
+  if (status === "unauthenticated" && user && user.photo) {
     // const photoPathWithoutUploads =
     //   user.photo && user.photo.replace(/^uploads\//, "");
 
@@ -30,11 +29,9 @@ const LoginButton: React.FC<UserOverlayProps> = ({
     imageSrc = user.photo;
   }
 
-  if(status === 'authenticated' && user && user.photo) {
-    imageSrc = user.photo as string
+  if (status === "authenticated" && user && user.photo) {
+    imageSrc = user.photo as string;
   }
-
- 
 
   const handleClick = () => {
     if (user || data) {
@@ -46,8 +43,8 @@ const LoginButton: React.FC<UserOverlayProps> = ({
 
   return (
     <div className="lg:flexCenter hidden transition-all hover:font-bold">
-      { status === 'loading' &&  <Spinner/>}
-      {!imageSrc && status !== 'loading' ? (
+      {status === "loading" && <Spinner />}
+      {!imageSrc && status !== "loading" ? (
         <Link href="/auth/signin">
           <ButtonSm
             type="button"

@@ -1,9 +1,9 @@
 /** @format */
-"use client"
+"use client";
 
-import { useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import { setUser, selectUserDetails } from '../app/redux/features/auth/authSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, selectUserDetails } from "../redux/features/auth/authSlice";
 
 export interface UserData {
   email: string;
@@ -21,9 +21,8 @@ interface ClientComponentProps {
 
 const ClientComponent: React.FC<ClientComponentProps> = ({ userData }) => {
   const dispatch = useDispatch();
-    const userDetails = useSelector(selectUserDetails);
-    // console.log(userDetails)
-
+  const userDetails = useSelector(selectUserDetails);
+  // console.log(userDetails)
 
   useEffect(() => {
     if (userData) {

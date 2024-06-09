@@ -1,9 +1,9 @@
 /** @format */
 
 import {type Session, getServerSession} from 'next-auth'
-import ListSection from "../components/sections/ListNowSection";
-import ListingsSection from "../components/sections/ListingsSection";
-import ClientComponent from "../components/ClientComponent";
+import ListSection from "./components/sections/ListNowSection";
+import ListingsSection from "./components/sections/ListingsSection";
+import ClientComponent from "./components/ClientComponent";
 import { authOptions } from "@/app/lib/nextAuth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/auth/authSlice";

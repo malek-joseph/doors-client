@@ -8,10 +8,10 @@ import Link from "next/link";
 import googleImg from "../../../public/assets/images/google-logo.png";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import { signin } from "../../app/services/authService"; // Import the signup function
+import { signin } from "../../services/authService"; // Import the signup function
 import Input from "../inputs/Input"; // Import the Input component
 import { useDispatch } from "react-redux";
-import { setUser } from "../../app/redux/features/auth/authSlice";
+import { setUser } from "../../redux/features/auth/authSlice";
 import { signIn } from "next-auth/react";
 
 const LoginForm: React.FC = () => {
@@ -38,7 +38,9 @@ const LoginForm: React.FC = () => {
       }
     }
   };
-    const handleGoogleLogin = async () => {signIn('google', {redirect: true, callbackUrl: '/'})};
+  const handleGoogleLogin = async () => {
+    signIn("google", { redirect: true, callbackUrl: "/" });
+  };
 
   return (
     <div className="p-4 rounded-lg lg:w-1/2 ">

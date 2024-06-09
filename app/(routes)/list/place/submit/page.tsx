@@ -2,16 +2,16 @@
 "use client"
 
 import {useState, useEffect} from 'react'
-import ListingDetailsCarousel from "@/components/carousels/ListingDetailsCarousel";
-import PlaceDetailsSectionOne from "@/components/sections/listingDetails/place/PlaceDetailsSectionOne";
-import SendMessageCard from "@/components/cards/message/SendMessageCard";
-import PlaceDetailsSectionTwo from "@/components/sections/listingDetails/place/PlaceDetailsSectionTwo";
-import PlaceDetailsSectionThree from "@/components/sections/listingDetails/place/PlaceDetailsSectionThree";
-import PlaceDetailsSectionFour from "@/components/sections/listingDetails/place/PlaceDetailsSectionFour";
-import PlaceDetailsSectionFive from "@/components/sections/listingDetails/place/PlaceDetailsSectionFive";
-import PublishEditBtns from "@/components/shared/buttons/PublishEditBtns";
+import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
+import PlaceDetailsSectionOne from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionOne";
+import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
+import PlaceDetailsSectionTwo from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionTwo";
+import PlaceDetailsSectionThree from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionThree";
+import PlaceDetailsSectionFour from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFour";
+import PlaceDetailsSectionFive from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFive";
+import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
-import Spinner from "@/components/shared/spinner/Spinner";
+import Spinner from "@/app/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
 import {
   selectPropertyDetails,

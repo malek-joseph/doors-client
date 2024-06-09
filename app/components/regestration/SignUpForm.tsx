@@ -5,7 +5,7 @@ import Button from "../shared/buttons/Button";
 import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { signup } from "../../app/services/authService";
+import { signup } from "../../services/authService";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 
@@ -33,9 +33,9 @@ const SignupForm: React.FC = () => {
     }));
   };
 
-
   const handleGoogleSignUp = async () => {
-    signIn('google', {redirect: true, callbackUrl: '/'})};
+    signIn("google", { redirect: true, callbackUrl: "/" });
+  };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();

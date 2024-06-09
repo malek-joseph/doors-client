@@ -1,6 +1,6 @@
 /** @format */
 
-import Spinner from "@/components/shared/spinner/Spinner";
+import Spinner from "@/app/components/shared/spinner/Spinner";
 import React from "react";
 
 const Loading = (): JSX.Element => {

@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import defaultProfilePic from "../../public/assets/images/profile.png"; // Path to your default profile image
+import defaultProfilePic from "../../../public/assets/images/profile.png"; // Path to your default profile image
 import { useSelector } from "react-redux";
 import { selectUserDetails, setUser } from "@/app/redux/features/auth/authSlice";
 import axios from "axios"; 
@@ -19,7 +19,7 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const {data, status} = useSession()
 
-console.log(userDetails)
+// console.log(userDetails)
 
   // Load the user's photo when userDetails changes
 useEffect(() => {
@@ -99,7 +99,7 @@ useEffect(() => {
       <label htmlFor="imageUpload" className={labelStyle}>
         {imageSrc ? "Change Image" : "Upload Image"}
       </label>
-      <h2 className="text-lg mt-4">Hello {userDetails?.name}. You can view your listings here, best of luck!</h2>{" "}
+      <h2 className="text-lg mt-4"> {userDetails?.name}</h2>{" "}
       {/* Adjust margin as needed */}
     </div>
   );

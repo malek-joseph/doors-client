@@ -2,12 +2,12 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import { selectPersonDetails } from "@/app/redux/features/listing/personFormSlice";
 import PhotoUpload from "./PhotoUpload";
 import { useEffect, useState } from "react";
-import ListingUploadCarousel from "@/components/carousels/ListingUploadCarousel";
-import Spinner from "@/components/shared/spinner/Spinner";
+import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
+import Spinner from "@/app/components/shared/spinner/Spinner";
 import localforage from "localforage";
 import imageCompression from "browser-image-compression";
 import { toast } from "react-toastify";

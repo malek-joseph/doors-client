@@ -4,12 +4,12 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import {
   selectPersonDetails,
   updatePersonDetails,
 } from "@/app/redux/features/listing/personFormSlice";
-import FeaturesSelector from "@/components/inputs/FeaturesSelector";
+import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
 import TextArea from "./TextArea";
 
 const Page = () => {

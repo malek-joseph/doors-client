@@ -8,20 +8,20 @@ import Logo from "./navbar/Logo";
 import NavLinks from "./navbar/NavLinks";
 import SearchBar from "./navbar/SearchBar";
 import { useSelector } from "react-redux";
-import { selectUserDetails } from "../app/redux/features/auth/authSlice"; // Adjust the import path as needed
+import { selectUserDetails } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
 import SwiperMenu from "./shared/menu/SwiperMenu";
 import HamburgerMenuOverlay from "./overlays/hamburger/HamburgerMenuOverlay";
 import UserAccountOverlay from "./overlays/user/UserAccountOverlay";
 import { useDispatch } from "react-redux";
-import { logout } from "../app/redux/features/auth/authSlice"; // Adjust the import path as needed
+import { logout } from "../redux/features/auth/authSlice"; // Adjust the import path as needed
 import { useRouter } from "next/navigation";
-import { useSession } from 'next-auth/react';
-import {signOut} from 'next-auth/react'
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
   const dispatch = useDispatch(); // Use useDispatch hook to dispatch actions
   const router = useRouter(); // Create the router instance
-  const { data, status } = useSession()
+  const { data, status } = useSession();
   const user = useSelector(selectUserDetails);
 
   const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
@@ -36,13 +36,11 @@ const Navbar = () => {
 
   const handleLogout = () => {
     if (user) {
-    dispatch(logout());
-
+      dispatch(logout());
     }
     if (data) {
-      signOut()
+      signOut();
     }
-      
 
     setIsUserOverlayVisible(false);
     router.push("/");

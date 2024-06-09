@@ -5,10 +5,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FOOTER_LINKS } from "../app/constants";
+import { FOOTER_LINKS } from "../constants";
 import ButtonSm from "./shared/buttons/ButtonSm";
-import googleApp from "../public/assets/images/googleApp.png";
-import appleApp from "../public/assets/images/appleApp.png";
+import googleApp from "../../public/assets/images/googleApp.png";
+import appleApp from "../../public/assets/images/appleApp.png";
 
 const Footer = () => {
   return (

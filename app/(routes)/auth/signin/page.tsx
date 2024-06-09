@@ -3,9 +3,9 @@
 
 import backgroundImage from "../../../public/assets/images/medical.jpeg"; // Replace with the path to your photo
 import logoImage from "../../../public/assets/images/logo.png"; // Replace with the path to your logo
-import LoginForm from "@/components/regestration/LoginForm";
+import LoginForm from "@/app/components/regestration/LoginForm";
 import Image from "next/image";
-import Carousel from "@/components/carousels/autoCarousel";
+import Carousel from "@/app/components/carousels/autoCarousel";
 
 const LoginPage: React.FC = () => {
   return (

@@ -8,33 +8,11 @@ import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
 import ListingCardPerson from "../cards/listingCard/ListingCardPerson";
 import SearchAndFiltersBar from "./SearchAndFiltersBar";
 import Loading from "@/app/(routes)/shortlists/loading";
+import { ListingType } from "@/app/types/listing";
 
-type ListingType = {
-  governance: string;
-  city: string;
-  totalBedrooms: number | string;
-  totalBathrooms: number | string;
-  internet: string;
-  totalRoommates: number | string;
-  roomType: string;
-  moveInDate: string;
-  furnishing: string;
-  roomBathroom: string;
-  selectedFeatures: string[];
-  monthlyRent: number;
-  deposit: number;
-  billsIncluded: boolean;
-  monthlyBills: number;
-  photos: string[];
-  roommatePreference: string;
-  roommatePreferences: string[];
-  description: string;
-  propertyDescription: string;
-  personDescription: string;
-  type: string;
-  accommodationType: string;
-  _id: string;
-};
+
+
+
 
 const ListSection = () => {
   const [listings, setListings] = useState<ListingType[]>([]);

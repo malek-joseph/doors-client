@@ -3,10 +3,10 @@
 import { useDispatch } from "react-redux";
 import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
 import { useSelector } from "react-redux";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
-import FeaturesSelector from "@/components/inputs/FeaturesSelector";
+import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
 import bedSideTable from '@/public/assets/images/bedSideTable.png';
 import wardrobe from '@/public/assets/images/wardrobe.png';
 import airConditioner from '@/public/assets/images/airConditioner.png';

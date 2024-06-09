@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 
-import Footer from "../../components/Footer";
+import Footer from "../components/Footer";
 
 function FooterVisibility() {
   const path = usePathname();
