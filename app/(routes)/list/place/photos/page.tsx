@@ -2,12 +2,11 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import PhotoUpload from "./PhotoUpload";
 import { useEffect, useState } from "react";
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
-import Spinner from "@/app/components/shared/spinner/Spinner";
 import localforage from "localforage";
 import imageCompression from "browser-image-compression";
 import { toast } from "react-toastify";
@@ -265,8 +264,7 @@ const compressImages = async (files: FileList): Promise<File[]> => {
             )}
             {loading && (
               <div className="mt-10">
-              <Spinner size={30} />
-
+                <div>loading</div>
               </div>
             )}
           </div>

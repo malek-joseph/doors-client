@@ -1,6 +1,6 @@
 /** @format */
 
-import AgeAndPlace from "@/app/components/shared/AgeAndPlace";
+import AgeAndPlace from "@/app/components/AgeAndPlace";
 import React from "react";
 
 interface PersonDetails {

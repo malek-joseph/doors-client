@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 
-import Button from "../shared/buttons/Button";
+import Button from "../buttons/Button";
 import Link from "next/link";
 import googleImg from "../../../public/assets/images/google-logo.png";
 import { useRouter } from "next/navigation";

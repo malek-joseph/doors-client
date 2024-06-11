@@ -1,7 +1,7 @@
 /** @format */
 
 import Link from "next/link";
-import { NAV_LINKS } from "../../constants/index";
+import { NAV_LINKS } from "../../../constants/index";
 
 const NavLinks = () => {
   return (
@@ -10,7 +10,7 @@ const NavLinks = () => {
         <Link
           href={link.href}
           key={link.key}
-          className="regular-16 text-gray-50 flexCenter cursor-pointer transition-all hover:font-bold">
+          className="regular-16 text-gray-50 flexCenter cursor-pointer transition-all hover:font-medium p-1">
           {link.label}
         </Link>
       ))}

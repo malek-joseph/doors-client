@@ -2,13 +2,13 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import {
   selectPropertyDetails,
   updatePropertyDetails,
 } from "@/app/redux/features/listing/placeFormSlice";
 import { useEffect, useState } from 'react';
-import PreferenceOptions from "@/app/components/shared/PreferenceOptions";
+import PreferenceOptions from "@/app/components/PreferenceOptions";
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);

@@ -5,7 +5,7 @@ import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { updatePersonDetails } from "@/app/redux/features/listing/personFormSlice";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import WarningMessage from "@/app/components/cards/message/WarningMessage";
 import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";

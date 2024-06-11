@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMessages } from "../services/messageApi";
 import MessageList from "./MessageList";
-import Button from "@/app/components/shared/buttons/Button";
+import Button from "@/app/components/buttons/Button";
 import {
   selectInitialMessage,
   clearInitialMessage,

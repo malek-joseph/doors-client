@@ -3,14 +3,14 @@
 
 import {useState, useEffect} from 'react'
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
-import PersonDetailsSectionOne from "@/app/components/sections/listingDetails/person/PersonDetailsSectionOne";
+import PersonDetailsSectionOne from "@/app/components/listingDetails/person/PersonDetailsSectionOne";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
-import PersonDetailsSectionTwo from "@/app/components/sections/listingDetails/person/PersonDetailsSectionTwo";
-import PersonDetailsSectionThree from "@/app/components/sections/listingDetails/person/PersonDetailsSectionThree";
-import PersonDetailsSectionFour from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFour";
-import PersonDetailsSectionFive from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFive";
+import PersonDetailsSectionTwo from "@/app/components/listingDetails/person/PersonDetailsSectionTwo";
+import PersonDetailsSectionThree from "@/app/components/listingDetails/person/PersonDetailsSectionThree";
+import PersonDetailsSectionFour from "@/app/components/listingDetails/person/PersonDetailsSectionFour";
+import PersonDetailsSectionFive from "@/app/components/listingDetails/person/PersonDetailsSectionFive";
 import { useRouter } from "next/navigation";
-import Spinner from "@/app/components/shared/spinner/Spinner";
+
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";

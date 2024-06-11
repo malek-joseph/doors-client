@@ -14,7 +14,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   isOverlayVisible,
 }) => {
   return (
-    <div className="padding-container" onClick={onClick}>
+    <div className="padding-container md:hidden" onClick={onClick} >
       {isOverlayVisible ? (
         <Image
           src="/assets/images/close.svg"

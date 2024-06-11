@@ -1,17 +1,16 @@
 /** @format */
-"use client"
+"use client";
 
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
-import PlaceDetailsSectionOne from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionOne";
+import PlaceDetailsSectionOne from "@/app/components/listingDetails/place/PlaceDetailsSectionOne";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
-import PlaceDetailsSectionTwo from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionTwo";
-import PlaceDetailsSectionThree from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionThree";
-import PlaceDetailsSectionFour from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFour";
-import PlaceDetailsSectionFive from "@/app/components/sections/listingDetails/place/PlaceDetailsSectionFive";
-import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
+import PlaceDetailsSectionTwo from "@/app/components/listingDetails/place/PlaceDetailsSectionTwo";
+import PlaceDetailsSectionThree from "@/app/components/listingDetails/place/PlaceDetailsSectionThree";
+import PlaceDetailsSectionFour from "@/app/components/listingDetails/place/PlaceDetailsSectionFour";
+import PlaceDetailsSectionFive from "@/app/components/listingDetails/place/PlaceDetailsSectionFive";
+import PublishEditBtns from "@/app/components/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
-import Spinner from "@/app/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
 import {
   selectPropertyDetails,
@@ -61,13 +60,13 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
       // setImageSrc(
       //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
       // );
-         const photo = userDetails.photo
-    setImageSrc(photo)
+      const photo = userDetails.photo;
+      setImageSrc(photo);
     }
   }, [userDetails]);
 
   if (!propertyDetails || !userDetails) {
-    return <Spinner />;
+    return <div>loading</div>;
   }
 
   const onEditClick = () => {
@@ -164,7 +163,7 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
               <SendMessageCard
                 name={userDetails.name}
                 photo={imageSrc}
-                listingType ={propertyDetails.type}
+                listingType={propertyDetails.type}
                 ownerId={userDetails.id}
               />
             )}

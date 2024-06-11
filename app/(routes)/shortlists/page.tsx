@@ -13,7 +13,6 @@ import {
 } from "@/app/services/shortlistService";
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import Loading from "./loading";
 import ListingImages from "@/app/components/cards/listingCard/ListingImages";
 
 const ShortlistPage: React.FC = () => {
@@ -60,7 +59,7 @@ const ShortlistPage: React.FC = () => {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <div>loading</div>;
   if (error) return <div>Error loading data: {error.message}</div>;
 
   const filteredShortlist = selectedOption

@@ -6,47 +6,44 @@ import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import { useSelector } from "react-redux";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import NumberInput from "@/app/components/inputs/NumberInput"; // Import the Input component
 import CheckboxWithLabel from "@/app/components/inputs/CheckboxWithLabel";
 
- 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = e.target;
-
-  const newValue =
-    name === "monthlyRent" || name === "deposit" ? parseFloat(value) : value;
-  dispatch(updatePropertyDetails({ [name]: newValue }));
-};
-   const handleBillsIncludedChange = (checked: boolean) => {
+    const newValue =
+      name === "monthlyRent" || name === "deposit" ? parseFloat(value) : value;
+    dispatch(updatePropertyDetails({ [name]: newValue }));
+  };
+  const handleBillsIncludedChange = (checked: boolean) => {
     dispatch(updatePropertyDetails({ billsIncluded: checked }));
-   };
-  
-   const handleMonthlyBillsChange = (e: ChangeEvent<HTMLInputElement>) => {
-     // Convert the input value to a number and update the state
-     dispatch(
-       updatePropertyDetails({ monthlyBills: parseFloat(e.target.value) || 0 })
-     );
-   };
+  };
+
+  const handleMonthlyBillsChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // Convert the input value to a number and update the state
+    dispatch(
+      updatePropertyDetails({ monthlyBills: parseFloat(e.target.value) || 0 })
+    );
+  };
 
   const handleBackClick = () => {
     router.push("/list/place/features");
   };
 
   const handleNextClick = () => {
-      router.push("/list/place/photos");
+    router.push("/list/place/photos");
   };
 
-  const isNextButtonDisabled =
-    !propertyDetails.monthlyRent  
+  const isNextButtonDisabled = !propertyDetails.monthlyRent;
 
   return (
     <div className="flex flex-col items-center justify-center ">

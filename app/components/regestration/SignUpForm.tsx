@@ -1,7 +1,7 @@
 /** @format */
 import React, { useState } from "react";
 import Link from "next/link";
-import Button from "../shared/buttons/Button";
+import Button from "../buttons/Button";
 import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";

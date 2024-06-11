@@ -3,15 +3,14 @@
 
 import { useState, useEffect } from "react";
 import ListingDetailsCarousel from "@/app/components/carousels/ListingDetailsCarousel";
-import PersonDetailsSectionOne from "@/app/components/sections/listingDetails/person/PersonDetailsSectionOne";
+import PersonDetailsSectionOne from "@/app/components/listingDetails/person/PersonDetailsSectionOne";
 import SendMessageCard from "@/app/components/cards/message/SendMessageCard";
-import PersonDetailsSectionTwo from "@/app/components/sections/listingDetails/person/PersonDetailsSectionTwo";
-import PersonDetailsSectionThree from "@/app/components/sections/listingDetails/person/PersonDetailsSectionThree";
-import PersonDetailsSectionFour from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFour";
-import PersonDetailsSectionFive from "@/app/components/sections/listingDetails/person/PersonDetailsSectionFive";
-import PublishEditBtns from "@/app/components/shared/buttons/PublishEditBtns";
+import PersonDetailsSectionTwo from "@/app/components/listingDetails/person/PersonDetailsSectionTwo";
+import PersonDetailsSectionThree from "@/app/components/listingDetails/person/PersonDetailsSectionThree";
+import PersonDetailsSectionFour from "@/app/components/listingDetails/person/PersonDetailsSectionFour";
+import PersonDetailsSectionFive from "@/app/components/listingDetails/person/PersonDetailsSectionFive";
+import PublishEditBtns from "@/app/components/buttons/PublishEditBtns";
 import { useRouter } from "next/navigation";
-import Spinner from "@/app/components/shared/spinner/Spinner";
 import { useSelector } from "react-redux";
 import {
   selectPersonDetails,
@@ -60,13 +59,13 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
       // setImageSrc(
       //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
       // );
-        const photo =  userDetails.photo
-    setImageSrc(photo)
+      const photo = userDetails.photo;
+      setImageSrc(photo);
     }
   }, [userDetails]);
 
   if (!personDetails || !userDetails) {
-    return <Spinner />;
+    return <div >loading</div>;
   }
 
   const onEditClick = () => {
@@ -114,7 +113,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
     router.push("/");
   };
 
-  if(!imageSrc) return null
+  if (!imageSrc) return null;
 
   // console.log(imageSrc);
   return (
@@ -162,8 +161,12 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
           </div>
           <div className="w-full lg:w-4/12 ">
             {imageSrc && (
-              <SendMessageCard name={userDetails.name} photo={imageSrc}  listingType ={personDetails.type}
-                ownerId={userDetails.id}/>
+              <SendMessageCard
+                name={userDetails.name}
+                photo={imageSrc}
+                listingType={personDetails.type}
+                ownerId={userDetails.id}
+              />
             )}
           </div>
           <PublishEditBtns

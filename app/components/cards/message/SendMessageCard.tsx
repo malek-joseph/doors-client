@@ -2,9 +2,9 @@
 
 "use client";
 import React, {useState, ChangeEvent} from "react";
-import CircleImage from "../../shared/CircleImage";
-import TextArea from "../../shared/TextArea";
-import Button from "../../shared/buttons/Button";
+import CircleImage from "../../CircleImage";
+import TextArea from "../../TextArea";
+import Button from "../../buttons/Button";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";

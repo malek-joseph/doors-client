@@ -7,7 +7,6 @@ import axios from "axios";
 import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
 import ListingCardPerson from "../cards/listingCard/ListingCardPerson";
 import SearchAndFiltersBar from "./SearchAndFiltersBar";
-import Loading from "@/app/(routes)/shortlists/loading";
 import { ListingType } from "@/app/types/listing";
 
 
@@ -148,7 +147,7 @@ const ListSection = () => {
       <SearchAndFiltersBar onSearch={handleSearch} onFilter={handleFilters} />
 
       {loading ? (
-        <Loading/>
+        <div>loading</div>
       ) : (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 mt-12 min-h-screen">
           {filteredListings.map((listing, i) =>

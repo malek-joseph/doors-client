@@ -6,7 +6,6 @@ import { ListingType } from "@/app/types/listing";
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import Link from "next/link";
-import Image from "next/image";
 import ListingCarousel from "@/app/components/carousels/ListingCarousel";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

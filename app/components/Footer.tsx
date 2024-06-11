@@ -6,22 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FOOTER_LINKS } from "../constants";
-import ButtonSm from "./shared/buttons/ButtonSm";
+import ButtonSm from "./buttons/ButtonSm";
 import googleApp from "../../public/assets/images/googleApp.png";
 import appleApp from "../../public/assets/images/appleApp.png";
 
 const Footer = () => {
   return (
-    <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 bg-gray-10 w-full">
+    <footer className=" flex justify-between items-center max-container padding-container relative z-30 py-5 border-t border-gray-300 w-full">
       <Link href="/" className="">
-        <Image
-          src="/logo.svg"
-          alt="logo"
-          width={40}
-          height={40}
-          className="w-8 h-auto"
-          priority
-        />
+        <Image src="/logo.svg" alt="logo" width={80} height={80} priority />
       </Link>
       <ul className=" h-full gap-2 lg:gap-5 flex flex-col lg:flex-row items-center justify-center ">
         {FOOTER_LINKS.map((link) => (

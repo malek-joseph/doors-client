@@ -4,7 +4,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import NextBackBtns from "@/app/components/shared/buttons/NextBackBtns";
+import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import {
   selectPersonDetails,
   updatePersonDetails,
