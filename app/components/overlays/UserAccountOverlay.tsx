@@ -1,8 +1,8 @@
+/** @format */
+
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
-import Image from "next/image"; // Import the Image component
-import profile from "@/public/assets/images/profile.png";
-import logout from "@/public/assets/images/logout.png";
+import { useEffect, useRef } from "react";
+import { NAV_LINKS } from "../../constants";
 
 interface UserAccountOverlayProps {
   toggleUserOverlay: () => void;
@@ -47,19 +47,30 @@ const UserAccountOverlay: React.FC<UserAccountOverlayProps> = ({
 
   return (
     <div ref={overlayRef} className="absolute z-10 top-full right-0">
-      <div className="bg-white shadow-md rounded-lg p-3 px-2">
+      <div className="bg-white shadow-md rounded-lg px-2">
         <ul className="flex flex-col space-y-2">
           <li className="flex items-center">
             <Link
               href="/profile"
-              className="ml-2 p-2 hover:bg-gray-100 rounded"
+              className="ml-2 p-2 hover:text-teal-500 rounded"
               onClick={handleProfileClick}>
               Profile
             </Link>
           </li>
+          {NAV_LINKS.map((link) => (
+            <li
+              className="flex items-center lg:hidden md:hidden"
+              key={link.key}>
+              <Link
+                href={link.href}
+                className="ml-2 p-2 hover:text-teal-500  rounded">
+                {link.label}
+              </Link>
+            </li>
+          ))}
           <li className="flex items-center">
             <button
-              className="ml-2 w-full text-left p-2 hover:bg-gray-100 rounded"
+              className="ml-2 w-full text-left p-2 hover:text-red-400 rounded"
               onClick={handleLogoutClick}>
               Logout
             </button>

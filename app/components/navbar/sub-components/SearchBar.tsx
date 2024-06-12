@@ -1,25 +1,39 @@
 /** @format */
+"use client"
 
 import Image from "next/image";
-import magnifying from "../../../public/assets/images/magnifying.svg";
+import { useState, useEffect } from "react";
+import SearchOverlay from "@/app/components/overlays/SearchOverlay";
+
 
 
 const SearchBar = () => {
+    const [isSearchOverlayVisible, setIsSearchOverlayVisible] = useState(false);
+
+  const toggleSearchOverlay = () => {
+   
+      setIsSearchOverlayVisible(!isSearchOverlayVisible);
+  };
+  
   return (
-         <div className="relative flex items-center transition-all border-gray-400 hover:border-black border cursor-pointer w-full lg:w-5/12 py-1.5 px-4 rounded-md  lg:mb-0 lg:ml-10">
+    <div className="relative flex items-center transition-all border-gray-400 hover:border-black border cursor-pointer w-full py-1.5 px-4 mx-5 rounded-md max-w-md h-12 " onClick={()=>{setIsSearchOverlayVisible(true)}}>
       <div className="mr-2">
-        <Image src={magnifying} alt="magnifying" width={15} />
+        <Image
+          src="/assets/images/magnifying.svg"
+          alt="magnifying"
+          width={20}
+          height={20}
+        />
       </div>
       <div className=" ">
-        <p className="text-sm text-gray-500 ml-2">Quick Search</p>
+        <p className="text-sm text-gray-500 ml-2">Search rooms and roommates</p>
       </div>
-      
+      {isSearchOverlayVisible && (
+        <SearchOverlay
+          toggleSearchOverlay={toggleSearchOverlay}
+        />
+      )}
     </div>
-
-    
-    
- 
-     
   );
 };
 

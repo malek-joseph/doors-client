@@ -60,7 +60,7 @@ const ShortlistPage: React.FC = () => {
   };
 
   if (loading) return <div>loading</div>;
-  if (error) return <div>Error loading data: {error.message}</div>;
+  if (error) return <div className="min-h-screen flexCenter">Error loading data: {error.message}</div>;
 
   const filteredShortlist = selectedOption
     ? shortlist.filter((item) => item.listingType === selectedOption)

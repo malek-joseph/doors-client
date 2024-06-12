@@ -1,3 +1,7 @@
+/** @format */
+
+"use client";
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUserDetails } from "../../../redux/features/auth/authSlice";
@@ -6,10 +10,8 @@ import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
-import HamburgerMenuOverlay from "@/app/components/overlays/hamburger/HamburgerMenuOverlay";
-import HamburgerMenu from "@/app/components/buttons/HamburgerMenu";
 import UserNavImage from "./sub-components/UserNavImage";
-import UserAccountOverlay from "../../overlays/user/UserAccountOverlay";
+import UserAccountOverlay from "@/app/components/overlays/UserAccountOverlay"
 
 const UserNavButton = () => {
   const { data } = useSession();
@@ -17,7 +19,6 @@ const UserNavButton = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUserDetails);
-  const [isMenuOverlayVisible, setIsMenuOverlayVisible] = useState(false);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,33 +34,33 @@ const UserNavButton = () => {
   };
 
   const handleLogout = () => {
-    if (user) {
-      dispatch(logout());
+    try {
+      if (user && !data) {
+        dispatch(logout());
+      }
+      if (data) {
+        signOut();
+        dispatch(logout());
+      }
+      toast.success("Signed out successfully");
+      setIsUserOverlayVisible(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Error logging out", error);
+      toast.error("Failed to logout");
     }
-    if (data) {
-      signOut();
-      dispatch(logout());
-    }
-    toast.success("Signed out successfully");
-    setIsUserOverlayVisible(false);
-    router.push("/");
-  };
-
-  const toggleMenuOverlay = () => {
-    setIsMenuOverlayVisible(!isMenuOverlayVisible);
   };
 
   return (
-    <>
+    <div className="relative">
       <UserNavImage imageSrc={imageSrc} toggleUserOverlay={toggleUserOverlay} />
       {isUserOverlayVisible && (user || data) && (
-        <UserAccountOverlay toggleUserOverlay={toggleUserOverlay} onLogout={handleLogout} />
+        <UserAccountOverlay
+          toggleUserOverlay={toggleUserOverlay}
+          onLogout={handleLogout}
+        />
       )}
-
-      <HamburgerMenu onClick={toggleMenuOverlay} isOverlayVisible={isMenuOverlayVisible} />
-
-      {isMenuOverlayVisible && <HamburgerMenuOverlay />}
-    </>
+    </div>
   );
 };
 

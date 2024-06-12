@@ -20,7 +20,7 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
 
   return (
     <div
-      className="lg:flexCenter md:flexCenter hidden transition-all hover:font-bold"
+      className="lg:flexCenter md:flexCenter  transition-all hover:font-bold"
       style={{ width: "50px", height: "50px", position: "relative" }}>
       {!imageSrc ? (
         <Link href="/auth/signin">

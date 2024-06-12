@@ -5,7 +5,7 @@ import { NAV_LINKS } from "../../../constants/index";
 
 const NavLinks = () => {
   return (
-    <ul className="hidden h-full gap-8 lg:flex ">
+    <ul className="hidden md:flex lg:flex  h-full gap-8  mr-5">
       {NAV_LINKS.map((link) => (
         <Link
           href={link.href}
