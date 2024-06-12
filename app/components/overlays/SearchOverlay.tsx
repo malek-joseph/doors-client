@@ -48,9 +48,7 @@ const UserAccountOverlay: React.FC<SearchOverlayProps> = ({
         <button className="px-4 py-2 text-teal-600 border border-teal-600 rounded-lg focus:outline-none">
           Flatmates
         </button>
-        <button className="px-4 py-2 text-teal-600 border border-teal-600 rounded-lg focus:outline-none">
-          Teamups
-        </button>
+     
       </div>
       <div className="mb-4">
         <input
