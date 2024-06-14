@@ -45,8 +45,10 @@ const Page = () => {
 
   const isNextButtonDisabled = !personDetails.monthlyRent;
 
+  console.log(personDetails)
+
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           Details about rent, deposit and bills
@@ -72,7 +74,7 @@ const Page = () => {
                 label="Monthly Bills Budget"
                 type="number"
                 id="monthlyBills"
-                value={String(personDetails.monthlyBills || "")} // Ensure you have 'monthlyBills' in your state
+                value={String(personDetails.monthlyBills)} 
                 onChange={handleMonthlyBillsChange}
                 required
                 autocomplete="off"

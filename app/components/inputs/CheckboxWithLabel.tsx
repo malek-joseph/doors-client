@@ -1,12 +1,12 @@
-// components/CheckboxWithLabel.tsx
-import React from 'react';
-import { Checkbox } from "@nextui-org/react";
+/** @format */
 
+// components/CheckboxWithLabel.tsx
+import React from "react";
 
 interface CheckboxWithLabelProps {
   label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void; // Callback to handle change
+  onChange: (checked: boolean) => void;
 }
 
 const CheckboxWithLabel: React.FC<CheckboxWithLabelProps> = ({
@@ -19,11 +19,29 @@ const CheckboxWithLabel: React.FC<CheckboxWithLabelProps> = ({
       type="checkbox"
       checked={checked}
       onChange={(e) => onChange(e.target.checked)}
-      className="form-checkbox h-3 w-3 border-gray-300 rounded focus:ring-teal-500 checkbox"
+      className="hidden"
     />
+    <div
+      className={`w-4 h-4 flex items-center justify-center border border-gray-300 rounded focus:ring-teal-500 cursor-pointer ${
+        checked ? "bg-teal-500 border-teal-500" : "bg-white"
+      }`}>
+      {checked && (
+        <svg
+          className="w-3 h-3 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      )}
+    </div>
     <span className="text-gray-600 text-sm">{label}</span>
   </label>
-
 );
 
 export default CheckboxWithLabel;

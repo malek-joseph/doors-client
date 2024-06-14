@@ -33,7 +33,7 @@ let userData
 
   return (
     <main className="flex flex-col items-center justify-center ">
-      <div className="w-5/6 mb-24">
+      <div className="w-5/6 ">
         <ClientComponent userData={userData} />
         <ListSection />
         <ListingsSection />

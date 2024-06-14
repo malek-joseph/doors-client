@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import { selectAccommodationType } from "@/app/redux/features/listing/placeFormSlice";
 import publishProperty from '../submit/publishProperty'
+import LoadingDoor from "@/app/components/loaders/door/LoadingDoor";
 
 
 
@@ -248,7 +249,7 @@ const compressImages = async (files: FileList): Promise<File[]> => {
   // console.log(imageURLs);
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           Property and Room photos
@@ -264,7 +265,7 @@ const compressImages = async (files: FileList): Promise<File[]> => {
             )}
             {loading && (
               <div className="mt-10">
-                <div>loading</div>
+                <LoadingDoor size={50}/>
               </div>
             )}
           </div>

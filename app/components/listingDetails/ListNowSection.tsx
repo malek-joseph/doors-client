@@ -4,7 +4,7 @@ import CardOne from "../cards/listingCard/ListNowCard"
 
 const ListSection = () => {
   return (
-    <section className="flex flex-col xl:flex-row  lg:mt-10 md:mt-10  mt-20 justify-between px-10 gap-5">
+    <section className="flex flex-col lg-flex-row md:flex-row xl:flex-row  lg:mt-10 md:mt-10  mt-24 justify-between lg:px-10 gap-5">
           <CardOne
             title="I need a roommate"
             description="Create a listing to find a potential roommate."

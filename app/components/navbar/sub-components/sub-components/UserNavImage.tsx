@@ -20,16 +20,16 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
 
   return (
     <div
-      className="lg:flexCenter md:flexCenter  transition-all hover:font-bold"
+      className="lg:flexCenter md:flexCenter  transition-all hover:font-bold hover:border-teal-500 border-2 rounded-full hover:drop-shadow-lg"
       style={{ width: "50px", height: "50px", position: "relative" }}>
       {!imageSrc ? (
         <Link href="/auth/signin">
           <div
             onClick={toggleUserOverlay}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer "
             style={{ width: "40px", height: "40px", position: "relative" }}>
             {!isImageLoaded && (
-              <Skeleton circle={true} height={40} width={40} />
+              <Skeleton circle={true} height={40} width={40} style={{top: "-5px"}}  />
             )}
             <img
               src="/assets/images/profile.png"
@@ -52,7 +52,7 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
           onClick={toggleUserOverlay}
           className="hover:cursor-pointer"
           style={{ width: "50px", height: "50px", position: "relative" }}>
-          {!isImageLoaded && <Skeleton circle={true} height={50} width={50} />}
+          {!isImageLoaded && <Skeleton circle={true} height={50} width={50} style={{top: "-5px"}} />}
           <img
             src={imageSrc}
             alt="User Image"

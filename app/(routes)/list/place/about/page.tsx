@@ -1,23 +1,28 @@
 /** @format */
 "use client";
 // Page.tsx
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updatePropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/buttons/NextBackBtns";
-import WarningMessage from "@/app/components/cards/message/WarningMessage";
 import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
-import SelectInput from "@/app/components/inputs/SelectInput"; // Import the shared SelectInput component
+import SelectInput from "@/app/components/inputs/SelectInput"; 
+import DateInput from "@/app/components/inputs/DateInput";
+import LocationInput from "@/app/components/inputs/LocationInput"; 
+import Loading from "./Loading";
+
 
 const Page = () => {
   const propertyDetails = useSelector(selectPropertyDetails);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false)
 
   type NumericValue = number | string;
+  
 
   const handleUniversalChange = (
     e:
@@ -39,46 +44,45 @@ const Page = () => {
   };
 
   const handleBackClick = () => {
+    setLoading(true)
     router.push("/list/place");
+    setLoading(false)
   };
 
   const handleNextClick = () => {
+    setLoading(true)
     if (propertyDetails) {
       dispatch(updatePropertyDetails(propertyDetails));
       router.push("/list/place/roommates");
     }
+    setLoading(false)
   };
 
   const isNextButtonDisabled =
-    !propertyDetails.governance ||
-    !propertyDetails.city ||
+    !propertyDetails.locationDetails ||
     !propertyDetails.totalBedrooms ||
     !propertyDetails.totalBathrooms ||
     !propertyDetails.internet;
 
+    console.log(propertyDetails)
+
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0 ">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
-        <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10">
+        <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-5">
           About the property
         </h2>
-        <div className="flex justify-center ">
-          <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
-            {/* <WarningMessage /> */}
-            <SelectInput
-              label="Governance"
-              name="governance"
-              value={propertyDetails.governance || ""}
-              options={["Cairo", "Giza", "Alexandria"]}
-              onChange={handleUniversalChange}
-            />
-            <SelectInput
-              label="City"
-              name="city"
-              value={propertyDetails.city || ""}
-              options={["Cairo", "Giza", "Alexandria"]}
-              onChange={handleUniversalChange}
-            />
+        <div className="flex justify-center w-full">
+          <div className="w-9/10 md:w-1/2 lg:w-2/5 flex items-center flex-col">
+            <div className="h-24 w-full flexCenter">
+              <LocationInput
+                label="Place Address"
+                type="place"
+                address={propertyDetails.address}
+                      placeholder="city, governorate"
+              />
+            </div>
+
             <NumericSelector
               title="Total Bedrooms"
               range={[1, 2, 3, "4+"]}
@@ -89,16 +93,13 @@ const Page = () => {
                 })
               }
             />
-            <NumericSelector
-              title="Total Bathrooms"
-              range={[1, 2, "3+"]}
-              selectedNumber={propertyDetails.totalBathrooms}
-              onSelectNumber={(value) =>
-                handleUniversalChange({
-                  target: { name: "totalBathrooms", value },
-                })
-              }
+            <DateInput
+              label="Avilable From"
+              name="availableFromDate"
+              value={propertyDetails.availableFromDate || ""}
+              onChange={handleUniversalChange}
             />
+
             <SelectInput
               label="Internet"
               name="internet"
@@ -117,6 +118,7 @@ const Page = () => {
           onBackClick={handleBackClick}
           onNextClick={handleNextClick}
           isNextDisabled={isNextButtonDisabled}
+          loading={loading}
         />
       </div>
     </div>

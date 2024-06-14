@@ -6,7 +6,7 @@ import React from "react";
 interface PersonDetails {
   gender?: string;
   city: string;
-  governance: string;
+  governorate: string;
   roomType: string;
   roommatePreference: string;
   furnishing: string;
@@ -17,7 +17,7 @@ interface PersonDetails {
 const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
   gender,
   city,
-  governance,
+  governorate,
   roommatePreference,
   furnishing,
   bathroomType,
@@ -29,7 +29,7 @@ const PlaceDetailsSectionOne: React.FC<PersonDetails> = ({
     <div className="">
       <div className=" mb-2">
         <h2 className="text-xl font-semibold text-gray-600">
-          {`Avilable for rent in ${city}, ${governance}.`}
+          {`Avilable for rent in ${city}, ${governorate}.`}
         </h2>
         <h3 className="text-gray-500 flex flex-col">
           {`${furnishing} ${roomType} room in a ${accommodationType}.`}

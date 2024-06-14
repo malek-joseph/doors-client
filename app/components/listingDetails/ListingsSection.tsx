@@ -1,186 +1,106 @@
 /** @format */
 "use client"
-// ListSection.tsx
 
-import { useState, useEffect } from "react";
 import axios from "axios";
-import ListingCardPlace from "../cards/listingCard/ListingCardPlace";
-import ListingCardPerson from "../cards/listingCard/ListingCardPerson";
-import SearchAndFiltersBar from "./SearchAndFiltersBar";
+import { useState, useEffect } from "react";
+import ListingCardPlace from "@/app/components/cards/listingCard/ListingCardPlace";
+import ListingCardPerson from "@/app/components/cards/listingCard/ListingCardPerson";
+import Pagination from "@/app/components/Pagination";
 import { ListingType } from "@/app/types/listing";
+import LoadingDoor from "@/app/components/loaders/door/LoadingDoor";
 
-
-
-
-
-const ListSection = () => {
+const ListSection =  () => {
   const [listings, setListings] = useState<ListingType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [filteredListings, setFilteredListings] = useState<ListingType[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [filters, setFilters] = useState<any>({
-    listingType: null,
-    roommatePreference: null,
-    rentRange: [500, 10000], // Min and Max rent range
-    internet: null,
-    city: null,
-    governance: null,
-  });
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const listingsPerPage = 9;
 
   useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const [propertiesResponse, personsResponse] = await Promise.all([
+          axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/allProperties`
+          ),
+          axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/allPersons`
+          ),
+        ]);
+
+        const properties: ListingType[] = propertiesResponse.data;
+        const persons: ListingType[] = personsResponse.data;
+
+        setListings([...properties, ...persons]);
+      } catch (error) {
+        console.error("Error fetching property details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchListings();
   }, []);
 
-  const fetchListings = async () => {
-    setLoading(true);
-    try {
-      const [propertiesResponse, personsResponse] = await Promise.all([
-        axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/allProperties`
-        ),
-        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/allPersons`),
-      ]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
-      const properties: ListingType[] = propertiesResponse.data;
-      const persons: ListingType[] = personsResponse.data;
-
-      // const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
-
-      // const updatedProperties = properties.map((listing) => ({
-      //   ...listing,
-      //   photos: listing.photos.map((photo) => {
-      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-      //     return `${baseURL}/${photoPathWithoutUploads}`;
-      //   }),
-      // }));
-
-      // const updatedPersons = persons.map((listing) => ({
-      //   ...listing,
-      //   photos: listing.photos.map((photo) => {
-      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-      //     return `${baseURL}/${photoPathWithoutUploads}`;
-      //   }),
-      // }));
-
-      // const combinedListings = [...updatedProperties, ...updatedPersons];
-      const combinedListings = [...properties, ...persons];
-
-      setListings(combinedListings);
-      setFilteredListings(combinedListings); // Initialize filtered listings with all listings
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching property details:", error);
-      setLoading(false);
-    }
-  };
-
-  const handleSearch = (searchTerm: string) => {
-    setSearchTerm(searchTerm);
-    applyFilters(searchTerm, filters);
-  };
-
-  const handleFilters = (newFilters: any) => {
-    setFilters(newFilters);
-    applyFilters(searchTerm, newFilters);
-  };
-
-  const applyFilters = (searchTerm: string, filters: any) => {
-    let filteredList = [...listings];
-
-    // Apply search term filter
-    filteredList = filteredList.filter(
-      (listing) =>
-        listing.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        listing.governance.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        listing.accommodationType
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        listing.roommatePreference
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
+  if (loading) {
+    return (
+      <div className="flexCenter h-screen w-full ">
+        <LoadingDoor size={60} />
+      </div>
     );
+  }
 
-    // Apply additional filters
-    if (filters.listingType) {
-      filteredList = filteredList.filter(
-        (listing) => listing.type === filters.listingType
-      );
-    }
-    if (filters.roommatePreference) {
-      filteredList = filteredList.filter(
-        (listing) => listing.roommatePreference == filters.roommatePreference
-      );
-    }
-    if (filters.rentRange) {
-      filteredList = filteredList.filter(
-        (listing) =>
-          listing.monthlyRent >= filters.rentRange[0] &&
-          listing.monthlyRent <= filters.rentRange[1]
-      );
-    }
-    if (filters.internet !== null) {
-      filteredList = filteredList.filter(
-        (listing) =>
-          listing.internet === (filters.internet === true ? "yes" : "no")
-      );
-    }
-    if (filters.city) {
-      filteredList = filteredList.filter((listing) =>
-        listing.city.toLowerCase().includes(filters.city.toLowerCase())
-      );
-    }
-    if (filters.governance) {
-      filteredList = filteredList.filter((listing) =>
-        listing.governance
-          .toLowerCase()
-          .includes(filters.governance.toLowerCase())
-      );
-    }
+  // Get current listings
+  const indexOfLastListing = currentPage * listingsPerPage;
+  const indexOfFirstListing = indexOfLastListing - listingsPerPage;
+  const currentListings = listings.slice(
+    indexOfFirstListing,
+    indexOfLastListing
+  );
 
-    setFilteredListings(filteredList);
-  };
-
-  // console.log(filteredListings);
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mx-auto mt-8">
-      <SearchAndFiltersBar onSearch={handleSearch} onFilter={handleFilters} />
-
-      {loading ? (
-        <div>loading</div>
-      ) : (
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 my-3 mt-12 min-h-screen">
-          {filteredListings.map((listing, i) =>
-            listing.type === "place" ? (
-              <ListingCardPlace
-                key={i}
-                photos={listing.photos}
-                monthlyRent={listing.monthlyRent}
-                propertyDescription={listing.propertyDescription}
-                billsIncluded={listing.billsIncluded}
-                governance={listing.governance}
-                city={listing.city}
-                id={listing._id}
-                loading={loading}
-                accommodationType={listing.accommodationType}
-              />
-            ) : (
-              <ListingCardPerson
-                key={i}
-                photos={listing.photos}
-                monthlyRent={listing.monthlyRent}
-                personDescription={listing.personDescription}
-                billsIncluded={listing.billsIncluded}
-                governance={listing.governance}
-                city={listing.city}
-                id={listing._id}
-                loading={loading}
-                accommodationType={listing.accommodationType}
-              />
-            )
-          )}
-        </section>
-      )}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-12 min-h-screen">
+        {currentListings.map((listing, i) =>
+          listing.type === "place" ? (
+            <ListingCardPlace
+              key={i}
+              photos={listing.photos}
+              monthlyRent={listing.monthlyRent}
+              propertyDescription={listing.propertyDescription}
+              billsIncluded={listing.billsIncluded}
+              governorate={listing.governorate}
+              city={listing.city}
+              id={listing._id}
+              accommodationType={listing.accommodationType}
+            />
+          ) : (
+            <ListingCardPerson
+              key={i}
+              photos={listing.photos}
+              monthlyRent={listing.monthlyRent}
+              personDescription={listing.personDescription}
+              billsIncluded={listing.billsIncluded}
+              governorate={listing.governorate}
+              city={listing.city}
+              id={listing._id}
+              accommodationType={listing.accommodationType}
+            />
+          )
+        )}
+      </section>
+      <Pagination
+        listingsPerPage={listingsPerPage}
+        totalListings={listings.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import {
   selectPersonDetails,
   updatePersonDetails,
 } from "@/app/redux/features/listing/personFormSlice";
-import TextArea from "./TextArea";
+import TextArea from "@/app/components/inputs/TextArea";
 
 const Page = () => {
   const personDetails = useSelector(selectPersonDetails);
@@ -38,7 +38,7 @@ const Page = () => {
   const isNextButtonDisabled = wordCount < 5;
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           About the person

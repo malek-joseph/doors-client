@@ -1,4 +1,7 @@
 /** @format */
+
+// RootLayout.tsx
+
 import Navbar from "@/app/components/navbar/Navbar";
 import Footer from "@/app/components/Footer";
 import "./globals.css";
@@ -26,8 +29,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
         <link rel="icon" href="/image/favicon.png" />
+      </head>
+      <body className={inter.className}>
         <Providers>
           <Navbar />
           {children}

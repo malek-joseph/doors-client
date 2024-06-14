@@ -26,7 +26,7 @@ const NumericSelector: React.FC<NumericSelectorProps> = ({
             key={index}
             className={`px-4 py-2 border rounded-md ${
               selectedNumber === value
-                ? "bg-teal-200 text-white"
+                ? "bg-teal-500 text-white"
                 : "bg-white border-gray-300"
             }`}
             onClick={() => onSelectNumber(value)}>

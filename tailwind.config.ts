@@ -1,4 +1,6 @@
-import type { Config } from 'tailwindcss'
+/** @format */
+
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -51,8 +53,18 @@ const config: Config = {
       fontFamily: {
         fancy: ["Roboto Mono"],
       },
+      keyframes: {
+        "rotate-square": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        "rotate-square": "rotate-square 2s linear infinite",
+      },
     },
   },
   plugins: [],
 };
-export default config
+
+export default config;

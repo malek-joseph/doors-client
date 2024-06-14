@@ -18,6 +18,10 @@ input[type='number'] {
   -moz-appearance: textfield; 
 }
 
+.hide-autocomplete-loader input + div {
+  display: none !important;
+}
+
 
 
 

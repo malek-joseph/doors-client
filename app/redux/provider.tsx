@@ -3,26 +3,39 @@
 "use client";
 
 import React from "react";
-import { store, persistor } from "./store"; // Import persistor here
+import { store, persistor } from "./store"; 
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react"; // Import PersistGate
+import { PersistGate } from "redux-persist/integration/react"; 
 
 import NextAuthProvider from "../providers/NextAuthProvider";
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import NextTopLoader from 'nextjs-toploader';
+
 
 export function Providers({ children }: { children: React.ReactNode }) {
+
+  
   return (
     <Provider store={store}>
-      <PersistGate
-        persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <NextAuthProvider>
-          {children}
-          <ProgressBar
-            height="4px"
+          <NextTopLoader
             color="teal"
-            options={{ showSpinner: false }}
-            shallowRouting
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            template='<div class="bar" role="bar"><div class="peg"></div></div> 
+  <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
+            zIndex={1600}
+            showAtBottom={false}
           />
+
+          {children}
+         
         </NextAuthProvider>
       </PersistGate>
     </Provider>

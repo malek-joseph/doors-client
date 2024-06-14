@@ -6,12 +6,12 @@ import { useDispatch } from "react-redux";
 import { updatePersonDetails } from "@/app/redux/features/listing/personFormSlice";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/buttons/NextBackBtns";
-import WarningMessage from "@/app/components/cards/message/WarningMessage";
-import NumericSelector from "@/app/components/inputs/NumericSelector";
 import { useSelector } from "react-redux";
 import { selectPersonDetails } from "@/app/redux/features/listing/personFormSlice";
 import SelectInput from "@/app/components/inputs/SelectInput"; // Import the shared SelectInput component
-import DateInput from "@/app/components/inputs/DateInput"; // Import the shared SelectInput component
+import DateInput from "@/app/components/inputs/DateInput";
+import LocationInput from "@/app/components/inputs/LocationInput"; 
+
 
 const Page = () => {
   const personDetails = useSelector(selectPersonDetails);
@@ -51,41 +51,32 @@ const Page = () => {
   };
 
   const isNextButtonDisabled =
-    !personDetails.governance ||
-    !personDetails.city ||
+    !personDetails.locationDetails ||
     !personDetails.moveInDate ||
     !personDetails.internet;
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0  md:mt-0">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10">
           My Preferences
         </h2>
         <div className="flex justify-center ">
-          <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
-            {/* <WarningMessage /> */}
-            <SelectInput
-              label="Governance"
-              name="governance"
-              value={personDetails.governance || ""}
-              options={["Cairo", "Giza", "Alexandria"]}
-              onChange={handleUniversalChange}
+          <div className="w-9/10 md:w-1/2 lg:w-2/5 flex items-center flex-col">
+            <LocationInput
+              label="Your Address"
+              type="person"
+              address={personDetails.address}
+              placeholder="city, governorate"
             />
-            <SelectInput
-              label="City"
-              name="city"
-              value={personDetails.city || ""}
-              options={["Cairo", "Giza", "Alexandria"]}
-              onChange={handleUniversalChange}
-            />
+
             <DateInput
               label="Move In Date"
               name="moveInDate"
               value={personDetails.moveInDate || ""}
               onChange={handleUniversalChange}
             />
-         
+
             <SelectInput
               label="Internet"
               name="internet"

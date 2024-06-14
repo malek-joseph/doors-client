@@ -60,7 +60,12 @@ const ShortlistPage: React.FC = () => {
   };
 
   if (loading) return <div>loading</div>;
-  if (error) return <div className="min-h-screen flexCenter">Error loading data: {error.message}</div>;
+  if (error)
+    return (
+      <div className="min-h-screen flexCenter">
+        Error loading data: {error.message}
+      </div>
+    );
 
   const filteredShortlist = selectedOption
     ? shortlist.filter((item) => item.listingType === selectedOption)
@@ -155,7 +160,7 @@ const ShortlistPage: React.FC = () => {
                         A {item.listingDetails.accommodationType} is for rent
                         in:
                       </span>{" "}
-                      {item.listingDetails.governance},{" "}
+                      {item.listingDetails.governorate},{" "}
                       {item.listingDetails.city}
                     </p>
                   </div>
@@ -189,7 +194,7 @@ const ShortlistPage: React.FC = () => {
                         Looking for a {item.listingDetails.accommodationType}{" "}
                         in:
                       </span>{" "}
-                      {item.listingDetails.governance},{" "}
+                      {item.listingDetails.governorate},{" "}
                       {item.listingDetails.city}
                     </p>
                   </div>

@@ -1,5 +1,5 @@
 /** @format */
-
+"use client"
 import ListingImages from "./ListingImages";
 import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -15,11 +15,11 @@ interface ListingCardProps {
   monthlyRent: number;
   propertyDescription: string;
   billsIncluded: boolean;
-  governance: string;
+  governorate: string;
   city: string;
   id: string;
   accommodationType: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
 const MAX_DESCRIPTION_LENGTH = 45; // Adjust the desired maximum length
@@ -29,7 +29,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
   monthlyRent,
   propertyDescription,
   billsIncluded,
-  governance,
+  governorate,
   city,
   id,
   loading,
@@ -95,7 +95,7 @@ const ListingCardPlace: React.FC<ListingCardProps> = ({
               <span className="text-sm text-gray-500">
                 A {accommodationType} is for rent in:
               </span>{" "}
-              {governance}, {city}
+              {governorate}, {city}
             </p>
           </div>
         </div>

@@ -96,7 +96,7 @@ useEffect(() => {
             <PersonDetailsSectionOne
               gender={userDetails.gender}
               city={personDetails.city}
-              governance={personDetails.governance}
+              governorate={personDetails.governorate}
               roomType={personDetails.roomType}
               roommatePreference={personDetails.roommatePreference}
               furnishing={personDetails.furnishing}

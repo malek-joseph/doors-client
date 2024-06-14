@@ -22,6 +22,9 @@ import publishProperty from "./publishProperty";
 import { useDispatch } from "react-redux";
 import localforage from "localforage";
 
+
+
+
 const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const { id } = params;
   const router = useRouter();
@@ -32,6 +35,7 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     localforage
@@ -52,21 +56,14 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     if (userDetails && userDetails.photo) {
-      // console.log(userDetails)
-      // const photoPathWithoutUploads = userDetails.photo.replace(
-      //   /^uploads\//,
-      //   ""
-      // );
-      // setImageSrc(
-      //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-      // );
+  
       const photo = userDetails.photo;
       setImageSrc(photo);
     }
   }, [userDetails]);
 
   if (!propertyDetails || !userDetails) {
-    return <div>loading</div>;
+    return <div>loading... </div>
   }
 
   const onEditClick = () => {
@@ -99,7 +96,8 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
       updatedImages,
       userDetails,
       updatedPropertyDetails,
-      accommodationType
+      accommodationType,
+      setLoading
     );
     localforage
       .removeItem("propertyImages")
@@ -113,10 +111,11 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
     dispatch(clearPlaceForm());
     router.push("/");
   };
+  // console.log(loading)
 
   // console.log(imageURLs);
   return (
-    <main className="flex flex-col items-center justify-center mb-32">
+    <main className="flex flex-col items-center justify-center mb-32 mt-20 lg:mt-0 md:mt-0">
       <div className="w-5/6 ">
         <div className="my-8">
           {imageURLs?.length > 0 && (
@@ -127,8 +126,8 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
           <div className="w-full lg:w-8/12">
             <PlaceDetailsSectionOne
               gender={userDetails.gender}
-              city={propertyDetails.city}
-              governance={propertyDetails.governance}
+              city={propertyDetails.locationDetails.city}
+              governorate={propertyDetails.locationDetails.governorate}
               roomType={propertyDetails.roomType}
               roommatePreference={propertyDetails.roommatePreference}
               furnishing={propertyDetails.furnishing}
@@ -171,6 +170,7 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
           <PublishEditBtns
             onEditClick={onEditClick}
             onPublishClick={onPublishClick}
+            loading={loading}
           />
         </div>
       </div>
@@ -179,3 +179,4 @@ const PropertyDetailsReview = ({ params }: { params: { id: number } }) => {
 };
 
 export default PropertyDetailsReview;
+ 

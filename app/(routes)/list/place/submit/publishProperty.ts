@@ -8,9 +8,11 @@ const publishProperty = async (
   imageFiles: FileList,
   userDetails: any,
   updatedPropertyDetails: any,
-  accommodationType: any
+  accommodationType: any,
+  setLoading: any
 ) => {
   const formData = new FormData();
+  setLoading(true)
   formData.append("userId", userDetails.id);
   formData.append("propertyDetails", JSON.stringify(updatedPropertyDetails));
   formData.append("accommodationType", accommodationType);
@@ -36,8 +38,11 @@ const publishProperty = async (
     // Handle the response from the createProperty endpoint
     const responseData = createPropertyResponse.data;
     toast.success("Property published successfully");
+    setLoading(false)
   } catch (error) {
     toast.error("Error publishing property");
+    setLoading(false);
+
   }
 };
 

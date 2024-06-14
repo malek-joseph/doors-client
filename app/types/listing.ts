@@ -1,5 +1,7 @@
+/** @format */
+
 export type ListingType = {
-  governance: string;
+  governorate: string;
   city: string;
   totalBedrooms: number | string;
   totalBathrooms: number | string;
@@ -24,4 +26,3 @@ export type ListingType = {
   accommodationType: string;
   _id: string;
 };
-

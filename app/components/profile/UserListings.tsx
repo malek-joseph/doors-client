@@ -40,20 +40,18 @@ const UserListings = () => {
   const markAsRented = async (listingId: string, listingType: string) => {
     try {
       await axios.delete(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/delete-listing/${listingType}/${listingId}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/delete-listing/${listingType}/${listingId}`
       );
 
-          toast.success("Listing deleted successfully");
+      toast.success("Listing deleted successfully");
 
       // Refresh listings after deletion
       if (userDetails && userDetails.id) {
         getListings(userDetails.id);
       }
-
     } catch (error) {
       console.error("Error marking listing as rented", error);
-          toast.error("Error marking listing as rented");
-
+      toast.error("Error marking listing as rented");
     }
   };
 
@@ -97,7 +95,7 @@ const UserListings = () => {
                         {listing.accommodationType}
                       </h3>
                       <p className="text-gray-400">
-                        {listing.governance}, {listing.city}
+                        {listing.governorate}, {listing.city}
                       </p>
                     </div>
                   </div>
@@ -157,7 +155,7 @@ const UserListings = () => {
                         {listing.accommodationType}
                       </h3>
                       <p className="text-gray-400">
-                        {listing.governance}, {listing.city}
+                        {listing.governorate}, {listing.city}
                       </p>
                     </div>
                   </div>

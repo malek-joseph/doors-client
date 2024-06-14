@@ -1,16 +1,23 @@
+/** @format */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-
-interface PersonDetails { 
-  governance: string;
+interface LocationDetails {
+  governorate: string;
   city: string;
+  formattedAddress: string;
+  placeId: string;
+  street?: string;
+
+  
+}
+
+interface PersonDetails {
   moveInDate: string;
   totalBedrooms: number | string;
   totalBathrooms: number | string;
   internet: string;
-  totalRoommates: number | string; 
+  totalRoommates: number | string;
   roomType: string;
   furnishing: string;
   roomBathroom: string;
@@ -25,19 +32,27 @@ interface PersonDetails {
   description: string;
   personDescription: string;
   type: string;
+  locationDetails: LocationDetails;
+    address: string;
 }
 
 interface PersonFormState {
   accommodationType: string | null;
   personDetails: PersonDetails;
 }
- 
+
+const initialLocationDetails: LocationDetails = {
+  governorate: "",
+  city: "",
+  formattedAddress: "",
+  placeId: "",
+  street: ""
+};
+
 const initialState: PersonFormState = {
   accommodationType: "",
   personDetails: {
-    governance: "",
-    city: "",
-    moveInDate:"",
+    moveInDate: "",
     totalBedrooms: 1,
     totalBathrooms: 1,
     internet: "",
@@ -45,19 +60,20 @@ const initialState: PersonFormState = {
     roomType: "",
     furnishing: "",
     roomBathroom: "",
-    selectedFeatures: [], 
-    monthlyRent: 0,
-    deposit: 0,
+    selectedFeatures: [],
+    monthlyRent: "",
+    deposit: "",
     billsIncluded: true,
-    monthlyBills: 0,
+    monthlyBills: "",
     photos: [],
     roommatePreference: "",
     roommatePreferences: [],
     description: "",
     personDescription: "",
-    type: ""
-    
-  },  
+    type: "",
+    locationDetails: initialLocationDetails,
+    address: "", 
+  },
 };
 
 const personFormSlice = createSlice({
@@ -73,6 +89,15 @@ const personFormSlice = createSlice({
     ) => {
       state.personDetails = { ...state.personDetails, ...action.payload };
     },
+    updateLocationDetails: (
+      state,
+      action: PayloadAction<Partial<LocationDetails>>
+    ) => {
+      state.personDetails.locationDetails = {
+        ...state.personDetails.locationDetails,
+        ...action.payload,
+      };
+    },
     resetForm: () => initialState,
     updatePhotos: (state, action: PayloadAction<string[]>) => {
       state.personDetails.photos = action.payload;
@@ -80,6 +105,9 @@ const personFormSlice = createSlice({
     clearPersonForm: (state) => {
       state.accommodationType = null;
       state.personDetails = initialState.personDetails;
+    },
+       updatePersonAddress: (state, action: PayloadAction<string>) => {
+      state.personDetails.address = action.payload;
     },
   },
 });
@@ -90,14 +118,14 @@ export const {
   resetForm,
   updatePhotos,
   clearPersonForm,
+  updatePersonAddress
 } = personFormSlice.actions;
 
 // Selectors
 export const selectAccommodationType = (state: {
   personForm: PersonFormState;
 }) => state.personForm.accommodationType;
-export const selectPersonDetails = (state: {
-  personForm: PersonFormState;
-}) => state.personForm.personDetails;
+export const selectPersonDetails = (state: { personForm: PersonFormState }) =>
+  state.personForm.personDetails;
 
 export default personFormSlice.reducer;

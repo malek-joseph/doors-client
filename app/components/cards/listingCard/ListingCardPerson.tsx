@@ -1,4 +1,5 @@
 /** @format */
+"use client"
 
 import ListingImages from "./ListingImages";
 import Link from "next/link";
@@ -15,10 +16,10 @@ interface ListingCardProps {
   monthlyRent: number;
   personDescription: string;
   billsIncluded: boolean;
-  governance: string;
+  governorate: string;
   city: string;
   id: string;
-  loading: boolean;
+  loading?: boolean;
   accommodationType: string;
 }
 
@@ -29,7 +30,7 @@ const ListingCardPerson: React.FC<ListingCardProps> = ({
   monthlyRent,
   personDescription,
   billsIncluded,
-  governance,
+  governorate,
   city,
   id,
   loading,
@@ -93,7 +94,7 @@ const ListingCardPerson: React.FC<ListingCardProps> = ({
               <span className="text-sm text-gray-500">
                 Looking for a {accommodationType} in:
               </span>{" "}
-              {governance}, {city}
+              {governorate}, {city}
             </p>
           </div>
         </div>

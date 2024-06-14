@@ -1,5 +1,5 @@
 export const NAV_LINKS = [
-  { href: '/shortlists', key: 'shortlist', label: 'Shortlist' },
+  { href: '/shortlists', key: 'shortlist', label: 'Shortlists' },
   { href: '/messages', key: 'messages', label: 'Messages'},
   // { href: '/', key: 'guides', label: 'Guides'},
 ]
@@ -10,19 +10,17 @@ export const FOOTER_LINKS = [
 ]
 
 
-
-
 export const accommodationTypes = [
   {
-    name: "Room(s) in an existing sharehouse",
-    iconSrc: "/assets/images/room.png",
+    name: "Shared appartment",
+    iconSrc: "/assets/images/appartment.png",
   },
-  { name: "Whole property for rent", iconSrc: "/assets/images/whole.png" },
+  { name: "Shared house", iconSrc: "/assets/images/whole.png" },
   {
-    name: "Student accommodation",
-    iconSrc: "/assets/images/students.png",
+    name: "Students Place",
+    iconSrc: "/assets/images/students-place.png",
   },
-  { name: "Homestay", iconSrc: "/assets/images/homestay.png" },
+  { name: "Family home", iconSrc: "/assets/images/family-home.png" },
 ];
 
 

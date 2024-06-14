@@ -8,7 +8,9 @@ const publishPerson = async (
   imageFiles: FileList,
   userDetails: any,
   updatedPersonDetails: any,
-  accommodationType: any
+  accommodationType: any,
+  setLoading: any
+
 ) => {
   const formData = new FormData();
   formData.append("userId", userDetails.id);
@@ -23,6 +25,7 @@ const publishPerson = async (
   });
 
   try {
+    setLoading(true)
     const createPersonResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/createPerson`,
       formData,
@@ -36,8 +39,10 @@ const publishPerson = async (
     // Handle the response from the createPerson endpoint
     const responseData = createPersonResponse.data;
     toast.success("Person published successfully");
+    setLoading(false)
   } catch (error) {
     toast.error("Error publishing person");
+    setLoading(false)
   }
 };
 

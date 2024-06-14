@@ -1,13 +1,15 @@
 // ButtonGroup.tsx
 import React from 'react';
+import LoadingDoor from "@/app/components/loaders/door/LoadingDoor"
 
 interface ButtonGroupProps {
-  onBackClick: () => void;
-  onNextClick: () => void;
+  onBackClick?: () => void;
+  onNextClick?: () => void;
   isNextDisabled?: boolean;
+  loading?: boolean;
 }
 
-const NextBackBtns: React.FC<ButtonGroupProps> = ({ onBackClick, onNextClick, isNextDisabled }) => {
+const NextBackBtns: React.FC<ButtonGroupProps> = ({ onBackClick, onNextClick, isNextDisabled, loading }) => {
 
 
   return (
@@ -20,10 +22,12 @@ const NextBackBtns: React.FC<ButtonGroupProps> = ({ onBackClick, onNextClick, is
       <button
         className={`bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mx-auto ${
           isNextDisabled ? "cursor-not-allowed" : "cursor-pointer"
-        }`}
+        } 
+        ${loading ? "cursor-not-allowed bg-teal-100" :""}
+        `}
         onClick={onNextClick}
         disabled={isNextDisabled}>
-        Next
+        {!loading ? "Next" : <LoadingDoor size={20} />}
       </button>
     </div>
   );

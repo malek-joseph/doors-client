@@ -1,15 +1,22 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface LocationDetails {
+  governorate: string;
+  city: string;
+  formattedAddress: string;
+  placeId: string;
+  street?: string;
 
+}
 
 interface PropertyDetails {
-  governance: string;
-  city: string;
+  locationDetails: LocationDetails;
+  availableFromDate: string;
   totalBedrooms: number | string;
   totalBathrooms: number | string;
   internet: string;
-  totalRoommates: number | string; 
+  totalRoommates: number | string;
   roomType: string;
   furnishing: string;
   roomBathroom: string;
@@ -24,18 +31,26 @@ interface PropertyDetails {
   description: string;
   propertyDescription: string;
   type: string;
+    address: string;
 }
 
 interface PlaceFormState {
   accommodationType: string | null;
   propertyDetails: PropertyDetails;
 }
+const initialLocationDetails: LocationDetails = {
+  governorate: "",
+  city: "",
+  formattedAddress: "",
+  placeId: "",
+  street: ""
+};
  
 const initialState: PlaceFormState = {
   accommodationType: "",
   propertyDetails: {
-    governance: "",
-    city: "",
+    locationDetails: initialLocationDetails,
+    availableFromDate: "",
     totalBedrooms: 1,
     totalBathrooms: 1,
     internet: "",
@@ -43,19 +58,19 @@ const initialState: PlaceFormState = {
     roomType: "",
     furnishing: "",
     roomBathroom: "",
-    selectedFeatures: [], 
-    monthlyRent: 0,
-    deposit: 0,
+    selectedFeatures: [],
+    monthlyRent: "",
+    deposit: "",
     billsIncluded: true,
-    monthlyBills: 0,
+    monthlyBills: "",
     photos: [],
     roommatePreference: "",
     roommatePreferences: [],
     description: "",
     propertyDescription: "",
-    type: ""
-    
-  },  
+    type: "",
+    address: "", 
+  },
 };
 
 const placeFormSlice = createSlice({
@@ -79,6 +94,9 @@ const placeFormSlice = createSlice({
       state.accommodationType = null;
       state.propertyDetails = initialState.propertyDetails;
     },
+    updatePropertyAddress: (state, action: PayloadAction<string>) => {
+      state.propertyDetails.address = action.payload;
+    },
   },
 });
 
@@ -88,6 +106,7 @@ export const {
   resetForm,
   updatePhotos,
   clearPlaceForm,
+  updatePropertyAddress
 } = placeFormSlice.actions;
 
 // Selectors

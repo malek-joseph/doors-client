@@ -29,7 +29,6 @@ const Page = () => {
   };
 
   const handleMonthlyBillsChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // Convert the input value to a number and update the state
     dispatch(
       updatePropertyDetails({ monthlyBills: parseFloat(e.target.value) || 0 })
     );
@@ -46,13 +45,13 @@ const Page = () => {
   const isNextButtonDisabled = !propertyDetails.monthlyRent;
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           Details about rent, deposit and bills
         </h2>
         <div className="flex justify-center  ">
-          <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
+          <div className="w-9/10 md:w-1/2 lg:w-2/5  flex items-center flex-col">
             <NumberInput
               label="Monthly Rent"
               type="number"
@@ -72,7 +71,7 @@ const Page = () => {
                 label="Monthly Bills"
                 type="number"
                 id="monthlyBills"
-                value={String(propertyDetails.monthlyBills || "")} // Ensure you have 'monthlyBills' in your state
+                value={String(propertyDetails.monthlyBills || "")}
                 onChange={handleMonthlyBillsChange}
                 required
                 autocomplete="off"
@@ -83,7 +82,7 @@ const Page = () => {
               label="Security Deposit"
               type="number"
               id="deposit"
-              value={String(propertyDetails.deposit)}
+              value={String(propertyDetails.deposit || "")}
               onChange={handleInputChange}
               required
               autocomplete="off"

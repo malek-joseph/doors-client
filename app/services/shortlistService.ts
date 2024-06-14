@@ -1,18 +1,20 @@
+/** @format */
+
 // services/shortlistService.ts
 
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your backend API URL
 
 interface ShortlistItem {
   id: string;
-  type: 'property' | 'person';
+  type: "property" | "person";
   title?: string;
   name?: string;
   city: string;
   monthlyRent: number;
   billsIncluded: boolean;
-  governance: string;
+  governorate: string;
   photos: string[];
 }
 
@@ -37,7 +39,7 @@ export const getShortlists = async (userId: string) => {
     // });
 
     // return updatedShortlist;
-    return response.data
+    return response.data;
   } catch (error) {
     throw new Error("Failed to fetch shortlists");
   }
@@ -48,8 +50,14 @@ export const addShortlist = async (shortlistData: ShortlistItem) => {
   return response.data;
 };
 
-export const updateShortlist = async (id: string, shortlistData: Partial<ShortlistItem>) => {
-  const response = await axios.put(`${API_URL}/shortlists/${id}`, shortlistData);
+export const updateShortlist = async (
+  id: string,
+  shortlistData: Partial<ShortlistItem>
+) => {
+  const response = await axios.put(
+    `${API_URL}/shortlists/${id}`,
+    shortlistData
+  );
   return response.data;
 };
 

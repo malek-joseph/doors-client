@@ -32,6 +32,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     localforage
@@ -52,13 +53,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     if (userDetails && userDetails.photo) {
-      // const photoPathWithoutUploads = userDetails.photo.replace(
-      //   /^uploads\//,
-      //   ""
-      // );
-      // setImageSrc(
-      //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-      // );
+
       const photo = userDetails.photo;
       setImageSrc(photo);
     }
@@ -69,7 +64,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
   }
 
   const onEditClick = () => {
-    router.push("/list/person/person");
+    router.push("/list/person/property");
   };
 
   const arrayToFileList = (files: (File | Blob)[]): FileList => {
@@ -98,15 +93,16 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
       updatedImages,
       userDetails,
       updatedPersonDetails,
-      accommodationType
+      accommodationType,
+      setLoading
     );
     localforage
       .removeItem("personImages")
       .then(() => {
-        // Item removed successfully
+    
       })
       .catch((error) => {
-        // Handle error
+       
         console.error("Error removing item:", error);
       });
     dispatch(clearPersonForm());
@@ -117,7 +113,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
 
   // console.log(imageSrc);
   return (
-    <main className="flex flex-col items-center justify-center mb-32">
+    <main className="flex flex-col items-center justify-center mb-32 mt-20 lg:mt-0 md:mt-0">
       <div className="w-5/6 ">
         <div className="my-8">
           {imageURLs?.length > 0 && (
@@ -128,8 +124,8 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
           <div className="w-full lg:w-8/12">
             <PersonDetailsSectionOne
               gender={userDetails.gender}
-              city={personDetails.city}
-              governance={personDetails.governance}
+              city={personDetails.locationDetails.city}
+              governorate={personDetails.locationDetails.governorate}
               roomType={personDetails.roomType}
               roommatePreference={personDetails.roommatePreference}
               furnishing={personDetails.furnishing}
@@ -172,6 +168,7 @@ const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
           <PublishEditBtns
             onEditClick={onEditClick}
             onPublishClick={onPublishClick}
+            loading={loading}
           />
         </div>
       </div>
