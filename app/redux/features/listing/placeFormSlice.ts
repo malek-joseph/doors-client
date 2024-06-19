@@ -62,7 +62,7 @@ const initialState: PlaceFormState = {
     monthlyRent: "",
     deposit: "",
     billsIncluded: true,
-    monthlyBills: "",
+    monthlyBills: 0,
     photos: [],
     roommatePreference: "",
     roommatePreferences: [],

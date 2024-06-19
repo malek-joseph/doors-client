@@ -131,17 +131,18 @@ const SearchAndFiltersPage = () => {
           );
         }
         console.log(filteredListings)
+        console.log(accommodationType)
 
 
-        if (accommodationType.length > 0) {
+
+        if (accommodationType && accommodationType.length > 0) {
           filteredListings = filteredListings.filter((listing) =>
             accommodationType.includes(listing.accommodationType)
           );
         }
-        console.log(accommodationType)
 
 
-        if (roomType !== "any") {
+        if (roomType && roomType !== "any") {
           filteredListings = filteredListings.filter(
             (listing) => listing.roomType === roomType
           );
@@ -149,7 +150,7 @@ const SearchAndFiltersPage = () => {
         console.log(filteredListings)
 
 
-        if (gender !== "anyone") {
+        if (gender && gender !== "anyone") {
           filteredListings = filteredListings.filter(
             (listing) => listing.roommatePreference === gender
           );
@@ -157,44 +158,44 @@ const SearchAndFiltersPage = () => {
         console.log(filteredListings)
 
 
-        if (furnishings !== "any") {
-          filteredListings = filteredListings.filter(
-            (listing) => listing.furnishing === furnishings
-          );
-        }
-        console.log(filteredListings)
+        // if (furnishings && furnishings !== "any") {
+        //   filteredListings = filteredListings.filter(
+        //     (listing) => listing.furnishing === furnishings
+        //   );
+        // }
+        // console.log(filteredListings)
 
 
-        if (bathroomType !== "any") {
-          filteredListings = filteredListings.filter(
-            (listing) => listing.roomBathroom === bathroomType
-          );
-        }
-        console.log(filteredListings)
+        // if (bathroomType && bathroomType !== "any") {
+        //   filteredListings = filteredListings.filter(
+        //     (listing) => listing.roomBathroom === bathroomType
+        //   );
+        // }
+        // console.log(filteredListings)
 
 
-        if (allowed.length > 0) {
-          filteredListings = filteredListings.filter((listing) =>
-            allowed.every((item) => listing.roommatePreferences.includes(item))
-          );
-        }
-        console.log(filteredListings)
+        // if (allowed && allowed.length > 0) {
+        //   filteredListings = filteredListings.filter((listing) =>
+        //     allowed.every((item) => listing.roommatePreferences.includes(item))
+        //   );
+        // }
+        // console.log(filteredListings)
 
 
-        // Sort listings
-        switch (sortOption) {
-          case "price_asc":
-            filteredListings.sort((a, b) => a.monthlyRent - b.monthlyRent);
-            break;
-          case "price_desc":
-            filteredListings.sort((a, b) => b.monthlyRent - a.monthlyRent);
-            break;
-          case "featured":
-          default:
-            filteredListings.sort((a, b) => a._id.localeCompare(b._id));
-            break;
-        }
-        console.log("before", filteredListings)
+        // // Sort listings
+        // switch (sortOption) {
+        //   case "price_asc":
+        //     filteredListings.sort((a, b) => a.monthlyRent - b.monthlyRent);
+        //     break;
+        //   case "price_desc":
+        //     filteredListings.sort((a, b) => b.monthlyRent - a.monthlyRent);
+        //     break;
+        //   case "featured":
+        //   default:
+        //     filteredListings.sort((a, b) => a._id.localeCompare(b._id));
+        //     break;
+        // }
+        // console.log("before", filteredListings)
 
 
         setListings(filteredListings);
@@ -252,7 +253,7 @@ const SearchAndFiltersPage = () => {
   return (
     <div className="bg-gray-100 pb-24">
       <div className="mt-[16px] h-[40px] px-[150px] shadow-lg flex items-center bg-neutral-50">
-        <Breadcrumb />
+        <Breadcrumb />                                  
       </div>
       <div className="container mx-auto mt-6 px-24">
         <div className="font-semibold text-teal-950 border-b border-gray-300 pb-6">
