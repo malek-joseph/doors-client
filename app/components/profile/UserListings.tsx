@@ -55,7 +55,7 @@ const UserListings = () => {
     }
   };
 
-  console.log(listings);
+  // console.log(listings);
 
   return (
     <div className="bg-gray-800 text-white p-6 rounded-lg w-full my-4">

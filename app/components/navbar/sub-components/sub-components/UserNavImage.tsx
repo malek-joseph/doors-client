@@ -18,6 +18,7 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
     setIsImageLoaded(true);
   };
 
+
   return (
     <div
       className="lg:flexCenter md:flexCenter  transition-all hover:font-bold hover:border-teal-500 border-2 rounded-full hover:drop-shadow-lg"

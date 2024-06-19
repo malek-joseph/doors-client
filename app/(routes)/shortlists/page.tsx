@@ -13,7 +13,7 @@ import {
 } from "@/app/services/shortlistService";
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import ListingImages from "@/app/components/cards/listingCard/ListingImages";
+import ListingCarousel from "@/app/components/carousels/ListingCarousel";
 
 const ShortlistPage: React.FC = () => {
   const userDetails = useSelector(selectUserDetails);
@@ -134,7 +134,7 @@ const ShortlistPage: React.FC = () => {
             </div>
 
             <div className="mb-2">
-              <ListingImages photos={item.listingDetails.photos} />
+              <ListingCarousel photos={item.listingDetails.photos} />
             </div>
 
             {item.listingType === "property" && (

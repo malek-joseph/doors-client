@@ -7,6 +7,7 @@ export const FOOTER_LINKS = [
   { href: '/', key: 'about', label: 'About Us' },
   { href: '/', key: 'terms', label: 'Terms of use'},
   { href: '/', key: 'privacy', label: 'Privacy Policy'},
+  { href: '/', key: 'CONTACT', label: 'FAQ & Contact'},
 ]
 
 

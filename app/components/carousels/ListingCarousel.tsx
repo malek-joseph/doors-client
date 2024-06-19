@@ -42,14 +42,14 @@ const Carousel: React.FC<CarouselProps> = ({ photos }) => {
       // pagination={{ clickable: false }}
       className="w-full h-full listing-carousel ">
       {photos.map((photo, index) => (
-        <SwiperSlide key={index} className="overflow-hidden">
+        <SwiperSlide key={index} className="overflow-hidden w-full">
           <Image
             priority={true}
             src={photo}
             alt={`Image ${index + 1}`}
             width={400}
             height={250}
-            className="object-cover rounded-lg"
+            className="object-cover rounded-lg w-full"
           />
         </SwiperSlide>
       ))}

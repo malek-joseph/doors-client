@@ -45,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <nav className="flex justify-center my-24">
+    <nav className="flex justify-center mt-24">
       <ul className="flex list-none space-x-2">
         <li className="mx-2">
           <button

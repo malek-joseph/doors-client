@@ -19,10 +19,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <PersistGate persistor={persistor}>
         <NextAuthProvider>
           <NextTopLoader
-            color="teal"
+            color="#042f2e"
             initialPosition={0.08}
             crawlSpeed={200}
-            height={3}
+            height={4}
             crawl={true}
             showSpinner={false}
             easing="ease"

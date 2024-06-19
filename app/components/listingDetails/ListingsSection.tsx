@@ -3,8 +3,7 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import ListingCardPlace from "@/app/components/cards/listingCard/ListingCardPlace";
-import ListingCardPerson from "@/app/components/cards/listingCard/ListingCardPerson";
+import ListingCardSquare from "@/app/components/cards/listingCard/ListingCardSquare";
 import Pagination from "@/app/components/Pagination";
 import { ListingType } from "@/app/types/listing";
 import LoadingDoor from "@/app/components/loaders/door/LoadingDoor";
@@ -66,31 +65,36 @@ const ListSection =  () => {
 
   return (
     <div className="container mx-auto mt-8">
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-12 min-h-screen">
+      <section className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-12 min-h-screen">
         {currentListings.map((listing, i) =>
           listing.type === "place" ? (
-            <ListingCardPlace
-              key={i}
+            <div>
+    <ListingCardSquare
+              key={listing._id}
               photos={listing.photos}
               monthlyRent={listing.monthlyRent}
-              propertyDescription={listing.propertyDescription}
+              description={listing.propertyDescription}
               billsIncluded={listing.billsIncluded}
               governorate={listing.governorate}
               city={listing.city}
               id={listing._id}
               accommodationType={listing.accommodationType}
+              type={listing.type}
             />
+            </div>
+        
           ) : (
-            <ListingCardPerson
-              key={i}
+            <ListingCardSquare
+              key={listing._id}
               photos={listing.photos}
               monthlyRent={listing.monthlyRent}
-              personDescription={listing.personDescription}
+              description={listing.personDescription}
               billsIncluded={listing.billsIncluded}
               governorate={listing.governorate}
               city={listing.city}
               id={listing._id}
               accommodationType={listing.accommodationType}
+              type={listing.type}
             />
           )
         )}
