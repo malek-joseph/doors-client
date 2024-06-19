@@ -1,3 +1,10 @@
+import {Accepting} from "@/app/types/listing"
+import cigarette from "@/public/assets/images/cigarette.png";
+import pet from "@/public/assets/images/pet.png";
+import student from "@/public/assets/images/student.png";
+import visitors from "@/public/assets/images/visitors.png";
+
+
 export const NAV_LINKS = [
   { href: '/shortlists', key: 'shortlist', label: 'Shortlists' },
   { href: '/messages', key: 'messages', label: 'Messages'},
@@ -23,6 +30,15 @@ export const accommodationTypes = [
   },
   { name: "Family home", iconSrc: "/assets/images/family-home.png" },
 ];
+
+
+
+ export const accepting: Accepting[] = [
+    { name: "smokers", src: cigarette },
+    { name: "pets", src: pet },
+    { name: "students", src: student },
+    { name: "visitors", src: visitors },
+  ];
 
 
 

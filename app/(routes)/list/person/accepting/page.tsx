@@ -10,11 +10,7 @@ import {
   updatePersonDetails,
 } from "@/app/redux/features/listing/personFormSlice";
 import FeaturesSelector from "@/app/components/inputs/FeaturesSelector";
-import cigarette from "@/public/assets/images/cigarette.png";
-import pet from "@/public/assets/images/pet.png";
-import student from "@/public/assets/images/student.png";
-import visitors from "@/public/assets/images/visitors.png";
-import type { StaticImageData } from "next/image";
+import {accepting} from "@/app/constants/index"
 
 const Page = () => {
   const personDetails = useSelector(selectPersonDetails);
@@ -50,17 +46,9 @@ const Page = () => {
     !personDetails.roomType ||
     !personDetails.roomBathroom;
 
-  type Accepting = {
-    name: string;
-    src: StaticImageData;
-  };
 
-  const accepting: Accepting[] = [
-    { name: "smokers", src: cigarette },
-    { name: "pets", src: pet },
-    { name: "students", src: student },
-    { name: "visitors", src: visitors },
-  ];
+
+
 
   return (
     <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">

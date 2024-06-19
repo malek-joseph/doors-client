@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <title>Doors</title>
         <link rel="icon" href="/image/favicon.png" />
       </head>
       <body className={inter.className}>

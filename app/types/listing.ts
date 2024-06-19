@@ -1,4 +1,6 @@
 /** @format */
+import type { StaticImageData } from "next/image";
+
 
 export type ListingType = {
   governorate: string;
@@ -24,5 +26,11 @@ export type ListingType = {
   personDescription: string;
   type: string;
   accommodationType: string;
+  availableFromDate?: Date;
   _id: string;
 };
+
+ export type Accepting = {
+    name: string;
+    src: StaticImageData;
+  };

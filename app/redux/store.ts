@@ -9,6 +9,8 @@ import authReducer from "./features/auth/authSlice";
 import placeFormReducer from "./features/listing/placeFormSlice";
 import personFormReducer from "./features/listing/personFormSlice";
 import initialMessageReducer from "./features/listing/initialMessageSlice";
+import filterReducer from "./features/listing/filterSlice"; 
+
 
 
 // Configuration for Redux Persist
@@ -17,7 +19,7 @@ const persistConfig = {
   version: 1, // Current version
 
   storage, // Storage method (local storage)
-  whitelist: ["auth", "placeForm", "personForm"], // Reducers you want to persist (by key)
+  whitelist: ["auth", "placeForm", "personForm", "filter"], // Reducers you want to persist (by key)
 };
 
 // Combine reducers 
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
   placeForm: placeFormReducer,
   personForm: personFormReducer,
   initialMessage: initialMessageReducer,
+    filter: filterReducer,
 
 });
 
