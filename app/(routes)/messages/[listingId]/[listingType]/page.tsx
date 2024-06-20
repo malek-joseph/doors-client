@@ -68,16 +68,7 @@ const startNewConversation = useCallback(async () => {
     const fetchAndSetConversations = async () => {
       try {
         const response = await fetchConversations(currentUserId);
-        // const updatedConversations = response.data.map((conv: any) => {
-        //   if (conv.currentUserPhoto) {
-        //     conv.currentUserPhoto = formatPhotoURL(conv.currentUserPhoto);
-        //   }
-        //   if (conv.listingOwnerPhoto) {
-        //     conv.listingOwnerPhoto = formatPhotoURL(conv.listingOwnerPhoto);
-        //   }
-        //   return conv;
-        // });
-        // setConversations(updatedConversations);
+    
         setConversations(response.data);
         initialized.current = true;
       } catch (error) {
@@ -112,21 +103,15 @@ const startNewConversation = useCallback(async () => {
     startNewConversation,
   ]);
 
-  // const formatPhotoURL = (photoPath: string) => {
-  //   const photoPathWithoutUploads = photoPath.replace(/^uploads\//, "");
-  //   return `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-  // };
+
 
   if (!userDetails) return;
   if (!currentUserId) return;
 
-  // console.log("Conversations:", conversations);
-
-  // console.log("Selected Conversation:", selectedConversation);
 
   return (
-    <div className="flex flex-col md:flex-row p-4 net_height">
-      <div className="w-full md:w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3 md:my-0">
+    <div className="flex flex-col md:flex-row p-4 net_height mt-14">
+      <div className="w-full md:w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3 ">
         {conversations.map((conversation) => (
           <div
             key={conversation._id}

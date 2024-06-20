@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(routes)/details/property",
+    "app/(routes)/details/place",
     "app/(routes)/details/person/page.tsx",
     "src",
     "app/providers/reduxProvider.ts"

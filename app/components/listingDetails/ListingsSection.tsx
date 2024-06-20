@@ -68,9 +68,8 @@ const ListSection =  () => {
       <section className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-12 min-h-screen">
         {currentListings.map((listing, i) =>
           listing.type === "place" ? (
-            <div>
     <ListingCardSquare
-              key={listing._id}
+              key={i}
               photos={listing.photos}
               monthlyRent={listing.monthlyRent}
               description={listing.propertyDescription}
@@ -81,11 +80,9 @@ const ListSection =  () => {
               accommodationType={listing.accommodationType}
               type={listing.type}
             />
-            </div>
-        
           ) : (
             <ListingCardSquare
-              key={listing._id}
+              key={i}
               photos={listing.photos}
               monthlyRent={listing.monthlyRent}
               description={listing.personDescription}

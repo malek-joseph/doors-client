@@ -14,7 +14,7 @@ const Logo = () => {
           width={35} 
           height={35} 
           priority
-          layout="responsive"
+           style={{ width: '100%', height: 'auto' }}
         />
       </Link>
     </div>

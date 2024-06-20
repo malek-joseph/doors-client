@@ -16,7 +16,7 @@ interface FeatureSelectorProps {
   onSelectFeature: (name: string) => void; // The handler function for selecting a feature
 }
 
-// The modified selector component for furnishings
+// The modified selector component for furnishing
 const FeaturesSelector: React.FC<FeatureSelectorProps> = ({
   title,
   items,

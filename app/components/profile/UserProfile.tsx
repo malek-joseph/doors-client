@@ -73,7 +73,7 @@ useEffect(() => {
 
 
 
-  // Adjusted style for the label
+
   const labelStyle =
     "text-center bg-black bg-opacity-50 text-white text-xs p-1 rounded cursor-pointer";
 
@@ -81,7 +81,7 @@ useEffect(() => {
     <div className="w-full h-full flex flex-col items-center justify-center  rounded-lg my-2 text-gray-600 p-4 mt-5">
       <div className="w-32 h-32 relative mb-2">
         {" "}
-        {/* Adjust margin as needed */}
+    
         <Image
           src={ imageSrc || defaultProfilePic}
           alt="User's Profile"
@@ -100,7 +100,7 @@ useEffect(() => {
         {imageSrc ? "Change Image" : "Upload Image"}
       </label>
       <h2 className="text-lg mt-4"> {userDetails?.name}</h2>{" "}
-      {/* Adjust margin as needed */}
+
     </div>
   );
 };

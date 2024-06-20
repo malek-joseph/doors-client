@@ -5,17 +5,19 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import SearchOverlay from "@/app/components/overlays/SearchOverlay";
 import FiltersOverlay from "@/app/components/overlays/FiltersOverlay";
-
-interface SearchBarProps {
-  activeFiltersCount?: number;
-}
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
 
 
-const SearchBar = ({ activeFiltersCount }:SearchBarProps) => {
+
+
+const SearchBar = () => {
   const [isSearchOverlayVisible, setIsSearchOverlayVisible] = useState(false);
   const [isFiltersOverlayVisible, setIsFiltersOverlayVisible] = useState(false);
   const [isSearchRoute, setIsSearchRoute] = useState(false);
-
+  const activeFiltersCount = useSelector(
+    (state: RootState) => state.filter.activeFiltersCount
+  );
   const pathname = usePathname();
 
   useEffect(() => {
@@ -74,9 +76,9 @@ const SearchBar = ({ activeFiltersCount }:SearchBarProps) => {
             />
             <span className="ml-2 text-md mr-2">Filters</span>
             <div className="relative ml-2">
-              <span className="absolute -top-2 -right-2 bg-teal-900 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {activeFiltersCount}
-              </span>
+            
+                {activeFiltersCount > 0 &&   <span className="absolute -top-2 -right-2 bg-teal-900 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"> {activeFiltersCount}    </span>}
+           
             </div>
           </button>
         )}

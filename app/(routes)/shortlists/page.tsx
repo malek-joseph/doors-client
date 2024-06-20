@@ -5,8 +5,7 @@
 import { useState, useEffect } from "react";
 import useSWR, { mutate } from "swr";
 import Link from "next/link";
-import axios from "axios";
-import Image from "next/image";
+
 import {
   getShortlists,
   deleteShortlist,
@@ -14,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import ListingCarousel from "@/app/components/carousels/ListingCarousel";
+import LoadingDoor from "@/app/components/loaders/door/LoadingDoor";
 
 const ShortlistPage: React.FC = () => {
   const userDetails = useSelector(selectUserDetails);
@@ -21,11 +21,11 @@ const ShortlistPage: React.FC = () => {
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState<
-    "property" | "person" | null
+    "place" | "person" | null
   >(null);
 
   useEffect(() => {
-    if (!userDetails) return; // Changed from `return null` to `return`
+    if (!userDetails) return; 
 
     const fetchShortlists = async () => {
       try {
@@ -42,7 +42,7 @@ const ShortlistPage: React.FC = () => {
     fetchShortlists();
   }, [userDetails]);
 
-  const handleOptionSelect = (option: "property" | "person") => {
+  const handleOptionSelect = (option: "place" | "person") => {
     setSelectedOption(option);
   };
 
@@ -53,13 +53,16 @@ const ShortlistPage: React.FC = () => {
       setShortlist(shortlist.filter((item) => item._id !== id));
       // Optionally, you can also re-fetch the shortlist
       mutate("/api/shortlists");
+      
     } catch (error) {
       console.error("Failed to remove from shortlist:", error);
       // Optionally, you can set an error state here
     }
   };
 
-  if (loading) return <div>loading</div>;
+  if (loading) return <div className="min-h-screen w-full flexCenter">
+    <LoadingDoor size={50}/>
+  </div>;
   if (error)
     return (
       <div className="min-h-screen flexCenter">
@@ -71,17 +74,23 @@ const ShortlistPage: React.FC = () => {
     ? shortlist.filter((item) => item.listingType === selectedOption)
     : shortlist;
 
-  const hasProperties = shortlist.some(
-    (item) => item.listingType === "property"
+    let hasProperties
+    let hasPersons
+
+  if (shortlist.length > 0 ) {
+    hasProperties = shortlist.some(
+    (item) => item.listingType === "place"
   );
-  const hasPersons = shortlist.some((item) => item.listingType === "person");
+   hasPersons = shortlist.some((item) => item.listingType === "person");
+
+  }
 
   // console.log(shortlist);
 
   return (
-    <div className="container mx-auto p-4 min-h-screen">
-      <div className="flex justify-between items-center mt-8 mb-4">
-        <h1 className="text-2xl font-bold text-gray-800">Shortlist</h1>
+    <div className="container mx-auto p-4 min-h-screen mb-14 mt-14 md:mt-0 lg:mt-0">
+      <div className="flex justify-between items-center mt-8 mb-14 text-teal-900">
+        <h1 className="text-2xl font-semibold">Shortlist</h1>
       </div>
       {shortlist.length === 0 && (
         <div className="flex flex-col items-center mt-16">
@@ -94,37 +103,36 @@ const ShortlistPage: React.FC = () => {
         </div>
       )}
 
-      <div className="flex justify-between gap-3  mb-4">
-        {hasProperties && (
+        {hasProperties && hasPersons && (
+      <div className="flex justify-between gap-3  mb-4 lg:px-14 flex-col md:flex-row lg:flex-row">
           <div
-            className={`cursor-pointer p-4 rounded-md text-center ${
-              selectedOption === "property"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
+            className={`cursor-pointer p-2 rounded-md text-center ${
+              selectedOption === "place"
+                ? "bg-teal-500 text-white"
+                : "bg-white text-gray-500 border border-teal-900 hover:border-teal-400"
             }`}
-            onClick={() => handleOptionSelect("property")}>
+            onClick={() => handleOptionSelect("place")}>
             Compare Properties
           </div>
-        )}
-        {hasPersons && (
-          <div
-            className={`cursor-pointer p-4 rounded-md text-center ${
+                 <div
+            className={`cursor-pointer p-2 rounded-md text-center ${
               selectedOption === "person"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
+                ? "bg-teal-500 text-white"
+                : "bg-white text-gray-500 border border-teal-900 hover:border-teal-400"
             }`}
             onClick={() => handleOptionSelect("person")}>
             Compare Roommates
           </div>
-        )}
       </div>
+        )}
+    
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
         {filteredShortlist.map((item) => (
-          <div key={item._id} className="bg-white rounded-lg shadow-md p-4">
+          <div key={item._id} className="bg-white rounded-lg shadow-lg p-4">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-gray-800">
-                {item.listingType === "property" ? item.title : item.name}
+                {item.listingType === "place" ? item.title : item.name}
               </h2>
               <button
                 className="text-red-500 hover:text-red-700"
@@ -137,7 +145,7 @@ const ShortlistPage: React.FC = () => {
               <ListingCarousel photos={item.listingDetails.photos} />
             </div>
 
-            {item.listingType === "property" && (
+            {item.listingType === "place" && (
               <>
                 <div className="flex justify-between mb-2 items-center">
                   <h2 className="text-xl font-semibold text-gray-600">
@@ -209,8 +217,8 @@ const ShortlistPage: React.FC = () => {
             <Link
               className="text-blue-500 hover:underline"
               href={
-                item.listingType === "property"
-                  ? `/details/property/${item.listingDetails._id}`
+                item.listingType === "place"
+                  ? `/details/place/${item.listingDetails._id}`
                   : `/details/person/${item.listingDetails._id}`
               }>
               View Details

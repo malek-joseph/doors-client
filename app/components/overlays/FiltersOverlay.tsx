@@ -9,15 +9,17 @@ import {
   selectFilter,
   setMonthlyRent,
   setBillsIncluded,
-  setAvailability,
   setAccommodationType,
   setRoomType,
   setGender,
-  setFurnishings,
+  setFurnishing,
   setBathroomType,
   setAllowed,
+  setActiveFiltersCount,
 } from "@/app/redux/features/listing/filterSlice";
 import { accepting, accommodationTypes } from "@/app/constants/index";
+import { RootState, AppDispatch } from "@/app/redux/store";
+
 
 interface FiltersOverlayProps {
   toggleFiltersOverlay: () => void;
@@ -30,6 +32,61 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
   const overlayRef = useRef<HTMLDivElement>(null);
   const { query: searchQuery, filter, ...filters } = useSelector(selectFilter);
   const dispatch = useDispatch();
+
+    const {
+      query,
+      
+      monthlyRent,
+      billsIncluded,
+      accommodationType,
+      roomType,
+      gender,
+      furnishing,
+      bathroomType,
+      allowed,
+    } = useSelector((state: RootState) => state.filter);
+
+const activeFiltersCount = Object.keys(filters).reduce((count, key) => {
+  // Ensure TypeScript knows how to access properties dynamically
+  const filtersTyped = filters as {
+    monthlyRent: { min: string | null; max: string | null };
+    billsIncluded: boolean;
+    accommodationType: string[];
+    roomType: "any" | "Private" | "Shared";
+    gender: "anyone" | "Women only" | "Men only";
+    furnishing: "any" | "Furnished" | "Unfurnished";
+    bathroomType: "any" | "Shared" | "Private";
+    allowed: string[];
+  };
+
+  if (key !== "monthlyRent" && key !== "allowed") {
+    const value = filtersTyped[key as keyof typeof filtersTyped];
+
+    // Exclude filters that have "any" as a value from active count
+    if (value !== "any" && value !== 'anyone' && value !== false) {
+      // console.log(value)
+      if (Array.isArray(value) && value.length > 0) {
+        return count + 1;
+      }
+
+      if (
+        (typeof value === "string" ) ||
+        typeof value === "boolean"
+      ) {
+        console.log(value)
+        return count + 1;
+      }
+    }
+  }
+
+  return count;
+}, 0);
+
+
+
+        useEffect(() => {
+          dispatch(setActiveFiltersCount(activeFiltersCount));
+        }, [dispatch, activeFiltersCount]);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -48,42 +105,46 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [handleClickOutside]);
 
-  const handleFiltersUpdate = useCallback(() => {
-    router.push(`/search?query=${searchQuery}&filter=${filter}`);
-    toggleFiltersOverlay();
-  }, [router, searchQuery, filter, toggleFiltersOverlay]);
+  // const handleFiltersUpdate = useCallback(() => {
+  //   router.push(`/search?query=${searchQuery}&filter=${filter}`);
+  //   toggleFiltersOverlay();
+  // }, [router, searchQuery, filter, toggleFiltersOverlay]);
 
-  const handleFilterChange = useCallback(
-    (newFilter: "rooms" | "roommates") => {
-      dispatch(setFilter(newFilter));
-    },
-    [dispatch]
-  );
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, action: any) => {
-      // Using switch case to handle different actions
-      switch (action.type) {
-        case "setQuery":
-          dispatch(setQuery(e.target.value));
-          break;
-        case "setMonthlyRent":
-          dispatch(
-            setMonthlyRent({
-              ...filters.monthlyRent,
-              [action.payload.field]: e.target.value,
-            })
-          );
-          break;
-        case "setAvailability":
-          dispatch(setAvailability(e.target.value));
-          break;
-        default:
-          break;
-      }
-    },
-    [dispatch, filters.monthlyRent]
-  );
+
+ const handleFilterChange = useCallback(
+   (newFilter: "rooms" | "roommates") => {
+     dispatch(setFilter(newFilter)); // Update filter state
+     router.push(`/search?query=${searchQuery}&filter=${newFilter}`); // Use newFilter directly
+   },
+   [dispatch, router, searchQuery]
+ );
+
+const handleInputChange = useCallback(
+  (e: React.ChangeEvent<HTMLInputElement>, action: any) => {
+    // Using switch case to handle different actions
+    switch (action.type) {
+      case "setQuery":
+        const newQuery = e.target.value;
+        dispatch(setQuery(newQuery));
+        router.push(`/search?query=${newQuery}&filter=${filter}`);
+        break;
+      case "setMonthlyRent":
+        dispatch(
+          setMonthlyRent({
+            ...filters.monthlyRent,
+            [action.payload.field]: e.target.value,
+          })
+        );
+        router.push(`/search?query=${searchQuery}&filter=${filter}`);
+        break;
+      default:
+        break;
+    }
+  },
+  [dispatch, router, filters.monthlyRent, searchQuery, filter]
+);
+
 
   const handleCheckboxChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, action: any) => {
@@ -95,7 +156,7 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
   return (
     <div
       ref={overlayRef}
-      className="absolute z-20 top-0 left-0 right-0 w-full bg-white shadow-lg rounded-lg cursor-default overflow-y-auto max-h-[80vh]">
+      className="absolute z-20 top-[-5px] left-0 right-0 w-full bg-white shadow-lg rounded-lg cursor-default overflow-y-auto max-h-[80vh]">
       <div className="p-4">
         <div className="flex justify-center mb-4">
           <button
@@ -166,7 +227,7 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
             </label>
           </div>
         </div>
-        <div className="mb-4 border-b border-gray-300 pb-5">
+        {/* <div className="mb-4 border-b border-gray-300 pb-5">
           <h4 className="font-semibold text-teal-900 mb-2">Availability</h4>
           <div className="flex space-x-2">
             <input
@@ -178,12 +239,12 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
               }
             />
           </div>
-        </div>
+        </div> */}
         <div className="mb-4 border-b border-gray-300 pb-5">
           <h4 className="font-semibold text-teal-900 mb-2">
             Accommodation type
           </h4>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 text-gray-500 text-sm">
             {accommodationTypes.map((accommodationType, i) => (
               <label className="flex items-center" key={i}>
                 <input
@@ -203,7 +264,7 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
         </div>
         <div className="mb-4 border-b border-gray-300 pb-5">
           <h4 className="font-semibold text-teal-900 mb-2">Room type</h4>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 text-gray-500 text-sm">
             <label className="flex items-center">
               <input
                 type="radio"
@@ -219,8 +280,8 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
                 type="radio"
                 name="roomType"
                 className="mr-2"
-                checked={filters.roomType === "private"}
-                onChange={() => dispatch(setRoomType("private"))}
+                checked={filters.roomType === "Private"}
+                onChange={() => dispatch(setRoomType("Private"))}
               />
               Private
             </label>
@@ -229,8 +290,8 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
                 type="radio"
                 name="roomType"
                 className="mr-2"
-                checked={filters.roomType === "shared"}
-                onChange={() => dispatch(setRoomType("shared"))}
+                checked={filters.roomType === "Shared"}
+                onChange={() => dispatch(setRoomType("Shared"))}
               />
               Shared
             </label>
@@ -238,7 +299,7 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
         </div>
         <div className="mb-4 border-b border-gray-300 pb-5">
           <h4 className="font-semibold text-teal-900 mb-2">Gender</h4>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 text-gray-500 text-sm">
             <label className="flex items-center">
               <input
                 type="radio"
@@ -247,15 +308,15 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
                 checked={filters.gender === "anyone"}
                 onChange={() => dispatch(setGender("anyone"))}
               />
-              Anyone
+              Any
             </label>
             <label className="flex items-center">
               <input
                 type="radio"
                 name="gender"
                 className="mr-2"
-                checked={filters.gender === "women"}
-                onChange={() => dispatch(setGender("women"))}
+                checked={filters.gender === "Women only"}
+                onChange={() => dispatch(setGender("Women only"))}
               />
               Women
             </label>
@@ -264,31 +325,45 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
                 type="radio"
                 name="gender"
                 className="mr-2"
-                checked={filters.gender === "men"}
-                onChange={() => dispatch(setGender("men"))}
+                checked={filters.gender === "Men only"}
+                onChange={() => dispatch(setGender("Men only"))}
               />
               Men
             </label>
           </div>
         </div>
         <div className="mb-4 border-b border-gray-300 pb-5">
-          <h4 className="font-semibold text-teal-900 mb-2">Furnishings</h4>
-          <div className="flex space-x-4">
-            <label className="flex items-center">
+          <h4 className="font-semibold text-teal-900 mb-2">Furnishing</h4>
+          <div className="flex space-x-4 text-gray-500 text-sm">
+               <label className="flex items-center">
+              
               <input
-                type="checkbox"
+                type="radio"
+                name="furnishing"
                 className="mr-2"
-                checked={filters.furnishings?.includes("furnished")}
-                onChange={() => dispatch(setFurnishings("furnished"))}
+                checked={filters.furnishing?.includes("any")}
+                onChange={() => dispatch(setFurnishing("any"))}
+              />
+              Any
+            </label>
+            <label className="flex items-center">
+              
+              <input
+                type="radio"
+                 name="furnishing"
+                className="mr-2"
+                checked={filters.furnishing?.includes("Furnished")}
+                onChange={() => dispatch(setFurnishing("Furnished"))}
               />
               Furnished
             </label>
             <label className="flex items-center">
               <input
-                type="checkbox"
+                type="radio"
+                 name="furnishing"
                 className="mr-2"
-                checked={filters.furnishings?.includes("unfurnished")}
-                onChange={() => dispatch(setFurnishings("unfurnished"))}
+                checked={filters.furnishing?.includes("Unfurnished")}
+                onChange={() => dispatch(setFurnishing("Unfurnished"))}
               />
               Unfurnished
             </label>
@@ -296,14 +371,24 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
         </div>
         <div className="mb-4 border-b border-gray-300 pb-5">
           <h4 className="font-semibold text-teal-900 mb-2">Bathroom type</h4>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 text-gray-500 text-sm">
+               <label className="flex items-center">
+              <input
+                type="radio"
+                name="bathroomType"
+                className="mr-2"
+                checked={filters.bathroomType === "any"}
+                onChange={() => dispatch(setBathroomType("any"))}
+              />
+              Any
+            </label>
             <label className="flex items-center">
               <input
                 type="radio"
                 name="bathroomType"
                 className="mr-2"
-                checked={filters.bathroomType === "shared"}
-                onChange={() => dispatch(setBathroomType("shared"))}
+                checked={filters.bathroomType === "Shared"}
+                onChange={() => dispatch(setBathroomType("Shared"))}
               />
               Shared
             </label>
@@ -312,16 +397,16 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
                 type="radio"
                 name="bathroomType"
                 className="mr-2"
-                checked={filters.bathroomType === "private"}
-                onChange={() => dispatch(setBathroomType("private"))}
+                checked={filters.bathroomType === "Private"}
+                onChange={() => dispatch(setBathroomType("Private"))}
               />
               Private
             </label>
           </div>
         </div>
-        <div className="mb-4 border-b border-gray-300 pb-5">
+        <div className="mb-4 ">
           <h4 className="font-semibold text-teal-900 mb-2">Allowed</h4>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 text-gray-500 text-sm">
             {accepting.map((accept, i) => (
               <label className="flex items-center" key={i}>
                 <input
@@ -335,13 +420,13 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
             ))}
           </div>
         </div>
-        <div className="flex justify-center mt-4">
+        {/* <div className="flex justify-center mt-4">
           <button
             className="px-6 py-2 border-2 border-teal-600 text-teal-600 rounded-lg hover:bg-teal-600 hover:text-white focus:outline-none"
             onClick={handleFiltersUpdate}>
             Apply
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

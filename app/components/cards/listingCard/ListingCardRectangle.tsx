@@ -54,7 +54,7 @@ listing
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="max-w-xl  bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="relative">
         <RectangleCarousel photos={photos} />
       </div>

@@ -42,15 +42,7 @@ useEffect(() => {
   const imageSrcMapCopy: Record<string, string> = {};
   messages.forEach((message) => {
     if (message.sender && message.sender.photo) {
-      // Extract the filename from the photo path
-      // const photoPathWithoutUploads = message.sender.photo.replace(
-      //   /^uploads\//,
-      //   ""
-      // );
-      // // Construct the full URL
-      // const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-      // // Store the full URL in the map
-      // imageSrcMapCopy[message.sender._id] = fullUrl;
+
       imageSrcMapCopy[message.sender._id] =    message.sender.photo
 
 ;
@@ -79,7 +71,8 @@ useEffect(() => {
     // console.log(imageSrc)
 
     return (
-      <div className="flex items-center mb-1">
+      <div className="flex items-center mb-1  ">
+        
         <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
           { imageSrc ? (
             <Image
@@ -98,8 +91,14 @@ useEffect(() => {
             {renderMessageSender(sender)}
           </span>
           <span className="ml-2 text-gray-600 text-sm">
-            {new Date(message.timestamp).toLocaleString()}
-          </span>
+  {new Date(message.timestamp).toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: undefined,
+  })}          </span>
         </div>
       </div>
     );

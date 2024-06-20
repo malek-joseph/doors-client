@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+
 
 interface PaginationProps {
   listingsPerPage: number;
@@ -45,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const visiblePages = getVisiblePages(currentPage, totalPages);
 
   return (
-    <nav className="flex justify-center mt-24">
+    <nav className="flex  justify-center mt-24 ">
       <ul className="flex list-none space-x-2">
         <li className="mx-2">
           <button
@@ -53,7 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({
               currentPage === 1 ? "invisible" : "visible"
             }`}
             onClick={() => paginate(currentPage - 1)}>
-            Previous
+            Prev
           </button>
         </li>
         {visiblePages.map((number, index) => (

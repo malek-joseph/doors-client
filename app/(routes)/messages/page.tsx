@@ -48,13 +48,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
         listingType
       );
 
-      // if (newConversation.receiverPhoto) {
-      //   const photoPathWithoutUploads = newConversation.receiverPhoto.replace(
-      //     /^uploads\//,
-      //     ""
-      //   );
-      //   newConversation.receiverPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`;
-      // }
+  
 
       setConversations((prevConversations) => [
         ...prevConversations,
@@ -74,22 +68,6 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
     const fetchAndSetConversations = async () => {
       try {
         const response = await fetchConversations(currentUserId);
-        //  const updatedConversations = response.data.map((conv: any) => {
-        //    if (conv.currentUserPhoto && conv.listingOwnerPhoto) {
-        //      const currentUserPhoto = conv.currentUserPhoto.replace(
-        //        /^uploads\//,
-        //        ""
-        //      );
-        //      const listingOwnerPhoto = conv.listingOwnerPhoto.replace(
-        //        /^uploads\//,
-        //        ""
-        //      );
-        //      conv.currentUserPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${currentUserPhoto}`;
-        //      conv.listingOwnerPhoto = `${process.env.NEXT_PUBLIC_BASE_URL}/${listingOwnerPhoto}`;
-        //    }
-        //    return conv;
-        //  });
-        // setConversations(updatedConversations);
         setConversations(response.data);
         initialized.current = true;
       } catch (error) {
@@ -129,14 +107,14 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
   // console.log("Selected Conversation:", selectedConversation);
 
   return (
-    <div className="w-screen net_height flex p-4">
+    <div className="w-screen net_height flex p-4  net_height">
       <div className="w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3">
         {conversations.map((conversation) => (
           <div
             key={conversation._id}
             className={`p-3 cursor-pointer ${
               selectedConversation?._id === conversation._id
-                ? "bg-gray-200"
+                ? "border border-teal-600 rounded-md"
                 : ""
             }`}
             onClick={() =>

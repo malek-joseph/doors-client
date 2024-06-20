@@ -47,7 +47,7 @@ const PlaceDetailsSectionThree: React.FC<PlaceDetailsSectionThreeProps> = ({
           alt="wifi"
         />
         <div className="text-teal-500 flex items-center justify-center flex-col mb-2">
-          <span className="text-sm text-gray-500">Internet</span>
+          <span className="text-sm text-gray-500">Pets</span>
                   <span className="text-xs">{petsAllowed ? "Allowed" : "Not Allowed"}</span>
 
         </div>

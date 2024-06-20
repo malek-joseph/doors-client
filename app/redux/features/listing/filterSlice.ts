@@ -8,13 +8,14 @@ export interface FilterState {
   filter: "rooms" | "roommates" | null;
   monthlyRent: { min: string | null; max: string | null };
   billsIncluded: boolean;
-  availability: string | null;
   accommodationType: string[];
-  roomType: "any" | "private" | "shared";
-  gender: "anyone" | "women" | "men";
-  furnishings: "any" | "furnished" | "unfurnished";
-  bathroomType: "any" | "private" | "shared";
+  roomType: "any" | "Private" | "Shared";
+  gender: "anyone" | "Women only" | "Men only";
+  furnishing: "any" | "Furnished" | "Unfurnished";
+  bathroomType: "any" | "Private" | "Shared";
   allowed: string[];
+    activeFiltersCount: number;
+
 }
 
 const initialState: FilterState = {
@@ -22,13 +23,14 @@ const initialState: FilterState = {
   filter: null,
   monthlyRent: { min: null, max: null },
   billsIncluded: false,
-  availability: null,
   accommodationType: [],
   roomType: "any",
   gender: "anyone",
-  furnishings: "any",
+  furnishing: "any",
   bathroomType: "any",
   allowed: [],
+    activeFiltersCount: 0,
+
 };
 
 const filterSlice = createSlice({
@@ -41,16 +43,20 @@ const filterSlice = createSlice({
     setFilter: (state, action: PayloadAction<"rooms" | "roommates" | null>) => {
       state.filter = action.payload;
     },
-    setMonthlyRent: (state, action: PayloadAction<{ min: string | null; max: string | null }>) => {
+    setMonthlyRent: (
+      state,
+      action: PayloadAction<{ min: string | null; max: string | null }>
+    ) => {
       state.monthlyRent = action.payload;
     },
     setBillsIncluded: (state, action: PayloadAction<boolean>) => {
       state.billsIncluded = action.payload;
     },
-    setAvailability: (state, action: PayloadAction<string | null>) => {
-      state.availability = action.payload;
-    },
+
     setAccommodationType: (state, action: PayloadAction<string>) => {
+      if (!state.accommodationType) {
+        state.accommodationType = [];
+      }
       const index = state.accommodationType.indexOf(action.payload);
       if (index === -1) {
         state.accommodationType.push(action.payload);
@@ -58,25 +64,43 @@ const filterSlice = createSlice({
         state.accommodationType.splice(index, 1);
       }
     },
-    setRoomType: (state, action: PayloadAction<"any" | "private" | "shared">) => {
+    setRoomType: (
+      state,
+      action: PayloadAction<"any" | "Private" | "Shared">
+    ) => {
       state.roomType = action.payload;
     },
-    setGender: (state, action: PayloadAction<"anyone" | "women" | "men">) => {
+    setGender: (
+      state,
+      action: PayloadAction<"anyone" | "Women only" | "Men only">
+    ) => {
       state.gender = action.payload;
     },
-    setFurnishings: (state, action: PayloadAction<"any" | "furnished" | "unfurnished">) => {
-      state.furnishings = action.payload;
+    setFurnishing: (
+      state,
+      action: PayloadAction<"any" | "Furnished" | "Unfurnished">
+    ) => {
+      state.furnishing = action.payload;
     },
-    setBathroomType: (state, action: PayloadAction<"any" | "private" | "shared">) => {
+    setBathroomType: (
+      state,
+      action: PayloadAction<"any" | "Private" | "Shared">
+    ) => {
       state.bathroomType = action.payload;
     },
     setAllowed: (state, action: PayloadAction<string>) => {
+      if (!state.allowed) {
+        state.allowed = [];
+      }
       const index = state.allowed.indexOf(action.payload);
       if (index === -1) {
         state.allowed.push(action.payload);
       } else {
         state.allowed.splice(index, 1);
       }
+    },
+       setActiveFiltersCount: (state, action: PayloadAction<number>) => {
+      state.activeFiltersCount = action.payload;
     },
   },
 });
@@ -86,13 +110,13 @@ export const {
   setFilter,
   setMonthlyRent,
   setBillsIncluded,
-  setAvailability,
   setAccommodationType,
   setRoomType,
   setGender,
-  setFurnishings,
+  setFurnishing,
   setBathroomType,
   setAllowed,
+  setActiveFiltersCount
 } = filterSlice.actions;
 
 export const selectFilter = (state: RootState) => state.filter;

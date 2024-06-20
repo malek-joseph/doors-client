@@ -39,6 +39,11 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ toggleSearchOverlay }) =>
     dispatch(setFilter(newFilter));
   };
 
+    const handleCityClick = (city: string) => {
+      toggleSearchOverlay();
+      router.push(`/search?query=${city}&filter=${filter}`);
+    };
+
   return (
     <div
       ref={overlayRef}
@@ -95,19 +100,24 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ toggleSearchOverlay }) =>
       <div className="mb-4">
         <h3 className="mb-2 text-gray-700">Explore a city</h3>
         <div className="flex flex-wrap gap-2 text-gray-600">
-          <span className="flex items-center gap-1 cursor-pointer hover:text-teal-500 transition-all">
-            <Image
-              src="/assets/images/location.png"
-              alt="location icon"
-              width={16}
-              height={16}
-            />{" "}
-            Cairo
-          </span>
-          {/* Other cities */}
+               {["Cairo", "Zayed", "New Cairo", "6th of October"].map((city) => (
+            <span
+              key={city}
+              className="flex items-center gap-1 cursor-pointer hover:text-teal-500 transition-all"
+              onClick={() => handleCityClick(city)}
+            >
+              <Image
+                src="/assets/images/location.png"
+                alt="location icon"
+                width={16}
+                height={16}
+              />{" "}
+              {city}
+            </span>
+          ))}
         </div>
       </div>
-      <div>
+      {/* <div>
         <h3 className="mb-2 text-gray-600 text-sm bg-gray-300 px-2 rounded-sm">
           Recent searches
         </h3>
@@ -121,9 +131,8 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ toggleSearchOverlay }) =>
             />{" "}
             Sydney Share Accommodation
           </span>
-          {/* Other recent searches */}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

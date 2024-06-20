@@ -30,7 +30,7 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
             className="hover:cursor-pointer "
             style={{ width: "40px", height: "40px", position: "relative" }}>
             {!isImageLoaded && (
-              <Skeleton circle={true} height={40} width={40} style={{top: "-5px"}}  />
+              <Skeleton circle={true} height={40} width={40} style={{top: "0"}}  />
             )}
             <img
               src="/assets/images/profile.png"

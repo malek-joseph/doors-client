@@ -1,6 +1,6 @@
 /** @format */
-"use client"
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ListingCardRectangle from "@/app/components/cards/listingCard/ListingCardRectangle";
@@ -16,11 +16,10 @@ import {
   setFilter,
   setMonthlyRent,
   setBillsIncluded,
-  setAvailability,
   setAccommodationType,
   setRoomType,
   setGender,
-  setFurnishings,
+  setFurnishing,
   setBathroomType,
   setAllowed,
 } from "@/app/redux/features/listing/filterSlice";
@@ -36,11 +35,10 @@ const SearchAndFiltersPage = () => {
     filter,
     monthlyRent,
     billsIncluded,
-    availability,
     accommodationType,
     roomType,
     gender,
-    furnishings,
+    furnishing,
     bathroomType,
     allowed,
   } = useSelector((state: RootState) => state.filter);
@@ -75,7 +73,7 @@ const SearchAndFiltersPage = () => {
         const persons: ListingType[] = personsResponse.data;
 
         let filteredListings = [...properties, ...persons];
-        console.log(filteredListings)
+
         // Apply filters
         if (query) {
           filteredListings = filteredListings.filter(
@@ -92,8 +90,6 @@ const SearchAndFiltersPage = () => {
               : listing.type === "person"
           );
         }
-        console.log(filteredListings)
-
 
         if (monthlyRent.min !== null || monthlyRent.max !== null) {
           filteredListings = filteredListings.filter((listing) => {
@@ -113,8 +109,6 @@ const SearchAndFiltersPage = () => {
             return true;
           });
         }
-        console.log(filteredListings)
-
 
         if (billsIncluded) {
           filteredListings = filteredListings.filter(
@@ -122,81 +116,39 @@ const SearchAndFiltersPage = () => {
           );
         }
 
-        console.log(filteredListings)
-
-
-        if (availability) {
-          filteredListings = filteredListings.filter(
-            (listing) => listing.moveInDate === availability
-          );
-        }
-        console.log(filteredListings)
-        console.log(accommodationType)
-
-
+        // console.log("accommodationType", accommodationType)
 
         if (accommodationType && accommodationType.length > 0) {
           filteredListings = filteredListings.filter((listing) =>
             accommodationType.includes(listing.accommodationType)
           );
         }
-
-
+if (allowed && allowed.length > 0) {
+  filteredListings = filteredListings.filter((listing) =>
+    allowed.every((allow) => listing.roommatePreferences.includes(allow))
+  );
+}
         if (roomType && roomType !== "any") {
           filteredListings = filteredListings.filter(
             (listing) => listing.roomType === roomType
           );
         }
-        console.log(filteredListings)
-
 
         if (gender && gender !== "anyone") {
           filteredListings = filteredListings.filter(
             (listing) => listing.roommatePreference === gender
           );
         }
-        console.log(filteredListings)
-
-
-        // if (furnishings && furnishings !== "any") {
-        //   filteredListings = filteredListings.filter(
-        //     (listing) => listing.furnishing === furnishings
-        //   );
-        // }
-        // console.log(filteredListings)
-
-
-        // if (bathroomType && bathroomType !== "any") {
-        //   filteredListings = filteredListings.filter(
-        //     (listing) => listing.roomBathroom === bathroomType
-        //   );
-        // }
-        // console.log(filteredListings)
-
-
-        // if (allowed && allowed.length > 0) {
-        //   filteredListings = filteredListings.filter((listing) =>
-        //     allowed.every((item) => listing.roommatePreferences.includes(item))
-        //   );
-        // }
-        // console.log(filteredListings)
-
-
-        // // Sort listings
-        // switch (sortOption) {
-        //   case "price_asc":
-        //     filteredListings.sort((a, b) => a.monthlyRent - b.monthlyRent);
-        //     break;
-        //   case "price_desc":
-        //     filteredListings.sort((a, b) => b.monthlyRent - a.monthlyRent);
-        //     break;
-        //   case "featured":
-        //   default:
-        //     filteredListings.sort((a, b) => a._id.localeCompare(b._id));
-        //     break;
-        // }
-        // console.log("before", filteredListings)
-
+        if (furnishing && furnishing !== "any") {
+          filteredListings = filteredListings.filter(
+            (listing) => listing.furnishing === furnishing
+          );
+        }
+        if (bathroomType && bathroomType !== "any") {
+          filteredListings = filteredListings.filter(
+            (listing) => listing.roomBathroom === bathroomType
+          );
+        }
 
         setListings(filteredListings);
         setLoading(false);
@@ -212,11 +164,10 @@ const SearchAndFiltersPage = () => {
     filter,
     monthlyRent,
     billsIncluded,
-    availability,
     accommodationType,
     roomType,
     gender,
-    furnishings,
+    furnishing,
     bathroomType,
     allowed,
     sortOption,
@@ -247,13 +198,12 @@ const SearchAndFiltersPage = () => {
     setSortOption(option);
   };
 
-        console.log(listings)
-
+  // console.log(listings)
 
   return (
     <div className="bg-gray-100 pb-24">
       <div className="mt-[16px] h-[40px] px-[150px] shadow-lg flex items-center bg-neutral-50">
-        <Breadcrumb />                                  
+        <Breadcrumb />
       </div>
       <div className="container mx-auto mt-6 px-24">
         <div className="font-semibold text-teal-950 border-b border-gray-300 pb-6">
@@ -276,15 +226,15 @@ const SearchAndFiltersPage = () => {
               {listings.length} results
             </div>
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <SortingFilter onSortChange={handleSortChange} />
             <div className="ml-3">
               <SaveSearchButton />
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <section className="grid grid-cols-1 gap-4 my-3 mt-12 min-h-screen">
+        <section className="grid grid-cols-1 gap-4 my-3 mt-12 min-h-screen max-w-screen">
           {currentListings.map((listing, i) =>
             listing.type === "place" ? (
               <ListingCardRectangle key={i} listing={listing} />
