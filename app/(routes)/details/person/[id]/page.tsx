@@ -75,7 +75,7 @@ useEffect(() => {
 }, [id]);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className='min-h-screen flexCenter'>This person has found a place</div>;
   }
 
 

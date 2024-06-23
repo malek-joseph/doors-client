@@ -1,21 +1,25 @@
 /** @format */
-
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMessages } from "../services/messageApi";
 import MessageList from "./MessageList";
 import Button from "@/app/components/buttons/Button";
+import Dropdown from "@/app/components/overlays/Dropdown";
 import {
   selectInitialMessage,
   clearInitialMessage,
 } from "@/app/redux/features/listing/initialMessageSlice";
+import Link from "next/link";
+import { AiOutlineSend } from "react-icons/ai";
+
 
 interface ChatProps {
   currentUserId: string;
   listingOwnerId: string;
   listingId: string;
   listingType: string;
+  handleDeleteConversation: () => void
 }
 
 interface Message {
@@ -42,6 +46,7 @@ const Chat: React.FC<ChatProps> = ({
   listingOwnerId,
   listingId,
   listingType,
+  handleDeleteConversation
 }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
@@ -72,12 +77,14 @@ const Chat: React.FC<ChatProps> = ({
   );
 
   useEffect(() => {
+    // Fetch initial messages
     fetchMessages(currentUserId, listingOwnerId, listingId)
       .then((response) => {
         setMessages(response.data);
       })
       .catch((error) => console.error(error));
 
+    // Join room and handle incoming messages
     socket.emit("joinRoom", { conversationId });
 
     socket.on("receiveMessage", () => {
@@ -89,6 +96,7 @@ const Chat: React.FC<ChatProps> = ({
     });
 
     return () => {
+      // Clean up socket event listeners
       socket.off("receiveMessage");
       socket.emit("leaveRoom", { conversationId });
     };
@@ -119,32 +127,55 @@ const Chat: React.FC<ChatProps> = ({
     }
   };
 
-  // console.log(messages)
+  const deleteConversation = () => {
+    handleDeleteConversation();
+    setMessages([]);
+  };
+
+  const options = [
+    {
+      label: "Delete Conversation",
+      onClick: deleteConversation,
+    },
+  ];
 
   return (
-    <div className="h-full flex flex-col justify-between p-3">
-      <MessageList messages={messages} />
-      <div className="flex items-center m-3">
-        <div className="w-2/3">
-          <input
-            type="text"
-            value={message}
-            onChange={handleInputChange}
-            className="border rounded-md p-2 w-full mt-4"
-            onKeyDown={handleEnterPress}
-          />
-        </div>
-        <div className="w-1/3 mx-5">
-          <Button
-            type="button"
-            title="Send"
-            variant="bg-teal-500 text-white"
-            onClick={handleSend}
-          />
-        </div>
+    <div className="flex flex-col justify-start h-[calc(100vh-250px)] md:h-[calc(100vh-130px)] lg:h-[calc(100vh-130px)] md:pt-8 lg:pt-8  ">
+      <div className="flex justify-between items-center bg-gray-100 px-4 py-2 border-b border-gray-300">
+        <Link
+          className="text-blue-500 hover:underline w-max"
+          href={
+            listingType === "place"
+              ? `/details/place/${listingId}`
+              : `/details/person/${listingId}`
+          }>
+          View Listing
+        </Link>
+        <Dropdown options={options} />
+      </div>
+      <div className=" px-2 bg-white overflow-y-auto">
+        <MessageList messages={messages} currentUserId={currentUserId} />
+      </div>
+      <div className="flex items-center border-t border-gray-300 p-2">
+        <input
+          type="text"
+          placeholder="Type a message..."
+          className="flex-1 border border-gray-300 p-2 rounded-md text-sm mr-2"
+          value={message}
+          onChange={handleInputChange}
+          onKeyPress={handleEnterPress}
+        />
+        <Button
+          type="button"
+          title="Send"
+          icon={<AiOutlineSend />}
+          variant="bg-teal-500 text-white hover:bg-teal-600 p-2  "
+          onClick={handleSend}
+        />{" "}
       </div>
     </div>
   );
 };
 
 export default Chat;
+

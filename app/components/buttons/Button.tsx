@@ -1,12 +1,13 @@
 /** @format */
 
 import Image from "next/image";
+import { ReactNode } from "react";
 
 
 type ButtonProps = {
   type: "button" | "submit";
   title: string;
-  icon?: string;
+  icon?: ReactNode;
   variant: string;
   disabled?: boolean;
   onClick?: () => void;
@@ -23,17 +24,14 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`text-sm p-1 border rounded-md w-full flex items-center justify-center mt-4  ${variant}`}
+      className={`text-sm p-1 border rounded-md w-max flex items-center justify-center  ${variant}`}
       disabled={disabled}
       onClick={onClick}>
-      {icon && (
-        <div className="w-6 h-6 mr-2">
-          <Image src={icon} alt="title" width={24} height={24} />
-        </div>
-      )}
-      <label className="hover:cursor-pointer">
+            <label className="hover:cursor-pointer">
         {disabled ? <div>loading</div> : title}
       </label>
+      {icon && <div className="ml-2 hidden md:block lg:block">{icon}</div>}
+  
     </button>
   );
 };
