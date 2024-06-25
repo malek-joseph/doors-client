@@ -62,13 +62,15 @@ const Chat: React.FC<ChatProps> = ({
     (msg: string) => {
       if (msg.trim()) {
         const newMessage = {
-          currentUserId: currentUserId,
-          listingOwnerId: listingOwnerId,
+          currentUserId,
+          listingOwnerId,
           content: msg,
-          listingId: listingId,
-          listingType: listingType,
-          conversationId: conversationId,
+          listingId,
+          listingType,
+          conversationId,
         };
+
+
 
         socket.emit("sendMessage", newMessage);
       }
@@ -139,6 +141,8 @@ const Chat: React.FC<ChatProps> = ({
     },
   ];
 
+  console.log(messages)
+
   return (
     <div className="flex flex-col justify-start h-[calc(100vh-250px)] md:h-[calc(100vh-130px)] lg:h-[calc(100vh-130px)] md:pt-8 lg:pt-8  ">
       <div className="flex justify-between items-center bg-gray-100 px-4 py-2 border-b border-gray-300">
@@ -153,7 +157,7 @@ const Chat: React.FC<ChatProps> = ({
         </Link>
         <Dropdown options={options} />
       </div>
-      <div className=" px-2 bg-white overflow-y-auto">
+      <div className="flex-1 px-2 bg-white overflow-y-auto h-full">
         <MessageList messages={messages} currentUserId={currentUserId} />
       </div>
       <div className="flex items-center border-t border-gray-300 p-2">

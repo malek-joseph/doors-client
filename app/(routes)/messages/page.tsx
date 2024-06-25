@@ -27,9 +27,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
   const router = useRouter();
 
   const [conversations, setConversations] = useState<any[]>([]);
-  const [selectedConversation, setSelectedConversation] = useState<any | null>(
-    null
-  );
+  const [selectedConversation, setSelectedConversation] = useState<any | null>(null);
   const [creatingNewConversation, setCreatingNewConversation] = useState(false);
   const [isChatView, setIsChatView] = useState(false);
   const initialized = useRef(false);
@@ -41,15 +39,8 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
 
     setCreatingNewConversation(true);
     try {
-      const newConversation = await startConversation(
-        currentUserId,
-        listingId,
-        listingType
-      );
-      setConversations((prevConversations) => [
-        ...prevConversations,
-        newConversation,
-      ]);
+      const newConversation = await startConversation(currentUserId, listingId, listingType);
+      setConversations((prevConversations) => [...prevConversations, newConversation]);
       setSelectedConversation(newConversation);
       setIsChatView(true);
     } catch (error) {
@@ -78,9 +69,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
 
   useEffect(() => {
     if (initialized.current && !creatingNewConversation) {
-      const selectedConv = conversations.find(
-        (conv) => conv.listingId === listingId
-      );
+      const selectedConv = conversations.find((conv) => conv.listingId === listingId);
 
       if (selectedConv) {
         setSelectedConversation(selectedConv);
@@ -89,6 +78,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
         startNewConversation();
       } else {
         setSelectedConversation(conversations[0] || null);
+        setIsChatView(true);
       }
     }
   }, [
@@ -101,11 +91,10 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
 
   const handleDeleteConversation = async () => {
     try {
+      const listingId = selectedConversation.listingId;
       await deleteConversation(currentUserId, listingId);
       toast.success("Conversation deleted successfully");
-      setConversations(
-        conversations.filter((conv) => conv.listingId !== listingId)
-      );
+      setConversations(conversations.filter((conv) => conv.listingId !== listingId));
       setSelectedConversation(null);
     } catch (error) {
       console.error("Error deleting conversation:", error);
@@ -115,74 +104,83 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
 
   if (!userDetails || !currentUserId) return null;
 
+  console.log(selectedConversation);
+  console.log(conversations);
+
   return (
     <div
       className={`flex flex-col md:flex-row p-4  h-[calc(100vh-180px)] md:h-[calc(100vh-130px)] lg:h-[calc(100vh-130px)] ${
         isChatView ? "mt-16 mb-4" : "mb-4 mt-16"
-      }  lg:my-0 md:my-0 `}>
+      }  lg:my-0 md:my-0 `}
+    >
       <div
         className={`w-full md:w-1/3 h-full border border-gray-300 rounded-lg overflow-y-auto my-3 ${
           isChatView ? "hidden md:block" : ""
-        }`}>
-        {conversations.map((conversation) => (
-          <div
-            key={conversation._id}
-            className={`p-3 cursor-pointer ${
-              selectedConversation?._id === conversation._id
-                ? "bg-gray-200"
-                : ""
-            }`}
-            onClick={() => {
-              setSelectedConversation(conversation);
-              setIsChatView(true);
-            }}>
-            <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
-                <Image
-                  src={
-                    conversation.listingOwnerId === userDetails.id
-                      ? conversation.currentUserPhoto
-                      : conversation.listingOwnerPhoto
-                  }
-                  alt={
-                    conversation.listingOwnerId === userDetails.id
-                      ? conversation.currentUserName
-                      : conversation.listingOwnerName
-                  }
-                  className="w-full h-full rounded-full object-cover"
-                  width={40}
-                  height={40}
-                />
-              </div>
-              <div>
-                <div>
-                  {conversation.listingOwnerId === userDetails.id
-                    ? conversation.currentUserName
-                    : conversation.listingOwnerName}
+        }`}
+      >
+        {conversations.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            <p className="text-gray-500">No conversations available.</p>
+          </div>
+        ) : (
+          conversations.map((conversation) => (
+            <div
+              key={conversation._id}
+              className={`p-3 cursor-pointer ${
+                selectedConversation?._id === conversation._id ? "bg-gray-200" : ""
+              }`}
+              onClick={() => {
+                setSelectedConversation(conversation);
+                setIsChatView(true);
+              }}
+            >
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
+                  <Image
+                    src={
+                      conversation.listingOwnerId === userDetails.id
+                        ? conversation.currentUserPhoto
+                        : conversation.listingOwnerPhoto
+                    }
+                    alt={
+                      conversation.listingOwnerId === userDetails.id
+                        ? conversation.currentUserName
+                        : conversation.listingOwnerName
+                    }
+                    className="w-full h-full rounded-full object-cover"
+                    width={40}
+                    height={40}
+                  />
                 </div>
-                <div className="text-xs text-gray-500">
-                  {conversation.listingOwnerId !== userDetails.id
-                    ? `Offering a place in a ${conversation.accommodationType}`
-                    : `Interested in your listing ${conversation.accommodationType}`}
+                <div>
+                  <div>
+                    {conversation.listingOwnerId === userDetails.id
+                      ? conversation.currentUserName
+                      : conversation.listingOwnerName}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    {conversation.listingOwnerId !== userDetails.id
+                      ? `Offering a place in a ${conversation.accommodationType}`
+                      : `Interested in your listing ${conversation.accommodationType}`}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <div
         className={`w-full md:w-2/3 h-full  flex flex-col items-center justify-start md:mt-3 lg:mt-3  ${
           isChatView ? "" : "hidden md:flex "
-        }`}>
+        }`}
+      >
         {isChatView && (
           <>
-            <button
-              className="md:hidden mb-2 flex items-center "
-              onClick={() => setIsChatView(false)}>
+            <button className="md:hidden mb-2 flex items-center " onClick={() => setIsChatView(false)}>
               <FaArrowLeft className="mr-2" /> Back to Conversations
             </button>
             {selectedConversation && (
-              <div className="w-full max-w-2xl mx-auto border border-gray-300 rounded-lg overflow-hidden shadow-md    ">
+              <div className="w-full max-w-2xl mx-auto border border-gray-300 rounded-lg overflow-hidden shadow-md">
                 <Chat
                   currentUserId={currentUserId}
                   listingOwnerId={selectedConversation.listingOwnerId}

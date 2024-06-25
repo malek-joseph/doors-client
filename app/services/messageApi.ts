@@ -36,10 +36,16 @@ export const startConversation = (
 
 export const deleteConversation = async (
   userId: string,
-  listingId: string
+  listingId: string,
+ 
+
+ 
 ) => {
   const response = await axios.delete(
   `${API_BASE_URL}/api/conversations/${userId}/${listingId}`
   );
+     
+
+ 
   return response.data;
 };

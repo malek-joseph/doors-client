@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 
-import Button from "../buttons/Button";
+import ButtonOne from "../buttons/ButtonOne";
 import Link from "next/link";
 import googleImg from "../../../public/assets/images/google-logo.png";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,8 @@ import Input from "../inputs/Input"; // Import the Input component
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { signIn } from "next-auth/react";
+import { AiFillGoogleCircle } from "react-icons/ai";
+
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +48,7 @@ const LoginForm: React.FC = () => {
     <div className="p-4 rounded-lg lg:w-1/2 ">
       {/* Signin with Google option */}
       <div className="flex items-center mb-4">
-        <Button
+        <ButtonOne
           type="button"
           title="Signin with Google"
           icon="/assets/images/google-logo.png"
@@ -95,7 +97,7 @@ const LoginForm: React.FC = () => {
 
         {/* Login button */}
 
-        <Button
+        <ButtonOne
           type="submit"
           title="Login"
           variant="btn_teal"
