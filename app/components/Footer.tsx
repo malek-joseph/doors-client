@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 flex flex-col lg:flex-row md:flex-row justify-between items-start lg:items-center md:items-center space-y-4 lg:space-y-0 md:space-y-0">
           <div className="flex flex-col lg:flex-row items-start md:flex-row lg:items-center md:items-center space-y-4 lg:space-y-0 md:space-y-0 lg:space-x-8 md:space-x-8">
-            <p className="text-gray-400 text-sm px-3">
+            <p className="text-gray-400 text-sm px-7">
               In the spirit of innovation, Doors connects roommates across
               Egypt, fostering community and shared living. We celebrate unity,
               respect diverse backgrounds, and aim to create harmonious living

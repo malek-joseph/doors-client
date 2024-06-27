@@ -2,7 +2,7 @@
 
 // RootLayout.tsx
 
-import Navbar from "@/app/components/navbar/Navbar";
+import Navbar from "@/app/components/navigation/navbar/Navbar";
 import Footer from "@/app/components/Footer";
 import "./globals.css";
 import type { Metadata } from "next";

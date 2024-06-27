@@ -4,14 +4,14 @@
 
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserDetails } from "../../../redux/features/auth/authSlice";
+import { selectUserDetails } from "../../../../redux/features/auth/authSlice";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
-import { logout } from "../../../redux/features/auth/authSlice";
+import { logout } from "../../../../redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import UserNavImage from "./sub-components/UserNavImage";
-import UserAccountOverlay from "@/app/components/overlays/UserAccountOverlay"
+import UserAccountOverlay from "@/app/components/overlays/UserAccountOverlay";
 
 const UserNavButton = () => {
   const { data } = useSession();
@@ -44,7 +44,7 @@ const UserNavButton = () => {
       }
       toast.success("Signed out successfully");
       setIsUserOverlayVisible(false);
-      router.push("/");
+      router.push("/auth/signin");
     } catch (error) {
       console.error("Error logging out", error);
       toast.error("Failed to logout");

@@ -16,7 +16,7 @@ const signup = async (formDataToSend: FormData, dispatch: AppDispatch) => {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/signup`,
       formDataToSend
-    );
+    ); 
     // console.log(response.data);
 
     if (response.status === 201) {

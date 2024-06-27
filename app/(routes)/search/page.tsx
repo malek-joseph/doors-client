@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ListingCardRectangle from "@/app/components/cards/listingCard/ListingCardRectangle";
 import Pagination from "@/app/components/Pagination";
-import Breadcrumb from "@/app/components/breadcrumbs/BreadcrumbStandard";
+import Breadcrumb from "@/app/components/navigation/breadcrumbs/BreadcrumbSearch";
 import SortingFilter from "@/app/components/inputs/SortingFilter";
 import SaveSearchButton from "@/app/components/buttons/SaveSearchButton";
 import { useSearchParams } from "next/navigation";

@@ -1,7 +1,6 @@
 /** @format */
 
-
-import UserNavButton from "@/app/components/navbar/sub-components/UserNavButton";
+import UserNavButton from "@/app/components/navigation/navbar/sub-components/UserNavButton";
 import Logo from "./sub-components/Logo";
 import NavLinks from "./sub-components/NavLinks";
 import SearchBar from "./sub-components/SearchBar";
@@ -30,7 +29,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flexCenter  mt-3">
-          <SearchBar  />
+          <SearchBar />
         </div>
       </div>
     </nav>

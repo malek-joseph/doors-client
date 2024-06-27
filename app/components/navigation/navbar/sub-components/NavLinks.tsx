@@ -1,7 +1,7 @@
 /** @format */
 
 import Link from "next/link";
-import { NAV_LINKS } from "../../../constants/index";
+import { NAV_LINKS } from "../../../../constants/index";
 
 const NavLinks = () => {
   return (

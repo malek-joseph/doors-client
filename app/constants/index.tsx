@@ -6,15 +6,18 @@ import visitors from "@/public/assets/images/visitors.png";
 
 
 export const NAV_LINKS = [
+  { href: '/info', key: 'info', label: 'Info' },
   { href: '/shortlists', key: 'shortlist', label: 'Shortlists' },
   { href: '/messages', key: 'messages', label: 'Messages'},
   // { href: '/', key: 'guides', label: 'Guides'},
 ]
 export const FOOTER_LINKS = [
-  { href: '/', key: 'about', label: 'About Us' },
-  { href: '/', key: 'terms', label: 'Terms of use'},
-  { href: '/', key: 'privacy', label: 'Privacy Policy'},
-  { href: '/', key: 'CONTACT', label: 'FAQ & Contact'},
+  { href: '/info', key: 'info', label: 'Info' },
+  { href: '/info/about', key: 'about', label: 'About Us' },
+  { href: '/info/terms', key: 'terms', label: 'Terms of use'},
+  { href: '/info/privacy', key: 'privacy', label: 'Privacy Policy'},
+  { href: '/info/contact', key: 'contact', label: 'Contact'},
+  { href: '/info/FAQ', key: 'faq', label: 'FAQ'},
 ]
 
 
