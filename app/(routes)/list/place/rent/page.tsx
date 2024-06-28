@@ -56,7 +56,7 @@ const Page = () => {
               label="Monthly Rent"
               type="number"
               id="monthlyRent"
-              value={String(propertyDetails.monthlyRent)}
+               value={String(propertyDetails.monthlyRent || "")}
               onChange={handleInputChange}
               required
               autocomplete="off"

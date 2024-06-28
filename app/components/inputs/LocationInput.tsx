@@ -170,17 +170,17 @@ const LocationInput = ({
             placeholder={placeholder}
             className={`rounded-lg ${
               hasError ? "input-error border-red-500" : "border-teal-500 border"
-            } w-full h-10 px-3 shadow-md text-sm outline-teal-500`}
+            } w-full h-10 px-3 shadow-md text-base outline-teal-500`}
             onContextMenu={handleContextMenu}
             onChange={(e) => setInputValue(e.target.value)}
           />
         </Autocomplete>
         {hasError && (
-          <div className="text-xs text-red-500 mt-2 ml-2">
+          <div className="text-base text-red-500 mt-2 ml-2">
             <span>Incorrect address, please try again</span>
           </div>
         )}
-        <Link href="#" className="text-xs text-teal-300 mt-2">
+        <Link href="#" className="text-base text-teal-300 mt-2">
           {!hideBelowText ? "Having trouble finding your address?" : ""}
         </Link>
       </div>

@@ -26,7 +26,7 @@ const NumberInput: React.FC<InputProps> = ({
     </label>
     <div className="flex items-center">
       <input
-        className="border border-gray-300 w-full rounded-l-md text-xs p-2 focus:border focus:border-teal-400 focus:outline-none"
+        className="border border-gray-300 w-full rounded-l-md text-base p-2 focus:border focus:border-teal-400 focus:outline-none"
         type={type}
         id={id}
         name={id}
@@ -36,7 +36,7 @@ const NumberInput: React.FC<InputProps> = ({
         autoComplete={autocomplete}
         placeholder={label}
       />
-      <span className="bg-gray-200 text-gray-700 text-xs p-2 rounded-r-md border border-l-0">
+      <span className="bg-gray-200 text-gray-700 text-base p-2 rounded-r-md border border-l-0">
         EGP  
       </span>
     </div>

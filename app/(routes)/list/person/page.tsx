@@ -39,7 +39,7 @@ const Page = () => {
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10">
           What type of accommodation are you looking for?
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mb-12 lg:mb-12 mb-24">
           {accommodationTypes.map((type) => (
             <AccommodationTypeButton
               key={type.name}

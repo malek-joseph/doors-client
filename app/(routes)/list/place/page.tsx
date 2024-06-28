@@ -36,23 +36,26 @@ const Page = () => {
 
   return (
     <div className="flex flex-col items-center justify-center md:net_height mt-20 lg:mt-0 md:mt-0">
-  <div className="w-11/12 py-8 md:net_height">
+      <div className="w-11/12 py-8 md:net_height">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10">
           What type of accommodation are you offering?
         </h2>
-      {loading ? (<div className="h-screen flexCenter"><LoadingDoor size={50} /></div> ): (
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {accommodationTypes.map((type) => (
-            <AccommodationTypeButton
-              key={type.name}
-              type={type}
-              isSelected={accommodationType === type.name}
-              onClick={handleTypeSelect}
-            />
-          ))}
-        </div>
-      )}
+        {loading ? (
+          <div className="h-screen flexCenter">
+            <LoadingDoor size={50} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mb-12 lg:mb-12 mb-24">
+            {accommodationTypes.map((type) => (
+              <AccommodationTypeButton
+                key={type.name}
+                type={type}
+                isSelected={accommodationType === type.name}
+                onClick={handleTypeSelect}
+              />
+            ))}
+          </div>
+        )}
 
         <NextBackBtns
           onBackClick={handleBackClick}
@@ -60,7 +63,6 @@ const Page = () => {
           isNextDisabled={isNextButtonDisabled}
         />
       </div>
-    
     </div>
   );
 };
