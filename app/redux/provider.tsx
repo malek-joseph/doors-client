@@ -6,6 +6,7 @@ import React from "react";
 import { store, persistor } from "./store"; 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react"; 
+import { ChakraProvider } from "@chakra-ui/react";
 
 import NextAuthProvider from "../providers/NextAuthProvider";
 import NextTopLoader from 'nextjs-toploader';
@@ -16,6 +17,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   
   return (
     <Provider store={store}>
+      <ChakraProvider>
       <PersistGate persistor={persistor}>
         <NextAuthProvider>
           <NextTopLoader
@@ -38,6 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
          
         </NextAuthProvider>
       </PersistGate>
+      </ChakraProvider>
     </Provider>
   );
 }

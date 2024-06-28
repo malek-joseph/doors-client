@@ -27,7 +27,7 @@ const Info = () => {
         </p>
         <div className="flex justify-center">
           <Image
-            src="/assets/images/about.jpeg"
+            src="/assets/images/Info.jpeg"
             alt="roommates"
             className="rounded-lg"
             width={800}

@@ -10,7 +10,7 @@ const NavLinks = () => {
         <Link
           href={link.href}
           key={link.key}
-          className="regular-16 text-gray-50 flexCenter cursor-pointer transition-all hover:font-medium p-1">
+          className="regular-16 text-gray-50 flexCenter cursor-pointer transition-all hover:text-teal-700 p-1">
           {link.label}
         </Link>
       ))}

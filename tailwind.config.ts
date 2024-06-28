@@ -19,6 +19,12 @@ const config: Config = {
       boxShadow: {
         lg: "3px 3px 20px 1px rgba(0, 0, 0, 0.1)",
       },
+      dropShadow: {
+        sm: "0px 0px 1px rgba(0,128,128,0.7)",
+        md: "0px 0px 3px rgba(0, 128, 128, 0.7)",
+        lg: "0px 0px 8px rgba(0, 128, 128, 0.7)",
+        xl: "0px 0px 13px rgba(0, 128, 128, 0.7)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

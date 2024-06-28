@@ -2,7 +2,7 @@ import React from 'react'
 import LoadingDoor from '@/app/components/loaders/door/LoadingDoor';
 
 
-const Loading = () => {
+const loading = () => {
   return (
     <div className="bg-transparent flexCenter net_height">
     <LoadingDoor size={50}/>
@@ -10,4 +10,4 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export default loading

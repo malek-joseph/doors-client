@@ -12,7 +12,10 @@ import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSli
 import SelectInput from "@/app/components/inputs/SelectInput"; 
 import DateInput from "@/app/components/inputs/DateInput";
 import LocationInput from "@/app/components/inputs/LocationInput"; 
-import Loading from "./Loading";
+import useLoading from "@/app/hooks/useLoading"; 
+import LoadingDoor from '@/app/components/loaders/door/LoadingDoor';
+
+
 
 
 const Page = () => {
@@ -20,6 +23,8 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false)
+  const routerLoading = useLoading(); 
+
 
   type NumericValue = number | string;
   
@@ -68,11 +73,13 @@ const Page = () => {
 
   return (
     <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0 ">
+    
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-5">
           About the property
         </h2>
-        <div className="flex justify-center w-full">
+           {loading ? (<div className="h-screen flexCenter"><LoadingDoor size={50} /></div> ): (
+          <div className="flex justify-center w-full">
           <div className="w-9/10 md:w-1/2 lg:w-2/5 flex items-center flex-col">
             <div className="h-24 w-full flexCenter">
               <LocationInput
@@ -113,6 +120,8 @@ const Page = () => {
             />
           </div>
         </div>
+       )}
+      
 
         <NextBackBtns
           onBackClick={handleBackClick}

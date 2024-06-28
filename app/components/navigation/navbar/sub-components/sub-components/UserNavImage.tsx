@@ -18,57 +18,43 @@ const UserNavImage = ({ imageSrc, toggleUserOverlay }: UserNavImageProps) => {
     setIsImageLoaded(true);
   };
 
-
   return (
     <div
-      className="lg:flexCenter md:flexCenter  transition-all hover:font-bold hover:border-teal-500 border-2 rounded-full hover:drop-shadow-lg"
-      style={{ width: "50px", height: "50px", position: "relative" }}>
-      {!imageSrc ? (
-        <Link href="/auth/signin">
-          <div
-            onClick={toggleUserOverlay}
-            className="hover:cursor-pointer "
-            style={{ width: "40px", height: "40px", position: "relative" }}>
-            {!isImageLoaded && (
-              <Skeleton circle={true} height={40} width={40} style={{top: "0"}}  />
-            )}
-            <img
-              src="/assets/images/profile.png"
-              alt="User Image"
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                display: isImageLoaded ? "block" : "none",
-                position: "absolute",
-                top: 0,
-                left: 0,
-              }}
-              onLoad={handleImageLoad}
-            />
-          </div>
-        </Link>
-      ) : (
+      className="lg:flexCenter md:flexCenter transition-all hover:font-bold hover:border-teal-500 border rounded-full hover:drop-shadow-md"
+      style={{ position: "relative" }}>
+      {imageSrc ? (
         <div
           onClick={toggleUserOverlay}
           className="hover:cursor-pointer"
-          style={{ width: "50px", height: "50px", position: "relative" }}>
-          {!isImageLoaded && <Skeleton circle={true} height={50} width={50} style={{top: "-5px"}} />}
-          <img
+          style={{ width: "40px", height: "40px", position: "relative" }}>
+          <Image
             src={imageSrc}
             alt="User Image"
-            style={{
-              width: "50px",
-              height: "50px",
-              borderRadius: "50%",
-              display: isImageLoaded ? "block" : "none",
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-            onLoad={handleImageLoad}
+            width={40}
+            height={40}
+            className="rounded-full"
+            onLoadingComplete={handleImageLoad}
+            style={{ display: isImageLoaded ? "block" : "none" }}
+            priority
           />
         </div>
+      ) : (
+        <Link href="/auth/signin">
+          <div
+            onClick={toggleUserOverlay}
+            className="hover:cursor-pointer"
+            style={{ width: "40px", height: "40px", position: "relative" }}>
+            <Image
+              src="/assets/images/profile.png"
+              alt="User Image"
+              width={40}
+              height={40}
+              className="rounded-full"
+              onLoadingComplete={handleImageLoad}
+              priority
+            />
+          </div>
+        </Link>
       )}
     </div>
   );

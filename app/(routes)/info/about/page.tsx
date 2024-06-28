@@ -1,16 +1,15 @@
 /** @format */
-
 import Breadcrumb from "@/app/components/navigation/breadcrumbs/BreadcrumbStandard";
 import Image from "next/image";
-import NavMenu from "@/app/components/navigation/NavMenu"
+import NavMenu from "@/app/components/navigation/NavMenu";
 
 const AboutUs = () => {
   return (
     <>
-      <div className=" md:mt-[.9rem] lg:mt-[.9rem] mt-[4.5rem] md:px-[150px] lg:px-[150px] px-[50px]  shadow-lg flex items-center bg-gray-100  ">
+      <div className="md:mt-[.9rem] lg:mt-[.9rem] mt-[4.5rem] md:px-[150px] lg:px-[150px] px-[50px] shadow-lg flex items-center bg-gray-100">
         <NavMenu />
       </div>
-      <div className=" h-[40px] md:px-[150px] lg:px-[150px] px-[50px] shadowb-lg flex items-center bg-neutral-50">
+      <div className="h-[40px] md:px-[150px] lg:px-[150px] px-[50px] shadowb-lg flex items-center bg-neutral-50">
         <Breadcrumb />
       </div>
       <div className="max-w-4xl mx-auto p-4 mb-14">
@@ -18,90 +17,99 @@ const AboutUs = () => {
           About Doors
         </h1>
         <p className="text-sm md:text-base text-gray-700 mb-14">
-          Doors is Egypt’s leading platform for finding shared accommodation.
-          Based in Cairo, Egypt, Doors enables individuals to list their
-          available rooms, discover roommates, or team up with others to start a
-          share house. Doors addresses a critical challenge faced by Egyptian
-          youth when moving to a new city, providing a seamless and reliable
-          solution for their accommodation needs.
+          Based in Cairo, Doors is Egypt’s premier platform for shared
+          accommodation. Our mission is to empower individuals by providing a
+          seamless solution for listing available rooms, connecting with
+          potential roommates, and establishing shared housing. Whether you’re a
+          student, young professional, or newcomer to a city, Doors simplifies
+          the process of finding comfortable and reliable accommodation. Welcome
+          to Doors!
         </p>
         <div className="flex justify-center">
           <Image
-            src="/assets/images/about.jpeg" // Update the path to your image
-            alt="Flatmates"
+            src="/assets/images/about.jpeg"
+            alt="about"
             className="rounded-lg"
             width={800}
             height={400}
+            priority={true}
           />
         </div>
         <h3 className="text-lg md:text-xl font-bold mb-5 mt-14 text-teal-950">
-          Find Your Ideal Room
+          Our Mission
         </h3>
         <p className="text-sm md:text-base text-gray-700 mb-5">
-          Are you searching for the perfect room? Look no further than Doors!
-          Our platform connects you with a wide range of listings across Egypt.
-          Whether you're looking for a cozy studio, a spacious apartment, or a
-          shared house, Doors has you covered. Here's why you'll love using
-          Doors to find your ideal room:
+          Our mission is to provide a platform that makes finding shared
+          accommodation easy, reliable, and safe. We aim to connect people in a
+          way that promotes community, trust, and shared living experiences,
+          helping individuals find the perfect living situation that meets their
+          needs and preferences.
+        </p>
+        <h3 className="text-lg md:text-xl font-bold mb-5 mt-14 text-teal-950">
+          Our Vision
+        </h3>
+        <p className="text-sm md:text-base text-gray-700 mb-5">
+          Our vision is to become the go-to platform for shared accommodation in
+          Egypt and beyond. We aspire to create a community where individuals
+          can find not just a place to live, but a home where they can thrive,
+          build lasting relationships, and enjoy a better quality of life.
+        </p>
+        <h3 className="text-lg md:text-xl font-bold mb-5 mt-14 text-teal-950">
+          Why Choose Doors?
+        </h3>
+        <p className="text-sm md:text-base text-gray-700 mb-5">
+          At Doors, we prioritize the safety and satisfaction of our users. Here
+          are a few reasons why you should choose Doors for your shared
+          accommodation needs:
         </p>
         <ul className="list-disc pl-6 mb-8 text-sm md:text-base">
           <li>
-            <strong className="text-teal-900">Custom Filters:</strong> Narrow
-            down your search based on location, budget, and amenities. Find the
-            room that suits your lifestyle.
+            <strong className="text-teal-900">Trust and Safety:</strong> Our
+            team verifies all listings and users to ensure a safe and reliable
+            experience.
           </li>
           <li>
-            <strong className="text-teal-900">Real Photos:</strong> All listings
-            include high-quality photos, so you can visualize your future space.
+            <strong className="text-teal-900">User-Friendly Interface:</strong>{" "}
+            Our platform is easy to use, allowing you to find or list a room
+            with just a few clicks.
           </li>
           <li>
-            <strong className="text-teal-900">Transparent Details:</strong> Get
-            essential information about each room, including rent, utilities,
-            and any additional fees.
+            <strong className="text-teal-900">Community Support:</strong>{" "}
+            Connect with a supportive community of individuals who share your
+            living preferences and goals.
           </li>
           <li>
-            <strong className="text-teal-900">Secure Messaging:</strong>{" "}
-            Communicate directly with landlords or roommates through our secure
-            messaging system.
+            <strong className="text-teal-900">Comprehensive Listings:</strong>{" "}
+            Access detailed information about each listing, including rent,
+            amenities, and more.
           </li>
           <li>
-            <strong className="text-teal-900">Verified Listings:</strong> Our
-            team verifies listings to ensure accuracy and prevent scams.
+            <strong className="text-teal-900">
+              Responsive Customer Service:
+            </strong>{" "}
+            Our customer service team is here to help you with any questions or
+            issues you may encounter.
           </li>
         </ul>
         <h3 className="text-lg md:text-xl font-bold mb-5 mt-14 text-teal-950">
-          Find Your Ideal Roommate
+          Our Values
         </h3>
-        <p className="text-sm md:text-base text-gray-700 mb-5">
-          Are you looking for the perfect roommate? Doors is here to help! Our
-          platform connects you with a diverse community of people across Egypt.
-          Whether you need a roommate for a shared apartment, a house, or any
-          other living situation, Doors has got you covered. Here's why you'll
-          love using Doors to find your ideal roommate:
-        </p>
         <ul className="list-disc pl-6 mb-8 text-sm md:text-base">
           <li>
-            <strong className="text-teal-900">Detailed Profiles:</strong> Browse
-            through comprehensive profiles with information on interests,
-            lifestyle, and preferences to find a compatible roommate.
+            <strong className="text-teal-900">Integrity:</strong> We operate
+            with honesty and transparency in all our dealings.
           </li>
           <li>
-            <strong className="text-teal-900">Custom Matching:</strong> Use our
-            advanced matching algorithm to find roommates who align with your
-            living habits and preferences.
+            <strong className="text-teal-900">Community:</strong> We foster a
+            sense of community and belonging among our users.
           </li>
           <li>
-            <strong className="text-teal-900">Verified Users:</strong> Our team
-            verifies users to ensure safety and prevent scams.
+            <strong className="text-teal-900">Innovation:</strong> We
+            continuously improve our platform to better serve our users' needs.
           </li>
           <li>
-            <strong className="text-teal-900">Secure Messaging:</strong>{" "}
-            Communicate directly with potential roommates through our secure
-            messaging system.
-          </li>
-          <li>
-            <strong className="text-teal-900">Community Reviews:</strong> Read
-            reviews from previous roommates to make informed decisions.
+            <strong className="text-teal-900">Excellence:</strong> We strive for
+            excellence in everything we do.
           </li>
         </ul>
       </div>
