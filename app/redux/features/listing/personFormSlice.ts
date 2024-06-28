@@ -22,10 +22,10 @@ interface PersonDetails {
   furnishing: string;
   roomBathroom: string;
   selectedFeatures: string[];
-  monthlyRent: number;
-  deposit: number;
+  monthlyRent: string;
+  deposit: string;
   billsIncluded: boolean;
-  monthlyBills: number;
+  monthlyBills: string;
   photos: string[];
   roommatePreference: string;
   roommatePreferences: string[];
