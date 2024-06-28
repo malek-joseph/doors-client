@@ -78,7 +78,7 @@ const Contact = () => {
           Contact Us 
         </h1>
         <p className="text-sm md:text-base text-gray-700 mb-8 leading-relaxed">
-          If you have any question or comment, check our <Link href="/FAQ" className="text-teal-500 hover:underline">FAQ</Link> section. If you can't find an answer to your question there, you can send us a message here:
+          If you have any question or comment, check our <Link href="/FAQ" className="text-teal-500 hover:underline">FAQ</Link> section. If you can&apos;t find an answer to your question there, you can send us a message here:
         </p>
         <form onSubmit={handleSubmit} className="flexCenter flex-col w-1/2">
           <Textarea

@@ -57,7 +57,7 @@ const Privacy = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-            We may need to collect your personal information based on your activities on our websites. For instance, if you request emails from us, we'll need your email address. Often, you'll be aware of the information we're collecting and when we're collecting it, as you'll be providing it to us directly.
+            We may need to collect your personal information based on your activities on our websites. For instance, if you request emails from us, we&apos;ll need your email address. Often, you&apos;ll be aware of the information we&apos;re collecting and when we&apos;re collecting it, as you&apos;ll be providing it to us directly.
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
@@ -71,7 +71,7 @@ Collecting Non-Personal Information
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-           We may also gather non-personal information, such as the pages you visit on our websites. This helps us provide a more personalized experience by suggesting properties similar to those you frequently view. We often use cookies or other technologies to collect this information, so you might not always be aware when it's happening.
+           We may also gather non-personal information, such as the pages you visit on our websites. This helps us provide a more personalized experience by suggesting properties similar to those you frequently view. We often use cookies or other technologies to collect this information, so you might not always be aware when it&apos;s happening.
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
@@ -178,7 +178,7 @@ Collecting Non-Personal Information
 any other information you share with us.                    </li>
                   </ol>
                   <header className="my-3 font-semibold">
-           What if you use our services through a social network, or log in here using your social network credentials? We’ll collect information from that social site, such as your:
+           What if you use our services through a social network, or log in here using your social network credentials? We&apos;ll collect information from that social site, such as your:
                   </header>
 
                   <ol className="list-decimal list-inside mb-6">
@@ -248,10 +248,10 @@ any other information you share with us.                    </li>
                    present website content in the most effective way for you and your devices.
                     </li>
                     <li className="mb-3">
-                 provide you with a better or more relevant service or product. For instance, we might help you save time by pre-filling a form with information you’ve already shared with us.
+                 provide you with a better or more relevant service or product. For instance, we might help you save time by pre-filling a form with information you&apos;ve already shared with us.
                     </li>
                     <li className="mb-3">
-                   combine with info we’ve collected from service providers, third parties, cookies or web beacons. We do this to give you a more relevant, personalised experience. It raises the quality of our services, and third-party services, too. For example, we might take your behavioural data, collected using cookies, and combine it with information you send to an agent through our enquiry form. This gives the agent a clearer picture of what interests you, so they can serve you better.
+                   combine with info we&apos;ve collected from service providers, third parties, cookies or web beacons. We do this to give you a more relevant, personalised experience. It raises the quality of our services, and third-party services, too. For example, we might take your behavioural data, collected using cookies, and combine it with information you send to an agent through our enquiry form. This gives the agent a clearer picture of what interests you, so they can serve you better.
                     </li>
                     <li className="mb-3">
                    contact you to conduct research, and ask for feedback on our products, services or websites.
@@ -284,7 +284,7 @@ any other information you share with us.                    </li>
                 <AccordionPanel pb={4}>
                   <ol className="list-decimal list-inside mb-6">
                     <li className="mb-3">
-                    We're committed to keeping your information safe. So, we have dedicated teams focused on securing your information and our systems.
+                    We&apos;re committed to keeping your information safe. So, we have dedicated teams focused on securing your information and our systems.
                     </li>
                     <li className="mb-3">
                      We have internal controls to make sure we only collect the smallest amount of personal info we need for any given purpose.

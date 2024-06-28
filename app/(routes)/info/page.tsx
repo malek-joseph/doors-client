@@ -18,7 +18,7 @@ const Info = () => {
           Welcome to Doors
         </h1>
         <p className="text-sm md:text-base text-gray-700 mb-14">
-          Doors is Egypt’s leading platform for finding shared accommodation.
+          Doors is Egypt&apos;s leading platform for finding shared accommodation.
           Based in Cairo, Egypt, Doors enables individuals to list their
           available rooms, discover roommates, or team up with others to start a
           share house. Doors addresses a critical challenge faced by Egyptian
@@ -41,8 +41,8 @@ const Info = () => {
         <p className="text-sm md:text-base text-gray-700 mb-5">
           Are you searching for the perfect room? Look no further than Doors!
           Our platform connects you with a wide range of listings across Egypt.
-          Whether you're looking for a cozy studio, a spacious apartment, or a
-          shared house, Doors has you covered. Here's why you'll love using
+          Whether you&apos;re looking for a cozy studio, a spacious apartment, or a
+          shared house, Doors has you covered. Here&apos;s why you&apos;ll love using
           Doors to find your ideal room:
         </p>
         <ul className="list-disc pl-6 mb-8 text-sm md:text-base">
@@ -77,7 +77,7 @@ const Info = () => {
           Are you looking for the perfect roommate? Doors is here to help! Our
           platform connects you with a diverse community of people across Egypt.
           Whether you need a roommate for a shared apartment, a house, or any
-          other living situation, Doors has got you covered. Here's why you'll
+          other living situation, Doors has got you covered. Here&apos;s why you&apos;ll
           love using Doors to find your ideal roommate:
         </p>
         <ul className="list-disc pl-6 mb-8 text-sm md:text-base">

@@ -211,7 +211,7 @@ const Terms = () => {
                   independent third party, the truth, accuracy or completeness
                   of any Content or the accuracy of any location details
                   available in respect of a Listing including, without
-                  limitation, location details provided by use of Google’s
+                  limitation, location details provided by use of Google&apos;s
                   Google Maps service. Your use of Google Maps is subject to the{" "}
                   <a
                     href="https://www.google.com/intl/en/help/terms_maps.html"
@@ -357,7 +357,7 @@ const Terms = () => {
                     </li>
                     <li className="mb-3">
                       Any personal information you provide to Doors will be
-                      treated in accordance Doors’s{" "}
+                      treated in accordance Doors&apos;s{" "}
                       <Link href="/privacy" className="text-teal-500 hover:underline">
                         Privacy Policy
                       </Link>
@@ -384,14 +384,14 @@ const Terms = () => {
                 <h2>
                   <AccordionButton _expanded={{ bg: "teal", color: "white" }}>
                     <Box as="span" flex="1" textAlign="left">
-                      User can't use other users' accounts
+                      User can&apos;t use other users&apos; accounts
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                  You may not use another user’s Account, or allow anyone else
-                  to use your Account, without Doors’s express prior written
+                  You may not use another user&apos;s Account, or allow anyone else
+                  to use your Account, without Doors&apos;s express prior written
                   permission.
                 </AccordionPanel>
               </AccordionItem>
@@ -425,7 +425,7 @@ const Terms = () => {
                   Doors may, in its absolute discretion, suspend or terminate
                   your Account if: a. you breach or violate any term or
                   condition of these Terms and Conditions of Use; or b. in
-                  Doors’s sole opinion, your ongoing use of the Service will
+                  Doors&apos;s sole opinion, your ongoing use of the Service will
                   bring, or may bring, the reputation of Doors into disrepute or
                   cause Flatmates to be in breach of an applicable law.
                 </AccordionPanel>
@@ -489,7 +489,7 @@ const Terms = () => {
                    Use the Website or any of the Services to collect, or attempt to collect, personal information about third parties without their knowledge or consent or to engage in screen scraping, database scraping or any other activity with the purpose of obtaining lists of users or other data.
                     </li>
                     <li className="mb-3">
-                  Use the Website or any of the Services for any activity which adversely affects the ability of other people or systems to use the Website or any of the Services, or the Internet generally, including the uploading of files that contain viruses, corrupted files, or any other similar software or programs that may damage the operation of another’s computer.
+                  Use the Website or any of the Services for any activity which adversely affects the ability of other people or systems to use the Website or any of the Services, or the Internet generally, including the uploading of files that contain viruses, corrupted files, or any other similar software or programs that may damage the operation of another&apos;s computer.
                     </li>
                   </ol>
                 </AccordionPanel>
@@ -504,7 +504,7 @@ const Terms = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                 Doors will attempt to make the Website and Services available for use 24 hours a day, 7 days a week. However, it will be necessary for Doors to take-down the Website and cease providing the Services for a period of time for regular maintenance and to make improvements and if circumstances beyond Doors’s control exist, such as problems preventing access to internet or webhosting services. In such circumstances Doors will incur no liability to you for such interruption or cessation of Services no matter how such liability would otherwise arise.
+                 Doors will attempt to make the Website and Services available for use 24 hours a day, 7 days a week. However, it will be necessary for Doors to take-down the Website and cease providing the Services for a period of time for regular maintenance and to make improvements and if circumstances beyond Doors&apos;s control exist, such as problems preventing access to internet or webhosting services. In such circumstances Doors will incur no liability to you for such interruption or cessation of Services no matter how such liability would otherwise arise.
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem>
@@ -517,7 +517,7 @@ const Terms = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                From time to time, Doors will make available on the Website articles and other material setting out information relevant to seeking accommodation or renting accommodation, such as articles relating to tenants’ rights as tenants (Informative Content). Any Informative Content on the Website is of a general nature only and does not consider your personal objectives, financial situation or particular needs. You should not regard Informative Content as advice and you should seek professional legal, property, accounting or other advice for your specific circumstances. You should not rely on any Informative Content as the basis for taking any legal action, negotiating or entering any agreement, or incurring any financial liabilities.
+                From time to time, Doors will make available on the Website articles and other material setting out information relevant to seeking accommodation or renting accommodation, such as articles relating to tenants&apos; rights as tenants (Informative Content). Any Informative Content on the Website is of a general nature only and does not consider your personal objectives, financial situation or particular needs. You should not regard Informative Content as advice and you should seek professional legal, property, accounting or other advice for your specific circumstances. You should not rely on any Informative Content as the basis for taking any legal action, negotiating or entering any agreement, or incurring any financial liabilities.
                 </AccordionPanel>
               </AccordionItem>
           

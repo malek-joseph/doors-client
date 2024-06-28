@@ -17,10 +17,10 @@ const AboutUs = () => {
           About Doors
         </h1>
         <p className="text-sm md:text-base text-gray-700 mb-14">
-          Based in Cairo, Doors is Egypt’s premier platform for shared
+          Based in Cairo, Doors is Egypt&apos;s premier platform for shared
           accommodation. Our mission is to empower individuals by providing a
           seamless solution for listing available rooms, connecting with
-          potential roommates, and establishing shared housing. Whether you’re a
+          potential roommates, and establishing shared housing. Whether you&apos;re a
           student, young professional, or newcomer to a city, Doors simplifies
           the process of finding comfortable and reliable accommodation. Welcome
           to Doors!
@@ -105,7 +105,7 @@ const AboutUs = () => {
           </li>
           <li>
             <strong className="text-teal-900">Innovation:</strong> We
-            continuously improve our platform to better serve our users' needs.
+            continuously improve our platform to better serve our users&apos; needs.
           </li>
           <li>
             <strong className="text-teal-900">Excellence:</strong> We strive for

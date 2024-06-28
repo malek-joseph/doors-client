@@ -61,13 +61,13 @@ const FAQ = () => {
                 <AccordionPanel pb={4}>
                   To activate or edit your listing, select the circular
                   person/profile icon at the top right corner of the page, make
-                  sure you're logged in first &gt; select profile &gt; then
-                  select the listing under ‘Your Listings’ in the centre of the
-                  dashboard. At the right of the next page will be a button to
-                  Activate. To deactivate, or stop the listing from appearing in
-                  the listings section or in search, you can follow the same
-                  steps, except the button will display "Mark as rented" for
-                  places, and "Found a place" for roommate listings. Edit
+                  sure you&apos;re logged in first &gt; select profile &gt; then
+                  select the listing under &apos;Your Listings&apos; in the centre of
+                  the dashboard. At the right of the next page will be a button
+                  to Activate. To deactivate, or stop the listing from appearing
+                  in the listings section or in search, you can follow the same
+                  steps, except the button will display &quot;Mark as rented&quot; for
+                  places, and &quot;Found a place&quot; for roommate listings. Edit
                   options appear under each section of the listing.
                 </AccordionPanel>
               </AccordionItem>
@@ -82,9 +82,9 @@ const FAQ = () => {
                 </h2>
                 <AccordionPanel pb={4}>
                   To Delete a listing, select the circular person/profile icon
-                  at the top right corner of the page, make sure you're logged
+                  at the top right corner of the page, make sure you&apos;re logged
                   in first &gt; select profile &gt; then select the listing
-                  under ‘Your Listings’ in the centre of the dashboard. At the
+                  under &apos;Your Listings&apos; in the centre of the dashboard. At the
                   right of the next page will be a button to Delete the listing.
                   This will remove the listing from the listings section, search
                   results and will delete it completely from your account.
@@ -101,9 +101,9 @@ const FAQ = () => {
                 </h2>
                 <AccordionPanel pb={4}>
                   To Deactivate your account, select the circular person/profile
-                  icon at the top right corner of the page, make sure you're
+                  icon at the top right corner of the page, make sure you&apos;re
                   logged in first &gt; select profile &gt; then scroll down, and
-                  you'll find the option to deactivate your account at the
+                  you&apos;ll find the option to deactivate your account at the
                   bottom of the dashboard.
                 </AccordionPanel>
               </AccordionItem>
@@ -120,7 +120,7 @@ const FAQ = () => {
                 <h2>
                   <AccordionButton _expanded={{ bg: "teal", color: "white" }}>
                     <Box as="span" flex="1" textAlign="left">
-                      Why was my listing / account deactivated or deleted?
+                      Why was my listing/account deactivated or deleted?
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
@@ -128,7 +128,7 @@ const FAQ = () => {
                 <AccordionPanel pb={4}>
                   All Free accounts that have been inactivate for more than 7
                   days will receive an email notification asking them if they
-                  are “still looking?”. If a member fails to log in within 48hrs
+                  are &apos;still looking?&apos;. If a member fails to log in within 48hrs
                   of that email being sent, their listing will be deactivated.
                   This is to ensure that all listings on the platform are live
                   and available. All accounts that have been inactive for more
@@ -146,7 +146,7 @@ const FAQ = () => {
                 </h2>
                 <AccordionPanel pb={4}>
                   All new and edited listings go through security checks,
-                  formerly known as moderation, to ensure they don’t contain
+                  formerly known as moderation, to ensure they don&apos;t contain
                   anything prohibited. From time to time, your account may also
                   be checked by our system and team. These checks are to ensure
                   the safety of all members on the site. This process should
@@ -167,7 +167,7 @@ const FAQ = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                  You can report a listing via the “Report listing” link at the
+                  You can report a listing via the &quot;Report listing&quot; link at the
                   bottom of every listing. You can also report a member via the
                   report member link in your messages. Click the three dots in
                   the message header to access this link. All feedback is
@@ -184,9 +184,16 @@ const FAQ = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-               If you have a bug or issue to report, please <Link href="/contact" className="text-teal-500 hover:underline">contact us</Link>. To help us investigate and resolve the issue as quickly as possible, please also provide us with the device and browser you were using at the time.
-
-Screenshots or URLs are appreciated and may help us identify the issue faster.
+                  If you have a bug or issue to report, please{" "}
+                  <Link
+                    href="/contact"
+                    className="text-teal-500 hover:underline">
+                    contact us
+                  </Link>
+                  . To help us investigate and resolve the issue as quickly as
+                  possible, please also provide us with the device and browser
+                  you were using at the time. Screenshots or URLs are
+                  appreciated and may help us identify the issue faster.
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
