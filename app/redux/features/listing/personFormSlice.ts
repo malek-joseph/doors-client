@@ -22,10 +22,10 @@ interface PersonDetails {
   furnishing: string;
   roomBathroom: string;
   selectedFeatures: string[];
-  monthlyRent: string;
-  deposit: string;
+  monthlyRent: number;
+  deposit: number;
   billsIncluded: boolean;
-  monthlyBills: string;
+  monthlyBills: number;
   photos: string[];
   roommatePreference: string;
   roommatePreferences: string[];
@@ -61,10 +61,10 @@ const initialState: PersonFormState = {
     furnishing: "",
     roomBathroom: "",
     selectedFeatures: [],
-    monthlyRent: "",
-    deposit: "",
+    monthlyRent: 0,
+    deposit: 0,
     billsIncluded: true,
-    monthlyBills: "",
+    monthlyBills: 0,
     photos: [],
     roommatePreference: "",
     roommatePreferences: [],
