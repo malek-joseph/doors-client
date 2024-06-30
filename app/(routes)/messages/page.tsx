@@ -102,7 +102,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
     }
   };
 
-  if (!userDetails || !currentUserId) return null;
+  // if (!userDetails || !currentUserId) return null;
 
   console.log(selectedConversation);
   console.log(conversations);
@@ -118,6 +118,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
           isChatView ? "hidden md:block" : ""
         }`}
       >
+       
         {conversations.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <p className="text-gray-500">No conversations available.</p>
@@ -138,12 +139,12 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
                 <div className="w-10 h-10 rounded-full mr-3 bg-gray-300">
                   <Image
                     src={
-                      conversation.listingOwnerId === userDetails.id
+                      conversation.listingOwnerId === userDetails?.id
                         ? conversation.currentUserPhoto
                         : conversation.listingOwnerPhoto
                     }
                     alt={
-                      conversation.listingOwnerId === userDetails.id
+                      conversation.listingOwnerId === userDetails?.id
                         ? conversation.currentUserName
                         : conversation.listingOwnerName
                     }
@@ -154,12 +155,12 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
                 </div>
                 <div>
                   <div>
-                    {conversation.listingOwnerId === userDetails.id
+                    {conversation.listingOwnerId === userDetails?.id
                       ? conversation.currentUserName
                       : conversation.listingOwnerName}
                   </div>
                   <div className="text-xs text-gray-500">
-                    {conversation.listingOwnerId !== userDetails.id
+                    {conversation.listingOwnerId !== userDetails?.id
                       ? `Offering a place in a ${conversation.accommodationType}`
                       : `Interested in your listing ${conversation.accommodationType}`}
                   </div>
@@ -174,6 +175,7 @@ const Messages: React.FC<MessagesProps> = ({ params }) => {
           isChatView ? "" : "hidden md:flex "
         }`}
       >
+    
         {isChatView && (
           <>
             <button className="md:hidden mb-2 flex items-center " onClick={() => setIsChatView(false)}>

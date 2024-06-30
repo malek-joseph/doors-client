@@ -60,9 +60,9 @@ const ShortlistPage: React.FC = () => {
     }
   };
 
-  if (loading) return <div className="min-h-screen w-full flexCenter">
-    <LoadingDoor size={50}/>
-  </div>;
+  // if (loading) return <div className="min-h-screen w-full flexCenter">
+  //   <LoadingDoor size={50}/>
+  // </div>;
   if (error)
     return (
       <div className="min-h-screen flexCenter">
