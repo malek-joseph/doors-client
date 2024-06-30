@@ -1,7 +1,7 @@
 /** @format */
 import React, { useState } from "react";
 import Link from "next/link";
-import Button from "../buttons/Button";
+import ButtonOne from "../buttons/ButtonOne";
 import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -83,7 +83,7 @@ const SignupForm: React.FC = () => {
     <div className="p-4 rounded-lg lg:w-1/2">
       <div>
         <div className="flex items-center mb-4">
-          <Button
+          <ButtonOne
             type="button"
             title="Signup with Google"
             icon="/assets/images/google-logo.png"
@@ -208,7 +208,7 @@ const SignupForm: React.FC = () => {
             </div>
           </div>
 
-          <Button
+          <ButtonOne
             type="submit"
             title="Signup"
             variant="btn_teal"

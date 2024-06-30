@@ -56,7 +56,7 @@ const LoginForm: React.FC = () => {
           disabled={false}
           onClick={handleGoogleLogin}
         />
-      </div>
+      </div> 
 
       {/* Horizontal line with "or" */}
       <div className="flex items-center mb-4">
