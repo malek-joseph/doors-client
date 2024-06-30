@@ -23,7 +23,7 @@ const Privacy = () => {
       <div className="h-[40px] md:px-[150px] lg:px-[150px] px-[50px] shadowb-lg flex items-center bg-neutral-50">
         <Breadcrumb />
       </div>
-      <div className="max-w-4xl mx-auto p-4 mb-14">
+      <div className="max-w-4xl mx-auto p-4 mb-14 md:px-14 lg:px-14 px-5">
         <h1 className="text-2xl md:text-3xl font-bold my-9 text-teal-950">
           Privacy Policies 
         </h1>

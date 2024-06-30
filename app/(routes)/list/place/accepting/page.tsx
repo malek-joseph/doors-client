@@ -59,7 +59,7 @@ const handleSelectFeature = (featureName: string) => {
    ];
 
   return (
-    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0 px-5">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           Roommate preferences

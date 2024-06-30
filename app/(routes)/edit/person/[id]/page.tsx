@@ -16,9 +16,8 @@ import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
 
-const PersonDetailsReview = ({ params }: { params: { id: number } }) => {
+const EditPersonListing = ({ params }: { params: { id: number } }) => {
   const { id } = params;
-  // console.log(id)
   const router = useRouter();
   const [personDetails, setPersonDetails] = useState<any>(null);
   const userDetails = useSelector(selectUserDetails);
@@ -42,7 +41,6 @@ useEffect(() => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/persons/personDetails/${id}`
       );
-
       setPersonDetails(response.data);
       setLoading(false);
     } catch (error) {
@@ -60,11 +58,10 @@ useEffect(() => {
     return <div className='min-h-screen flexCenter'>This person has found a place</div>;
   }
 
-
   return (
     <main className="flex flex-col items-center justify-center mb-24 min-h-screen">
       <div className="w-5/6 ">
-          {personDetails  && (
+          {personDetails && userDetails  && (
             <>
                    <div className="my-8">
             <ListingDetailsCarousel
@@ -74,7 +71,7 @@ useEffect(() => {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
             <div className="w-full lg:w-8/12">
             <PersonDetailsSectionOne
-              gender={personDetails.roommatePreference}
+              gender={userDetails.gender}
               city={personDetails.city}
               governorate={personDetails.governorate}
               roomType={personDetails.roomType}
@@ -131,4 +128,4 @@ useEffect(() => {
   );
 };
 
-export default PersonDetailsReview;
+export default EditPersonListing;

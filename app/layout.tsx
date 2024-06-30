@@ -10,7 +10,7 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Providers } from "./redux/provider";
-import FooterVisibility from "./helpers/FooterVisibility";
+import FooterVisibility from "./utils/FooterVisibility";
 
 const inter = Inter({ subsets: ["latin"] });
 

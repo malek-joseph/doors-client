@@ -9,7 +9,7 @@ import Breadcrumb from "@/app/components/navigation/breadcrumbs/BreadcrumbSearch
 import SortingFilter from "@/app/components/inputs/SortingFilter";
 import SaveSearchButton from "@/app/components/buttons/SaveSearchButton";
 import { useSearchParams } from "next/navigation";
-import { capitalizeFirstLetter } from "@/app/helpers/helperFunctions";
+import { capitalizeFirstLetter } from "@/app/utils/helperFunctions";
 import { RootState, AppDispatch } from "@/app/redux/store";
 import {
   setQuery,

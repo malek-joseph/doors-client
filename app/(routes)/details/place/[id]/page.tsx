@@ -28,13 +28,6 @@ const dispatch = useDispatch()
 
 useEffect(() => {
   if (propertyDetails && propertyDetails.userPhoto) {
-    // const photoPathWithoutUploads = propertyDetails.userPhoto.replace(
-    //   /^uploads\//,
-    //   ""
-    // );
-    // setImageSrc(
-    //   `${process.env.NEXT_PUBLIC_BASE_URL}/${photoPathWithoutUploads}`
-    // );
       const photo = propertyDetails.userPhoto
     setImageSrc(photo)
   }
@@ -50,17 +43,6 @@ useEffect(() => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/properties/propertyDetails/${id}`
       );
 
-      // const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your actual base URL
-
-      // const updatedPropertyDetails = {
-      //   ...response.data,
-      //   photos: response.data.photos.map((photo: string) => {
-      //     const photoPathWithoutUploads = photo.replace(/^uploads\//, "");
-      //     return `${baseURL}/${photoPathWithoutUploads}`;
-      //   }),
-      // };
-
-      // setPropertyDetails(updatedPropertyDetails);
       setPropertyDetails(response.data);
       setLoading(false);
     } catch (error) {
@@ -79,12 +61,10 @@ useEffect(() => {
   }
 
  
-
-  // console.log(propertyDetails)
   return (
-    <main className="flex flex-col items-center justify-center mb-10 min-h-screen">
+    <main className="flex flex-col items-center justify-center mb-24 min-h-screen">
       <div className="w-5/6 ">
-        {propertyDetails && userDetails && (
+        {propertyDetails  && (
           <>
             <div className="my-8">
               <ListingDetailsCarousel images={propertyDetails.photos} />
@@ -92,7 +72,7 @@ useEffect(() => {
             <div className="flex flex-col lg:flex-row justify-between items-start gap-5">
               <div className="w-full lg:w-8/12">
                 <PlaceDetailsSectionOne
-                  gender={userDetails.gender}
+                  gender={propertyDetails.roommatePreference}
                   city={propertyDetails.city}
                   governorate={propertyDetails.governorate}
                   roomType={propertyDetails.roomType}

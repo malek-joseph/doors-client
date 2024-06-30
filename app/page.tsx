@@ -1,7 +1,7 @@
 /** @format */
 
 import {type Session, getServerSession} from 'next-auth'
-import ListSection from "./components/listingDetails/ListNowSection";
+import ListNowSection from "./components/listingDetails/ListNowSection";
 import ListingsSection from "./components/listingDetails/ListingsSection";
 import ClientComponent from "./components/ClientComponent";
 import { authOptions } from "@/app/lib/nextAuth";
@@ -35,7 +35,7 @@ let userData
     <main className="flex flex-col items-center justify-center pb-24">
       <div className="w-5/6 ">
         <ClientComponent userData={userData} />
-        <ListSection />
+        <ListNowSection />
         <ListingsSection />
       </div>
     </main>

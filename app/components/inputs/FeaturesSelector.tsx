@@ -44,8 +44,8 @@ const FeaturesSelector: React.FC<FeatureSelectorProps> = ({
               }`}
               onClick={() => onSelectFeature(item.name)}
               aria-label={item.name}>
-              <div className="w-12 h-12 flex justify-center items-center p-1">
-                <Image src={item.src} alt={item.name} width={60} height={60} />
+              <div className="w-10 h-10 flex justify-center items-center p-1">
+                <Image src={item.src} alt={item.name} width={50} height={50} />
               </div>
             </button>
             <div className="text-xs text-gray-500 font-extralight mt-3">

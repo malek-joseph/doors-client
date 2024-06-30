@@ -6,14 +6,14 @@ import Image from "next/image";
 const Info = () => {
   return (
     <>
-      <div className="md:mt-[.9rem] lg:mt-[.9rem] mt-[4.5rem] md:px-[150px] lg:px-[150px] px-[50px] shadow-lg flex items-center bg-gray-100">
+      <div className="md:mt-[.9rem] lg:mt-[.9rem] mt-[4.5rem] md:px-[150px] lg:px-[150px] px-[50px] shadow-lg flex items-center bg-gray-100 ">
         <NavMenu />
       </div>
       <div className="h-[40px] md:px-[150px] lg:px-[150px] px-[50px] shadowb-lg flex items-center bg-neutral-50">
         <Breadcrumb />
       </div>
 
-      <div className="max-w-4xl mx-auto p-4 mb-14">
+      <div className="max-w-4xl mx-auto p-4 mb-14 md:px-14 lg:px-14 px-5">
         <h1 className="text-2xl md:text-3xl font-bold my-9 text-teal-950">
           Welcome to Doors
         </h1>

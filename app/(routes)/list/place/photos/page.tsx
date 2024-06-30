@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import NextBackBtns from "@/app/components/buttons/NextBackBtns";
 import { selectPropertyDetails } from "@/app/redux/features/listing/placeFormSlice";
-import PhotoUpload from "./PhotoUpload";
+import PhotoUpload from "@/app/components/upload/PhotoUpload";
 import { useEffect, useState } from "react";
 import ListingUploadCarousel from "@/app/components/carousels/ListingUploadCarousel";
 import localforage from "localforage";
@@ -13,11 +13,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
 import { selectAccommodationType } from "@/app/redux/features/listing/placeFormSlice";
-import publishProperty from '../submit/publishProperty'
+import {publishProperty} from '@/app/services/placeService'
 import LoadingDoor from "@/app/components/loaders/door/LoadingDoor";
 
 
-
+ 
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -121,9 +121,6 @@ setLoading(false    )
             // Handle error
             console.error("Error storing item:", error);
           });
-
-   
-
   };
  
 

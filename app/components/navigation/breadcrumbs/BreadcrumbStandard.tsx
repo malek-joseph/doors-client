@@ -2,7 +2,10 @@
 "use client"
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { capitalizeFirstLetter, removeSlashes } from "@/app/helpers/helperFunctions";
+import {
+  capitalizeFirstLetter,
+  removeSlashes,
+} from "@/app/utils/helperFunctions";
 import { usePathname } from 'next/navigation'
 
 

@@ -28,6 +28,7 @@ export type ListingType = {
   accommodationType: string;
   availableFromDate?: Date;
   _id: string;
+  activated: boolean;
 };
 
  export type Accepting = {

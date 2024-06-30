@@ -30,9 +30,7 @@ return (
       <p className="font-semibold text-gray-900 mb-1">
         Show off yourself!
       </p>
-      <p className="text-gray-600">
-        Post photos of yourself doing your regular activities, let the photos talk for themselves!
-      </p>
+     
     </div>
     <button
       className="bg-white text-teal-600 px-4 py-2 rounded shadow hover:bg-teal-300 hover:text-white transition-all"

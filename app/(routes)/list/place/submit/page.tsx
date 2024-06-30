@@ -18,7 +18,7 @@ import {
   clearPlaceForm,
 } from "@/app/redux/features/listing/placeFormSlice";
 import { selectUserDetails } from "@/app/redux/features/auth/authSlice";
-import publishProperty from "./publishProperty";
+import {publishProperty} from "@/app/services/placeService";
 import { useDispatch } from "react-redux";
 import localforage from "localforage";
 

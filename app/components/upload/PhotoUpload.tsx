@@ -44,10 +44,7 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({
         <p className="font-semibold text-gray-900 mb-1">
           Show off your property!
         </p>
-        <p className="text-gray-600">
-          Let potential roommates know you&apos;re for real and that your room
-          is their best option.
-        </p>
+      
       </div>
       <button
         className="bg-white text-teal-600 px-4 py-2 rounded shadow hover:bg-teal-300 hover:text-white transition-all"
@@ -75,3 +72,4 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({
 };
 
 export default PhotoUpload;
+ 

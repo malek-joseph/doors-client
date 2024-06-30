@@ -47,7 +47,7 @@ const Page = () => {
   const isNextButtonDisabled = !personDetails.totalRoommates;
 
   return (
-    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0">
+    <div className="flex flex-col items-center justify-center mt-20 lg:mt-0 md:mt-0 px-5">
       <div className="w-11/12 py-8 overflow-y-auto mb-20">
         <h2 className="lg:text-2xl font-bold text-teal-600 mb-6 lg:mb-10 ">
           Roommates details
@@ -56,7 +56,7 @@ const Page = () => {
           <div className="w-9/10 md:w-8/10 lg:w-7/10 flex items-center flex-col">
             <NumericSelector
               title="What's the maximum number of roommates you can live with?"
-              range={[1, 2, 3, 4, 5, "6+"]}
+              range={[1, 2, 3, "4+"]}
               selectedNumber={personDetails.totalRoommates}
               onSelectNumber={(value) =>
                 handleUniversalChange({
